@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test R2 Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: none;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test R2 Storage Upload</h1>
+        <p>This form will test file uploads to Cloudflare R2 storage.</p>
+        
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Select a file to upload:</label>
+                <input type="file" id="file" name="file" required>
+            </div>
+            <button type="submit">Upload File</button>
+        </form>
+        
+        <div id="result" class="result">
+            <h3>Upload Result:</h3>
+            <pre id="resultData"></pre>
+            <div id="imagePreview" style="margin-top: 15px; display: none;">
+                <h4>File Preview:</h4>
+                <img id="uploadedImage" style="max-width: 100%; max-height: 300px;" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const resultDiv = document.getElementById('result');
+            const resultData = document.getElementById('resultData');
+            const imagePreview = document.getElementById('imagePreview');
+            const uploadedImage = document.getElementById('uploadedImage');
+            
+            resultDiv.style.display = 'block';
+            resultData.innerHTML = 'Uploading...';
+            resultData.className = '';
+            imagePreview.style.display = 'none';
+            
+            try {                const response = await fetch('/api/v1/test/api-upload/', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultData.className = 'success';
+                    resultData.innerHTML = JSON.stringify(data, null, 2);
+                    
+                    // If it's an image, show preview
+                    const file = document.getElementById('file').files[0];
+                    if (file.type.startsWith('image/')) {
+                        uploadedImage.src = data.file_url;
+                        imagePreview.style.display = 'block';
+                    }
+                } else {
+                    resultData.className = 'error';
+                    resultData.innerHTML = JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                resultData.className = 'error';
+                resultData.innerHTML = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

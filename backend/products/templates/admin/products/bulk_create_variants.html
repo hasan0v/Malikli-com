@@ -1,0 +1,69 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+  &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+  &rsaquo; <a href="{% url 'admin:products_product_changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+  &rsaquo; <a href="{% url 'admin:products_product_change' object_id=product.pk %}">{{ product }}</a>
+  &rsaquo; {% trans 'Bulk Create Variants' %}
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <h1>Create Variants for {{ product.name }}</h1>
+  
+  <div class="module">
+    <form method="post">
+      {% csrf_token %}
+      
+      <div class="form-row">
+        <h2>Select Sizes</h2>
+        <div class="checkbox-grid">
+          {{ form.sizes }}
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <h2>Select Colors</h2>
+        <div class="checkbox-grid">
+          {{ form.colors }}
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <p class="help">
+          Variants will be created for all combinations of selected sizes and colors. 
+          If you select both sizes and colors, each size will be paired with each color.
+        </p>
+      </div>
+      
+      <div class="submit-row">
+        <input type="submit" value="Create Variants" class="default" name="_save">
+        <a href="{% url 'admin:products_product_change' object_id=product.pk %}" class="closelink">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .checkbox-grid label {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+  }
+  
+  .checkbox-grid input[type="checkbox"] {
+    margin-right: 8px;
+  }
+</style>
+{% endblock %}

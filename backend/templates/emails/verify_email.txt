@@ -1,0 +1,15 @@
+Verify Your Email Address - Malikli
+
+Hello {{ user.first_name|default:user.username }},
+
+Thank you for registering with Malikli! To complete your account setup, please verify your email address by clicking the link below:
+
+{{ verification_url }}
+
+This verification link will expire in 24 hours.
+
+If you didn't create an account with Malikli, you can safely ignore this email.
+
+---
+© 2025 Malikli. All rights reserved.
+This is an automated message, please do not reply to this email.

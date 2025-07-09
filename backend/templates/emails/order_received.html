@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Received - {{ order.order_number }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .email-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #4ECDC4;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #4ECDC4;
+            margin: 0;
+            font-size: 28px;
+        }
+        .order-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .order-info h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .items-table th,
+        .items-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .items-table th {
+            background-color: #4ECDC4;
+            color: white;
+        }
+        .items-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .status-section {
+            background-color: #e8f4fd;
+            color: #1565c0;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .status-section h3 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+        .next-steps {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .next-steps h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .next-steps ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .next-steps li {
+            margin: 8px 0;
+            color: #856404;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>{{ site_name }}</h1>
+            <p>Order Received</p>
+        </div>
+
+        <p>
+            {% if user %}
+                Dear {{ user.first_name|default:user.username }},
+            {% else %}
+                Dear Customer,
+            {% endif %}
+        </p>
+
+        <p>Thank you for your order! We have received your order and it is currently being reviewed.</p>
+
+        <div class="status-section">
+            <h3>📋 Order Status: Pending Review</h3>
+            <p>Your order has been received and is awaiting payment verification and processing.</p>
+        </div>
+
+        <div class="order-info">
+            <h2>Order Information</h2>
+            <div class="order-details">
+                <strong>Order Number:</strong>
+                <span>{{ order.order_number }}</span>
+            </div>
+            <div class="order-details">
+                <strong>Order Date:</strong>
+                <span>{{ order.created_at|date:"F d, Y" }}</span>
+            </div>
+            <div class="order-details">
+                <strong>Payment Status:</strong>
+                <span>Pending Review</span>
+            </div>
+            <div class="order-details">
+                <strong>Order Status:</strong>
+                <span>{{ order.get_order_status_display }}</span>
+            </div>
+        </div>
+
+        <h3>Items Ordered:</h3>
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>
+                        {{ item.product_name_snapshot }}
+                        {% if item.variant_name_snapshot %}
+                            <br><small>{{ item.variant_name_snapshot }}</small>
+                        {% endif %}
+                        {% if item.color %}
+                            <br><small>Color: {{ item.color }}</small>
+                        {% endif %}
+                        {% if item.size %}
+                            <br><small>Size: {{ item.size }}</small>
+                        {% endif %}
+                    </td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.price_per_unit }}</td>
+                    <td>${{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if order.shipping_cost > 0 %}
+        <div class="order-details">
+            <strong>Shipping:</strong>
+            <span>${{ order.shipping_cost }}</span>
+        </div>
+        {% endif %}
+
+        {% if order.tax_amount > 0 %}
+        <div class="order-details">
+            <strong>Tax:</strong>
+            <span>${{ order.tax_amount }}</span>
+        </div>
+        {% endif %}
+
+        {% if order.discount_amount > 0 %}
+        <div class="order-details">
+            <strong>Discount:</strong>
+            <span>-${{ order.discount_amount }}</span>
+        </div>
+        {% endif %}
+
+        <div class="order-details" style="font-size: 1.2em; font-weight: bold; border-top: 2px solid #4ECDC4; padding-top: 10px; margin-top: 15px;">
+            <strong>Total Amount:</strong>
+            <span>${{ order.total_amount }}</span>
+        </div>
+
+        <div class="next-steps">
+            <h3>What happens next?</h3>
+            <ul>
+                <li>We will review and verify your payment information</li>
+                <li>You will receive a confirmation email once payment is processed</li>
+                <li>Your order will then be prepared for shipment</li>
+                <li>You'll receive tracking information once your order ships</li>
+            </ul>
+        </div>
+
+        <p><strong>Questions about your order?</strong></p>
+        <p>If you have any questions or concerns, please contact our support team at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
+
+        <div class="footer">
+            <p>Thank you for choosing {{ site_name }}!</p>
+            <p>You'll hear from us soon with an update on your order.</p>
+        </div>
+    </div>
+</body>
+</html>

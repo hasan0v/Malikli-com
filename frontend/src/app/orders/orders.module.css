@@ -1,0 +1,804 @@
+/* Tiffany Blue Brand Colors */
+/* :root {
+  --tiffany-blue: #0ABAB5;
+  --tiffany-light: #81D8D4;
+  --tiffany-dark: #008B8B;
+  --tiffany-gradient: linear-gradient(135deg, #0ABAB5 0%, #81D8D4 100%);
+  --tiffany-gradient-reverse: linear-gradient(135deg, #81D8D4 0%, #0ABAB5 100%);
+  --tiffany-gradient-soft: linear-gradient(135deg, rgba(10, 186, 181, 0.1) 0%, rgba(129, 216, 212, 0.05) 100%);
+  --tiffany-shadow: rgba(10, 186, 181, 0.25);
+  --tiffany-shadow-light: rgba(129, 216, 212, 0.15);
+  --tiffany-shadow-soft: rgba(10, 186, 181, 0.08);
+  --elegant-white: #FAFAFA;
+  --elegant-gray: #F8F9FA;
+  --text-primary: #2C3E50;
+  --text-secondary: #5A6C7D;
+  --text-muted: #95A5A6;
+  --success-color: #27AE60;
+  --warning-color: #F39C12;
+  --error-color: #E74C3C;
+  --info-color: #3498DB;
+} */
+
+.ordersPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F8F9FA 0%, #E8F6F5 50%, #F0FDFC 100%);
+  padding: 2rem 0;
+  position: relative;
+}
+
+.ordersPage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(10, 186, 181, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(129, 216, 212, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--tiffany-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+/* Loading State */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 1.5rem;
+}
+
+.loadingState p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--tiffany-shadow-light);
+  border-top: 4px solid var(--tiffany-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Controls Section */
+.controls {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 8px 32px var(--tiffany-shadow-light);
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(10, 186, 181, 0.08);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.filters {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 200px;
+}
+
+.filterGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.select {
+  background: var(--elegant-gray);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 0.875rem 1.125rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235A6C7D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px;
+  padding-right: 3rem;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--tiffany-blue);
+  background: white;
+  box-shadow: 0 0 0 4px var(--tiffany-shadow-light);
+  transform: translateY(-1px);
+}
+
+.select:hover {
+  border-color: var(--tiffany-light);
+  background: white;
+}
+
+.orderCount {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 0.875rem 1.5rem;
+  background: var(--tiffany-gradient-soft);
+  border-radius: 12px;
+  white-space: nowrap;
+  border: 1px solid rgba(10, 186, 181, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.orderCount::before {
+  content: '📦';
+  font-size: 1.1rem;
+}
+/* Orders List */
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.orderCard {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px var(--tiffany-shadow-light);
+  border: 1px solid rgba(10, 186, 181, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.orderCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--tiffany-gradient);
+  border-radius: 24px 24px 0 0;
+}
+
+.orderCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 64px var(--tiffany-shadow);
+}
+
+/* Order Header */
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem 2.5rem 1.5rem;
+  background: var(--tiffany-gradient-soft);
+  gap: 2rem;
+  position: relative;
+}
+
+.orderInfo {
+  flex: 1;
+}
+
+.orderNumber {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.01em;
+}
+
+.orderMeta {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+  font-weight: 500;
+}
+
+.orderDate,
+.orderTotal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.orderDate::before {
+  content: '📅';
+  font-size: 1rem;
+}
+
+.orderTotal::before {
+  content: '💰';
+  font-size: 1rem;
+}
+
+.orderStatuses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.paymentStatus {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}/* Order Items */
+.orderItems {
+  padding: 2rem 2.5rem;
+  border-bottom: 1px solid rgba(10, 186, 181, 0.08);
+}
+
+.orderItem {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: var(--elegant-white);
+  border: 1px solid rgba(10, 186, 181, 0.05);
+  transition: all 0.3s ease;
+}
+
+.orderItem:last-child {
+  margin-bottom: 0;
+}
+
+.orderItem:hover {
+  background: white;
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px var(--tiffany-shadow-light);
+}
+
+.itemImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--elegant-gray);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.itemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.itemImage:hover img {
+  transform: scale(1.05);
+}
+
+.itemDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.itemName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.itemVariant {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.itemVariant span {
+  padding: 0.375rem 0.75rem;
+  background: white;
+  border: 1px solid var(--tiffany-light);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--tiffany-dark);
+}
+
+.itemPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.quantity {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--tiffany-dark);
+}/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 12px 48px var(--tiffany-shadow-light);
+  border: 1px solid rgba(10, 186, 181, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.emptyIcon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+  background: var(--tiffany-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.emptyState h3 {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.emptyState p {
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.shopButton {
+  padding: 1rem 2.5rem;
+  background: var(--tiffany-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px var(--tiffany-shadow);
+}
+
+.shopButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px var(--tiffany-shadow);
+}
+
+/* Delivery Info */
+.deliveryInfo {
+  padding: 2rem 2.5rem;
+  background: var(--tiffany-gradient-soft);
+  border-bottom: 1px solid rgba(10, 186, 181, 0.08);
+}
+
+.deliveryInfo h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deliveryInfo h4::before {
+  content: '🚚';
+  font-size: 1.2rem;
+}
+
+.deliveryDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trackingInfo,
+.estimatedDelivery {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(10, 186, 181, 0.1);
+}
+
+.trackingNumber {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  background: var(--elegant-gray);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--tiffany-light);
+  font-weight: 600;
+  color: var(--tiffany-dark);
+  letter-spacing: 0.05em;
+}
+
+.trackButton {
+  padding: 0.5rem 1rem;
+  background: var(--tiffany-gradient);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px var(--tiffany-shadow-light);
+}
+
+.trackButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--tiffany-shadow);
+}
+
+/* Order Actions */
+.orderActions {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem 2.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  background: rgba(248, 249, 250, 0.5);
+}
+
+.orderActions button {
+  padding: 0.875rem 1.75rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+}
+
+.orderActions button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.orderActions button:hover::before {
+  left: 100%;
+}
+
+.viewDetailsButton {
+  background: var(--tiffany-gradient);
+  color: white;
+  box-shadow: 0 6px 20px var(--tiffany-shadow-light);
+}
+
+.viewDetailsButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--tiffany-shadow);
+}
+
+.reorderButton {
+  background: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+}
+
+.reorderButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(39, 174, 96, 0.4);
+}
+
+.cancelButton {
+  background: linear-gradient(135deg, var(--error-color) 0%, #C0392B 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+}
+
+.cancelButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(231, 76, 60, 0.4);
+}
+
+.retryPaymentButton {
+  background: linear-gradient(135deg, var(--warning-color) 0%, #E67E22 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+}
+
+.retryPaymentButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(243, 156, 18, 0.4);
+}
+
+/* Error State */
+.errorState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 12px 48px var(--tiffany-shadow-light);
+  border: 1px solid rgba(231, 76, 60, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.errorIcon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.errorState h3 {
+  font-size: 1.75rem;
+  color: var(--error-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.errorState p {
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.retryButton {
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, var(--error-color) 0%, #C0392B 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgba(231, 76, 60, 0.3);
+}
+
+.retryButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(231, 76, 60, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ordersPage {
+    padding: 5rem 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .filters {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .filterGroup {
+    min-width: auto;
+  }
+  
+  .orderHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .orderStatuses {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .orderMeta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .orderItems {
+    padding: 1.5rem;
+  }
+  
+  .orderItem {
+    gap: 1rem;
+    padding: 0.75rem;
+  }
+  
+  .itemImage {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .deliveryInfo {
+    padding: 1.5rem;
+  }
+  
+  .orderActions {
+    justify-content: stretch;
+    padding: 1.5rem;
+  }
+  
+  .orderActions button {
+    flex: 1;
+    text-align: center;
+    min-width: 0;
+  }
+  
+  .itemPrice {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .trackingInfo,
+  .estimatedDelivery {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .orderCard {
+    margin: 0 -0.5rem;
+    border-radius: 16px;
+  }
+  
+  .orderCard::before {
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .controls {
+    margin: 0 -0.5rem 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .orderItem {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .itemImage {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .orderActions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .orderActions button {
+    padding: 1rem;
+  }
+}
+
+

@@ -1,0 +1,523 @@
+/* Auth page styles - Modern Design */
+
+.authContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(180deg, #0891b2 0%, #0e7490 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.authContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(10, 186, 181, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.authCard {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 
+    0 32px 64px rgba(0, 0, 0, 0.1),
+    0 16px 32px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 3rem;
+}
+
+.authHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.authTitle {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #1a202c 0%, #4a5568 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.authSubtitle {
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.errorMessage {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border: 1px solid #f87171;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.successMessage {
+  text-align: center;
+  padding: 2rem 0;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  margin: 1.5rem 0;
+}
+
+.successIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+.helpText {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+}
+
+.linkButton {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.linkButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 85%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  color: #1a202c;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #0ABAB5;
+  box-shadow: 0 0 0 3px rgba(10, 186, 181, 0.1);
+  background: #fafbfc;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 0.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.passwordToggle:hover {
+  color: #0ABAB5;
+  background: rgba(10, 186, 181, 0.1);
+}
+
+.checkboxGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkboxCustom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.checkbox:checked + .checkboxCustom {
+  background: linear-gradient(135deg, #0ABAB5 0%, #0891b2 100%);
+  border-color: #0ABAB5;
+}
+
+.checkbox:checked + .checkboxCustom::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.forgotLink {
+  font-size: 0.85rem;
+  color: #0ABAB5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.forgotLink:hover {
+  color: #0891b2;
+  text-decoration: underline;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #0ABAB5 0%, #0891b2 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  box-shadow: 0 8px 25px rgba(10, 186, 181, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  transition: left 0.5s ease;
+}
+
+.submitButton:hover::before {
+  left: 0;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(10, 186, 181, 0.4);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 8px 25px rgba(10, 186, 181, 0.2);
+}
+
+/* Loading state for buttons */
+.submitButton.loading {
+  background: linear-gradient(135deg, #8cc8c1 0%, #9cb5d8 100%) !important;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.authFooter {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footerText {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footerLink {
+  color: #0ABAB5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+  color: #0891b2;
+  text-decoration: underline;
+}
+
+.socialDivider {
+  position: relative;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.socialDivider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.dividerText {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0 1rem;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.socialButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.socialButton:hover {
+  border-color: #d1d5db;
+  background: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.socialButton:active {
+  transform: translateY(0);
+}
+
+/* Redirect control styles */
+.redirectInfo {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.redirectInfo p {
+  margin: 0 0 1rem 0;
+  color: #047857;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.redirectActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.proceedButton {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.proceedButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.cancelButton {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+  border: 1px solid rgba(107, 114, 128, 0.3);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background: rgba(107, 114, 128, 0.2);
+  border-color: rgba(107, 114, 128, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .authContainer {
+    padding: 1rem 0.75rem;
+    margin-top: 5rem;
+  }
+  .input {
+    width: 82%;
+  }
+  .authCard {
+    padding: 2rem 1.5rem;
+    margin: 0;
+    border-radius: 20px;
+  }
+
+  .authTitle {
+    font-size: 1.875rem;
+  }
+
+  .socialButtons {
+    flex-direction: column;
+  }
+
+  .checkboxGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .redirectActions {
+    flex-direction: column;
+  }
+}
+
+/* Form row for registration */
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

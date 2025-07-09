@@ -1,0 +1,324 @@
+/* Checkout Options Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 20px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(129, 230, 217, 0.1);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(107, 114, 128, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: rgba(107, 114, 128, 0.2);
+  color: #374151;
+  transform: scale(1.05);
+}
+
+.modalHeader {
+  text-align: center;
+  padding: 2.5rem 2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.1) 0%, rgba(167, 243, 208, 0.08) 100%);
+  border-radius: 20px 20px 0 0;
+}
+
+.modalTitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.75rem;
+}
+
+.modalSubtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.optionsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.option {
+  padding: 2rem;
+  border: 2px solid rgba(129, 230, 217, 0.3);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.option:hover {
+  border-color: #14b8a6;
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.15);
+  transform: translateY(-2px);
+}
+
+.optionHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.optionIcon {
+  font-size: 2rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.2) 0%, rgba(167, 243, 208, 0.15) 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optionTitle {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #0f766e;
+  margin: 0;
+}
+
+.optionDescription {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.optionBenefits {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.optionBenefits li {
+  padding: 0.5rem 0;
+  color: #374151;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.3);
+}
+
+.loginButton:hover {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
+}
+
+.guestButton {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.1) 0%, rgba(167, 243, 208, 0.1) 100%);
+  color: #0f766e;
+  border: 2px solid #14b8a6;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.guestButton:hover {
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.2) 0%, rgba(167, 243, 208, 0.2) 100%);
+  border-color: #0d9488;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.2);
+}
+
+.modalFooter {
+  padding: 1.5rem 2rem 2rem;
+  text-align: center;
+  background: #f9fafb;
+  border-radius: 0 0 20px 20px;
+}
+
+.footerNote {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .modalOverlay {
+    padding: 0.5rem;
+  }
+
+  .modalContent {
+    border-radius: 16px;
+    max-height: 95vh;
+  }
+
+  .modalHeader {
+    padding: 2rem 1.5rem 1rem;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .modalTitle {
+    font-size: 1.5rem;
+  }
+
+  .modalSubtitle {
+    font-size: 1rem;
+  }
+
+  .optionsContainer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .option {
+    padding: 1.5rem;
+  }
+
+  .optionIcon {
+    font-size: 1.75rem;
+    padding: 0.5rem;
+  }
+
+  .optionTitle {
+    font-size: 1.25rem;
+  }
+
+  .closeButton {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+  }
+
+  .modalFooter {
+    padding: 1.25rem 1.5rem 1.5rem;
+    border-radius: 0 0 16px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalHeader {
+    padding: 1.5rem 1rem 0.75rem;
+  }
+
+  .modalTitle {
+    font-size: 1.375rem;
+  }
+
+  .optionsContainer {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .option {
+    padding: 1.25rem;
+  }
+
+  .optionHeader {
+    gap: 0.75rem;
+  }
+
+  .loginButton,
+  .guestButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .modalContent {
+    animation: none;
+  }
+
+  .option:hover {
+    transform: none;
+  }
+
+  .loginButton:hover,
+  .guestButton:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .option {
+    border-width: 3px;
+  }
+
+  .loginButton,
+  .guestButton {
+    border-width: 2px;
+  }
+}

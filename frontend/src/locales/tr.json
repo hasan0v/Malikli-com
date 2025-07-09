@@ -1,0 +1,1747 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "delivery": "Teslimat & Ödeme",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "profile": "Profilim",
+    "orders": "Siparişlerim",
+    "favorites": "Favorilerim",
+    "settings": "Ayarlar",
+    "logout": "Çıkış Yap",
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "adminPanel": "Yönetici Paneli"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata oluştu",
+    "tryAgain": "Tekrar Dene",
+    "buyNow": "Hemen Al",
+    "addToCart": "Sepete Ekle",
+    "selectOptions": "Seçenekleri Seç",
+    "checkingAuth": "Yetki kontrol ediliyor..."
+  },
+  "home": {
+    "error": {
+      "title": "Bir hata oluştu",
+      "button": "Tekrar dene"
+    },
+    "loading": {
+      "slider": "Slider yükleniyor...",
+      "products": "Ürünler yükleniyor..."
+    },
+    "slider": {
+      "promo1Alt": "Promosyon banner 1",
+      "promo1Title": "Promosyon Banner 1",
+      "promo1Description": "Promosyonlarımızı inceleyin",
+      "promo2Alt": "Promosyon banner 2",
+      "promo2Title": "Promosyon Banner 2",
+      "promo2Description": "Özel teklifler mevcut",
+      "newCollectionAlt": "Yeni koleksiyon geldi",
+      "newCollectionTitle": "Yeni Koleksiyon",
+      "newCollectionDescription": "En yeni ürünlerimizi keşfedin"
+    },
+    "welcome": {
+      "title": "Malikli'ye Hoş Geldiniz",
+      "subtitle": "Şu anda ürün bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin.",
+      "viewDrops": "Koleksiyonları Görüntüle"
+    },
+    "noProducts": "Bu koleksiyonda ürün bulunamadı."
+  },
+  "auth": {
+    "login": {
+      "title": "Hoş Geldiniz",
+      "subtitle": "Hesabınıza giriş yapın",
+      "username": "Kullanıcı Adı",
+      "usernamePlaceholder": "Kullanıcı adınızı girin",
+      "password": "Şifre",
+      "passwordPlaceholder": "Şifrenizi girin",
+      "rememberMe": "Beni hatırla",
+      "forgotPassword": "Şifrenizi mi unuttunuz?",
+      "loginButton": "Giriş Yap",
+      "loginButtonLoading": "Giriş yapılıyor...",
+      "noAccount": "Hesabınız yok mu?",
+      "registerLink": "Kayıt ol",
+      "orDivider": "veya",
+      "socialGoogle": "Google",
+      "socialFacebook": "Facebook",
+      "errorDefault": "Giriş hatası. Lütfen bilgilerinizi kontrol edin."
+    },
+    "register": {
+      "title": "Hesap Oluştur",
+      "subtitle": "Bugün Malikli'ye katılın",
+      "firstName": "Ad",
+      "firstNamePlaceholder": "Adınız",
+      "lastName": "Soyad",
+      "lastNamePlaceholder": "Soyadınız",
+      "username": "Kullanıcı Adı",
+      "usernamePlaceholder": "Bir kullanıcı adı seçin",
+      "email": "E-posta",
+      "emailPlaceholder": "eposta@adresiniz.com",
+      "phone": "Telefon (isteğe bağlı)",
+      "phonePlaceholder": "+90 (xxx) xxx-xx-xx",
+      "password": "Şifre",
+      "passwordPlaceholder": "Şifre oluşturun",
+      "confirmPassword": "Şifreyi Onayla",
+      "confirmPasswordPlaceholder": "Şifreyi tekrar girin",
+      "acceptTerms": "Kabul ediyorum",
+      "termsLink": "hizmet şartlarını",
+      "andText": "ve",
+      "privacyLink": "gizlilik politikasını",
+      "registerButton": "Hesap Oluştur",
+      "registerButtonLoading": "Hesap oluşturuluyor...",
+      "hasAccount": "Zaten bir hesabınız var mı?",
+      "loginLink": "Giriş yap",
+      "orDivider": "veya",
+      "socialGoogle": "Google",
+      "socialFacebook": "Facebook",
+      "errorDefault": "Kayıt hatası. Lütfen verilerinizi kontrol edin.",
+      "successMessage": "Kayıt başarılı! Adresinize bir e-posta doğrulaması gönderdik. Lütfen e-postanızı kontrol edin ve hesabınızı etkinleştirmek için bağlantıyı takip edin.",
+      "redirectInfo": "{{seconds}} saniye içinde giriş sayfasına otomatik yönlendirme",
+      "redirectNow": "Şimdi git",
+      "stayHere": "Burada kal",
+      "validation": {
+        "acceptTerms": "Lütfen hizmet şartlarını kabul edin",
+        "passwordMismatch": "Şifreler eşleşmiyor"
+      }
+    },
+    "forgotPassword": {
+      "title": "Şifrenizi mi Unuttunuz?",
+      "subtitle": "E-postanızı girin, size şifre sıfırlama talimatları gönderelim",
+      "emailSentTitle": "E-posta Gönderildi",
+      "emailSentSubtitle": "Şifre sıfırlama talimatları için e-postanızı kontrol edin",
+      "email": "E-posta",
+      "emailPlaceholder": "E-postanızı girin",
+      "sendButton": "Talimatları Gönder",
+      "sendButtonLoading": "Gönderiliyor...",
+      "successMessage": "{{email}} adresine şifre sıfırlama talimatları gönderdik",
+      "helpText": "E-posta birkaç dakika içinde gelmezse, spam klasörünüzü kontrol edin",
+      "backToLogin": "Giriş sayfasına dön",
+      "rememberedPassword": "Şifrenizi hatırladınız mı?",
+      "loginLink": "Giriş yap",
+      "noAccount": "Hesabınız yok mu?",
+      "registerLink": "Kayıt ol"
+    },
+    "resetPassword": {
+      "title": "Yeni Şifre",
+      "subtitle": "Yeni şifrenizi girin",
+      "invalidLinkTitle": "Geçersiz Bağlantı",
+      "invalidLinkMessage": "Bu şifre sıfırlama bağlantısı geçersiz veya süresi dolmuş. Lütfen yeni bir tane talep edin.",
+      "successTitle": "Şifre Değiştirildi",
+      "successMessage": "Şifreniz başarıyla değiştirildi. Artık yeni şifrenizle giriş yapabilirsiniz.",
+      "password": "Yeni Şifre",
+      "passwordPlaceholder": "Yeni şifreyi girin",
+      "confirmPassword": "Şifreyi Onayla",
+      "confirmPasswordPlaceholder": "Yeni şifreyi tekrar girin",
+      "resetButton": "Şifreyi Sıfırla",
+      "resetButtonLoading": "Sıfırlanıyor...",
+      "backToLogin": "Giriş sayfasına dön",
+      "requestNewLink": "Yeni bağlantı talep et",
+      "validation": {
+        "passwordRequired": "Şifre gerekli",
+        "passwordLength": "Şifre en az 8 karakter olmalıdır",
+        "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",
+        "passwordMismatch": "Şifreler eşleşmiyor"
+      }
+    },
+    "verifyEmail": {
+      "title": "E-posta Doğrulama",
+      "subtitle": "E-posta adresiniz doğrulanıyor...",
+      "successTitle": "E-posta Doğrulandı!",
+      "successMessage": "E-postanız başarıyla doğrulandı. Artık hesabınıza giriş yapabilirsiniz.",
+      "errorTitle": "Doğrulama Hatası",
+      "errorMessage": "Doğrulama bağlantısı geçersiz veya süresi dolmuş. Lütfen yeni bir doğrulama e-postası talep edin.",
+      "backToLogin": "Giriş sayfasına dön",
+      "resendLink": "Doğrulama e-postasını tekrar gönder"
+    },
+    "changePassword": {
+      "title": "Şifreyi Değiştir",
+      "subtitle": "Hesap şifrenizi güncelleyin",
+      "successTitle": "Şifre Değiştirildi",
+      "successMessage": "Şifreniz başarıyla değiştirildi.",
+      "currentPassword": "Mevcut Şifre",
+      "currentPasswordPlaceholder": "Mevcut şifreyi girin",
+      "newPassword": "Yeni Şifre",
+      "newPasswordPlaceholder": "Yeni şifreyi girin",
+      "confirmPassword": "Yeni Şifreyi Onayla",
+      "confirmPasswordPlaceholder": "Yeni şifreyi tekrar girin",
+      "changeButton": "Şifreyi Değiştir",
+      "changeButtonLoading": "Değiştiriliyor...",
+      "backToProfile": "Profile geri dön",
+      "validation": {
+        "currentPasswordRequired": "Mevcut şifre gerekli",
+        "newPasswordRequired": "Yeni şifre gerekli",
+        "passwordLength": "Şifre en az 8 karakter olmalıdır",
+        "confirmPasswordRequired": "Lütfen yeni şifrenizi onaylayın",
+        "passwordMismatch": "Şifreler eşleşmiyor"
+      }
+    },
+    "resendVerification": {
+      "title": "E-postayı Doğrula",
+      "subtitle": "E-posta doğrulamasını tekrar gönder",
+      "emailSentTitle": "E-posta Gönderildi",
+      "emailSentSubtitle": "Doğrulama talimatları için e-postanızı kontrol edin",
+      "email": "E-posta",
+      "emailPlaceholder": "E-postanızı girin",
+      "resendButton": "Doğrulamayı Tekrar Gönder",
+      "resendButtonLoading": "Gönderiliyor...",
+      "successMessage": "{{email}} adresine yeni bir doğrulama e-postası gönderdik",
+      "helpText": "E-posta birkaç dakika içinde gelmezse, spam klasörünüzü kontrol edin",
+      "backToLogin": "Giriş sayfasına dön"
+    }
+  },
+  "product": {
+    "loading": {
+      "text": "Ürün yükleniyor..."
+    },
+    "error": {
+      "somethingWrong": "Bir şeyler ters gitti",
+      "notFound": "Ürün bulunamadı",
+      "notFoundMessage": "Aradığınız ürünü bulamadık.",
+      "backToHome": "Ana sayfaya dön",
+      "invalidSlug": "Geçersiz ürün kodu"
+    },
+    "breadcrumbs": {
+      "home": "Ana Sayfa"
+    },
+    "price": {
+      "currency": "EUR"
+    },
+    "availability": {
+      "inStock": "Stokta Var",
+      "outOfStock": "Stokta Yok",
+      "lowStock": "Stok Az"
+    },
+    "description": {
+      "noDescription": "Ürün açıklaması mevcut değil."
+    },
+    "variants": {
+      "size": "Beden",
+      "color": "Renk",
+      "variant": "Varyant",
+      "selectedInfo": {
+        "size": "Beden:",
+        "color": "Renk:",
+        "variant": "Varyant:"
+      }
+    },
+    "quantity": {
+      "label": "Miktar:"
+    },
+    "buttons": {
+      "buyNow": "Hemen Al",
+      "addToCart": "Sepete Ekle",
+      "processing": "İşleniyor...",
+      "adding": "Ekleniyor..."
+    },
+    "about": "Bu Ürün Hakkında",
+    "readMore": "Devamını Oku",
+    "story": {
+      "title": "İlham Kaynağı",
+      "crafted": "Sevgiyle Üretildi",
+      "explore": "Detayları Keşfet"
+    },
+    "addingToCart": "Sepete Ekleniyor...",
+    "relatedProducts": {
+      "title": "İlgili Ürünler"
+    }
+  },
+  "productCard": {
+    "variants": {
+      "colors": "{{count}} renk",
+      "colors_plural": "{{count}} renk",
+      "sizes": "{{count}} beden",
+      "sizes_plural": "{{count}} beden"
+    }
+  },
+  "cart": {
+    "loading": "Sepet yükleniyor...",
+    "title": "Sepetiniz",
+    "empty": {
+      "title": "Sepet Boş",
+      "message": "Sipariş vermek için sepetinize ürün ekleyin",
+      "continueShopping": "Alışverişe Başla"
+    },
+    "headers": {
+      "product": "Ürün",
+      "price": "Fiyat",
+      "quantity": "Miktar",
+      "total": "Toplam"
+    },
+    "removeItem": "Ürünü kaldır",
+    "actions": {
+      "clearCart": "Sepeti Temizle",
+      "continueShopping": "Alışverişe Devam Et",
+      "checkout": "Ödemeye Geç"
+    },
+    "summary": {
+      "title": "Özet",
+      "items": "Ürünler ({{count}})",
+      "shipping": "Kargo",
+      "total": "Ödenecek Toplam"
+    },
+    "secureCheckout": "Güvenli Ödeme",
+    "sidebar": {
+      "title": "Sepet ({{count}})",
+      "close": "Sepeti kapat",
+      "empty": "Sepetiniz boş",
+      "startShopping": "Alışverişe Başla",
+      "total": "Toplam",
+      "viewCart": "Sepeti Görüntüle",
+      "checkout": "Ödemeye Geç"
+    }
+  },
+  "checkout": {
+    "title": "Ödeme",
+    "loading": "Yükleniyor...",
+    "emptyCart": {
+      "title": "Sepet Boş",
+      "message": "Ödemeye devam etmek için sepetinize ürün ekleyin."
+    },
+    "error": {
+      "title": "Hata",
+      "productLoadFailed": "Ürün bilgileri yüklenemedi. Lütfen tekrar deneyin.",
+      "orderSubmissionFailed": "Siparişiniz verilirken bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "confirmations": {
+      "deleteAddress": "Bu adresi silmek istediğinizden emin misiniz?"
+    },
+    "navigation": {
+      "back": "← Geri",
+      "continue": "Devam Et →",
+      "placeOrder": "Sipariş Ver",
+      "processing": "İşleniyor..."
+    },
+    "options": {
+      "title": "Ödeme Yönteminizi Seçin",
+      "subtitle": "Satın alma işleminize nasıl devam etmek istersiniz?",
+      "login": {
+        "title": "Hesabınıza Giriş Yapın",
+        "description": "Kayıtlı adreslerinize, sipariş geçmişinize erişmek ve kişiselleştirilmiş bir alışveriş deneyiminin keyfini çıkarmak için giriş yapın.",
+        "benefit1": "Daha hızlı ödeme için adresleri kaydedin",
+        "benefit2": "Sipariş geçmişinizi takip edin",
+        "benefit3": "Profilinizi ve tercihlerinizi yönetin",
+        "benefit4": "Özel üye teklifleri alın",
+        "button": "Giriş Yap & Devam Et"
+      },
+      "guest": {
+        "title": "Misafir Olarak Devam Et",
+        "description": "Hesap oluşturmadan hızlıca ödeme yapın. Sipariş detaylarınız e-postanıza gönderilecektir.",
+        "benefit1": "Hızlı ve basit ödeme",
+        "benefit2": "Hesap oluşturma gerektirmez",
+        "benefit3": "E-posta ile sipariş onayı",
+        "button": "Misafir Olarak Devam Et"
+      },
+      "footerNote": "Siparişlerinizi takip etmek ve tercihlerinizi kaydetmek için daha sonra her zaman bir hesap oluşturabilirsiniz."
+    },
+    "steps": {
+      "information": "Bilgiler",
+      "shipping": "Kargo",
+      "payment": "Ödeme",
+      "confirmation": "Onay"
+    },
+    "customerInfo": {
+      "title": "Müşteri Bilgileri",
+      "loggedIn": "Giriş yapıldı, bilgiler otomatik olarak kaydedildi",
+      "saving": "Otomatik kaydediliyor...",
+      "guestCheckout": "Misafir Ödemesi",
+      "guestCheckoutNote": "Hesap oluşturmadan ödeme yapabilirsiniz. Sipariş detaylarınız e-postanıza gönderilecektir.",
+      "savedAddresses": "Kayıtlı Adresler",
+      "loadingAddresses": "Adresler yükleniyor...",
+      "default": "Varsayılan",
+      "use": "Kullan",
+      "delete": "Sil",
+      "addNewAddress": "Yeni Adres Ekle",
+      "selectedAddress": "Seçili Adres",
+      "firstName": "Ad",
+      "firstNamePlaceholder": "Adınızı girin",
+      "lastName": "Soyad",
+      "lastNamePlaceholder": "Soyadınızı girin",
+      "email": "E-posta",
+      "emailPlaceholder": "eposta@adresiniz.com",
+      "phone": "Telefon",
+      "phoneLabel": "Tel",
+      "phonePlaceholder": "+90 (5xx) xxx-xx-xx",
+      "shippingAddress": "Teslimat Adresi",
+      "addressNote": "Adresi geçici olarak girebilir veya gelecekteki siparişler için kaydedebilirsiniz",
+      "streetAddress": "Adres",
+      "streetAddressPlaceholder": "Sokak, bina numarası",
+      "apartment": "Daire/Ofis",
+      "apartmentPlaceholder": "Daire, ofis (isteğe bağlı)",
+      "city": "Şehir",
+      "cityPlaceholder": "İstanbul",
+      "state": "İlçe/Bölge",
+      "statePlaceholder": "Kadıköy",
+      "postalCode": "Posta Kodu",
+      "postalCodePlaceholder": "34700",
+      "country": "Ülke",
+      "saveAddress": "Adresi gelecekteki siparişler için kaydet",
+      "countries": {
+        "afghanistan": "Afganistan",
+        "albania": "Arnavutluk",
+        "algeria": "Cezayir",
+        "anguilla": "Anguilla",
+        "angola": "Angola",
+        "antiguaAndBarbuda": "Antigua ve Barbuda",
+        "argentina": "Arjantin",
+        "aruba": "Aruba",
+        "australia": "Avustralya",
+        "austria": "Avusturya",
+        "azerbaijan": "Azerbaycan",
+        "bahamas": "Bahamalar",
+        "bahrain": "Bahreyn",
+        "bangladesh": "Bangladeş",
+        "barbados": "Barbados",
+        "belarus": "Belarus",
+        "belgium": "Belçika",
+        "belize": "Belize",
+        "benin": "Benin",
+        "bermuda": "Bermuda",
+        "bhutan": "Butan",
+        "bolivia": "Bolivya",
+        "bonaireSintEustatiusSaba": "Bonaire, Sint Eustatius ve Saba",
+        "bosniaHerzegovina": "Bosna-Hersek",
+        "botswana": "Botsvana",
+        "brazil": "Brezilya",
+        "bruneiDarussalam": "Brunei Darussalam",
+        "bulgaria": "Bulgaristan",
+        "burkinaFaso": "Burkina Faso",
+        "burundi": "Burundi",
+        "cambodia": "Kamboçya",
+        "cameroon": "Kamerun",
+        "canada": "Kanada",
+        "canaryIslands": "Kanarya Adaları (İspanya)",
+        "capeVerde": "Yeşil Burun Adaları",
+        "caymanIslands": "Cayman Adaları",
+        "centralAfricanRepublic": "Orta Afrika Cumhuriyeti",
+        "chad": "Çad",
+        "chile": "Şili",
+        "china": "Çin",
+        "colombia": "Kolombiya",
+        "comorosIslands": "Komor Adaları",
+        "costaRica": "Kosta Rika",
+        "coteIvoire": "Fildişi Sahili (Cum.)",
+        "croatia": "Hırvatistan",
+        "cuba": "Küba",
+        "curacao": "Curaçao",
+        "cyprus": "Kıbrıs",
+        "czechRepublic": "Çek Cumhuriyeti",
+        "democraticRepublicCongo": "Kongo Demokratik Cumhuriyeti",
+        "denmark": "Danimarka",
+        "djibouti": "Cibuti",
+        "dominica": "Dominika",
+        "dominicanRepublic": "Dominik Cumhuriyeti",
+        "ecuador": "Ekvador",
+        "egypt": "Mısır",
+        "equatorialGuinea": "Ekvator Ginesi",
+        "eritrea": "Eritre",
+        "estonia": "Estonya",
+        "eswatini": "Esvatini (eski adıyla Svaziland)",
+        "ethiopia": "Etiyopya",
+        "faroeIslands": "Faroe Adaları (Danimarka)",
+        "fiji": "Fiji",
+        "finland": "Finlandiya",
+        "france": "Fransa",
+        "frenchPolynesia": "Fransız Polinezyası",
+        "gabon": "Gabon",
+        "gambia": "Gambiya",
+        "georgia": "Gürcistan",
+        "germany": "Almanya",
+        "ghana": "Gana",
+        "gibraltar": "Cebelitarık (Britanya)",
+        "greece": "Yunanistan",
+        "greenland": "Grönland (Danimarka)",
+        "grenada": "Grenada",
+        "guatemala": "Guatemala",
+        "guernsey": "Guernsey (Britanya)",
+        "guinea": "Gine",
+        "guyana": "Guyana",
+        "haiti": "Haiti",
+        "hongKong": "Hong Kong (Çin)",
+        "hungary": "Macaristan",
+        "iceland": "İzlanda",
+        "india": "Hindistan",
+        "indonesia": "Endonezya",
+        "iran": "İran (İslam Cum.)",
+        "iraq": "Irak",
+        "ireland": "İrlanda",
+        "italy": "İtalya",
+        "jamaica": "Jamaika",
+        "japan": "Japonya",
+        "jersey": "Jersey (Britanya)",
+        "jordan": "Ürdün",
+        "kazakhstan": "Kazakistan",
+        "kenya": "Kenya",
+        "kiribati": "Kiribati",
+        "kosovo": "Kosova",
+        "kuwait": "Kuveyt",
+        "kyrgyzstan": "Kırgızistan",
+        "laos": "Laos",
+        "latvia": "Letonya",
+        "lebanon": "Lübnan",
+        "lesotho": "Lesoto",
+        "liberia": "Liberya",
+        "libya": "Libya",
+        "liechtenstein": "Lihtenştayn",
+        "lithuania": "Litvanya",
+        "luxembourg": "Lüksemburg",
+        "macao": "Makao",
+        "madagascar": "Madagaskar",
+        "malawi": "Malavi",
+        "malaysia": "Malezya",
+        "maldives": "Maldivler",
+        "mali": "Mali",
+        "malta": "Malta",
+        "mauritania": "Moritanya",
+        "mauritius": "Mauritius",
+        "mexico": "Meksika",
+        "moldova": "Moldova",
+        "monaco": "Monako",
+        "mongolia": "Moğolistan",
+        "montenegro": "Karadağ",
+        "morocco": "Fas",
+        "mozambique": "Mozambik",
+        "myanmar": "Myanmar",
+        "namibia": "Namibya",
+        "nepal": "Nepal",
+        "netherlands": "Hollanda",
+        "newCaledonia": "Yeni Kaledonya",
+        "newZealand": "Yeni Zelanda",
+        "nicaragua": "Nikaragua",
+        "niger": "Nijer",
+        "nigeria": "Nijerya",
+        "northKorea": "Kore Demokratik Halk Cumhuriyeti",
+        "northMacedonia": "Kuzey Makedonya",
+        "norway": "Norveç",
+        "oman": "Umman",
+        "pakistan": "Pakistan",
+        "panama": "Panama (Cum.)",
+        "papuaNewGuinea": "Papua Yeni Gine",
+        "paraguay": "Paraguay",
+        "peru": "Peru",
+        "philippines": "Filipinler",
+        "poland": "Polonya",
+        "portugal": "Portekiz",
+        "qatar": "Katar",
+        "republicCongo": "Kongo Demokratik Cumhuriyeti",
+        "romania": "Romanya",
+        "russianFederation": "Rusya Federasyonu",
+        "rwanda": "Ruanda",
+        "saintKittsAndNevis": "Saint Kitts ve Nevis",
+        "saintMartin": "Saint-Martin",
+        "salvador": "El Salvador",
+        "samoa": "Samoa",
+        "sanMarino": "San Marino",
+        "saoTomeAndPrincipe": "Sao Tome ve Principe",
+        "saudiArabia": "Suudi Arabistan",
+        "senegal": "Senegal",
+        "serbia": "Sırbistan",
+        "seychelles": "Seyşeller",
+        "sierraLeone": "Sierra Leone",
+        "singapore": "Singapur",
+        "slovakia": "Slovakya",
+        "slovenia": "Slovenya",
+        "solomonIsland": "Solomon Adaları",
+        "southAfrica": "Güney Afrika",
+        "spain": "İspanya",
+        "sriLanka": "Sri Lanka",
+        "stLucia": "Saint Lucia",
+        "stVincentAndGrenadines": "Saint Vincent ve Grenadinler",
+        "sudan": "Sudan",
+        "surinam": "Surinam",
+        "sweden": "İsveç",
+        "switzerland": "İsviçre",
+        "syrianArabRepublic": "Suriye Arap Cumhuriyeti",
+        "taiwan": "Tayvan (Çin)",
+        "tajikistan": "Tacikistan",
+        "tanzania": "Tanzanya",
+        "thailand": "Tayland",
+        "togoleseRepublic": "Togo Cumhuriyeti",
+        "tonga": "Tonga",
+        "trinidadAndTobago": "Trinidad ve Tobago",
+        "tunisia": "Tunus",
+        "turkey": "Türkiye",
+        "turkmenistan": "Türkmenistan",
+        "turksAndCaicosIslands": "Turks ve Caicos Adaları",
+        "uganda": "Uganda",
+        "ukraine": "Ukrayna",
+        "unitedArabEmirates": "Birleşik Arap Emirlikleri",
+        "unitedKingdom": "Büyük Britanya ve Kuzey İrlanda Birleşik Krallığı",
+        "uruguay": "Uruguay",
+        "usa": "ABD (Amerika Birleşik Devletleri)",
+        "usVirginIslands": "Virgin Adaları",
+        "uzbekistan": "Özbekistan",
+        "vanuatu": "Vanuatu",
+        "vatican": "Vatikan",
+        "venezuela": "Venezuela",
+        "vietnam": "Vietnam",
+        "virginIslands": "Virgin Adaları",
+        "yemen": "Yemen",
+        "zambia": "Zambiya",
+        "zimbabwe": "Zimbabve"
+    }
+    },
+    "summary": {
+      "title": "Sipariş Özeti",
+      "subtotal": "Ara Toplam",
+      "shipping": "Kargo",
+      "discount": "İndirim",
+      "total": "Toplam",
+      "size": "Beden",
+      "freeReturns": "Ücretsiz İade",
+      "support": "7/24 Destek",
+      "updating": "Toplamlar güncelleniyor..."
+    },
+    "shipping": {
+      "title": "Kargo",
+      "standardShipping": "Standart Kargo",
+      "standardDescription": "5-14 iş günü içinde teslimat",
+      "deliveryTime": {
+        "today": "Bugün",
+        "days": "{{count}} gün",
+        "days_plural": "{{count}} gün",
+        "range": "{{min}}-{{max}} gün"
+      },
+      "free": "Ücretsiz",
+      "info": "Tüm siparişler özenle paketlenir ve 1-2 iş günü içinde kargoya verilir"
+    },
+    "payment": {
+      "title": "Ödeme Yöntemi",
+      "instructions": "'Sipariş Ver'e tıkladıktan sonra kart bilgilerinizi girmek için güvenli bir ödeme sayfasına yönlendirileceksiniz.",
+      "cardDescription": "Güvenli kart ödemesi"
+    },
+    "secureCheckout": "Güvenli Ödeme",
+    "confirmation": {
+      "title": "Sipariş Onayı",
+      "reviewText": "Lütfen siparişinizi vermeden önce sipariş detaylarınızı gözden geçirin.",
+      "customerInfo": {
+        "title": "Müşteri Bilgileri",
+        "name": "Ad Soyad",
+        "email": "E-posta",
+        "phone": "Telefon"
+      },
+      "shippingInfo": {
+        "title": "Teslimat Bilgileri",
+        "address": "Adres",
+        "method": "Yöntem",
+        "deliveryTime": "Teslimat Süresi",
+        "cost": "Kargo Ücreti"
+      },
+      "paymentMethod": {
+        "title": "Ödeme Yöntemi"
+      },
+      "orderItems": {
+        "title": "Sipariş Ürünleri",
+        "quantity": "Miktar",
+        "variant": "Varyant"
+      },
+      "orderTotal": {
+        "title": "Sipariş Toplamı",
+        "subtotal": "Ara Toplam",
+        "shipping": "Kargo",
+        "discount": "İndirim",
+        "total": "Toplam"
+      },
+      "deliveryTime": {
+        "oneDay": "1 gün",
+        "days": "{{days}} gün",
+        "weeks": "{{weeks}} hafta"
+      },
+      "terms": {
+        "agree": "Kabul ediyorum:",
+        "termsLink": "Şartlar ve Koşullar",
+        "and": "ve",
+        "privacyLink": "Gizlilik Politikası",
+        "error": "Devam etmek için lütfen Şartlar ve Koşulları ve Gizlilik Politikasını kabul edin"
+      },
+      "button": {
+        "loading": "Ödemeye yönlendiriliyor...",
+        "placeOrder": "Ödemeye Geç - {{amount}} EUR "
+      },
+      "redirectNotice": "Güvenli bir ödeme sayfasına yönlendirileceksiniz",
+      "securityNotice": "Ödeme verileriniz korunur ve şifrelenir"
+    },
+    "validation": {
+      "firstNameRequired": "Ad gerekli",
+      "lastNameRequired": "Soyad gerekli",
+      "emailRequired": "E-posta gerekli",
+      "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+      "addressRequired": "Adres gerekli",
+      "cityRequired": "Şehir gerekli",
+      "stateRequired": "İlçe/Bölge gerekli",
+      "postalCodeRequired": "Posta kodu gerekli",
+      "shippingMethodRequired": "Lütfen bir kargo yöntemi seçin",
+      "paymentMethodRequired": "Lütfen bir ödeme yöntemi seçin",
+      "pleaseComplete": "Lütfen aşağıdaki alanları doldurun"
+    },
+    "success": {
+      "loading": "Sipariş detayları yükleniyor...",
+      "title": "Sipariş Onaylandı!",
+      "message": "Satın alımınız için teşekkür ederiz. Siparişiniz alındı ve işleme konuluyor.",
+      "error": {
+        "title": "Bir şeyler ters gitti",
+        "orderNotFound": "Sipariş bulunamadı",
+        "returnHome": "Ana Sayfaya Dön"
+      },
+      "orderInfo": {
+        "title": "Sipariş Bilgileri",
+        "orderNumber": "Sipariş Numarası",
+        "orderDate": "Sipariş Tarihi",
+        "totalAmount": "Toplam Tutar",
+        "paymentStatus": "Ödeme Durumu"
+      },
+      "shipping": {
+        "title": "Teslimat Bilgileri",
+        "method": "Kargo Yöntemi",
+        "estimatedDelivery": "Tahmini Teslimat"
+      },
+      "items": {
+        "title": "Sipariş Ürünleri",
+        "quantity": "Miktar"
+      },
+      "total": {
+        "subtotal": "Ara Toplam",
+        "shipping": "Kargo",
+        "discount": "İndirim",
+        "total": "Toplam"
+      },
+      "nextSteps": {
+        "title": "Sıradaki Adımlar Neler?",
+        "email": {
+          "title": "Sipariş Onay E-postası",
+          "description": "Kısa süre içinde sipariş detaylarınızı içeren bir onay e-postası alacaksınız."
+        },
+        "processing": {
+          "title": "İşleme",
+          "description": "Siparişinizi 1-2 iş günü içinde gönderim için hazırlayacağız."
+        },
+        "shipping": {
+          "title": "Kargo Güncellemeleri",
+          "description": "Siparişiniz kargoya verildiğinde takip bilgilerini alacaksınız."
+        }
+      },
+      "actions": {
+        "continueShopping": "Alışverişe Devam Et",
+        "printOrder": "Siparişi Yazdır"
+      },
+      "support": {
+        "title": "Yardıma mı ihtiyacınız var?",
+        "message": "Siparişinizle ilgili herhangi bir sorunuz varsa, lütfen müşteri destek ekibimizle iletişime geçin."
+      }
+    }
+  },
+  "faq": {
+    "hero": {
+      "title": "Sıkça Sorulan Sorular",
+      "subtitle": "Hizmetlerimiz hakkında en popüler soruların yanıtlarını bulun",
+      "searchPlaceholder": "Soru arayın..."
+    },
+    "categoriesSection": {
+      "title": "Soru Kategorileri"
+    },
+    "categories": {
+      "all": "Tüm Sorular",
+      "orders": "Siparişler",
+      "delivery": "Teslimat",
+      "payment": "Ödeme",
+      "returns": "İadeler",
+      "account": "Hesap",
+      "general": "Genel"
+    },
+    "resultsCount": "{{count}} soru bulundu",
+    "questions": {
+      "orders": {
+        "howToOrder": {
+          "question": "Web sitesinde nasıl sipariş verilir?",
+          "answer": "Sipariş vermek için: 1) Bir ürün seçin ve sepete ekleyin, 2) Sepete gidin ve 'Ödemeye Geç'e tıklayın, 3) İletişim bilgilerini doldurun ve teslimat yöntemini seçin, 4) Siparişi onaylayın. Siparişi verdikten sonra e-posta ile onay alacaksınız."
+        },
+        "changeOrder": {
+          "question": "Siparişi değiştirebilir veya iptal edebilir miyim?",
+          "answer": "Siparişi verdikten sonraki 30 dakika içinde +90 xxx xxx xx xx numaralı telefondan veya support@malikli1992.com e-posta adresinden bizimle iletişime geçerek siparişi değiştirebilir veya iptal edebilirsiniz. Sipariş işleme alındıktan sonra değişiklik kabul edilmez."
+        },
+        "trackOrder": {
+          "question": "Sipariş durumunu nasıl takip edebilirim?",
+          "answer": "Sipariş durumu, kişisel hesabınızdaki 'Siparişlerim' bölümünden takip edilebilir. Ayrıca, ödeme sırasında verdiğiniz e-posta ve telefon numarasına durum bildirimleri gönderiyoruz."
+        }
+      },
+      "delivery": {
+        "methods": {
+          "question": "Hangi teslimat yöntemleri mevcut?",
+          "answer": "Birkaç teslimat yöntemi sunuyoruz: kurye ile teslimat (1-2 gün), kargo şirketleri ile Türkiye geneline teslimat (2-5 gün), teslimat noktasından alma. Maliyet ve zamanlama hakkında detaylı bilgi için 'Teslimat' sayfasını inceleyin."
+        },
+        "cost": {
+          "question": "Teslimat ücreti ne kadar?",
+          "answer": "Teslimat maliyeti yönteme ve bölgeye göre değişir: İstanbul içi - 50 TL'den, Türkiye geneli - 80 TL'den başlar. 1000 TL üzeri siparişlerde kargo ücretsizdir. Kesin maliyet ödeme sırasında hesaplanır."
+        },
+        "time": {
+          "question": "Teslimat saatleri nedir?",
+          "answer": "Kurye ile teslimat Pazartesi'den Cuma'ya 09:00-18:00, Cumartesi 10:00-16:00 arası yapılır. Siparişinizi verirken uygun bir zaman aralığı seçebilirsiniz."
+        }
+      },
+      "payment": {
+        "methods": {
+          "question": "Hangi ödeme yöntemleri kabul ediliyor?",
+          "answer": "Aşağıdaki ödeme yöntemlerini kabul ediyoruz: Visa/MasterCard banka kartları, banka havalesi, kapıda ödeme (sadece kurye ile teslimatta geçerlidir)."
+        },
+        "security": {
+          "question": "Web sitesinde kartla ödeme güvenli mi?",
+          "answer": "Evet, kartla ödeme tamamen güvenlidir. Korunmuş SSL bağlantısı kullanıyoruz ve PCI DSS güvenlik standartlarına uyuyoruz. Kart verileriniz sunucularımızda kaydedilmez ve doğrudan bankaya iletilir."
+        },
+        "when": {
+          "question": "Para karttan ne zaman çekilir?",
+          "answer": "Kartla ödeme yaparken para, sipariş onayından hemen sonra çekilir. Kapıda ödeme seçeneğinde, para malı teslim alırken kuryeye ödenir."
+        }
+      },
+      "returns": {
+        "canReturn": {
+          "question": "Bir ürünü iade edebilir miyim?",
+          "answer": "Evet, Türkiye mevzuatına göre ürünü teslim aldıktan sonra 14 gün içinde iade edebilirsiniz. Ürün orijinal ambalajında, kullanılmamış, etiketleri ve fişiyle birlikte olmalıdır."
+        },
+        "howToReturn": {
+          "question": "İade işlemi nasıl yapılır?",
+          "answer": "İade işlemi için +90 xxx xxx xx xx numaralı telefondan veya support@malikli1992.com e-posta adresinden bizimle iletişime geçin. Ürün alımını organize edeceğiz veya ofisimize getirebilirsiniz. Para iadesi 10 iş günü içinde işlenir."
+        },
+        "deliveryCost": {
+          "question": "İade durumunda teslimat ücreti iade edilir mi?",
+          "answer": "Teslimat ücreti sadece ürün kusurluysa veya açıklamaya uymuyorsa iade edilir. Alıcının isteği üzerine iade yapıldığında teslimat ücreti karşılanmaz."
+        }
+      },
+      "account": {
+        "registration": {
+          "question": "Web sitesine kayıt zorunlu mu?",
+          "answer": "Tek seferlik alışverişler için kayıt zorunlu değildir, ancak kolaylık sağlamak için bir hesap oluşturmanızı öneririz: siparişleri takip edebilir, teslimat adreslerini kaydedebilir, kişisel indirimler ve bonuslar alabilirsiniz."
+        },
+        "forgotPassword": {
+          "question": "Unutulan şifre nasıl kurtarılır?",
+          "answer": "Giriş sayfasında 'Şifremi unuttum?'a tıklayın, kayıt sırasında kullandığınız e-postayı girin. Size bir şifre kurtarma bağlantısı göndereceğiz. E-posta gelmezse 'Spam' klasörünüzü kontrol edin."
+        },
+        "changeData": {
+          "question": "Kişisel hesaptaki veriler nasıl değiştirilir?",
+          "answer": "Kişisel hesabınızda 'Bilgilerim' bölümüne gidin, gerekli değişiklikleri yapın ve kaydedin. E-postayı değiştirmek için yeni e-posta adresine onay gönderilmesi gerekir."
+        }
+      },
+      "general": {
+        "contact": {
+          "question": "Destek ile nasıl iletişime geçilir?",
+          "answer": "Bize şu yollarla ulaşabilirsiniz: +90 xxx xxx xx xx telefon numarasından (Pzt-Cuma 9:00-18:00), support@malikli1992.com e-posta adresinden, web sitesindeki iletişim formu aracılığıyla. Tüm sorulara 24 saat içinde yanıt veriyoruz."
+        },
+        "loyalty": {
+          "question": "Sadakat programı var mı?",
+          "answer": "Evet, bir bonus programımız var. Her alışverişinizden bonus kazanırsınız (sipariş tutarının %5'i), bu bonusları gelecekteki alışverişlerinizde kullanabilirsiniz. Düzenli müşteriler için sezonluk promosyonlar ve indirimler de mevcuttur."
+        },
+        "warranty": {
+          "question": "Ürünlere garanti veriyor musunuz?",
+          "answer": "Tüm ürünler Türkiye mevzuatına göre garanti kapsamındadır. Ek olarak, bazı ürünlerin üretici garantisi uzatılmıştır. Garanti koşulları her ürünün açıklamasında belirtilmiştir."
+        }
+      }
+    },
+    "help": {
+      "title": "Sorunuza cevap bulamadınız mı?",
+      "description": "Destek ekibimiz size her zaman yardımcı olmaya hazır",
+      "call": "Ara",
+      "email": "E-posta"
+    },
+    "quickLinks": {
+      "title": "Faydalı Bağlantılar",
+      "delivery": {
+        "title": "Teslimat",
+        "description": "Yöntemler ve teslimat koşulları"
+      },
+      "returns": {
+        "title": "İadeler",
+        "description": "Ürün iade koşulları"
+      },
+      "terms": {
+        "title": "Koşullar",
+        "description": "Kullanım şartları"
+      },
+      "privacy": {
+        "title": "Gizlilik",
+        "description": "Veri işleme politikası"
+      }
+    }
+  },
+  "terms": {
+    "hero": {
+      "title": "Kullanım Koşulları",
+      "subtitle": "Web sitemizi ve hizmetlerimizi kullanma kuralları ve koşulları",
+      "effectiveDate": "Yürürlülük tarihi: 12 Mayıs 2025"
+    },
+    "general": {
+      "title": "Genel Hükümler",
+      "welcome": "Malikli1992'ye Hoş Geldiniz",
+      "intro": "Bu Kullanım Koşulları, Malikli1992 (bundan sonra 'Şirket' olarak anılacaktır) ile web sitesi kullanıcıları arasında, Web Sitesi'nin ve sunulan hizmetlerin kullanımına ilişkin ilişkiyi düzenler.",
+      "agreement": "Web sitemizi kullanarak, bu koşulları kabul etmiş ve onlara uymayı taahhüt etmiş olursunuz. Herhangi bir hükmü kabul etmiyorsanız, lütfen web sitemizi kullanmaktan kaçının."
+    },
+    "userGuidelines": {
+      "title": "Kullanıcı Yönergeleri",
+      "registration": {
+        "title": "Kayıt",
+        "description": "Hesap oluştururken doğru ve güncel bilgi sağlama",
+        "details": "Kullanıcı, doğru verileri sağlamayı ve zamanında güncellemeyi taahhüt eder"
+      },
+      "orders": {
+        "title": "Sipariş Verme",
+        "description": "Sipariş verirken talimatlara ve kurallara uyma",
+        "details": "Tüm siparişler belirlenmiş prosedürlere ve zaman çizelgelerine göre işlenir"
+      },
+
+      "payment": {
+        "title": "Ödeme",
+        "description": "Yasal ödeme yöntemlerini kullanma ve son teslim tarihlerine uyma",
+        "details": "Ödeme, web sitesinde belirtilen koşullara uygun olarak yapılır"
+      },
+      "usage": {
+        "title": "Web Sitesi Kullanımı",
+        "description": "Platformla çalışırken kurallara ve kısıtlamalara uyum",
+        "details": "Kaynağın herhangi bir kötü niyetli veya yasa dışı kullanımı yasaktır"
+      }
+    },
+    "companyServices": {
+      "title": "Hizmetlerimiz",
+      "products": {
+        "title": "Ürün Temini",
+        "description": "Web sitesi açıklamasına göre kaliteli ürünlerin satışı"
+      },
+      "delivery": {
+        "title": "Teslimat",
+        "description": "Belirtilen adrese ürün teslimatının organizasyonu"
+      },
+      "returns": {
+        "title": "İade ve Değişim",
+        "description": "Yasaya uygun olarak iade imkanının sağlanması"
+      },
+      "dataProtection": {
+        "title": "Veri Koruma",
+        "description": "Kullanıcıların kişisel verilerinin güvenliğinin sağlanması"
+      }
+    },
+    "responsibilities": {
+      "title": "Haklar ve Sorumluluklar",
+      "user": {
+        "title": "Kullanıcı Sorumlulukları",
+        "items": {
+          "accurate": "Doğru bilgi sağlama",
+          "rules": "Web sitesi kullanım kurallarına uyma",
+          "payment": "Siparişlerin zamanında ödenmesi",
+          "updates": "İletişim verilerindeki değişikliklerin bildirilmesi"
+        }
+      },
+      "company": {
+        "title": "Şirket Sorumlulukları",
+        "items": {
+          "quality": "Kaliteli ürünler sağlama",
+          "delivery": "Teslimat sürelerine uyma",
+          "website": "Web sitesi işlevselliğini sağlama",
+          "dataProtection": "Kullanıcıların kişisel verilerini koruma"
+        }
+      }
+    },
+    "paymentDelivery": {
+      "title": "Ödeme ve Teslimat",
+      "payment": {
+        "title": "Ödeme Koşulları",
+        "description": "Ödeme Türk Lirası cinsinden yapılır. Banka kartları, elektronik ödemeler ve kapıda ödeme kabul edilir. Tüm fiyatlara KDV dahildir."
+      },
+      "delivery": {
+        "title": "Teslimat Koşulları",
+        "description": "Teslimat Türkiye Cumhuriyeti genelinde gerçekleştirilir. Detaylı koşullar ve teslimat maliyeti ilgili web sitesi sayfasında belirtilmiştir."
+      }
+    },
+    "intellectualProperty": {
+      "title": "Fikri Mülkiyet",
+      "copyright": {
+        "title": "Telif Hakkı",
+        "description": "Tüm metinler, resimler ve web sitesi tasarımı telif hakkı ile korunmaktadır"
+      },
+      "trademarks": {
+        "title": "Ticari Markalar",
+        "description": "Marka logoları ve adları tescilli ticari markalardır"
+      },
+      "confidential": {
+        "title": "Gizli Bilgi",
+        "description": "Yazılı izin olmadan kopyalanması ve kullanılması yasaktır"
+      }
+    },
+    "liability": {
+      "title": "Sorumluluğun Sınırlandırılması",
+      "limitations": {
+        "title": "Sınırlamalar",
+        "description": "Şirket, Web Sitesi'nin veya sunulan hizmetlerin yanlış kullanımından kaynaklanan kullanıcıya verilen zarardan, Türkiye Cumhuriyeti mevzuatının öngördüğü durumlar dışında sorumlu değildir.",
+        "technical": "Teknik arızalar ve web sitesinin geçici olarak kullanılamaması",
+        "thirdParty": "Üçüncü şahısların eylemleri",
+        "forceMajeure": "Mücbir sebep durumları",
+        "improperUse": "Alıcı tarafından ürünlerin yanlış kullanımı"
+      }
+    },
+    "applicableLaw": {
+      "title": "Uygulanacak Hukuk",
+      "jurisdiction": {
+        "title": "Yargı Yetkisi",
+        "description": "Bu Kullanım Koşulları Türkiye Cumhuriyeti mevzuatına tabidir. Tüm uyuşmazlıklar Türkiye Cumhuriyeti'nin yürürlükteki mevzuatına göre çözülür."
+      },
+      "disputes": "Uyuşmazlık durumunda, taraflar bunları müzakereler yoluyla çözmeyi taahhüt eder. Anlaşmaya varılamaması durumunda, uyuşmazlıklar mahkemede görülür."
+    },
+    "contact": {
+      "title": "Kullanım koşulları hakkında sorularınız mı var?",
+      "description": "Açıklamalar ve yardım için bizimle iletişime geçin",
+      "workingHours": "Çalışma saatleri: 7/24"
+    },
+    "updates": {
+      "title": "Kullanım Koşullarındaki Değişiklikler",
+      "description": "Şirket, bu Kullanım Koşullarında değişiklik yapma hakkını saklı tutar. Değişiklikler, Web Sitesi'nde yayınlandıkları andan itibaren yürürlüğe girer. Güncel koşullarla tanışmak için bu sayfayı düzenli olarak gözden geçirmenizi öneririz."
+    }
+  },
+  "privacy": {
+    "hero": {
+      "title": "Gizlilik Politikası",
+      "subtitle": "Kişisel verilerinizin korunmasını ciddiye alıyoruz",
+      "effectiveDate": "Yürürlülük tarihi: 12 Mayıs 2025"
+    },
+    "general": {
+      "title": "Genel Hükümler",
+      "about": "Bu politika hakkında",
+      "intro": "Bu Gizlilik Politikası, MALIKLI1992 web sitesini (bundan sonra 'Web Sitesi' olarak anılacaktır) kullanırken sağlanan kullanıcıların kişisel verilerinin işlenmesi ve korunması prosedürünü tanımlar.",
+      "compliance": "Kişisel verilerin işlenmesi, 6698 sayılı 'Kişisel Verilerin Korunması Kanunu'na ve Türkiye Cumhuriyeti'nin diğer düzenleyici kanunlarına uygun olarak gerçekleştirilir."
+    },
+    "dataTypes": {
+      "title": "Hangi Verileri Topluyoruz",
+      "personal": {
+        "title": "Kişisel Bilgiler",
+        "name": "Tam ad",
+        "birthDate": "Doğum tarihi",
+        "passport": "Kimlik bilgileri"
+      },
+      "contact": {
+        "title": "İletişim Verileri",
+        "email": "E-posta adresi",
+        "phone": "Telefon numarası",
+        "address": "Teslimat adresi"
+      },
+      "payment": {
+        "title": "Ödeme Bilgileri",
+        "details": "Ödeme detayları",
+        "history": "Sipariş geçmişi",
+        "methods": "Ödeme yöntemleri"
+      },
+      "additional": {
+        "title": "Ek Veriler",
+        "preferences": "Kullanıcı tercihleri",
+        "history": "Ziyaret geçmişi",
+        "reviews": "Yorumlar ve değerlendirmeler"
+      }
+    },
+    "purposes": {
+      "title": "Veri İşleme Amaçları",
+      "orders": {
+        "title": "Sipariş İşleme",
+        "description": "Siparişlerinizi işleme, onaylama ve yerine getirme"
+      },
+      "communication": {
+        "title": "Kullanıcı İletişimi",
+        "description": "Sipariş durumu bildirimleri ve müşteri hizmetleri"
+      },
+      "marketing": {
+        "title": "Pazarlama Materyalleri",
+        "description": "Haber ve promosyon teklifleri gönderme (onay ile)"
+      },
+      "improvement": {
+        "title": "Hizmet İyileştirme",
+        "description": "Hizmet kalitemizin analizi ve iyileştirilmesi"
+      }
+    },
+    "userRights": {
+      "title": "Haklarınız",
+      "information": {
+        "title": "Bilgi Edinme Hakkı",
+        "description": "Kişisel verileriniz ve işlenme yöntemleri hakkında tam bilgi alma"
+      },
+      "modification": {
+        "title": "Değiştirme Hakkı",
+        "description": "Yanlış veya eksik kişisel verilerin düzeltilmesini talep etme"
+      },
+      "deletion": {
+        "title": "Silme Hakkı",
+        "description": "Kanunda belirtilen durumlarda kişisel verilerinizin silinmesini talep etme"
+      },
+      "withdrawal": {
+        "title": "Rızayı Geri Çekme Hakkı",
+        "description": "Kişisel veri işleme rızasını herhangi bir zamanda geri çekme"
+      }
+    },
+    "security": {
+      "title": "Veri Koruma ve Saklama",
+      "technical": {
+        "title": "Teknik Önlemler",
+        "description": "Verilerinizin güvenliğini sağlamak için modern şifreleme teknolojileri ve güvenli sunucular kullanıyoruz."
+      },
+      "organizational": {
+        "title": "Organizasyonel Önlemler",
+        "description": "Kişisel verilere yalnızca gizliliği korumakla yükümlü yetkili çalışanlar erişebilir."
+      },
+      "retention": {
+        "title": "Saklama Süresi",
+        "description": "Kişisel veriler, işleme amaçlarına ulaşmak için gerekenden daha uzun süre saklanmaz."
+      }
+    },
+    "thirdParty": {
+      "title": "Verilerin Üçüncü Taraflara Aktarılması",
+      "when": {
+        "title": "Verileri ne zaman aktarırız",
+        "description": "Kişisel veriler, yalnızca Türkiye Cumhuriyeti mevzuatının öngördüğü durumlarda veya doğrudan rızanızla üçüncü taraflara aktarılabilir.",
+        "contractual": "Sözleşme yükümlülüklerini yerine getirirken",
+        "government": "Yetkili devlet kurumlarının talebi üzerine",
+        "consent": "Yazılı rızanızla",
+        "security": "Güvenliği sağlamak ve dolandırıcılığı önlemek için"
+      }
+    },
+    "consent": {
+      "title": "İşleme Rızası",
+      "how": {
+        "title": "Nasıl rıza verirsiniz",
+        "description": "Kullanıcı, Web Sitesi'ne kaydolurken veya sipariş verirken ilgili kutucuğu işaretleyerek kişisel verilerinin işlenmesine rıza verir."
+      },
+      "withdrawal": "Rıza, e-posta adresimize yazılı bildirim gönderilerek herhangi bir zamanda geri çekilebilir."
+    },
+    "contact": {
+      "title": "Veri işleme hakkında sorularınız mı var?",
+      "description": "Ek bilgi için bizimle iletişime geçin",
+      "workingHours": "Çalışma saatleri: 7/24"
+    },
+    "updates": {
+      "title": "Gizlilik Politikasındaki Değişiklikler",
+      "description": "Bu Gizlilik Politikasında değişiklik yapma hakkımızı saklı tutarız. Değişiklikler, Web Sitesi'nde yayınlandıkları andan itibaren yürürlüğe girer. Politikanın güncel sürümüyle tanışmak için bu sayfayı düzenli olarak kontrol etmenizi öneririz."
+    }
+  },
+  "delivery": {
+    "hero": {
+      "title": "Teslimat & Ödeme",
+      "subtitle": "Türkiye genelinde hızlı ve güvenilir teslimat"
+    },
+    "methods": {
+      "title": "Teslimat Yöntemleri",
+      "post": {
+        "title": "Kargo",
+        "description": "Türkiye Cumhuriyeti genelinde teslimat",
+        "timeframe": "2-5 iş günü",
+        "pricing": "Kargo tarifelerine göre"
+      },
+      "courier": {
+        "title": "Kurye ile Teslimat",
+        "description": "Belirli şehirlerde hızlı teslimat",
+        "timeframe": "1-2 iş günü",
+        "pricing": "Sipariş verirken belirtilir"
+      }
+    },
+    "details": {
+      "timeframe": "Süre",
+      "cost": "Maliyet"
+    },
+    "conditions": {
+      "title": "Teslimat Koşulları",
+      "geography": {
+        "title": "Coğrafya",
+        "description": "Türkiye Cumhuriyeti genelinde teslimat"
+      },
+      "payment": {
+        "title": "Ödeme",
+        "description": "Kapıda ödeme veya online ödeme"
+      },
+      "support": {
+        "title": "Destek",
+        "description": "7/24 kesintisiz destek"
+      }
+    },
+    "faq": {
+      "title": "Sıkça Sorulan Sorular",
+      "duration": {
+        "question": "Teslimat ne kadar sürer?",
+        "answer": "Kargo ile ortalama teslimat süresi iki ila beş iş günüdür. Kurye ile teslimat 1-2 iş günü sürer."
+      },
+      "changeAddress": {
+        "question": "Sipariş verdikten sonra teslimat adresini değiştirebilir miyim?",
+        "answer": "Evet, sipariş kargoya verilmeden önce teslimat adresini değiştirebilirsiniz. Destek servisimizle +90 xxx xxx xx xx numaralı telefondan iletişime geçin veya support@malikli1992.com adresine yazın."
+      },
+      "tracking": {
+        "question": "Siparişimi nasıl takip edebilirim?",
+        "answer": "Sipariş kargoya verildikten sonra bir takip numarası alacaksınız. Paketi kargo şirketinin web sitesinden veya kişisel hesabımızdan takip edebilirsiniz."
+      },
+      "lostPackage": {
+        "question": "Paket kaybolur veya hasar görürse ne yapmalı?",
+        "answer": "Teslimattan sonraki 48 saat içinde destek servisimizle iletişime geçin. Sorunu derhal taşıyıcı ile çözecek ve ürünün değiştirilmesini veya iadesini sağlayacağız."
+      }
+    },
+    "contact": {
+      "title": "Sorularınız mı var?",
+      "description": "Destek servisimizle iletişime geçin"
+    }
+  },
+  "returns": {
+    "hero": {
+      "title": "İade & Değişim",
+      "subtitle": "Basit ve şeffaf ürün iade prosedürü"
+    },
+    "process": {
+      "title": "İade Süreci",
+      "contact": {
+        "title": "Bize Ulaşın",
+        "description": "Satın aldıktan sonra 14 gün içinde destek ile iletişime geçin"
+      },
+      "prepare": {
+        "title": "Ürünü Hazırlayın",
+        "description": "Ürünün etiketleri ve ambalajıyla birlikte orijinal durumda olduğundan emin olun"
+      },
+      "send": {
+        "title": "Ürünü Gönderin",
+        "description": "Ürünü belirtilen adrese gönderin veya kuryeye teslim edin"
+      },
+      "receive": {
+        "title": "İade Alın",
+        "description": "Ürün incelemesinden sonra para iadesi veya değişim yapacağız"
+      }
+    },
+    "conditions": {
+      "title": "İade Koşulları",
+      "accepted": {
+        "title": "İade için kabul ettiklerimiz",
+        "original": "Orijinal ambalajındaki ürünler",
+        "unworn": "Etiketli, giyilmemiş ürünler",
+        "unused": "Kullanım belirtisi olmayan ürünler",
+        "appearance": "Görünümü korunmuş ürünler"
+      },
+      "notAccepted": {
+        "title": "İade için kabul etmediklerimiz",
+        "used": "Kullanılmış ürünler",
+        "noTags": "Orijinal etiketleri olmayan ürünler",
+        "damaged": "Hasarlı ürünler",
+        "noPackaging": "Ambalajı hasarlı ürünler"
+      }
+    },
+    "legal": {
+      "title": "Yasal Bilgiler",
+      "basis": {
+        "title": "Yasal Dayanak",
+        "description": "Uygun kalitede bir ürün, görünümü, fabrika etiketleri, etiketleri, tüketici özellikleri korunmuşsa ve satın almayı onaylayan bir belge eklenmişse iade edilebilir. Kullanılmış ürünler iade edilemez."
+      },
+      "law": "Tüketicinin Korunması Hakkında Kanun'un ilgili maddelerine göre, tüketici, uygun kalitede bir ürünü iade etme veya on dört gün içinde benzer bir ürünle değiştirme hakkına sahiptir."
+    },
+    "faq": {
+      "title": "Sıkça Sorulan Sorular",
+      "timeLimit": {
+        "question": "Bir ürün ne kadar sürede iade edilebilir?",
+        "answer": "Tüketicinin Korunması Hakkında Kanun'a göre, uygun kalitede bir ürünün iadesi satın alma tarihinden itibaren on dört gün içinde mümkündür."
+      },
+      "documents": {
+        "question": "İade için hangi belgeler gereklidir?",
+        "answer": "İade için satın almayı onaylayan bir belge (fiş, ödeme makbuzu) ve başvuru sırasında doldurulabilecek bir iade başvurusu gereklidir."
+      },
+      "exchange": {
+        "question": "Bir ürünü farklı bir bedenle değiştirebilir miyim?",
+        "answer": "Evet, stokta mevcutsa farklı beden veya renkte benzer bir ürünle değişim mümkündür. Uygun bir ürün yoksa, para iadesi işlemi yaparız."
+      },
+      "shippingCost": {
+        "question": "İade sırasında kargo ücretini kim öder?",
+        "answer": "Ürün satıcının hatası nedeniyle (kusur, uygunsuzluk) iade edilirse, kargo ücretini biz öderiz. Uygun kalitede bir ürün iade edildiğinde, kargo ücretini alıcı öder."
+      },
+      "refundTime": {
+        "question": "Para ne zaman iade edilecek?",
+        "answer": "Para iadesi, iade edilen ürünü alıp kontrol ettikten sonra 7 iş günü içinde, satın alma için kullanılan aynı ödeme yöntemine yapılır."
+      }
+    },
+    "contact": {
+      "title": "İade ile ilgili yardıma mı ihtiyacınız var?",
+      "description": "Destek servisimiz iade prosedüründe size yardımcı olacaktır",
+      "workingHours": "Çalışma saatleri: 7/24"
+    }
+  },
+  "profile": {
+    "loading": "Profil yükleniyor...",
+    "edit": "Düzenle",
+    "cancel": "İptal",
+    "logout": "Çıkış Yap",
+    "saveChanges": "Değişiklikleri Kaydet",
+    "notSpecified": "Belirtilmemiş",
+    "personalInfo": {
+      "title": "Kişisel Bilgiler",
+      "firstName": "Ad",
+      "lastName": "Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "phonePlaceholder": "+90 (xxx) xxx-xx-xx"
+    },
+    "accountSettings": {
+      "title": "Hesap Ayarları",
+      "changePassword": {
+        "title": "Şifreyi Değiştir",
+        "description": "Hesabınızı güvende tutmak için şifrenizi güncelleyin",
+        "button": "Değiştir"
+      },
+      "notifications": {
+        "title": "Bildirimler",
+        "description": "Bildirim tercihlerinizi yönetin",
+        "button": "Yapılandır"
+      }
+    },
+    "orders": {
+      "title": "Siparişlerim",
+      "noOrders": "Henüz hiç siparişiniz yok",
+      "startShopping": "Alışverişe Başla"
+    }
+  },
+  "footer": {
+    "description": "Aylık özel koleksiyonlar ve benzersiz ürünler.",
+    "companyInfo": {
+      "fullName": "“MALIKLI 1992” Limited Şirketi",
+      "manufacturer": "Üretici: LLC “MALIKLI 1992”",
+      "registration": "Devlet tescil belgesi No. 193863901, 21.04.2025 tarihinde Minsk Şehir Yürütme Komitesi tarafından verilmiştir",
+      "address": "220005, Minsk, Vera Khoruzhey sok., 6A, oda 94I",
+      "tradeRegistry": "Ticaret sicil kaydı"
+    },
+    "information": {
+      "title": "Bilgi",
+      "faq": "SSS",
+      "delivery": "Teslimat & Ödeme",
+      "returns": "İadeler",
+      "terms": "Kullanım Koşulları",
+      "privacy": "Gizlilik Politikası"
+    },
+    "contact": {
+      "title": "Bize Ulaşın",
+      "workingHours": "Çalışma saatleri: 7/24"
+    },
+    "copyright": "© {{year}} LLC \"MALIKLI 1992\". Tüm hakları saklıdır."
+  },
+  "orders": {
+    "title": "Siparişlerim",
+    "subtitle": "Siparişlerinizi takip edin ve yönetin",
+    "loading": "Siparişleriniz yükleniyor...",
+    "orderCount": "{{count}} sipariş",
+    "orderCount_plural": "{{count}} sipariş",
+    "orderDate": "Sipariş Tarihi",
+    "total": "Toplam",
+    "filters": {
+      "status": "Duruma Göre Filtrele",
+      "allStatuses": "Tüm Durumlar",
+      "sortBy": "Sırala",
+      "dateDesc": "Yeniden Eskiye",
+      "dateAsc": "Eskiden Yeniye",
+      "amountDesc": "En Yüksek Tutar",
+      "amountAsc": "En Düşük Tutar",
+      "statusAsc": "Durum A-Z"
+    },
+    "status": {
+      "pending": "Beklemede",
+      "confirmed": "Onaylandı",
+      "processing": "İşleniyor",
+      "shipped": "Kargolandı",
+      "delivered": "Teslim Edildi",
+      "cancelled": "İptal Edildi"
+    },
+    "paymentStatus": {
+      "pending": "Ödeme Bekleniyor",
+      "paid": "Ödendi",
+      "failed": "Ödeme Başarısız",
+      "refunded": "İade Edildi"
+    },
+    "item": {
+      "color": "Renk",
+      "size": "Beden",
+      "quantity": "Adet"
+    },
+    "delivery": {
+      "title": "Teslimat Bilgileri",
+      "trackingNumber": "Takip Numarası",
+      "track": "Takip Et",
+      "estimated": "Tahmini Teslimat"
+    },
+    "actions": {
+      "viewDetails": "Detayları Görüntüle",
+      "reorder": "Tekrar Sipariş Ver",
+      "cancel": "Siparişi İptal Et",
+      "confirmCancel": "Bu siparişi iptal etmek istediğinizden emin misiniz?",
+      "backToOrders": "Siparişlere Geri Dön",
+      "retryPayment": "Ödemeyi Tekrar Dene"
+    },
+    "empty": {
+      "title": "Henüz Sipariş Yok",
+      "message": "Henüz hiç sipariş vermediniz. Siparişlerinizi burada görmek için alışverişe başlayın.",
+      "startShopping": "Alışverişe Başla"
+    },
+    "error": {
+      "title": "Bir şeyler ters gitti",
+      "retry": "Tekrar Dene",
+      "orderNotFound": "Sipariş bulunamadı",
+      "backToOrders": "Siparişlere Geri Dön"
+    }
+  },
+  "orderDetails": {
+    "summary": {
+      "title": "Sipariş Özeti",
+      "lastUpdated": "Son Güncelleme",
+      "shippingMethod": "Kargo Yöntemi"
+    },
+    "customer": {
+      "title": "Müşteri Bilgileri",
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon"
+    },
+    "shipping": {
+      "title": "Teslimat Bilgileri",
+      "address": "Teslimat Adresi"
+    },
+    "items": {
+      "title": "Sipariş Ürünleri",
+      "each": "her biri"
+    },
+    "total": {
+      "title": "Sipariş Toplamı",
+      "subtotal": "Ara Toplam",
+      "shipping": "Kargo",
+      "discount": "İndirim",
+      "total": "Toplam",
+      "free": "Ücretsiz"
+    },
+    "actions": {
+      "print": "Siparişi Yazdır"
+    }
+  },
+  "paymentCallback": {
+    "processing": {
+      "title": "Ödeme İşleniyor",
+      "message": "Ödemenizi işlerken lütfen bekleyin..."
+    },
+    "error": {
+      "title": "Ödeme İşleme Hatası",
+      "viewOrders": "Siparişlerimi Görüntüle",
+      "backHome": "Ana Sayfaya Dön"
+    }
+  },
+  "orderComplete": {
+    "loading": "Sipariş detayları yükleniyor...",
+    "success": {
+      "title": "Sipariş Tamamlandı!",
+      "message": "Satın alımınız için teşekkür ederiz. Siparişiniz başarıyla verildi ve ödeme onaylandı."
+    },
+    "summary": {
+      "title": "Sipariş Özeti",
+      "orderNumber": "Sipariş Numarası",
+      "total": "Toplam Tutar",
+      "paymentStatus": "Ödeme Durumu",
+      "orderStatus": "Sipariş Durumu"
+    },
+    "items": {
+      "title": "Sipariş Edilen Ürünler",
+      "quantity": "Adet",
+      "andMore": "ve {{count}} daha fazla ürün"
+    },
+    "nextSteps": {
+      "title": "Sırada ne var?",
+      "confirmation": "Kısa süre içinde bir sipariş onay e-postası alacaksınız",
+      "processing": "Siparişinizi 24 saat içinde işlemeye başlayacağız",
+      "shipping": "Ürünleriniz kargoya hazırlanacak",
+      "tracking": "Kargoya verildiğinde takip bilgisi alacaksınız"
+    },
+    "actions": {
+      "viewOrder": "Sipariş Detaylarını Görüntüle",
+      "continueShopping": "Alışverişe Devam Et"
+    },
+    "error": {
+      "title": "Sipariş Yüklenemedi",
+      "viewOrders": "Tüm Siparişleri Görüntüle",
+      "backHome": "Ana Sayfaya Dön"
+    }
+  },
+  "orderFailed": {
+    "loading": "Sipariş detayları yükleniyor...",
+    "title": "Ödeme Başarısız",
+    "message": "Üzgünüz, ödemeniz işleme alınamadı. Lütfen tekrar deneyin veya destek ekibimizle iletişime geçin.",
+    "reason": {
+      "title": "Hata Nedeni"
+    },
+    "orderInfo": {
+      "title": "Sipariş Bilgileri",
+      "orderNumber": "Sipariş Numarası",
+      "amount": "Tutar",
+      "status": "Sipariş Durumu",
+      "paymentStatus": "Ödeme Durumu"
+    },
+    "nextSteps": {
+      "title": "Ne yapabilirsiniz:",
+      "checkPayment": "Ödeme yöntemi bilgilerinizi kontrol edin",
+      "tryAgain": "Ödemeyi tekrar deneyin",
+      "differentMethod": "Farklı bir ödeme yöntemi kullanın",
+      "contactSupport": "Yardım için destek ekibimizle iletişime geçin"
+    },
+    "commonIssues": {
+      "title": "Yaygın Ödeme Sorunları",
+      "insufficientFunds": {
+        "title": "Yetersiz Bakiye",
+        "description": "Hesabınızda bu işlem için yeterli bakiye olduğundan emin olun."
+      },
+      "cardExpired": {
+        "title": "Süresi Dolmuş Kart",
+        "description": "Kartınızın süresinin dolmadığını kontrol edip tekrar deneyin."
+      },
+      "networkError": {
+        "title": "Ağ Bağlantısı",
+        "description": "Zayıf bağlantı ödemeyi kesintiye uğratmış olabilir. Lütfen tekrar deneyin."
+      }
+    },
+    "actions": {
+      "tryAgain": "Ödemeyi Tekrar Dene",
+      "contactSupport": "Destekle İletişime Geç",
+      "viewOrders": "Siparişlerimi Görüntüle"
+    }
+  },
+  "deliveryPage": {
+    "globalReach": {
+      "title": "Küresel Erişimimiz",
+      "subtitle": "Dünya çapında 140'tan fazla ülkeye gururla gönderim yaparak MALIKLI1992'nin özel modasını seçkin müşterilere ulaştırıyoruz."
+    },
+    "services": {
+      "domestic": {
+        "title": "Yurtiçi Kargo",
+        "subtitle": "(Türkiye)",
+        "time": "Yerel teslimatlar için 1-3 iş günü"
+      },
+      "international": {
+        "title": "Uluslararası",
+        "subtitle": "Kargo",
+        "time": "Varış noktasına bağlı olarak 7-30 gün"
+      },
+      "express": {
+        "title": "Ekspres Servisler",
+        "time": "5-15 iş günü"
+      },
+      "standard": {
+        "title": "Standart Servisler",
+        "time": "1-4 hafta"
+      }
+    },
+    "deliveryTimes": {
+      "title": "Servise Göre Teslimat Süreleri",
+      "emsTitle": "Uluslararası EMS (Ekspres Posta Servisi)"
+    },
+    "regions": {
+      "europe": {
+        "title": "Avrupa",
+        "deliveryTime": "5-10 iş günü",
+        "tracking": "Tam takip"
+      },
+      "northAmerica": {
+        "title": "Kuzey Amerika",
+        "countries": [
+          "ABD",
+          "Kanada"
+        ],
+        "deliveryTime": "7-14 iş günü",
+        "tracking": "Tam takip"
+      },
+      "asia": {
+        "title": "Asya",
+        "deliveryTime": "5-12 iş günü",
+        "tracking": "Tam takip"
+      },
+      "australia": {
+        "title": "Avustralya/Okyanusya",
+        "deliveryTime": "8-15 iş günü",
+        "tracking": "Tam takip"
+      },
+      "russia": {
+        "title": "Rusya",
+        "deliveryTime": "3-7 iş günü",
+        "note": "Komşu ülke"
+      },
+      "cis": {
+        "title": "Diğer BDT Ülkeleri",
+        "deliveryTime": "5-10 iş günü"
+      }
+    },
+    "factors": {
+      "title": "Teslimat Sürelerini Etkileyen Faktörler",
+      "delays": {
+        "title": "Olası Gecikmeler",
+        "items": [
+          "Gümrük işlemleri",
+          "Uzak teslimat bölgeleri",
+          "Ulusal tatiller",
+          "Hava koşulları",
+          "Yoğun kargo sezonları"
+        ]
+      },
+      "faster": {
+        "title": "Daha Hızlı Teslimat Edilen Yerler",
+        "items": [
+          "Rusya: 3-7 gün",
+          "Polonya: 5-10 gün",
+          "Almanya: 7-12 gün",
+          "Litvanya: 5-8 gün"
+        ]
+      },
+      "longer": {
+        "title": "Daha Uzun Süren Teslimatlar",
+        "items": [
+          "ABD: 10-21 gün",
+          "Avustralya: 12-25 gün",
+          "Uzak bölgeler: 20-35 gün"
+        ]
+      }
+    },
+    "labels": {
+      "deliveryTime": "Teslim süresi:",
+      "tracking": "Takip:",
+      "note": "Not:"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "title": "Bize Ulaşın",
+      "subtitle": "Herhangi bir sorunuzda size yardımcı olmak için buradayız"
+    },
+    "contactInfo": {
+      "title": "İletişim Bilgileri",
+      "email": {
+        "label": "E-posta Adresi",
+        "value": "support@malikli1992.com"
+      },
+      "hours": {
+        "label": "Çalışma Saatleri",
+        "value": "7/24"
+      },
+      "address": {
+        "label": "Adres",
+        "value": "220005, Minsk, Vera Khoruzhei sok., 6A, oda 94I"
+      }
+    },
+    "form": {
+      "title": "Mesaj Gönder",
+      "userNotification": "{{name}} olarak giriş yaptınız. Bilgileriniz otomatik olarak dolduruldu.",
+      "messages": {
+        "success": "Mesajınız başarıyla gönderildi! Kısa süre içinde sizinle iletişime geçeceğiz.",
+        "error": "Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin."
+      },
+      "fields": {
+        "name": {
+          "label": "İsim",
+          "placeholder": "İsminizi girin",
+          "required": true
+        },
+        "email": {
+          "label": "E-posta",
+          "placeholder": "eposta@adresiniz.com",
+          "required": true
+        },
+        "subject": {
+          "label": "Konu",
+          "placeholder": "Mesajınızın konusu",
+          "required": true
+        },
+        "message": {
+          "label": "Mesaj",
+          "placeholder": "Sorunuzu veya önerinizi bize anlatın...",
+          "required": true
+        }
+      },
+      "submit": {
+        "idle": "Mesaj Gönder",
+        "submitting": "Gönderiliyor..."
+      }
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "MALIKLI1992 Hakkında",
+      "subtitle": "2025'ten Beri Özel Moda Yaratıyoruz",
+      "description": "Biz, zamanımızın ruhunu yansıtan ve aynı zamanda zamansız zarafeti koruyan, benzersiz, yüksek kaliteli giysiler yaratmaya odaklanmış modern bir moda markasıyız."
+    },
+    "stats": {
+      "foundingYear": "Kuruluş",
+      "uniqueProducts": "Benzersiz Ürün",
+      "happyCustomers": "Mutlu Müşteri",
+      "customerSupport": "Müşteri Desteği"
+    },
+    "story": {
+      "title": "Hikayemiz",
+      "subtitle": "Vizyondan Gerçeğe",
+      "paragraph1": "MALIKLI1992, günümüzün kalabalık pazarında öne çıkan özgün moda yaratma tutkusundan doğdu. Yolculuğumuz basit ama güçlü bir vizyonla başladı: sadece olağanüstü görünmekle kalmayıp aynı zamanda bir hikaye anlatan giysiler tasarlamak.",
+      "paragraph2": "Koleksiyonumuzdaki her parça, detaylara, kaliteli malzemelere ve yenilikçi tasarım yaklaşımlarına özen gösterilerek özenle üretilmiştir. Modanın bireyselliği ifade etme ve estetik vizyonumuzu paylaşan insanlar arasında bağlantılar kurma gücüne inanıyoruz.",
+      "paragraph3": "Bugün, yaratıcılığı, ayrıcalığı ve giyim yoluyla kendini ifade etme sanatını kutlayan sınırlı koleksiyonlar sunarak çağdaş modanın sınırlarını zorlamaya devam ediyoruz.",
+      "cards": {
+        "growth": {
+          "title": "Sürekli Büyüme",
+          "description": "Küresel bir moda tutkunları topluluğu oluşturma"
+        },
+        "creativity": {
+          "title": "Yaratıcı Mükemmellik",
+          "description": "Moda tasarımı ve yenilikçilikte sınırları zorlama"
+        }
+      }
+    },
+    "timeline": {
+      "sectionTitle": "Yolculuğumuz",
+      "sectionSubtitle": "Marka evrimimizdeki önemli kilometre taşları",
+      "founding": {
+        "title": "Markanın Kuruluşu",
+        "description": "MALIKLI1992, benzersiz, yüksek kaliteli moda parçaları yaratma vizyonuyla kuruldu"
+      },
+      "firstDrops": {
+        "title": "İlk Koleksiyonlar",
+        "description": "İmza estetiğimizi dünyaya tanıtan ilk koleksiyonlarımızı başlattık"
+      },
+      "expansion": {
+        "title": "Küresel Genişleme",
+        "description": "Uluslararası pazarlara erişimimizi genişleterek dünya çapında bir topluluk oluşturduk"
+      },
+      "future": {
+        "title": "Gelecek Vizyonu",
+        "description": "Özel modada yenilik yapmaya ve yeni standartlar belirlemeye devam etmek"
+      }
+    },
+    "mission": {
+      "title": "Misyonumuz",
+      "description": "Bireylerin benzersiz tarzlarını ifade etmelerini sağlarken en yüksek kalite ve ayrıcalık standartlarını koruyan olağanüstü moda parçaları yaratmak."
+    },
+    "vision": {
+      "title": "Vizyonumuz",
+      "description": "Trendleri belirleyen, yaratıcılığa ilham veren ve özgün, yüksek kaliteli tasarımı takdir eden insanlardan oluşan bir topluluk oluşturan, küresel olarak tanınan bir moda markası olmak."
+    },
+    "values": {
+      "title": "Değerlerimiz",
+      "subtitle": "Yaptığımız her şeye rehberlik eden ilkeler",
+      "exclusivity": {
+        "title": "Ayrıcalık",
+        "description": "Sınırlı sayıda üretim, her parçanın özel ve benzersiz kalmasını sağlar",
+        "iconAlt": "Ayrıcalığı temsil eden taç simgesi"
+      },
+      "quality": {
+        "title": "Kalite",
+        "description": "Her üründe birinci sınıf malzemeler ve titiz işçilik",
+        "iconAlt": "Kaliteyi temsil eden elmas simgesi"
+      },
+      "community": {
+        "title": "Topluluk",
+        "description": "Dünya çapındaki moda tutkunlarıyla bağlantılar kurmak",
+        "iconAlt": "Topluluğu temsil eden mesaj simgesi"
+      }
+    },
+    "team": {
+      "title": "Ekibimizle Tanışın",
+      "subtitle": "MALIKLI1992'nin arkasındaki yaratıcı beyinler",
+      "founder": {
+        "role": "Kurucu & Kreatif Direktör",
+        "description": "MALIKLI1992'nin yaratıcı yönünü ve marka felsefesini yönlendiren vizyoner lider"
+      },
+      "contact": {
+        "email": "E-posta"
+      }
+    },
+    "cta": {
+      "title": "Moda Yolculuğumuza Katılın",
+      "description": "Özel topluluğumuzun bir parçası olun ve en son koleksiyonlarımızdan ve moda yeniliklerimizden haberdar olun.",
+      "register": "Şimdi Katıl",
+      "viewDrops": "Koleksiyonları Görüntüle"
+    }
+  }
+}

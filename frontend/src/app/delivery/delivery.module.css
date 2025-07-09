@@ -1,0 +1,374 @@
+/* Delivery Page Styles - Matching Design */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding-top: 120px;
+  padding-bottom: 80px;
+}
+
+/* Global Reach Section */
+.globalReachSection {
+  padding: 80px 0;
+  background: white;
+}
+
+.globalReachContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.mainTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.mainSubtitle {
+  font-size: 1.2rem;
+  color: #718096;
+  max-width: 700px;
+  margin: 0 auto 60px;
+  line-height: 1.6;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.serviceCard {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.serviceCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.serviceIcon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.serviceTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.serviceSubtitle {
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.serviceTime {
+  font-size: 1rem;
+  color: #718096;
+  line-height: 1.5;
+}
+
+/* Delivery Times Section */
+.deliveryTimesSection {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.deliveryTimesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sectionTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.serviceMainTitle {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.serviceMainTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #0ABAB5;
+  border-radius: 2px;
+}
+
+.emsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.emsCard {
+  background: #2d3748;
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.emsCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(45, 55, 72, 0.3);
+}
+
+.emsHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.emsFlag {
+  font-size: 1.5rem;
+  margin-right: 12px;
+}
+
+.emsTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0ABAB5;
+  margin: 0;
+}
+
+.emsCountries {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.countryTag {
+  background: rgba(10, 186, 181, 0.2);
+  color: #0ABAB5;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.emsDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.emsDetail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.emsLabel {
+  color: #a0aec0;
+  font-size: 0.95rem;
+}
+
+.emsValue {
+  color: white;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Factors Section */
+.factorsSection {
+  padding: 80px 0;
+  background: white;
+}
+
+.factorsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.factorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.factorCard {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.factorCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.delaysCard::before {
+  background: #e53e3e;
+}
+
+.fasterCard::before {
+  background: #0ABAB5;
+}
+
+.longerCard::before {
+  background: #ed8936;
+}
+
+.factorCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.factorTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #2d3748;
+}
+
+.delaysCard .factorTitle {
+  color: #e53e3e;
+}
+
+.fasterCard .factorTitle {
+  color: #0ABAB5;
+}
+
+.longerCard .factorTitle {
+  color: #ed8936;
+}
+
+.factorList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.factorList li {
+  padding: 12px 0;
+  color: #4a5568;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.factorList li:last-child {
+  border-bottom: none;
+}
+
+.factorList li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.delaysCard .factorList li::before {
+  color: #e53e3e;
+}
+
+.fasterCard .factorList li::before {
+  color: #0ABAB5;
+}
+
+.longerCard .factorList li::before {
+  color: #ed8936;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .serviceMainTitle {
+    font-size: 1.8rem;
+  }
+  
+  .servicesGrid,
+  .emsGrid,
+  .factorsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .serviceCard,
+  .emsCard,
+  .factorCard {
+    padding: 30px 20px;
+  }
+  
+  .globalReachSection,
+  .deliveryTimesSection,
+  .factorsSection {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-top: 60px;
+  }
+  
+  .mainTitle {
+    font-size: 2rem;
+  }
+  
+  .mainSubtitle {
+    font-size: 1rem;
+  }
+  
+  .globalReachContainer,
+  .deliveryTimesContainer,
+  .factorsContainer {
+    padding: 0 15px;
+  }
+}

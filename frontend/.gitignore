@@ -1,0 +1,30 @@
+# General
+.DS_Store
+*.log
+*.pot
+*.pyc
+__pycache__/
+node_modules/
+.pnp.*
+
+# Python
+venv/
+*.egg-info/
+dist/
+build/
+
+# Environment files
+backend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+frontend/.env.test.local
+
+# Next.js
+frontend/.next/
+frontend/out/
+frontend/.swc/
+
+# IDE specific
+.vscode/
+.idea/

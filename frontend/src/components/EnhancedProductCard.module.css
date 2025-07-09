@@ -1,0 +1,987 @@
+/* Enhanced Product Card - Split Layout */
+.enhancedCard {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 2rem;
+  min-height: 600px;
+}
+
+.enhancedCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+/* Desktop Split Layout - Adjusted for vertical images */
+@media (min-width: 768px) {
+  .enhancedCard {
+    flex-direction: row;
+    min-height: 500px;
+    align-items: flex-start; /* Align items to top for better vertical image display */
+  }
+}
+
+/* Left Section - Product Card */
+.productCardSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  min-height: 400px;
+}
+
+@media (min-width: 768px) {
+  .productCardSection {
+    flex: 0 0 25%; /* Reduced to 25% width for left side */
+    border-right: 1px solid #f1f5f9;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top */
+  }
+}
+
+/* Product Image - Optimized for vertical images */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 320px; /* Increased height for vertical images */
+  background: #f8fafc;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .imageContainer {
+    height: 400px; /* Even taller on desktop for better vertical image display */
+    max-width: 300px; /* Limit width to maintain proper proportions */
+    margin: 0 auto 1.5rem auto; /* Center the image container */
+  }
+}
+
+.productImage {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+  /* Ensure vertical images display properly */
+  object-fit: cover !important;
+  object-position: center top !important;
+}
+
+.enhancedCard:hover .productImage {
+  transform: scale(1.05);
+}
+
+/* Product Info */
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.productName {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1e293b;
+}
+
+.productName a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.productName a:hover {
+  color: #0ABAB5;
+}
+
+/* Price */
+.priceContainer {
+  margin: 0.5rem 0;
+}
+
+.currentPrice {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0ABAB5;
+  background: linear-gradient(135deg, #0ABAB5 0%, #0891b2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Color Selection */
+.colorSelection {
+  margin: 1rem 0;
+}
+
+.colorOptions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.colorSwatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  background-clip: padding-box;
+}
+
+.colorSwatch:hover {
+  transform: scale(1.15);
+  border-color: #94a3b8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.colorSwatch.selectedSwatch {
+  border-color: #0ABAB5;
+  border-width: 4px;
+  transform: scale(1.2);
+  box-shadow: 0 0 0 2px rgba(10, 186, 181, 0.2);
+}
+
+.colorSwatch.selectedSwatch::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+/* Size Selection */
+.sizeSelection {
+  margin: 1rem 0;
+}
+
+.sizeOptions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sizeButton {
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  background: transparent;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #64748b;
+}
+
+.sizeButton:hover {
+  border-color: #0ABAB5;
+  color: #0ABAB5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 186, 181, 0.2);
+}
+
+.sizeButton.selectedSize {
+  background: linear-gradient(135deg, #0ABAB5 0%, #0891b2 100%);
+  border-color: #0ABAB5;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 186, 181, 0.3);
+}
+
+/* Button Container */
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+/* Add to Cart Button - Secondary style */
+.addToCartButton {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #0891b2;
+  border: 2px solid #0891b2;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(8, 145, 178, 0.2);
+}
+
+.addToCartButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(8, 145, 178, 0.4);
+}
+
+.addToCartButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  color: #94a3b8;
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+/* Buy Now Button - Primary style */
+.buyNowButton {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #0ABAB5 0%, #0891b2 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(10, 186, 181, 0.3);
+}
+
+.buyNowButton:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(10, 186, 181, 0.4);
+  background: linear-gradient(135deg, #0891b2 0%, #0ABAB5 100%);
+}
+
+.buyNowButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  background: #e2e8f0;
+  color: #94a3b8;
+}
+
+.addToCartDisabled,
+.buyNowDisabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  background: #e2e8f0;
+  color: #94a3b8;
+}
+
+/* Right Section - Carousel + Description */
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+@media (min-width: 768px) {
+  .rightSection {
+    flex: 0 0 75%; /* Increased to 75% width for right side */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content horizontally */
+    justify-content: flex-start; /* Align content to top */
+    gap: 0rem; /* Space between gallery and story section */
+  }
+}
+
+/* Dynamic Gallery - 3 images with elegant positioning - Optimized for vertical images */
+.dynamicGallery {
+  position: relative;
+  width: 100%;
+  height: 520px; /* Slightly adjusted for better spacing */
+  max-width: 750px; /* Refined width */
+  margin: 1.5rem auto;
+  perspective: 1200px; /* Enhanced 3D perspective */
+  padding: 20px; /* Add padding for better spacing */
+  background: linear-gradient(135deg, rgba(10, 186, 181, 0.02) 0%, rgba(248, 250, 252, 0.8) 100%);
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dynamicGallery::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(10, 186, 181, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(8, 145, 178, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .dynamicGallery {
+    height: 580px; /* Better proportioned height */
+    max-width: 850px; /* Refined desktop width */
+    padding: 30px; /* More padding on desktop */
+  }
+}
+
+.galleryImage {
+  position: absolute;
+  border-radius: 24px; /* More rounded corners */
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+  transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother, longer transition */
+  cursor: pointer;
+  border: 2px solid rgba(10, 186, 181, 0.1); /* Subtle border */
+  z-index: 1; /* Ensure images appear above background */
+}
+
+.galleryImage:hover {
+  transform: translateY(-12px) scale(1.05) rotateY(-2deg); /* More dynamic hover */
+  box-shadow: 0 25px 60px rgba(10, 186, 181, 0.25); /* Tiffany blue shadow on hover */
+  z-index: 10;
+  border-color: rgba(10, 186, 181, 0.3); /* Enhanced border on hover */
+}
+
+.galleryImg {
+  transition: transform 1s ease-out; /* Smoother image transition */
+  object-fit: cover !important;
+  object-position: center top !important;
+  filter: brightness(1.02) contrast(1.05); /* Slight enhancement */
+}
+
+.galleryImage:hover .galleryImg {
+  transform: scale(1.08); /* More pronounced zoom */
+  filter: brightness(1.05) contrast(1.1) saturate(1.1); /* Enhanced colors on hover */
+}
+
+/* Position classes for elegant arrangement - Better balanced layout */
+.position0 {
+  width: 32%; /* Primary image - balanced size */
+  height: 70%; /* Good height for showcase */
+  top: 5%;
+  left: 5%;
+  z-index: 3;
+  transform: rotate(-1deg); /* Subtle rotation for artistic feel */
+}
+
+.position1 {
+  width: 28%; /* Secondary image - smaller but prominent */
+  height: 60%; /* Proportional height */
+  top: 20%;
+  right: 15%;
+  z-index: 2;
+  transform: rotate(2deg); /* Opposite rotation for balance */
+}
+
+.position2 {
+  width: 30%; /* Third image - medium size */
+  height: 55%; /* Adequate height */
+  bottom: 8%;
+  left: 35%;
+  z-index: 1;
+  transform: rotate(-0.5deg); /* Minimal rotation */
+}
+
+/* Animation states - Refined and elegant */
+.animating {
+  transform: scale(0.98) rotateX(5deg); /* Subtle 3D flip effect */
+  filter: blur(0.5px) brightness(0.95); /* Gentle blur and dim */
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth animation curve */
+}
+
+.animating.position0 {
+  animation: floatAnimation0 1.2s ease-in-out;
+}
+
+.animating.position1 {
+  animation: floatAnimation1 1.2s ease-in-out 0.2s;
+}
+
+.animating.position2 {
+  animation: floatAnimation2 1.2s ease-in-out 0.4s;
+}
+
+@keyframes floatAnimation0 {
+  0% { transform: rotate(-1deg) translateY(0px) scale(1); }
+  50% { transform: rotate(-1deg) translateY(-15px) scale(1.02); }
+  100% { transform: rotate(-1deg) translateY(0px) scale(1); }
+}
+
+@keyframes floatAnimation1 {
+  0% { transform: rotate(2deg) translateY(0px) scale(1); }
+  50% { transform: rotate(2deg) translateY(-12px) scale(1.02); }
+  100% { transform: rotate(2deg) translateY(0px) scale(1); }
+}
+
+@keyframes floatAnimation2 {
+  0% { transform: rotate(-0.5deg) translateY(0px) scale(1); }
+  50% { transform: rotate(-0.5deg) translateY(-10px) scale(1.02); }
+  100% { transform: rotate(-0.5deg) translateY(0px) scale(1); }
+}
+
+/* Mobile positioning */
+@media (max-width: 767px) {  .dynamicGallery {
+    height: 420px; /* Optimized mobile height */
+    max-width: 100%;
+    padding: 15px;
+  }
+    .position0 {
+    width: 38%; /* Slightly larger on mobile */
+    height: 75%; /* Good mobile height */
+    top: 2%;
+    left: 8%;
+    transform: rotate(-0.5deg); /* Subtle rotation on mobile */
+  }
+    .position1 {
+    width: 35%; /* Narrower for vertical display */
+    height: 70%; /* Taller for vertical images */
+    top: 10%;
+    right: 5%;
+  }
+  
+  .position2 {
+    width: 32%; /* Narrower but still visible */
+    height: 65%; /* Good height for vertical images */
+    bottom: 0;
+    left: 25%;
+  }}
+
+/* Story Section - Elegant storytelling design */
+.storySection {
+  width: 100%;
+  max-width: 800px; /* Wider to match the gallery */
+  margin: 2rem auto;
+  position: relative;
+}
+
+.storyContent {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(10, 186, 181, 0.1);
+  overflow: hidden;
+}
+
+.storyHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.storyTitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #0ABAB5 0%, #0891b2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.storyAccent {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #0ABAB5, rgba(10, 186, 181, 0.2));
+  border-radius: 1px;
+}
+
+.storyText {
+  position: relative;
+  z-index: 2;
+}
+
+.storyParagraph {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #475569;
+  margin-bottom: 2rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* Enhanced ProductDescription integration */
+.storyParagraph :global(.descriptionContainer) {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  backdrop-filter: none;
+}
+
+.storyParagraph :global(.formattedContent) {
+  gap: 8px;
+}
+
+.storyParagraph :global(.paragraph) {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.storyParagraph :global(.paragraph div) {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.storyDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.craftedBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(10, 186, 181, 0.1) 0%, rgba(8, 145, 178, 0.05) 100%);
+  color: #0ABAB5;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid rgba(10, 186, 181, 0.2);
+}
+
+.badgeIcon {
+  font-size: 1.1rem;
+}
+
+.exploreLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #0ABAB5;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: rgba(10, 186, 181, 0.05);
+  border: 1px solid transparent;
+}
+
+.exploreLink:hover {
+  background: rgba(10, 186, 181, 0.1);
+  border-color: rgba(10, 186, 181, 0.3);
+  transform: translateY(-2px);
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease;
+}
+
+.exploreLink:hover .arrowIcon {
+  transform: translateX(4px) translateY(-4px);
+}
+
+.storyBackground {
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(10, 186, 181, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+  animation: floatBackground 8s ease-in-out infinite;
+}
+
+@keyframes floatBackground {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Mobile story section adjustments */
+@media (max-width: 767px) {
+  .storyContent {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .storyTitle {
+    font-size: 1.4rem;
+  }
+  
+  .storyParagraph {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  
+  .storyDetails {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .craftedBadge,
+  .exploreLink {
+    justify-content: center;
+  }
+}
+
+.descriptionTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  border-bottom: 2px solid #0ABAB5;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.descriptionText {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #475569;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Enhanced ProductDescription integration for mobile */
+.descriptionText :global(.descriptionContainer) {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  backdrop-filter: none;
+}
+
+.descriptionText :global(.formattedContent) {
+  gap: 8px;
+}
+
+.descriptionText :global(.paragraph) {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.descriptionText :global(.paragraph div) {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.readMoreLink {
+  align-self: flex-start;
+  color: #0ABAB5;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.readMoreLink:hover {
+  color: #0891b2;
+  border-bottom-color: #0ABAB5;
+  transform: translateX(4px);
+}
+
+/* Mobile Description Section - Hidden since we now use story section */
+.mobileDescriptionSection {
+  display: none; /* Hide mobile description to prevent duplication */
+}
+
+@media (min-width: 768px) {
+  .mobileDescriptionSection {
+    display: none;
+  }
+}
+
+.mobileDescriptionSection .descriptionText {
+  font-size: 0.925rem;
+  color: #64748b;
+}
+
+/* Hide carousel on mobile - still showing 2 images would be too cramped */
+@media (max-width: 767px) {
+  .carouselContainer {
+    display: none;
+  }
+}
+
+/* Responsive adjustments for vertical images */
+@media (max-width: 640px) {
+  .enhancedCard {
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .productCardSection,
+  .rightSection {
+    padding: 1.5rem;
+  }
+  
+  .imageContainer {
+    height: 300px; /* Taller for mobile vertical images */
+    margin-bottom: 1rem;
+    max-width: none; /* Remove width restriction on mobile */
+  }
+  
+  .productName {
+    font-size: 1.25rem;
+  }
+  
+  .currentPrice {
+    font-size: 1.5rem;
+  }
+  
+  .colorSwatch {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .addToCartButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.925rem;
+  }
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.enhancedCard {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Focus states for accessibility */
+.colorSwatch:focus,
+.sizeButton:focus,
+.addToCartButton:focus {
+  outline: 2px solid #0ABAB5;
+  outline-offset: 2px;
+}
+
+.readMoreLink:focus {
+  outline: 2px solid #0ABAB5;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Vertical image optimizations */
+.productImage,
+.carouselImg {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+  /* Ensure vertical images display properly */
+  object-fit: cover !important;
+  object-position: center top !important;
+}
+
+/* Adjust hover effects for vertical images */
+.enhancedCard:hover .productImage,
+.enhancedCard:hover .carouselImg {
+  transform: scale(1.03); /* Slightly less zoom for vertical images */
+}
+
+/* Image container aspect ratio adjustments */
+.imageContainer::before {
+  content: '';
+  display: block;
+  padding-top: 133.33%; /* 3:4 aspect ratio for vertical images */
+  width: 100%;
+}
+
+.carouselContainer::before {
+  content: '';
+  display: block;
+  padding-top: 66.67%; /* 3:2 aspect ratio for 2 vertical images side by side */
+  width: 100%;
+}
+
+/* Override padding-top on larger screens where we set explicit heights */
+@media (min-width: 768px) {
+  .imageContainer::before,
+  .carouselContainer::before {
+    display: none; /* Remove aspect ratio on desktop where we use explicit heights */
+  }
+}
+
+/* Ensure images fill container properly for vertical orientation */
+@media (max-width: 767px) {
+  .imageContainer {
+    position: relative;
+    height: auto; /* Let aspect ratio control height on mobile */
+  }
+  
+  .imageContainer::before {
+    padding-top: 125%; /* Slightly less tall on mobile */
+  }
+}
+
+/* Missing styles from original ProductCard */
+
+/* Original price for variant pricing */
+.originalPrice {
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+/* Checkmark for selected color swatch */
+.checkmark {
+  pointer-events: none;
+}
+
+/* Disabled button state */
+.addToCartDisabled {
+  background: #e2e8f0 !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Animation for color/size selection */
+@keyframes selectBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.05); }
+}
+
+.selectedColor,
+.selectedSize {
+  animation: selectBounce 0.3s ease;
+}
+
+/* Improved swatch selection styling to match checkmark support */
+.colorSwatch.selectedSwatch::after {
+  display: none; /* Hide the default after element when we have checkmark */
+}
+
+/* Enhanced mobile responsive design */
+@media (max-width: 768px) {
+  .colorSwatch {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .sizeButton {
+    padding: 5px 8px;
+    font-size: 11px;
+    min-width: 28px;
+  }
+  
+  .addToCartButton {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .currentPrice {
+    font-size: 16px;
+  }
+  
+  .originalPrice {
+    font-size: 13px;
+  }
+}
+
+/* Sequential Image Gallery Row - Optimized for 9:16 aspect ratio */
+.imageGalleryRow {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px; /* Increased to accommodate all three images */
+  margin: 1.5rem auto;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(10, 186, 181, 0.02) 0%, rgba(248, 250, 252, 0.8) 100%);
+  border-radius: 30px;
+  position: relative;
+  overflow: visible; /* Changed from hidden to ensure third image is visible */
+  /* Height optimized for 9:16 images */
+  height: 540px; /* Tall enough for 9:16 aspect ratio */
+}
+
+.imageGalleryRow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(10, 186, 181, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(8, 145, 178, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .imageGalleryRow {
+    height: 400px; /* Even taller on desktop for better 9:16 display */
+    max-width: 750px; /* Increased desktop width */
+    padding: 30px;
+    gap: 25px;
+  }
+}
+
+.galleryImageItem {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(10, 186, 181, 0.1);
+  z-index: 1;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  /* Remove aspect-ratio constraint and use min-width to ensure visibility */
+  min-width: 200px; /* Ensure minimum width for visibility */
+  width: calc(33.333% - 20px); /* Equal width distribution with gap consideration */
+}
+
+.galleryImageItem:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 50px rgba(10, 186, 181, 0.25);
+  border-color: rgba(10, 186, 181, 0.3);
+  z-index: 10;
+}
+
+/* Fade animation for sequential changes */
+.fading {
+  opacity: 0.3;
+  transform: scale(0.98);
+  filter: blur(1px);
+  transition: all 0.8s ease-out; /* Increased fade animation duration */
+}
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+  .imageGalleryRow {
+    display: none; /* Hide image gallery on mobile */
+  }
+  
+  .galleryImageItem {
+    display: none; /* Hide individual gallery items on mobile */
+  }
+}

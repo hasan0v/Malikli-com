@@ -1,0 +1,154 @@
+.languageSwitcher {
+  position: relative;
+  margin-left: 1rem;
+  z-index: 50;
+}
+
+.currentLanguage {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: inherit;
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.currentLanguage:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.flag {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.chevron {
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+  opacity: 0.7;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+  /* Hide the language name in the current language button on mobile */
+  .currentLanguage .name {
+    display: none;
+  }
+  
+  /* Hide the chevron on mobile since we're only showing the flag */
+  .currentLanguage .chevron {
+    display: none;
+  }
+  
+  .flag {
+    margin-right: 0; /* Remove margin when name is hidden */
+  }
+  
+  .currentLanguage {
+    padding: 0.4rem; /* Reduce padding and make it more square */
+    min-width: auto; /* Remove min-width constraint */
+    width: 40px; /* Fixed width for flag-only button */
+    height: 40px; /* Fixed height for flag-only button */
+    justify-content: center; /* Center the flag */
+  }
+  
+  /* Keep dropdown options showing both flag and name */
+  .dropdown {
+    right: -10px; /* Adjust positioning on mobile */
+    min-width: 140px;
+  }
+  
+  .languageOption {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Ensure dropdown option names are visible */
+  .languageOption .name {
+    display: block;
+    font-size: 0.8rem;
+  }
+  
+  .languageOption .flag {
+    margin-right: 0.3rem; /* Keep spacing in dropdown */
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  margin-top: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 
+    0 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0 10px 20px -15px rgba(22, 23, 24, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  min-width: 160px;
+  z-index: 1000;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.languageOption {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.languageOption:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #1f2937;
+}
+
+.active {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #1d4ed8;
+  font-weight: 600;
+}

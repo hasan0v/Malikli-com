@@ -1,0 +1,82 @@
+# ---------------------
+# Python / Django
+# ---------------------
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+.env
+.env.*
+*.log
+venv/
+env/
+.venv/
+build/
+dist/
+.mypy_cache/
+.DS_Store
+*.db
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ---------------------
+# Node / Next.js (frontend)  
+# ---------------------
+node_modules/
+.next/
+out/
+.env.local
+.env.production
+.env.development
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ---------------------
+# System / IDE files
+# ---------------------
+*.swp
+*.swo
+*.idea/
+.vscode/
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---------------------
+# Media and Static files
+# ---------------------
+/media/
+/static/
+/staticfiles/
+/local_media_debug/
+
+# ---------------------
+# Backup and temporary files
+# ---------------------
+*.bak
+*.orig
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+
+# ---------------------
+# OS specific files
+# ---------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

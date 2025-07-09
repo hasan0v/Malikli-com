@@ -1,0 +1,760 @@
+/* Modern Terms Page Styles */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0fdfc 0%, #e6fffa 100%);
+  padding: 2rem 0;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #4fd1c5 0%, #38b2ac 100%);
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(79, 209, 197, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: float 20s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1.5rem;
+}
+
+.effectiveDate {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 0.8rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.dateIcon {
+  font-size: 1.2rem;
+}
+
+/* Main Content */
+.content {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Section Cards */
+.section {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(79, 209, 197, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #4fd1c5, #38b2ac);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(79, 209, 197, 0.2);
+}
+
+.section:hover::before {
+  transform: scaleX(1);
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Intro Card */
+.introCard {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: linear-gradient(135deg, rgba(79, 209, 197, 0.05), rgba(56, 178, 172, 0.05));
+  border-radius: 15px;
+  padding: 2rem;
+  border: 1px solid rgba(79, 209, 197, 0.15);
+}
+
+.introContent h4 {
+  color: #2d3748;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.introContent p {
+  color: #4a5568;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.introContent p:last-child {
+  margin-bottom: 0;
+}
+
+.introIcon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+/* Guidelines Grid */
+.guidelinesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.guidelineCard {
+  background: white;
+  border: 1px solid rgba(79, 209, 197, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.guidelineCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #4fd1c5, #38b2ac);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.guidelineCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(79, 209, 197, 0.15);
+}
+
+.guidelineCard:hover::before {
+  transform: scaleX(1);
+}
+
+.guidelineIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.guidelineTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.8rem;
+}
+
+.guidelineDescription {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.guidelineDetails {
+  background: rgba(79, 209, 197, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  border-left: 3px solid #4fd1c5;
+}
+
+.guidelineDetails p {
+  color: #2d3748;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Services Grid */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.serviceCard {
+  background: linear-gradient(135deg, rgba(79, 209, 197, 0.05), rgba(56, 178, 172, 0.05));
+  border: 1px solid rgba(79, 209, 197, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, rgba(79, 209, 197, 0.1), rgba(56, 178, 172, 0.1));
+  box-shadow: 0 8px 20px rgba(79, 209, 197, 0.15);
+}
+
+.serviceIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.serviceTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.8rem;
+}
+
+.serviceDescription {
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsibilities Grid */
+.responsibilitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.responsibilityCard {
+  background: white;
+  border: 1px solid rgba(79, 209, 197, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.responsibilityCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(79, 209, 197, 0.15);
+}
+
+.responsibilityHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.responsibilityIcon {
+  font-size: 2rem;
+}
+
+.responsibilityTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.responsibilityList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.responsibilityItem {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(79, 209, 197, 0.1);
+  position: relative;
+  padding-left: 1.5rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.responsibilityItem:last-child {
+  border-bottom: none;
+}
+
+.responsibilityItem::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0.8rem;
+  color: #4fd1c5;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Payment and Delivery Card */
+.paymentDeliveryCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: linear-gradient(135deg, rgba(79, 209, 197, 0.05), rgba(56, 178, 172, 0.05));
+  border-radius: 15px;
+  padding: 2rem;
+  border: 1px solid rgba(79, 209, 197, 0.15);
+}
+
+.paymentSection,
+.deliverySection {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.paymentIcon,
+.deliveryIcon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.paymentContent h4,
+.deliveryContent h4 {
+  color: #2d3748;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.paymentContent p,
+.deliveryContent p {
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* IP Grid */
+.ipGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.ipCard {
+  background: white;
+  border: 1px solid rgba(79, 209, 197, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.ipCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(79, 209, 197, 0.15);
+}
+
+.ipIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ipTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.8rem;
+}
+
+.ipDescription {
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Liability Card */
+.liabilityCard {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: linear-gradient(135deg, rgba(245, 101, 101, 0.05), rgba(229, 62, 62, 0.05));
+  border: 1px solid rgba(245, 101, 101, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.liabilityIcon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.liabilityContent h4 {
+  color: #2d3748;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.liabilityContent p {
+  color: #4a5568;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.liabilityList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.liabilityList li {
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.liabilityList li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #f56565;
+  font-weight: bold;
+}
+
+/* Legal Card */
+.legalCard {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: linear-gradient(135deg, rgba(79, 209, 197, 0.05), rgba(56, 178, 172, 0.05));
+  border: 1px solid rgba(79, 209, 197, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.legalIcon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.legalContent h4 {
+  color: #2d3748;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.legalContent p {
+  color: #4a5568;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.legalContent p:last-child {
+  margin-bottom: 0;
+}
+
+/* Contact Section */
+.contactSection {
+  background: linear-gradient(135deg, #4fd1c5 0%, #38b2ac 100%);
+  border-radius: 20px;
+  padding: 0;
+  color: white;
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.contactSection::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 15px 15px;
+  animation: float 25s linear infinite reverse;
+}
+
+.contactCard {
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.contactCard h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.contactCard p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  color: white;
+}
+
+.contactInfo {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.contactItem {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.contactItem:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.contactIcon {
+  font-size: 1.3rem;
+}
+
+.workingHours {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.clockIcon {
+  font-size: 1.2rem;
+}
+
+/* Update Section */
+.updateSection {
+  margin-top: 2rem;
+}
+
+.updateCard {
+  background: linear-gradient(135deg, rgba(79, 209, 197, 0.05), rgba(56, 178, 172, 0.05));
+  border: 1px solid rgba(79, 209, 197, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.updateCard h4 {
+  color: #2d3748;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.updateCard p {
+  color: #4a5568;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Last Updated */
+.lastUpdated {
+  text-align: center;
+  padding: 2rem;
+  color: #718096;
+  font-style: italic;
+  border-top: 2px solid rgba(79, 209, 197, 0.2);
+  margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0;
+  }
+
+  .content {
+    padding: 0 0.5rem;
+  }
+
+  .hero {
+    margin-bottom: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .guidelinesGrid,
+  .servicesGrid,
+  .responsibilitiesGrid,
+  .ipGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .paymentDeliveryCard {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .introCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .liabilityCard,
+  .legalCard {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .paymentSection,
+  .deliverySection {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .contactInfo {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contactCard h3 {
+    font-size: 1.8rem;
+  }
+
+  .contactItem {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .contactCard {
+    padding: 2rem 1rem;
+  }
+
+  .contactCard h3 {
+    font-size: 1.5rem;
+  }
+
+  .guidelineCard,
+  .serviceCard,
+  .responsibilityCard,
+  .ipCard {
+    padding: 1rem;
+  }
+
+  .introCard,
+  .paymentDeliveryCard,
+  .liabilityCard,
+  .legalCard,
+  .updateCard {
+    padding: 1.5rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .section,
+  .contactItem {
+    transition: none;
+  }
+
+  .header::before,
+  .contactSection::before {
+    animation: none;
+  }
+
+  .section:hover {
+    transform: none;
+  }
+
+  .contactItem:hover {
+    transform: none;
+  }
+}

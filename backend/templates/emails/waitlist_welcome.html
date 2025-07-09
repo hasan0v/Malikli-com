@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to {{ site_name }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .email-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #0ABAB5;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0ABAB5;
+            margin-bottom: 10px;
+        }
+        .welcome-title {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .credentials-box {
+            background-color: #f8f9fa;
+            border: 2px solid #0ABAB5;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .credential-item {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        .credential-label {
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .credential-value {
+            font-family: 'Courier New', monospace;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: #495057;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        .login-button {
+            display: inline-block;
+            background-color: #0ABAB5;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+        .login-button:hover {
+            background-color: #08a19d;
+        }
+        .important-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .security-tips {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .security-tips h4 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+        .security-tips ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .security-tips li {
+            margin: 5px 0;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">{{ site_name }}</div>
+            <p>Premium Fashion & Lifestyle</p>
+        </div>        <!-- Welcome Message -->
+        <h1 class="welcome-title">🎉 Welcome to {{ site_name }}, {{ user_name }}!</h1>
+        
+        <p>Thank you for joining our waitlist{% if source %} through {{ source }}{% endif %}! We're excited to let you know that your account is now ready, and you have exclusive early access to our platform.</p>
+
+        <!-- Login Credentials -->
+        <div class="credentials-box">
+            <h3 style="color: #0ABAB5; margin-top: 0;">Your Login Credentials</h3>
+            
+            <div class="credential-item">
+                <span class="credential-label">Username:</span>
+                <div class="credential-value">{{ user_name }}</div>
+            </div>
+            
+            <div class="credential-item">
+                <span class="credential-label">Temporary Password:</span>
+                <div class="credential-value">{{ password }}</div>
+            </div>
+        </div>
+
+        <!-- Login Button -->
+        <div style="text-align: center;">
+            <a href="{{ login_url }}" class="login-button">🚀 Login to Your Account</a>
+        </div>
+
+        <!-- Important Security Note -->
+        <div class="important-note">
+            <strong>⚠️ Important:</strong> This is a temporary password. For your security, please log in and change your password immediately after your first login.
+        </div>
+
+        <!-- Security Tips -->
+        <div class="security-tips">
+            <h4>🔒 Security Tips</h4>
+            <ul>
+                <li>Change your password immediately after logging in</li>
+                <li>Use a strong, unique password with at least 8 characters</li>
+                <li>Include uppercase, lowercase, numbers, and special characters</li>
+                <li>Never share your login credentials with anyone</li>
+                <li>Enable email verification for added security</li>
+            </ul>
+        </div>
+
+        <!-- What's Next -->
+        <div style="margin: 30px 0;">
+            <h3 style="color: #0ABAB5;">What's Next?</h3>
+            <ol style="padding-left: 20px;">
+                <li>Click the login button above or visit <a href="{{ login_url }}">{{ login_url }}</a></li>
+                <li>Log in with your email and temporary password</li>
+                <li>Update your password and complete your profile</li>
+                <li>Start exploring our exclusive collections!</li>
+            </ol>
+        </div>
+
+        <!-- Support Information -->
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+            <h4 style="color: #2c3e50; margin-top: 0;">Need Help?</h4>
+            <p>If you have any questions or need assistance, our support team is here to help!</p>
+            <p>📧 Email: support@malikli1992.com<br>
+               🌐 Website: <a href="https://malikli1992.com">malikli1992.com</a></p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© {{ year }} {{ site_name }}. All rights reserved.</p>
+            <p>You're receiving this email because you signed up for our waitlist.</p>
+            <p style="font-size: 12px; color: #999;">
+                This email contains sensitive login information. Please do not forward this email to others.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+.languageTest {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 800px;
+}
+
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.currentSettings,
+.translationTest,
+.rtlTest {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.rtlBox {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.languageTest h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.languageTest h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.languageTest ul {
+  padding-left: 20px;
+}
+
+.languageTest li {
+  margin-bottom: 5px;
+}

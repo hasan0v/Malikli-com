@@ -1,0 +1,329 @@
+/* Product Description Styles */
+.descriptionContainer {
+  margin: 0px 0;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.formattedContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mainDescription {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+}
+
+.mainDescription p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #475569;
+  margin: 0;
+  font-weight: 400;
+  white-space: pre-line; /* Preserve line breaks and wrap text */
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionTitle::before {
+  content: '';
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(135deg, #0ABAB5 0%, #0891b2 100%);
+  border-radius: 2px;
+}
+
+.featuresSection {
+  margin: 20px 0;
+}
+
+.featuresList {
+  display: grid;
+  gap: 16px;
+}
+
+.featureItem {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.3);
+  transition: all 0.3s ease;
+}
+
+.featureItem:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.featureTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f766e;
+  margin: 0 0 8px 0;
+  text-transform: capitalize;
+}
+
+.featureContent {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+  white-space: pre-line; /* Preserve line breaks and wrap text */
+}
+
+.featureContent span {
+  display: inline; /* Ensure sentences flow naturally */
+}
+
+.featureSection {
+  margin: 12px 0;
+  padding: 12px 0;
+}
+
+.highlightsSection {
+  margin: 20px 0;
+}
+
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.bulletItem {
+  position: relative;
+  padding-left: 28px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #475569;
+  transition: all 0.3s ease;
+}
+
+.bulletItem::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.bulletItem:hover {
+  color: #1e293b;
+  padding-left: 32px;
+}
+
+.bulletItem:hover::before {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.paragraph {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #475569;
+  margin: 12px 0;
+  font-weight: 400;
+  white-space: pre-line; /* Preserve line breaks and wrap text */
+}
+
+.paragraph span {
+  display: inline; /* Ensure sentences flow naturally */
+}
+
+/* Ensure multi-sentence content flows properly */
+.mainDescription div {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #475569;
+  margin: 0;
+  font-weight: 400;
+  white-space: pre-line;
+}
+
+.mainDescription span {
+  display: inline;
+}
+
+.featureContent div {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.paragraph div {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #475569;
+  margin: 0;
+  font-weight: 400;
+  white-space: pre-line;
+}
+
+/* Small font option for mobile screens */
+@media (max-width: 768px) {
+  .paragraph div {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .paragraph div {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+}
+
+/* Inline text formatting */
+.descriptionContainer :global(.checkmark) {
+  color: #10b981;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.descriptionContainer :global(.highlight) {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.85em;
+}
+
+/* Tiffany Blue Emphasis Styles */
+.descriptionContainer :global(.tiffanyEmphasis) {
+  color: #0ABAB5;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(10, 186, 181, 0.1);
+  transition: all 0.3s ease;
+}
+
+.descriptionContainer :global(.tiffanyEmphasis):hover {
+  color: #0891b2;
+  transform: scale(1.02);
+}
+
+.descriptionContainer :global(.tiffanyBold) {
+  color: #0ABAB5;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(10, 186, 181, 0.1) 0%, rgba(8, 145, 178, 0.05) 100%);
+  padding: 1px 3px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.descriptionContainer :global(.tiffanyBold):hover {
+  background: linear-gradient(135deg, rgba(10, 186, 181, 0.15) 0%, rgba(8, 145, 178, 0.08) 100%);
+  transform: translateY(-1px);
+}
+
+.descriptionContainer :global(.sizeEmphasis) {
+  background: linear-gradient(135deg, #0ABAB5 0%, #0891b2 100%);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(10, 186, 181, 0.2);
+}
+
+.descriptionContainer :global(.materialEmphasis) {
+  color: #0f766e;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(10, 186, 181, 0.05) 100%);
+  padding: 1px 4px;
+  border-radius: 3px;
+  text-transform: capitalize;
+  border-bottom: 1px solid rgba(10, 186, 181, 0.3);
+}
+
+.descriptionContainer strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .descriptionContainer {
+    padding: 16px;
+    margin: 16px 0;
+  }
+  
+  .mainDescription p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .sectionTitle {
+    font-size: 1rem;
+  }
+  
+  .featureItem {
+    padding: 12px;
+  }
+  
+  .featureTitle {
+    font-size: 0.875rem;
+  }
+  
+  .featureContent {
+    font-size: 0.8rem;
+  }
+  
+  .bulletItem {
+    font-size: 0.8rem;
+    padding-left: 24px;
+  }
+  
+  .bulletItem::before {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .descriptionContainer {
+    padding: 12px;
+    border-radius: 12px;
+  }
+  
+  .featuresList {
+    gap: 12px;
+  }
+  
+  .bulletList {
+    gap: 8px;
+  }
+}

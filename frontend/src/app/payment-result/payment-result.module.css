@@ -1,0 +1,144 @@
+.paymentResultPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.success, .cancelled, .failed, .error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.success h1 {
+  color: #28a745;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.cancelled h1 {
+  color: #ffc107;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.failed h1, .error h1 {
+  color: #dc3545;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.success p, .cancelled p, .failed p, .error p {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.orderInfo {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.primaryButton, .secondaryButton {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  flex: 1;
+}
+
+.primaryButton {
+  background: #007bff;
+  color: white;
+}
+
+.primaryButton:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.secondaryButton {
+  background: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
+}
+
+.secondaryButton:hover {
+  background: #e9ecef;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .paymentResultPage {
+    padding: 1rem;
+  }
+  
+  .container {
+    padding: 2rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+  
+  .icon {
+    font-size: 3rem;
+  }
+  
+  .success h1, .cancelled h1, .failed h1, .error h1 {
+    font-size: 1.5rem;
+  }
+}

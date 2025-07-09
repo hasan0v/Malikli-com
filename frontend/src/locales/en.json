@@ -1,0 +1,1765 @@
+{  "nav": {
+    "home": "Home",
+    "delivery": "Delivery & Payment",
+    "about": "About Us",
+    "contact": "Contacts",
+    "profile": "My Profile",
+    "orders": "My Orders",
+    "favorites": "Favorites",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Sign Up",
+    "adminPanel": "Admin Panel"
+  },"common": {
+    "loading": "Loading...",
+    "error": "Error occurred",
+    "tryAgain": "Try Again",
+    "buyNow": "Buy Now",
+    "addToCart": "Add to Cart",
+    "selectOptions": "Select Options",
+    "checkingAuth": "Checking authorization...",
+    "welcome": "Welcome to our multilingual store!",
+    "hello": "Hello, {{name}}!",
+    "languageTest": "Language Testing Component",
+    "currentSettings": "Current Language Settings",
+    "currentLanguage": "Current Language",
+    "availableLanguages": "Available Languages",
+    "translationTest": "Translation Test",
+    "rtlTest": "Right-to-Left Text Test",
+    "rtlTestText": "This text should be displayed correctly in RTL languages.",
+    "rtl": "Right-to-Left",
+    "ltr": "Left-to-Right"
+  },
+  "home": {
+    "error": {
+      "title": "An error occurred",
+      "button": "Try again"
+    },    "loading": {
+      "slider": "Loading slider...",
+      "products": "Loading products..."
+    },
+    "slider": {
+      "promo1Alt": "Promotional banner 1",
+      "promo1Title": "Promotional Banner 1",
+      "promo1Description": "Check out our promotions",
+      "promo2Alt": "Promotional banner 2",
+      "promo2Title": "Promotional Banner 2",
+      "promo2Description": "Special offers available",
+      "newCollectionAlt": "New collection arrival",
+      "newCollectionTitle": "New Collection",
+      "newCollectionDescription": "Discover our latest items"
+    },"welcome": {
+      "title": "Welcome to Malikli",
+      "subtitle": "Currently no products found. Please check back later.",
+      "viewDrops": "View Drops"
+    },    "noProducts": "No products found in this collection."
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome",
+      "subtitle": "Sign in to your account",
+      "username": "Username",
+      "usernamePlaceholder": "Enter username",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Sign In",
+      "loginButtonLoading": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Sign up",
+      "orDivider": "or",
+      "socialGoogle": "Google",
+      "socialFacebook": "Facebook",
+      "errorDefault": "Login error. Please check your credentials."
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join Malikli today",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Your first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Your last name",
+      "username": "Username",
+      "usernamePlaceholder": "Choose a username",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",      "phone": "Phone (optional)",
+      "phonePlaceholder": "+7 (xxx) xxx-xx-xx",
+      "password": "Password",
+      "passwordPlaceholder": "Create password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Repeat password",
+      "acceptTerms": "I agree with the",
+      "termsLink": "terms of service",
+      "andText": "and",
+      "privacyLink": "privacy policy",
+      "registerButton": "Create Account",
+      "registerButtonLoading": "Creating account...",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "orDivider": "or",
+      "socialGoogle": "Google",
+      "socialFacebook": "Facebook",
+      "errorDefault": "Registration error. Please check your data.",
+      "successMessage": "Registration successful! We've sent an email verification to your address. Please check your email and follow the link to activate your account.",
+      "redirectInfo": "Automatic redirect to login page in {{seconds}} seconds",
+      "redirectNow": "Go now",
+      "stayHere": "Stay here",
+      "validation": {
+        "acceptTerms": "Please accept the terms of service",
+        "passwordMismatch": "Passwords don't match"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot Password?",
+      "subtitle": "Enter your email and we'll send password reset instructions",
+      "emailSentTitle": "Email Sent",
+      "emailSentSubtitle": "Check your email for password reset instructions",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "sendButton": "Send Instructions",
+      "sendButtonLoading": "Sending...",
+      "successMessage": "We've sent password reset instructions to {{email}}",
+      "helpText": "If the email doesn't arrive within a few minutes, check your spam folder",
+      "backToLogin": "Back to login",
+      "rememberedPassword": "Remembered your password?",
+      "loginLink": "Sign in",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Sign up"
+    },    "resetPassword": {
+      "title": "New Password",
+      "subtitle": "Enter your new password",
+      "invalidLinkTitle": "Invalid Link",
+      "invalidLinkMessage": "This password reset link is invalid or has expired. Please request a new one.",
+      "successTitle": "Password Changed",
+      "successMessage": "Your password has been successfully changed. You can now sign in with your new password.",
+      "password": "New Password",
+      "passwordPlaceholder": "Enter new password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Repeat new password",
+      "resetButton": "Reset Password",
+      "resetButtonLoading": "Resetting...",
+      "backToLogin": "Back to login",
+      "requestNewLink": "Request new link",
+      "validation": {
+        "passwordRequired": "Password is required",
+        "passwordLength": "Password must be at least 8 characters",
+        "confirmPasswordRequired": "Please confirm your password",
+        "passwordMismatch": "Passwords don't match"
+      }
+    },
+    "verifyEmail": {
+      "title": "Email Verification",
+      "subtitle": "Verifying your email address...",
+      "successTitle": "Email Verified!",
+      "successMessage": "Your email has been successfully verified. You can now sign in to your account.",
+      "errorTitle": "Verification Error",
+      "errorMessage": "The verification link is invalid or has expired. Please request a new verification email.",
+      "backToLogin": "Back to login",
+      "resendLink": "Resend verification email"
+    },    "changePassword": {
+      "title": "Change Password",
+      "subtitle": "Update your account password",
+      "successTitle": "Password Changed",
+      "successMessage": "Your password has been successfully changed.",
+      "currentPassword": "Current Password",
+      "currentPasswordPlaceholder": "Enter current password",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Enter new password",
+      "confirmPassword": "Confirm New Password",
+      "confirmPasswordPlaceholder": "Repeat new password",
+      "changeButton": "Change Password",
+      "changeButtonLoading": "Changing...",
+      "backToProfile": "Back to profile",
+      "validation": {
+        "currentPasswordRequired": "Current password is required",
+        "newPasswordRequired": "New password is required",
+        "passwordLength": "Password must be at least 8 characters",
+        "confirmPasswordRequired": "Please confirm your new password",
+        "passwordMismatch": "Passwords don't match"
+      }
+    },
+    "resendVerification": {
+      "title": "Verify Email",
+      "subtitle": "Resend email verification",
+      "emailSentTitle": "Email Sent",
+      "emailSentSubtitle": "Check your email for verification instructions",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "resendButton": "Resend Verification",
+      "resendButtonLoading": "Sending...",
+      "successMessage": "We've sent a new verification email to {{email}}",
+      "helpText": "If the email doesn't arrive within a few minutes, check your spam folder",      "backToLogin": "Back to login"
+    }
+  },  "product": {
+    "loading": {
+      "text": "Loading product..."
+    },    "error": {
+      "somethingWrong": "Something went wrong",
+      "notFound": "Product not found",
+      "notFoundMessage": "We couldn't find the product you're looking for.",
+      "backToHome": "Back to home",
+      "invalidSlug": "Invalid product slug"
+    },    "breadcrumbs": {
+      "home": "Home"
+    },
+    "price": {
+      "currency": "EUR"
+    },
+    "availability": {
+      "inStock": "In Stock",
+      "outOfStock": "Out of Stock",
+      "lowStock": "Low Stock"
+    },    "description": {
+      "noDescription": "Product description is not available.",
+      "template": "Description for {{name}}"
+    },
+    "variants": {
+      "size": "Size",
+      "color": "Color",
+      "variant": "Variant",
+      "selectedInfo": {
+        "size": "Size:",
+        "color": "Color:",
+        "variant": "Variant:"
+      }
+    },
+    "quantity": {
+      "label": "Quantity:"
+    },    "buttons": {
+      "buyNow": "Buy Now",
+      "addToCart": "Add to Cart",
+      "processing": "Processing...",
+      "adding": "Adding..."
+    },    "about": "About This Product",
+    "readMore": "Read More",    "story": {
+      "title": "The Inspiration",
+      "crafted": "Handcrafted with Love",
+      "explore": "Explore Details"
+    },
+    "addingToCart": "Adding to Cart...",
+    "relatedProducts": {
+      "title": "Related Products"
+    }
+  },  "productCard": {
+    "variants": {
+      "colors": "{{count}} color",
+      "colors_plural": "{{count}} colors",
+      "sizes": "{{count}} size",
+      "sizes_plural": "{{count}} sizes"
+    }
+  },
+  "cart": {
+    "loading": "Loading cart...",
+    "title": "Your Cart",
+    "empty": {
+      "title": "Cart is Empty",
+      "message": "Add items to your cart to place an order",
+      "continueShopping": "Start Shopping"
+    },
+    "headers": {
+      "product": "Product",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total"
+    },
+    "removeItem": "Remove item",
+    "actions": {
+      "clearCart": "Clear Cart",
+      "continueShopping": "Continue Shopping",
+      "checkout": "Checkout"
+    },
+    "summary": {
+      "title": "Summary",
+      "items": "Items ({{count}})",
+      "shipping": "Shipping",
+      "total": "Total to Pay"
+    },
+    "secureCheckout": "Secure Payment",
+    "sidebar": {
+      "title": "Cart ({{count}})",
+      "close": "Close cart",
+      "empty": "Your cart is empty",
+      "startShopping": "Start Shopping",
+      "total": "Total",
+      "viewCart": "View Cart",
+      "checkout": "Checkout"
+    }
+  },  "checkout": {
+    "title": "Checkout",
+    "loading": "Loading...",
+    "emptyCart": {
+      "title": "Cart is Empty",
+      "message": "Add items to your cart to continue checkout."
+    },
+    "error": {
+      "title": "Error",
+      "productLoadFailed": "Failed to load product information. Please try again.",
+      "orderSubmissionFailed": "An error occurred while placing your order. Please try again."
+    },
+    "confirmations": {
+      "deleteAddress": "Are you sure you want to delete this address?"
+    },
+    "navigation": {
+      "back": "← Back",
+      "continue": "Continue →",
+      "placeOrder": "Place Order",
+      "processing": "Processing..."
+    },
+    "options": {
+      "title": "Choose Your Checkout Method",
+      "subtitle": "How would you like to proceed with your purchase?",
+      "login": {
+        "title": "Login to Your Account",
+        "description": "Sign in to access your saved addresses, order history, and enjoy a personalized shopping experience.",
+        "benefit1": "Save addresses for faster checkout",
+        "benefit2": "Track your order history",
+        "benefit3": "Manage your profile and preferences",
+        "benefit4": "Get exclusive member offers",
+        "button": "Sign In & Continue"
+      },
+      "guest": {
+        "title": "Continue as Guest",
+        "description": "Checkout quickly without creating an account. Your order details will be sent to your email.",
+        "benefit1": "Quick and simple checkout",
+        "benefit2": "No account creation required",
+        "benefit3": "Order confirmation via email",
+        "button": "Continue as Guest"
+      },
+      "footerNote": "You can always create an account later to track your orders and save your preferences."
+    },
+    "steps": {
+      "information": "Information",
+      "shipping": "Shipping", 
+      "payment": "Payment",
+      "confirmation": "Confirmation"    },"customerInfo": {
+      "title": "Customer Information",
+      "loggedIn": "Logged in automatically saved",
+      "saving": "Auto-saving...",
+      "guestCheckout": "Guest Checkout",
+      "guestCheckoutNote": "You can checkout without creating an account. Your order details will be sent to your email.",
+      "savedAddresses": "Saved Addresses",
+      "loadingAddresses": "Loading addresses...",
+      "default": "Default",
+      "use": "Use",
+      "delete": "Delete",
+      "addNewAddress": "Add New Address",
+      "selectedAddress": "Selected Address",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Enter first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter last name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",      "phone": "Phone",
+      "phoneLabel": "Tel",
+      "phonePlaceholder": "+375 (44) 123-45-67",
+      "shippingAddress": "Shipping Address",
+      "addressNote": "You can enter address temporarily or save it for future orders",
+      "streetAddress": "Address",
+      "streetAddressPlaceholder": "Street, house number",
+      "apartment": "Apartment/Office",
+      "apartmentPlaceholder": "Apartment, office (optional)",
+      "city": "City",
+      "cityPlaceholder": "New York",
+      "state": "Region",
+      "statePlaceholder": "New York",
+      "postalCode": "Postal Code",
+      "postalCodePlaceholder": "220000",
+      "country": "Country",
+      "saveAddress": "Save address for future orders",
+      "countries": {
+        "afghanistan": "Afghanistan",
+        "albania": "Albania",
+        "algeria": "Algeria",
+        "anguilla": "Anguilla",
+        "angola": "Angola",
+        "antiguaAndBarbuda": "Antigua and Barbuda",
+        "argentina": "Argentina",
+        "aruba": "Aruba",
+        "australia": "Australia",
+        "austria": "Austria",
+        "azerbaijan": "Azerbaijan",
+        "bahamas": "Bahamas",
+        "bahrain": "Bahrain",
+        "bangladesh": "Bangladesh",
+        "barbados": "Barbados",
+        "belarus": "Belarus",
+        "belgium": "Belgium",
+        "belize": "Belize",
+        "benin": "Benin",
+        "bermuda": "Bermuda",
+        "bhutan": "Bhutan",
+        "bolivia": "Bolivia",
+        "bonaireSintEustatiusSaba": "Bonaire, Sint Eustatius, and Saba",
+        "bosniaHerzegovina": "Bosnia-Herzegovina",
+        "botswana": "Botswana",
+        "brazil": "Brazil",
+        "bruneiDarussalam": "Brunei Darussalam",
+        "bulgaria": "Bulgaria",
+        "burkinaFaso": "Burkina Faso",
+        "burundi": "Burundi",
+        "cambodia": "Cambodia",
+        "cameroon": "Cameroon",
+        "canada": "Canada",
+        "canaryIslands": "Canary Islands (Spain)",
+        "capeVerde": "Cape Verde",
+        "caymanIslands": "Cayman Islands",
+        "centralAfricanRepublic": "Central African Republic",
+        "chad": "Chad",
+        "chile": "Chile",
+        "china": "China",
+        "colombia": "Columbia",
+        "comorosIslands": "Comoros Islands",
+        "costaRica": "Costa Rica",
+        "coteIvoire": "Côte d'Ivoire (Rep.)",
+        "croatia": "Croatia",
+        "cuba": "Cuba",
+        "curacao": "Curaçao",
+        "cyprus": "Cyprus",
+        "czechRepublic": "Czech Republic",
+        "democraticRepublicCongo": "Democratic Republic of the Congo",
+        "denmark": "Denmark",
+        "djibouti": "Djibouti",
+        "dominica": "Dominica",
+        "dominicanRepublic": "Dominican Republic",
+        "ecuador": "Ecuador",
+        "egypt": "Egypt",
+        "equatorialGuinea": "Equatorial Guinea",
+        "eritrea": "Eritrea",
+        "estonia": "Estonia",
+        "eswatini": "Eswatini (ex. Swaziland)",
+        "ethiopia": "Ethiopia",
+        "faroeIslands": "Faroe Islands (Denmark)",
+        "fiji": "Fiji",
+        "finland": "Finland",
+        "france": "France",
+        "frenchPolynesia": "French Polynesia",
+        "gabon": "Gabon",
+        "gambia": "Gambia",
+        "georgia": "Georgia",
+        "germany": "Germany",
+        "ghana": "Ghana",
+        "gibraltar": "Gibraltar (Britain)",
+        "greece": "Greece",
+        "greenland": "Greenland (Denmark)",
+        "grenada": "Grenada",
+        "guatemala": "Guatemala",
+        "guernsey": "Guernsey (Britain)",
+        "guinea": "Guinea",
+        "guyana": "Guyana",
+        "haiti": "Haiti",
+        "hongKong": "Hong Kong (China)",
+        "hungary": "Hungary",
+        "iceland": "Iceland",
+        "india": "India",
+        "indonesia": "Indonesia",
+        "iran": "Iran (Islamic Rep.)",
+        "iraq": "Iraq",
+        "ireland": "Ireland",
+        "italy": "Italy",
+        "jamaica": "Jamaica",
+        "japan": "Japan",
+        "jersey": "Jersey (Britain)",
+        "jordan": "Jordan",
+        "kazakhstan": "Kazakhstan",
+        "kenya": "Kenya",
+        "kiribati": "Kiribati",
+        "kosovo": "Kosovo",
+        "kuwait": "Kuwait",
+        "kyrgyzstan": "Kyrgyzstan",
+        "laos": "Laos",
+        "latvia": "Latvia",
+        "lebanon": "Lebanon",
+        "lesotho": "Lesotho",
+        "liberia": "Liberia",
+        "libya": "Libya",
+        "liechtenstein": "Liechtenstein",
+        "lithuania": "Lithuania",
+        "luxembourg": "Luxembourg",
+        "macao": "Macao",
+        "madagascar": "Madagascar",
+        "malawi": "Malawi",
+        "malaysia": "Malaysia",
+        "maldives": "Maldives",
+        "mali": "Mali",
+        "malta": "Malta",
+        "mauritania": "Mauritania",
+        "mauritius": "Mauritius",
+        "mexico": "Mexico",
+        "moldova": "Moldova",
+        "monaco": "Monaco",
+        "mongolia": "Mongolia",
+        "montenegro": "Montenegro",
+        "morocco": "Morocco",
+        "mozambique": "Mozambique",
+        "myanmar": "Myanmar",
+        "namibia": "Namibia",
+        "nepal": "Nepal",
+        "netherlands": "Netherlands",
+        "newCaledonia": "New Caledonia",
+        "newZealand": "New Zealand",
+        "nicaragua": "Nicaragua",
+        "niger": "Niger",
+        "nigeria": "Nigeria",
+        "northKorea": "Dem. People's Rep. of Korea",
+        "northMacedonia": "North Macedonia",
+        "norway": "Norway",
+        "oman": "Oman",
+        "pakistan": "Pakistan",
+        "panama": "Panama (Rep.)",
+        "papuaNewGuinea": "Papua New Guinea",
+        "paraguay": "Paraguay",
+        "peru": "Peru",
+        "philippines": "Philippines",
+        "poland": "Poland",
+        "portugal": "Portugal",
+        "qatar": "Qatar",
+        "republicCongo": "Dem. Republic of the Congo",
+        "romania": "Romania",
+        "russianFederation": "Russian Federation",
+        "rwanda": "Rwanda",
+        "saintKittsAndNevis": "Saint Kitts and Nevis",
+        "saintMartin": "Saint-Martin",
+        "salvador": "Salvador",
+        "samoa": "Samoa",
+        "sanMarino": "San Marino",
+        "saoTomeAndPrincipe": "Sao Tome and Principe",
+        "saudiArabia": "Saudi Arabia",
+        "senegal": "Senegal",
+        "serbia": "Serbia",
+        "seychelles": "Seychelles",
+        "sierraLeone": "Sierra Leone",
+        "singapore": "Singapore",
+        "slovakia": "Slovakia",
+        "slovenia": "Slovenia",
+        "solomonIsland": "Solomon Island",
+        "southAfrica": "South Africa",
+        "spain": "Spain",
+        "sriLanka": "Sri Lanka",
+        "stLucia": "St. Lucia",
+        "stVincentAndGrenadines": "St. Vincent and the Grenadines",
+        "sudan": "Sudan",
+        "surinam": "Suriname",
+        "sweden": "Sweden",
+        "switzerland": "Switzerland",
+        "syrianArabRepublic": "Syrian Arab Republic",
+        "taiwan": "Taiwan (China)",
+        "tajikistan": "Tajikistan",
+        "tanzania": "Tanzania",
+        "thailand": "Thailand",
+        "togoleseRepublic": "Togolese Republic",
+        "tonga": "Tonga",
+        "trinidadAndTobago": "Trinidad and Tobago",
+        "tunisia": "Tunisia",
+        "turkey": "Turkey",
+        "turkmenistan": "Turkmenistan",
+        "turksAndCaicosIslands": "Turks and Caicos Islands",
+        "uganda": "Uganda",
+        "ukraine": "Ukraine",
+        "unitedArabEmirates": "United Arab Emirates",
+        "unitedKingdom": "United Kingdom of Great Britain and Northern Ireland",
+        "uruguay": "Uruguay",
+        "usa": "USA (United States)",
+        "usVirginIslands": "Virgin Islands",
+        "uzbekistan": "Uzbekistan",
+        "vanuatu": "Vanuatu",
+        "vatican": "Vatican",
+        "venezuela": "Venezuela",
+        "vietnam": "Vietnam",
+        "virginIslands": "Virgin Islands",
+        "yemen": "Yemen",
+        "zambia": "Zambia",
+        "zimbabwe": "Zimbabwe"
+      }
+    },
+    "summary": {
+      "title": "Order Summary",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "discount": "Discount",
+      "total": "Total",
+      "size": "Size",
+      "freeReturns": "Free Returns",
+      "support": "24/7 Support",
+      "updating": "Updating totals..."
+    },
+    "shipping": {
+      "title": "Shipping",
+      "standardShipping": "Standard Shipping",
+      "standardDescription": "Delivery within 5-14 business days",
+      "deliveryTime": {
+        "today": "Today",
+        "days": "{{count}} day",
+        "days_plural": "{{count}} days",
+        "range": "{{min}}-{{max}} days"
+      },
+      "free": "Free",
+      "info": "All orders are carefully packaged and shipped within 1-2 business days"
+    },    "payment": {
+      "title": "Payment Method",
+      "instructions": "After clicking 'Place Order' you will be redirected to a secure payment page to enter your card details.",
+      "cardDescription": "Secure card payment"
+    },
+    "secureCheckout": "Secure Payment",
+    "confirmation": {
+      "title": "Order Confirmation",
+      "reviewText": "Please review your order details before placing your order.",
+      "customerInfo": {
+        "title": "Customer Information",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone"
+      },
+      "shippingInfo": {
+        "title": "Shipping Information",
+        "address": "Address",
+        "method": "Method",
+        "deliveryTime": "Delivery Time",
+        "cost": "Shipping Cost"
+      },
+      "paymentMethod": {
+        "title": "Payment Method"
+      },
+      "orderItems": {
+        "title": "Order Items",
+        "quantity": "Quantity",
+        "variant": "Variant"
+      },
+      "orderTotal": {
+        "title": "Order Total",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "discount": "Discount",
+        "total": "Total"
+      },
+      "deliveryTime": {
+        "oneDay": "1 day",
+        "days": "{{days}} days",
+        "weeks": "{{weeks}} weeks"
+      },
+      "terms": {
+        "agree": "I agree to the",
+        "termsLink": "Terms and Conditions",
+        "and": "and",
+        "privacyLink": "Privacy Policy",
+        "error": "Please agree to the Terms and Conditions and Privacy Policy to proceed"
+      },
+      "button": {
+        "loading": "Redirecting to payment...",
+        "placeOrder": "Proceed to Payment - {{amount}} EUR"
+      },
+      "redirectNotice": "You will be redirected to a secure payment page",
+      "securityNotice": "Your payment data is protected and encrypted"
+    },    "validation": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "addressRequired": "Address is required",
+      "cityRequired": "City is required",
+      "stateRequired": "State/Region is required",
+      "postalCodeRequired": "Postal code is required",
+      "shippingMethodRequired": "Please select a shipping method",
+      "paymentMethodRequired": "Please select a payment method",
+      "pleaseComplete": "Please complete the following fields"
+    },
+    "success": {
+      "loading": "Loading order details...",
+      "title": "Order Confirmed!",
+      "message": "Thank you for your purchase. Your order has been received and is being processed.",
+      "error": {
+        "title": "Something went wrong",
+        "orderNotFound": "Order not found",
+        "returnHome": "Return to Home"
+      },
+      "orderInfo": {
+        "title": "Order Information",
+        "orderNumber": "Order Number",
+        "orderDate": "Order Date",
+        "totalAmount": "Total Amount",
+        "paymentStatus": "Payment Status"
+      },
+      "shipping": {
+        "title": "Shipping Information",
+        "method": "Shipping Method",
+        "estimatedDelivery": "Estimated Delivery"
+      },
+      "items": {
+        "title": "Order Items",
+        "quantity": "Quantity"
+      },
+      "total": {
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "discount": "Discount",
+        "total": "Total"
+      },
+      "nextSteps": {
+        "title": "What's Next?",
+        "email": {
+          "title": "Order Confirmation Email",
+          "description": "You'll receive a confirmation email with your order details shortly."
+        },
+        "processing": {
+          "title": "Processing",
+          "description": "We'll prepare your order for shipment within 1-2 business days."
+        },
+        "shipping": {
+          "title": "Shipping Updates",
+          "description": "You'll receive tracking information once your order ships."
+        }
+      },
+      "actions": {
+        "continueShopping": "Continue Shopping",
+        "printOrder": "Print Order"
+      },
+      "support": {
+        "title": "Need Help?",
+        "message": "If you have any questions about your order, please contact our customer support team."
+      }
+    }
+  },
+  "payment": {
+    "title": "Complete Your Payment",
+    "loading": "Loading payment form...",
+    "orderSummary": "Order Summary",
+    "order": "Order",
+    "amount": "Amount",
+    "cardNumber": "Card Number",
+    "month": "Month",
+    "year": "Year",
+    "cvv": "CVV",
+    "cardholderName": "Cardholder Name",
+    "monthPlaceholder": "MM",
+    "yearPlaceholder": "YY",
+    "cardholderPlaceholder": "John Doe",
+    "processing": "Processing...",
+    "payButton": "Pay {{amount}} {{currency}}",
+    "securityMessage": "Your payment information is secure and encrypted",
+    "back": "Go Back",
+    "sessionError": "Unable to load payment session",
+    "redirecting": {
+      "title": "Redirecting to Secure Payment",
+      "message": "Please wait while we redirect you to our secure payment platform...",
+      "step1": "Creating secure payment session",
+      "step2": "Redirecting to payment platform",
+      "step3": "Complete your payment securely"
+    },
+    "success": {
+      "title": "Payment Successful!",
+      "message": "Your payment of {{amount}} {{currency}} has been processed.",
+      "redirecting": "Redirecting to order confirmation..."
+    },
+    "error": {
+      "title": "Payment Error",
+      "backToCheckout": "Back to Checkout",
+      "viewOrders": "View My Orders"
+    }
+  },
+  "faq": {
+    "hero": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Find answers to the most popular questions about our services",
+      "searchPlaceholder": "Search questions..."
+    },
+    "categoriesSection": {
+      "title": "Question Categories"
+    },
+    "categories": {
+      "all": "All Questions",
+      "orders": "Orders",
+      "delivery": "Delivery",
+      "payment": "Payment",
+      "returns": "Returns",
+      "account": "Account",
+      "general": "General"
+    },
+    "resultsCount": "Found {{count}} questions",
+    "questions": {
+      "orders": {
+        "howToOrder": {
+          "question": "How to place an order on the website?",
+          "answer": "To place an order: 1) Select a product and add it to cart, 2) Go to cart and click 'Checkout', 3) Fill in contact details and choose delivery method, 4) Confirm the order. After placing the order, you'll receive confirmation via email."
+        },
+        "changeOrder": {
+          "question": "Can I change or cancel an order?",
+          "answer": "You can change or cancel an order within 30 minutes after placing it by contacting us at +375 44 537 1787 or email support@malikli1992.com. Changes are not accepted after the order is sent for processing."
+        },
+        "trackOrder": {
+          "question": "How to track order status?",
+          "answer": "Order status can be tracked in your personal account in the 'My Orders' section. We also send status notifications to the email and phone number provided during checkout."
+        }
+      },
+      "delivery": {
+        "methods": {
+          "question": "What delivery methods are available?",
+          "answer": "We offer several delivery methods: courier delivery in Minsk (1-2 days), delivery throughout Belarus by transport companies (2-5 days), pickup from pickup point. See detailed information about cost and timing on the 'Delivery' page."
+        },
+        "cost": {
+          "question": "How much does delivery cost?",
+          "answer": "Delivery cost depends on method and region: in Minsk - from 5 EUR, throughout Belarus - from 10 EUR. For orders over 100 EUR, delivery in Minsk is free. Exact cost is calculated during checkout."
+        },
+        "time": {
+          "question": "What are the delivery hours?",
+          "answer": "Courier delivery is performed Monday to Friday from 9:00 to 18:00, Saturday from 10:00 to 16:00. You can choose a convenient time slot when placing your order."
+        }
+      },
+      "payment": {
+        "methods": {
+          "question": "What payment methods are accepted?",
+          "answer": "We accept the following payment methods: Visa/MasterCard bank cards, electronic money (Yandex.Money, WebMoney), bank transfer, cash on delivery (only for courier delivery)."
+        },
+        "security": {
+          "question": "Is card payment on the website secure?",
+          "answer": "Yes, card payment is completely secure. We use protected SSL connection and comply with PCI DSS security standards. Your card data is not saved on our servers and is transmitted directly to the bank."
+        },
+        "when": {
+          "question": "When is money charged from the card?",
+          "answer": "When paying by card, money is charged immediately after order confirmation. When choosing cash payment, money is accepted by the courier upon receiving the goods."
+        }
+      },
+      "returns": {
+        "canReturn": {
+          "question": "Can I return a product?",
+          "answer": "Yes, you can return a product within 14 days from receipt according to Belarus legislation. The product must be in original packaging, without signs of use, with preserved tags and receipts."
+        },
+        "howToReturn": {
+          "question": "How to process a return?",
+          "answer": "To process a return, contact us at +375 44 537 1787 or email support@malikli1992.com. We'll arrange product pickup or you can bring it to our office. Money refund is processed within 10 business days."
+        },
+        "deliveryCost": {
+          "question": "Is delivery cost refunded when returning?",
+          "answer": "Delivery cost is refunded only if the product is defective or doesn't match the description. When returning at buyer's request, delivery cost is not compensated."
+        }
+      },
+      "account": {
+        "registration": {
+          "question": "Is website registration mandatory?",
+          "answer": "Registration is not mandatory for one-time purchases, but we recommend creating an account for convenience: you can track orders, save delivery addresses, receive personal discounts and bonuses."
+        },
+        "forgotPassword": {
+          "question": "How to recover forgotten password?",
+          "answer": "On the login page, click 'Forgot password?', enter the email used during registration. We'll send you a password recovery link. If the email doesn't arrive, check your 'Spam' folder."
+        },
+        "changeData": {
+          "question": "How to change data in personal account?",
+          "answer": "In your personal account, go to 'My Data' section, make necessary changes and save. To change email, confirmation to the new email address is required."
+        }
+      },
+      "general": {
+        "contact": {
+          "question": "How to contact support?",
+          "answer": "You can contact us: by phone +375 44 537 1787 (Mon-Fri 9:00-18:00), by email support@malikli1992.com, through the contact form on the website. We respond to all inquiries within 24 hours."
+        },
+        "loyalty": {
+          "question": "Is there a loyalty program?",
+          "answer": "Yes, we have a bonus program. For each purchase you get bonuses (5% of order amount), which you can use to pay for future purchases. Seasonal promotions and discounts for regular customers are also available."
+        },
+        "warranty": {
+          "question": "Do you provide warranty on products?",
+          "answer": "All products come with warranty according to Belarus legislation. Additionally, some products have extended manufacturer warranty. Warranty conditions are specified in each product description."
+        }
+      }
+    },
+    "help": {
+      "title": "Didn't find an answer to your question?",
+      "description": "Our support team is ready to help you anytime",
+      "call": "Call",
+      "email": "Email"
+    },
+    "quickLinks": {
+      "title": "Useful Links",
+      "delivery": {
+        "title": "Delivery",
+        "description": "Methods and delivery conditions"
+      },
+      "returns": {
+        "title": "Returns",
+        "description": "Product return conditions"
+      },
+      "terms": {
+        "title": "Terms",
+        "description": "Terms of use"
+      },
+      "privacy": {
+        "title": "Privacy",
+        "description": "Data processing policy"
+      }
+    }
+  },
+  "terms": {
+    "hero": {
+      "title": "Terms of Use",
+      "subtitle": "Rules and conditions for using our website and services",
+      "effectiveDate": "Effective date: May 12, 2025"
+    },
+    "general": {
+      "title": "General Provisions",
+      "welcome": "Welcome to Malikli1992",
+      "intro": "These Terms of Use govern the relationship between Malikli1992 (hereinafter - 'Company') and website users regarding the use of the Website and provided services.",
+      "agreement": "By using our website, you agree to these terms and undertake to comply with them. If you disagree with any provisions, please refrain from using our website."
+    },
+    "userGuidelines": {
+      "title": "User Guidelines",
+      "registration": {
+        "title": "Registration",
+        "description": "Providing accurate and up-to-date information when creating an account",
+        "details": "User undertakes to provide accurate data and update it timely"
+      },
+      "orders": {
+        "title": "Placing Orders",
+        "description": "Following instructions and rules when placing orders",
+        "details": "All orders are processed according to established procedures and timelines"
+      },
+      "payment": {
+        "title": "Payment",
+        "description": "Using legal payment methods and meeting deadlines",
+        "details": "Payment is made in accordance with the conditions specified on the website"
+      },
+      "usage": {
+        "title": "Website Usage",
+        "description": "Compliance with rules and restrictions when working with the platform",
+        "details": "Any malicious or illegal use of the resource is prohibited"
+      }
+    },
+    "companyServices": {
+      "title": "Our Services",
+      "products": {
+        "title": "Product Provision",
+        "description": "Sale of quality products according to website description"
+      },
+      "delivery": {
+        "title": "Delivery",
+        "description": "Organization of product delivery to specified address"
+      },
+      "returns": {
+        "title": "Returns and Exchange",
+        "description": "Ensuring return possibility in accordance with law"
+      },
+      "dataProtection": {
+        "title": "Data Protection",
+        "description": "Ensuring security of users' personal data"
+      }
+    },
+    "responsibilities": {
+      "title": "Rights and Responsibilities",
+      "user": {
+        "title": "User Responsibilities",
+        "items": {
+          "accurate": "Providing accurate information",
+          "rules": "Compliance with website usage rules",
+          "payment": "Timely payment of orders",
+          "updates": "Notification of contact data changes"
+        }
+      },
+      "company": {
+        "title": "Company Responsibilities",
+        "items": {
+          "quality": "Providing quality products",
+          "delivery": "Meeting delivery deadlines",
+          "website": "Ensuring website functionality",
+          "dataProtection": "Protecting users' personal data"
+        }
+      }
+    },
+    "paymentDelivery": {
+      "title": "Payment and Delivery",
+      "payment": {
+        "title": "Payment Terms",
+        "description": "Payment is made in Belarusian rubles. Bank cards, electronic payments and cash on delivery are accepted. All prices are inclusive of VAT."
+      },
+      "delivery": {
+        "title": "Delivery Terms",
+        "description": "Delivery is carried out throughout the Republic of Belarus. Detailed conditions and delivery cost are specified on the corresponding website page."
+      }
+    },
+    "intellectualProperty": {
+      "title": "Intellectual Property",
+      "copyright": {
+        "title": "Copyright",
+        "description": "All texts, images and website design are protected by copyright"
+      },
+      "trademarks": {
+        "title": "Trademarks",
+        "description": "Brand logos and names are registered trademarks"
+      },
+      "confidential": {
+        "title": "Confidential Information",
+        "description": "Copying and use without written consent is prohibited"
+      }
+    },
+    "liability": {
+      "title": "Limitation of Liability",
+      "limitations": {
+        "title": "Limitations",
+        "description": "The Company is not liable for damage caused to the user due to improper use of the Website or provided services, except in cases provided by the legislation of the Republic of Belarus.",
+        "technical": "Technical failures and temporary website unavailability",
+        "thirdParty": "Actions of third parties",
+        "forceMajeure": "Force majeure circumstances",
+        "improperUse": "Improper use of products by the buyer"
+      }
+    },
+    "applicableLaw": {
+      "title": "Applicable Law",
+      "jurisdiction": {
+        "title": "Jurisdiction",
+        "description": "These Terms of Use are governed by the legislation of the Republic of Belarus. All disputes are resolved in accordance with the current legislation of the Republic of Belarus."
+      },
+      "disputes": "In case of disputes, the parties undertake to resolve them through negotiations. If agreement cannot be reached, disputes are considered in court."
+    },
+    "contact": {
+      "title": "Questions about terms of use?",
+      "description": "Contact us for clarifications and assistance",
+      "workingHours": "Working hours: 24/7"
+    },
+    "updates": {
+      "title": "Changes to Terms of Use",
+      "description": "The Company reserves the right to make changes to these Terms of Use. Changes take effect from the moment of their publication on the Website. We recommend regularly reviewing this page to familiarize yourself with current terms."
+    }
+  },
+  "privacy": {
+    "hero": {
+      "title": "Privacy Policy",
+      "subtitle": "We take the protection of your personal data seriously",
+      "effectiveDate": "Effective date: May 12, 2025"
+    },
+    "general": {
+      "title": "General Provisions",
+      "about": "About this policy",
+      "intro": "This Privacy Policy defines the procedure for processing and protecting personal data of users provided when using the MALIKLI1992 website (hereinafter - 'Website').",
+      "compliance": "Personal data processing is carried out in accordance with the Law of the Republic of Belarus of November 15, 2021 'On Personal Data Protection' and other regulatory acts of the Republic of Belarus."
+    },
+    "dataTypes": {
+      "title": "What Data We Collect",
+      "personal": {
+        "title": "Personal Information",
+        "name": "Full name",
+        "birthDate": "Date of birth",
+        "passport": "Passport data"
+      },
+      "contact": {
+        "title": "Contact Data",
+        "email": "Email address",
+        "phone": "Phone number",
+        "address": "Delivery address"
+      },
+      "payment": {
+        "title": "Payment Information",
+        "details": "Payment details",
+        "history": "Order history",
+        "methods": "Payment methods"
+      },
+      "additional": {
+        "title": "Additional Data",
+        "preferences": "User preferences",
+        "history": "Visit history",
+        "reviews": "Reviews and comments"
+      }
+    },
+    "purposes": {
+      "title": "Data Processing Purposes",
+      "orders": {
+        "title": "Order Processing",
+        "description": "Processing, confirming and fulfilling your orders"
+      },
+      "communication": {
+        "title": "User Communication",
+        "description": "Order status notifications and customer service"
+      },
+      "marketing": {
+        "title": "Marketing Materials",
+        "description": "Sending news and promotional offers (with consent)"
+      },
+      "improvement": {
+        "title": "Service Improvement",
+        "description": "Analysis and improvement of our service quality"
+      }
+    },
+    "userRights": {
+      "title": "Your Rights",
+      "information": {
+        "title": "Right to Information",
+        "description": "Receive complete information about your personal data and methods of its processing"
+      },
+      "modification": {
+        "title": "Right to Modification",
+        "description": "Require correction of inaccurate or incomplete personal data"
+      },
+      "deletion": {
+        "title": "Right to Deletion",
+        "description": "Require deletion of your personal data in cases established by law"
+      },
+      "withdrawal": {
+        "title": "Right to Withdraw Consent",
+        "description": "Withdraw consent for personal data processing at any time"
+      }
+    },
+    "security": {
+      "title": "Data Protection and Storage",
+      "technical": {
+        "title": "Technical Measures",
+        "description": "We use modern encryption technologies and secure servers to ensure the security of your data."
+      },
+      "organizational": {
+        "title": "Organizational Measures",
+        "description": "Only authorized employees who are obliged to maintain confidentiality have access to personal data."
+      },
+      "retention": {
+        "title": "Storage Period",
+        "description": "Personal data is stored no longer than necessary to achieve processing purposes."
+      }
+    },
+    "thirdParty": {
+      "title": "Data Transfer to Third Parties",
+      "when": {
+        "title": "When we transfer data",
+        "description": "Personal data may be transferred to third parties only in cases provided by the legislation of the Republic of Belarus or with your direct consent.",
+        "contractual": "When fulfilling contractual obligations",
+        "government": "At the request of authorized government agencies",
+        "consent": "With your written consent",
+        "security": "To ensure security and prevent fraud"
+      }
+    },
+    "consent": {
+      "title": "Consent for Processing",
+      "how": {
+        "title": "How you give consent",
+        "description": "The user gives consent for processing their personal data when registering on the Website or placing an order, by checking the corresponding field."
+      },
+      "withdrawal": "Consent can be withdrawn at any time by sending written notice to our email address."
+    },
+    "contact": {
+      "title": "Questions about data processing?",
+      "description": "Contact us for additional information",
+      "workingHours": "Working hours: 24/7"
+    },
+    "updates": {
+      "title": "Changes to Privacy Policy",
+      "description": "We reserve the right to make changes to this Privacy Policy. Changes take effect from the moment of their publication on the Website. We recommend regularly checking this page to familiarize yourself with the current version of the Policy."
+    }
+  },
+  "delivery": {
+    "hero": {
+      "title": "Delivery & Payment",
+      "subtitle": "Fast and reliable delivery throughout Belarus"
+    },
+    "methods": {
+      "title": "Delivery Methods",
+      "post": {
+        "title": "Belpost",
+        "description": "Delivery throughout the Republic of Belarus",
+        "timeframe": "2-5 business days",
+        "pricing": "According to Belpost tariffs"
+      },
+      "courier": {
+        "title": "Courier Delivery",
+        "description": "Fast delivery in Minsk",
+        "timeframe": "1-2 business days",
+        "pricing": "Specified when ordering"
+      }
+    },
+    "details": {
+      "timeframe": "Duration",
+      "cost": "Cost"
+    },
+    "conditions": {
+      "title": "Delivery Conditions",
+      "geography": {
+        "title": "Geography",
+        "description": "Delivery throughout the Republic of Belarus"
+      },
+      "payment": {
+        "title": "Payment",
+        "description": "Cash on delivery or online payment"
+      },
+      "support": {
+        "title": "Support",
+        "description": "24/7 round-the-clock support"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "duration": {
+        "question": "How long does delivery take?",
+        "answer": "Average delivery time by post is two to five business days. Courier delivery in Minsk takes 1-2 business days."
+      },
+      "changeAddress": {
+        "question": "Can I change the delivery address after placing an order?",
+        "answer": "Yes, you can change the delivery address before the order is shipped. Contact our support service at +375 44 537 1787 or write to support@malikli1992.com."
+      },
+      "tracking": {
+        "question": "How to track my order?",
+        "answer": "After shipping the order, you will receive a tracking number. You can track the package on the Belpost website or in our personal account."
+      },
+      "lostPackage": {
+        "question": "What to do if the package is lost or damaged?",
+        "answer": "Contact our support service within 48 hours of receipt. We will promptly resolve the issue with the carrier and ensure replacement or refund of the product."
+      }
+    },
+    "contact": {
+      "title": "Have questions?",
+      "description": "Contact our support service"
+    }
+  },
+  "returns": {
+    "hero": {
+      "title": "Returns & Exchange",
+      "subtitle": "Simple and transparent product return procedure"
+    },
+    "process": {
+      "title": "Return Process",
+      "contact": {
+        "title": "Contact Us",
+        "description": "Contact support within 14 days of purchase"
+      },
+      "prepare": {
+        "title": "Prepare the Product",
+        "description": "Ensure the product is in original condition with tags and packaging"
+      },
+      "send": {
+        "title": "Send the Product",
+        "description": "Send the product to the specified address or hand it to the courier"
+      },
+      "receive": {
+        "title": "Receive Refund",
+        "description": "After product inspection, we will refund or exchange"
+      }
+    },
+    "conditions": {
+      "title": "Return Conditions",
+      "accepted": {
+        "title": "We accept for return",
+        "original": "Products in original packaging",
+        "unworn": "Unworn items with tags",
+        "unused": "Products without signs of use",
+        "appearance": "Items with preserved appearance"
+      },
+      "notAccepted": {
+        "title": "We do not accept for return",
+        "used": "Used products",
+        "noTags": "Items without original tags",
+        "damaged": "Damaged products",
+        "noPackaging": "Products with damaged packaging"
+      }
+    },
+    "legal": {
+      "title": "Legal Information",
+      "basis": {
+        "title": "Legislative Basis",
+        "description": "A product of proper quality can be returned if its appearance, factory labels, tags, consumer properties are preserved, and a document confirming the purchase is attached. Used products cannot be returned."
+      },
+      "law": "According to Article 28 of the Law of the Republic of Belarus of January 9, 2002 'On Consumer Rights Protection', the consumer has the right to return a product of proper quality or exchange it for a similar product within fourteen days."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "timeLimit": {
+        "question": "Within what time can a product be returned?",
+        "answer": "According to Article 28 of the Law of the Republic of Belarus 'On Consumer Rights Protection', return of a product of proper quality is possible within fourteen days from the date of purchase."
+      },
+      "documents": {
+        "question": "What documents are needed for return?",
+        "answer": "For return, a document confirming the purchase (receipt, payment receipt) is required, as well as a return application that can be filled out when applying."
+      },
+      "exchange": {
+        "question": "Can I exchange a product for a different size?",
+        "answer": "Yes, exchange for a similar product of different size or color is possible if available in stock. If no suitable product is available, we will process a money refund."
+      },
+      "shippingCost": {
+        "question": "Who pays for shipping when returning?",
+        "answer": "If the product is returned due to seller's fault (defect, non-compliance), we pay for shipping. When returning a product of proper quality, the buyer pays for shipping."
+      },
+      "refundTime": {
+        "question": "When will money be returned?",
+        "answer": "Money refund is processed within 7 business days after receiving and checking the returned product to the same payment method used for purchase."
+      }
+    },    "contact": {
+      "title": "Need help with return?",
+      "description": "Our support service will help you with the return procedure",
+      "workingHours": "Working hours: 24/7"
+    }
+  },
+  "profile": {
+    "loading": "Loading profile...",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "logout": "Logout",
+    "saveChanges": "Save Changes",
+    "notSpecified": "Not specified",
+    "personalInfo": {
+      "title": "Personal Information",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "phonePlaceholder": "+375 (44) 123-45-67"
+    },
+    "accountSettings": {
+      "title": "Account Settings",
+      "changePassword": {
+        "title": "Change Password",
+        "description": "Update your password to keep your account secure",
+        "button": "Change"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "description": "Manage your notification preferences",
+        "button": "Configure"
+      }
+    },
+    "orders": {
+      "title": "My Orders",
+      "noOrders": "You don't have any orders yet",      "startShopping": "Start Shopping"
+    }
+  },
+  "footer": {
+    "description": "Exclusive monthly drops and unique products.",
+    "companyInfo": {
+      "fullName": "Limited Liability Company \"MALIKLI 1992\"",
+      "manufacturer": "Manufacturer: LLC \"MALIKLI 1992\"",
+      "registration": "State registration certificate No. 193863901, issued on 21.04.2025 by Minsk City Executive Committee",
+      "address": "220005, Minsk, Vera Khoruzhey str., 6A, premises 94I",
+      "tradeRegistry": "Trade register registration"
+    },
+    "information": {
+      "title": "Information",
+      "faq": "FAQ",
+      "delivery": "Delivery & Payment",
+      "returns": "Returns",
+      "terms": "Terms of Use",
+      "privacy": "Privacy Policy"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "workingHours": "Working hours: 24/7"    },
+    "copyright": "© {{year}} LLC \"MALIKLI 1992\". All rights reserved."
+  },
+  "orders": {
+    "title": "My Orders",
+    "subtitle": "Track and manage your orders",
+    "loading": "Loading your orders...",
+    "orderCount": "{{count}} order",
+    "orderCount_plural": "{{count}} orders",
+    "orderDate": "Order Date",
+    "total": "Total",
+    "filters": {
+      "status": "Filter by Status",
+      "allStatuses": "All Statuses",
+      "sortBy": "Sort By",
+      "dateDesc": "Newest First",
+      "dateAsc": "Oldest First",
+      "amountDesc": "Highest Amount",
+      "amountAsc": "Lowest Amount",
+      "statusAsc": "Status A-Z"
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "paymentStatus": {
+      "pending": "Payment Pending",
+      "paid": "Paid",
+      "failed": "Payment Failed",
+      "refunded": "Refunded"
+    },
+    "item": {
+      "color": "Color",
+      "size": "Size",
+      "quantity": "Qty"
+    },
+    "delivery": {
+      "title": "Delivery Information",
+      "trackingNumber": "Tracking Number",
+      "track": "Track",
+      "estimated": "Estimated Delivery"
+    },    
+    "actions": {
+      "viewDetails": "View Details",
+      "reorder": "Reorder",
+      "cancel": "Cancel Order",
+      "confirmCancel": "Are you sure you want to cancel this order?",
+      "backToOrders": "Back to Orders",
+      "retryPayment": "Retry Payment"
+    },
+    "empty": {
+      "title": "No Orders Yet",
+      "message": "You haven't placed any orders yet. Start shopping to see your orders here.",
+      "startShopping": "Start Shopping"
+    },    "error": {
+      "title": "Something went wrong",
+      "retry": "Try Again",
+      "orderNotFound": "Order not found",
+      "backToOrders": "Back to Orders"
+    }
+  },
+  "orderDetails": {
+    "summary": {
+      "title": "Order Summary",
+      "lastUpdated": "Last Updated",
+      "shippingMethod": "Shipping Method"
+    },
+    "customer": {
+      "title": "Customer Information",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "shipping": {
+      "title": "Shipping Information",
+      "address": "Shipping Address"
+    },
+    "items": {
+      "title": "Order Items",
+      "each": "each"
+    },
+    "total": {
+      "title": "Order Total",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "discount": "Discount",
+      "total": "Total",
+      "free": "Free"
+    },
+    "actions": {
+      "print": "Print Order"
+    }
+  },
+  "paymentCallback": {
+    "processing": {
+      "title": "Processing Payment",
+      "message": "Please wait while we process your payment..."
+    },
+    "error": {
+      "title": "Payment Processing Error",
+      "viewOrders": "View My Orders",
+      "backHome": "Back to Home"
+    }
+  },
+  "orderComplete": {
+    "loading": "Loading order details...",
+    "success": {
+      "title": "Order Complete!",
+      "message": "Thank you for your purchase. Your order has been successfully placed and payment confirmed."
+    },
+    "summary": {
+      "title": "Order Summary",
+      "orderNumber": "Order Number",
+      "total": "Total Amount",
+      "paymentStatus": "Payment Status",
+      "orderStatus": "Order Status"
+    },
+    "items": {
+      "title": "Items Ordered",
+      "quantity": "Qty",
+      "andMore": "and {{count}} more items"
+    },
+    "nextSteps": {
+      "title": "What happens next?",
+      "confirmation": "You'll receive an order confirmation email shortly",
+      "processing": "We'll start processing your order within 24 hours",
+      "shipping": "Your items will be prepared for shipping",
+      "tracking": "You'll receive tracking information once shipped"
+    },
+    "actions": {
+      "viewOrder": "View Order Details",
+      "continueShopping": "Continue Shopping"
+    },
+    "error": {
+      "title": "Unable to Load Order",
+      "viewOrders": "View All Orders",
+      "backHome": "Back to Home"
+    }
+  },
+  "orderFailed": {
+    "loading": "Loading order details...",
+    "title": "Payment Failed",
+    "message": "We're sorry, but your payment could not be processed. Please try again or contact our support team.",
+    "reason": {
+      "title": "Failure Reason"
+    },
+    "orderInfo": {
+      "title": "Order Information",
+      "orderNumber": "Order Number",
+      "amount": "Amount",
+      "status": "Order Status",
+      "paymentStatus": "Payment Status"
+    },
+    "nextSteps": {
+      "title": "What you can do:",
+      "checkPayment": "Check your payment method details",
+      "tryAgain": "Try the payment again",
+      "differentMethod": "Use a different payment method",
+      "contactSupport": "Contact our support team for assistance"
+    },
+    "commonIssues": {
+      "title": "Common Payment Issues",
+      "insufficientFunds": {
+        "title": "Insufficient Funds",
+        "description": "Make sure your account has enough balance for this transaction."
+      },
+      "cardExpired": {
+        "title": "Expired Card",
+        "description": "Check that your card hasn't expired and try again."
+      },
+      "networkError": {
+        "title": "Network Connection",
+        "description": "Poor connection might have interrupted the payment. Please try again."
+      }
+    },
+    "actions": {
+      "tryAgain": "Try Payment Again",
+      "contactSupport": "Contact Support",
+      "viewOrders": "View My Orders"
+    }
+  },
+  "deliveryPage": {
+    "globalReach": {
+      "title": "Our Global Reach",
+      "subtitle": "We proudly ship to over 140 countries worldwide, bringing MALIKLI1992's exclusive fashion to discerning customers across the globe."
+    },
+    "services": {
+      "domestic": {
+        "title": "Domestic Shipping",
+        "subtitle": "(Belarus)",
+        "time": "1-3 business days for local deliveries"
+      },
+      "international": {
+        "title": "International",
+        "subtitle": "Shipping",
+        "time": "7-30 days depending on destination"
+      },
+      "express": {
+        "title": "Express Services",
+        "time": "5-15 business days"
+      },
+      "standard": {
+        "title": "Standard Services",
+        "time": "1-4 weeks"
+      }
+    },
+    "deliveryTimes": {
+      "title": "Delivery Times by Service",
+      "emsTitle": "International EMS (Express Mail Service)"
+    },
+    "regions": {
+      "europe": {
+        "title": "Europe",
+        "deliveryTime": "5-10 business days",
+        "tracking": "Full tracking"
+      },
+      "northAmerica": {
+        "title": "North America",
+        "countries": ["USA", "Canada"],
+        "deliveryTime": "7-14 business days",
+        "tracking": "Full tracking"
+      },
+      "asia": {
+        "title": "Asia",
+        "deliveryTime": "5-12 business days",
+        "tracking": "Full tracking"
+      },
+      "australia": {
+        "title": "Australia/Oceania",
+        "deliveryTime": "8-15 business days",
+        "tracking": "Full tracking"
+      },
+      "russia": {
+        "title": "Russia",
+        "deliveryTime": "3-7 business days",
+        "note": "Neighboring country"
+      },
+      "cis": {
+        "title": "Other CIS Countries",
+        "deliveryTime": "5-10 business days"
+      }
+    },
+    "factors": {
+      "title": "Factors Affecting Delivery Times",
+      "delays": {
+        "title": "Possible Delays",
+        "items": [
+          "Customs clearance processing",
+          "Remote destination areas",
+          "National holidays",
+          "Weather conditions",
+          "Peak shipping seasons"
+        ]
+      },
+      "faster": {
+        "title": "Faster Delivery To",
+        "items": [
+          "Russia: 3-7 days",
+          "Poland: 5-10 days",
+          "Germany: 7-12 days",
+          "Lithuania: 5-8 days"
+        ]
+      },
+      "longer": {
+        "title": "Longer Delivery To",
+        "items": [
+          "USA: 10-21 days",
+          "Australia: 12-25 days",
+          "Remote areas: 20-35 days"
+        ]
+      }
+    },    "labels": {
+      "deliveryTime": "Delivery time:",
+      "tracking": "Tracking:",
+      "note": "Note:"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "title": "Contact Us",
+      "subtitle": "We're here to help you with any questions"
+    },
+    "contactInfo": {
+      "title": "Contact Information",
+      "email": {
+        "label": "Email Address",
+        "value": "support@malikli1992.com"
+      },
+      "hours": {
+        "label": "Working Hours",
+        "value": "24/7"
+      },
+      "address": {
+        "label": "Address",
+        "value": "220005, Minsk, st. Vera Khoruzhei, 6A, room 94I"
+      }
+    },
+    "form": {
+      "title": "Send Message",
+      "userNotification": "You are logged in as {{name}}. Your details are automatically filled.",
+      "messages": {
+        "success": "Your message has been sent successfully! We will contact you shortly.",
+        "error": "An error occurred while sending the message. Please try again."
+      },
+      "fields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter your name",
+          "required": true
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "your@email.com",
+          "required": true
+        },
+        "subject": {
+          "label": "Subject",
+          "placeholder": "Subject of your message",
+          "required": true
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Tell us about your question or suggestion...",
+          "required": true
+        }
+      },
+      "submit": {
+        "idle": "Send Message",
+        "submitting": "Sending..."      }
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "About MALIKLI1992",
+      "subtitle": "Creating Exclusive Fashion Since 2025",
+      "description": "We are a modern fashion brand focused on creating unique, high-quality clothing that reflects the spirit of our time while maintaining timeless elegance."
+    },
+    "stats": {
+      "foundingYear": "Founded",
+      "uniqueProducts": "Unique Products",
+      "happyCustomers": "Happy Customers",
+      "customerSupport": "Customer Support"
+    },
+    "story": {
+      "title": "Our Story",
+      "subtitle": "From Vision to Reality",
+      "paragraph1": "MALIKLI1992 was born from a passion for creating distinctive fashion that stands out in today's crowded market. Our journey began with a simple yet powerful vision: to design clothing that not only looks exceptional but also tells a story.",
+      "paragraph2": "Every piece in our collection is carefully crafted with attention to detail, quality materials, and innovative design approaches. We believe in the power of fashion to express individuality and create connections between people who share our aesthetic vision.",
+      "paragraph3": "Today, we continue to push the boundaries of contemporary fashion, introducing limited drops that celebrate creativity, exclusivity, and the art of self-expression through clothing.",
+      "cards": {
+        "growth": {
+          "title": "Continuous Growth",
+          "description": "Building a global community of fashion enthusiasts"
+        },
+        "creativity": {
+          "title": "Creative Excellence",
+          "description": "Pushing boundaries in fashion design and innovation"
+        }
+      }
+    },
+    "timeline": {
+      "sectionTitle": "Our Journey",
+      "sectionSubtitle": "Key milestones in our brand evolution",
+      "founding": {
+        "title": "Brand Foundation",
+        "description": "MALIKLI1992 was established with a vision to create unique, high-quality fashion pieces"
+      },
+      "firstDrops": {
+        "title": "First Collections",
+        "description": "Launched our inaugural drops, introducing our signature aesthetic to the world"
+      },
+      "expansion": {
+        "title": "Global Expansion",
+        "description": "Extended our reach to international markets, building a worldwide community"
+      },
+      "future": {
+        "title": "Future Vision",
+        "description": "Continuing to innovate and set new standards in exclusive fashion"
+      }
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To create exceptional fashion pieces that empower individuals to express their unique style while maintaining the highest standards of quality and exclusivity."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To become a globally recognized fashion brand that sets trends, inspires creativity, and builds a community of people who appreciate distinctive, high-quality design."
+    },
+    "values": {
+      "title": "Our Values",
+      "subtitle": "The principles that guide everything we do",
+      "exclusivity": {
+        "title": "Exclusivity",
+        "description": "Limited drops ensure that each piece remains special and unique",
+        "iconAlt": "Crown icon representing exclusivity"
+      },
+      "quality": {
+        "title": "Quality",
+        "description": "Premium materials and meticulous craftsmanship in every item",
+        "iconAlt": "Diamond icon representing quality"
+      },
+      "community": {
+        "title": "Community",
+        "description": "Building connections with fashion enthusiasts worldwide",
+        "iconAlt": "Message icon representing community"
+      }
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "The creative minds behind MALIKLI1992",
+      "founder": {
+        "role": "Founder & Creative Director",
+        "description": "Visionary leader driving the creative direction and brand philosophy of MALIKLI1992"
+      },
+      "contact": {
+        "email": "Email"
+      }
+    },
+    "cta": {
+      "title": "Join Our Fashion Journey",
+      "description": "Be part of our exclusive community and stay updated with our latest drops and fashion innovations.",
+      "register": "Join Now",
+      "viewDrops": "View Collections"
+    }
+  }
+}
+
+

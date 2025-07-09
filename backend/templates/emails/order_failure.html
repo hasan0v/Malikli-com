@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Payment Failed - {{ order.order_number }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .email-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #e74c3c;
+            margin: 0;
+            font-size: 28px;
+        }
+        .alert-box {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            margin: 20px 0;
+        }
+        .alert-box h2 {
+            margin-top: 0;
+            color: #721c24;
+        }
+        .order-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .items-table th,
+        .items-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .items-table th {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .items-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #4ECDC4;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>{{ site_name }}</h1>
+            <p>Order Payment Failed</p>
+        </div>
+
+        <p>
+            {% if user %}
+                Dear {{ user.first_name|default:user.username }},
+            {% else %}
+                Dear Customer,
+            {% endif %}
+        </p>
+
+        <div class="alert-box">
+            <h2>Payment Processing Failed</h2>
+            <p>Unfortunately, we were unable to process your payment for order <strong>{{ order.order_number }}</strong>. Your order has been cancelled and no charges have been made to your payment method.</p>
+        </div>
+
+        <div class="order-info">
+            <h3>Order Information</h3>
+            <div class="order-details">
+                <strong>Order Number:</strong>
+                <span>{{ order.order_number }}</span>
+            </div>
+            <div class="order-details">
+                <strong>Order Date:</strong>
+                <span>{{ order.created_at|date:"F d, Y" }}</span>
+            </div>
+            <div class="order-details">
+                <strong>Payment Status:</strong>
+                <span>{{ order.get_payment_status_display }}</span>
+            </div>
+            <div class="order-details">
+                <strong>Order Status:</strong>
+                <span>{{ order.get_order_status_display }}</span>
+            </div>
+        </div>
+
+        <h3>Items in Your Order:</h3>
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>
+                        {{ item.product_name_snapshot }}
+                        {% if item.variant_name_snapshot %}
+                            <br><small>{{ item.variant_name_snapshot }}</small>
+                        {% endif %}
+                        {% if item.color %}
+                            <br><small>Color: {{ item.color }}</small>
+                        {% endif %}
+                        {% if item.size %}
+                            <br><small>Size: {{ item.size }}</small>
+                        {% endif %}
+                    </td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.price_per_unit }}</td>
+                    <td>${{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p><strong>What happens next?</strong></p>
+        <ul>
+            <li>All items from this order have been returned to stock</li>
+            <li>No payment has been processed</li>
+            <li>You can try placing the order again with a different payment method</li>
+        </ul>
+
+        <div style="text-align: center;">
+            <a href="{{ site_url }}" class="cta-button">Continue Shopping</a>
+        </div>
+
+        <p>If you continue to experience issues with payment processing, please contact our support team at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a> for assistance.</p>
+
+        <div class="footer">
+            <p>Thank you for your interest in {{ site_name }}!</p>
+            <p>We apologize for any inconvenience caused.</p>
+        </div>
+    </div>
+</body>
+</html>

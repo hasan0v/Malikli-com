@@ -1,0 +1,825 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.navbar.transparent {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  box-shadow: none;
+  color: gray;
+}
+
+/* Add this new style for when mobile menu is open */
+.navbar.mobileOpen {
+  background-color: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navContainer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logoContainer img {
+  height: auto;
+  max-height: 40px;
+  width: auto;
+}
+
+.logo {
+  height: auto;
+  transition: filter 0.3s ease;
+}
+
+.logoWhite {
+  height: auto;
+  /* filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); */
+  transition: filter 0.3s ease;
+}
+
+.navLinks {
+  display: flex;
+  gap: 32px;
+}
+
+.navLink {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 8px 0;
+}
+
+.navbar.transparent .navLink {
+  color: #333;
+  /* text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); */
+}
+
+.navLink:hover {
+  color: #0ABAB5;
+}
+
+.navIcons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Language switcher styles - now used for both desktop and mobile */
+.languageSwitcher {
+  display: flex;
+  align-items: center;
+}
+
+/* Old mobile language section removed */
+.mobileLangSection {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Language switcher remains visible on mobile in main navbar */
+  .languageSwitcher {
+    display: flex;
+  }
+}
+
+.iconLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #0891b2;
+  color: white;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid #ffffff;
+}
+
+.iconSvg {
+  width: 24px;
+  height: 24px;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.iconLight {
+  color: #333;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+.cartIconContainer {
+  position: relative;
+}
+
+.cartCount {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background-color: #0ABAB5;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.mobileMenu {
+  display: none;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.mobileMenu.dark {
+  background: linear-gradient(135deg, #0ABAB5 0%, #08a0a5 100%);
+  backdrop-filter: blur(19px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.mobileMenu.open {
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.mobileMenuLinks {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.mobileMenuLinks a {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+  transition: color 0.2s ease-in-out, padding-left 0.2s ease-in-out;
+}
+
+.mobileMenuLinks.dark a {
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.mobileMenuLinks a:hover {
+  color: #09c5d0;
+  padding-left: 8px;
+}
+
+/* User Menu Styles */
+.userMenuContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  color: #333;
+  gap: 8px;
+}
+
+.userButton:hover {
+  background-color: rgba(10, 171, 181, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(10, 171, 181, 0.15);
+}
+
+.navbar.transparent .userButton {
+  color: #333;
+}
+
+.navbar.transparent .userButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0ABAB5 0%, #08a0a5 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(10, 171, 181, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.userButton:hover .userAvatar {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(10, 171, 181, 0.4);
+}
+
+.userName {
+  font-weight: 500;
+  font-size: 14px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+  opacity: 0.7;
+}
+
+.chevronUp {
+  transform: rotate(180deg);
+}
+
+.userDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  min-width: 200px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 8px 0;
+  z-index: 1100;
+  animation: dropdownSlideIn 0.2s ease-out;
+  transform-origin: top right;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdownItem:hover {
+  background-color: rgba(10, 171, 181, 0.08);
+  color: #0ABAB5;
+  padding-left: 20px;
+}
+
+.dropdownIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.dropdownItem:hover .dropdownIcon {
+  opacity: 1;
+}
+
+.dropdownDivider {
+  height: 1px;
+  margin: 8px 12px;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile User Menu Styles */
+.mobileUserSection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileUserInfo {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  margin-bottom: 8px;
+}
+
+.mobileUserAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0ABAB5 0%, #08a0a5 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 16px;
+  box-shadow: 0 4px 12px rgba(10, 171, 181, 0.3);
+}
+
+.mobileUserDetails {
+  flex: 1;
+}
+
+.mobileUserName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.mobileUserEmail {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mobileUserActions {
+  padding: 0 8px;
+}
+
+.mobileUserAction,
+.mobileAuthAction {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.mobileUserAction:hover,
+.mobileAuthAction:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+}
+
+.mobileActionIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  opacity: 0.8;
+}
+
+.mobileAuthSection {
+  margin-top: 16px;
+  padding: 16px 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Fixed cart button */
+.fixedCartButton {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: 0 8px 25px rgba(238, 90, 36, 0.3); */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  color: white;
+}
+
+.fixedCartButton:hover {
+  transform: translateY(-2px);
+  /* box-shadow: 0 12px 35px rgba(238, 90, 36, 0.4); */
+  background: linear-gradient(135deg, rgb(14, 116, 144) 0%, rgb(8, 145, 178) 100%);
+}
+
+.fixedCartButton:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 20px rgba(238, 90, 36, 0.3);
+}
+
+.fixedCartButton svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.fixedCartCount {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ffffff;
+  color: #0891b2 ;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid #0891b2;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Mobile responsiveness for fixed cart */
+@media (max-width: 768px) {
+  .fixedCartButton {
+    width: 50px;
+    height: 50px;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .fixedCartButton svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .fixedCartCount {
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
+}
+
+.desktopLanguageSwitcher {
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .navContainer {
+    padding: 0 12px; /* Reduce padding for more space */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logoContainer {
+    flex-shrink: 0;
+    order: 1; /* Logo comes first */
+  }
+
+  .logoContainer img {
+    max-height: 28px; /* Significantly reduce logo size on mobile */
+  }
+
+  .logo, .logoWhite {
+    max-height: 28px; /* Ensure both logo variants are smaller */
+  }
+
+  .navLinks {
+    display: none;
+  }  .navIcons {
+    display: flex;
+    gap: 12px; /* Reduce gap between icons */
+    align-items: center;
+    order: 2; /* Keep profile menu and language switcher visible */
+    flex-shrink: 0;
+  }
+
+  /* Language switcher now visible on mobile */
+  .languageSwitcher {
+    display: flex;
+  }
+
+  .mobileMenuButton {
+    display: block;
+    order: 3; /* Ensure hamburger menu is always visible */
+    flex-shrink: 0;
+    margin-left: 8px; /* Add small spacing */
+  }
+
+  .mobileMenu {
+    display: block;
+  }
+
+  .userButton {
+    padding: 6px 8px;
+  }
+
+  .userName {
+    display: none; /* Hide username text on mobile to save space */
+  }
+
+  .userAvatar {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .userDropdown {
+    right: -10px;
+    min-width: 180px;
+  }
+
+  /* Ensure icons remain visible and properly sized */
+  .iconSvg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Ensure proper spacing and prevent overflow */
+  .navContainer > * {
+    flex-shrink: 0;
+  }
+}
+
+/* Extra small screens (small phones) */
+@media (max-width: 480px) {
+  .navContainer {
+    padding: 0 8px; /* Even less padding on very small screens */
+  }
+
+  .logoContainer img {
+    max-height: 24px; /* Further reduce logo size */
+  }
+
+  .logo, .logoWhite {
+    max-height: 24px;
+  }
+
+  .navIcons {
+    gap: 8px; /* Reduce gap further */
+  }
+
+  .userAvatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .iconSvg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .userButton {
+    padding: 4px 6px;
+  }
+
+  /* Ensure the navbar height can be slightly reduced if needed */
+  .navbar {
+    height: 70px;
+  }
+
+  .mobileMenu {
+    top: 70px;
+  }
+
+  .mobileMenu.open {
+    height: calc(100vh - 70px);
+  }
+
+  /* Mobile optimizations for language switcher */
+  .languageSwitcher {
+    margin-right: 8px; /* Add some spacing from hamburger menu */
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .navbar {
+    height: 60px; /* Reduce height in landscape mode */
+  }
+
+  .logoContainer img {
+    max-height: 22px;
+  }
+
+  .logo, .logoWhite {
+    max-height: 22px;
+  }
+
+  .mobileMenu {
+    top: 60px;
+  }
+
+  .mobileMenu.open {
+    height: calc(100vh - 60px);
+  }
+}
+
+/* Adjustments for very small screens (like iPhone SE) */
+@media (max-width: 375px) {
+  .navbar {
+    height: 60px;
+  }
+
+  .navContainer {
+    padding: 0 10px;
+  }
+
+  .logoContainer img {
+    max-height: 20px;
+  }
+
+  .logo, .logoWhite {
+    max-height: 20px;
+  }
+
+  .navIcons {
+    gap: 6px;
+  }
+
+  .userAvatar {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .iconSvg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .userButton {
+    padding: 2px 4px;
+  }
+
+  .mobileMenu {
+    top: 60px;
+  }
+
+  .mobileMenu.open {
+    height: calc(100vh - 60px);
+  }
+}
+
+/* Very small devices (like older iPhones) */
+@media (max-width: 320px) {
+  .navbar {
+    height: 50px;
+  }
+
+  .navContainer {
+    padding: 0 8px;
+  }
+
+  .logoContainer img {
+    max-height: 18px;
+  }
+
+  .logo, .logoWhite {
+    max-height: 18px;
+  }
+
+  .navIcons {
+    gap: 4px;
+  }
+
+  .userAvatar {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+  }
+
+  .iconSvg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .userButton {
+    padding: 2px 4px;
+  }
+
+  .mobileMenu {
+    top: 50px;
+  }
+
+  .mobileMenu.open {
+    height: calc(100vh - 50px);
+  }
+}
+
+/* Hide mobile user menu by default on very small screens */
+@media (max-width: 375px) {
+  .mobileUserSection {
+    display: none;
+  }
+}
+
+/* Mobile language switcher section - REMOVED since language switcher is now in main navbar */
+.mobileLangSection {
+  display: none;
+}
+
+/* Desktop-only elements - hidden on mobile */
+.desktopOnly {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none;
+  }
+}
+
+/* Language switcher - now visible on both desktop and mobile */
+.languageSwitcher {
+  display: flex;
+  align-items: center;
+}
+
+/* Remove the mobile language section since it's now in main navbar */
+.mobileLangSection {
+  display: none;
+}

@@ -1,0 +1,711 @@
+/* src/app/globals.css */
+/* Tailwind directives and @theme removed */
+
+/* Critical Performance CSS - Ensure priority images load immediately */
+img[data-priority="true"] {
+  opacity: 1 !important;
+  transition: none !important;
+  visibility: visible !important;
+}
+
+/* Ensure Next.js Image with priority loads immediately */
+img[data-nimg="1"][loading="eager"] {
+  opacity: 1 !important;
+  transition: none !important;
+  visibility: visible !important;
+}
+
+/* Critical Image Optimization for LCP */
+img[data-priority="true"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Ensure priority images load immediately */
+.productImage[data-priority="true"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Priority image containers should also be immediately visible */
+.imageContainer img[data-priority="true"] {
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* Critical performance optimizations - must be at the top */
+.productImage[data-priority="true"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Priority images should be immediately visible */
+img[data-priority="true"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Shimmer animation for loading states */
+@keyframes shimmerAnimation {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Spin animation for loading indicators */
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+
+/* CSS Custom Properties */
+:root {
+  --tiffany-blue: #0ABAB5;
+  --tiffany-light: #81D8D4;
+  --tiffany-dark: #008B8B;
+  --tiffany-pale: #F0FDFC;
+  --tiffany-gradient: linear-gradient(135deg, #0ABAB5 0%, #81D8D4 100%);
+  --tiffany-gradient-reverse: linear-gradient(135deg, #81D8D4 0%, #0ABAB5 100%);
+  --tiffany-gradient-soft: linear-gradient(135deg, rgba(10, 186, 181, 0.1) 0%, rgba(129, 216, 212, 0.05) 100%);
+  --tiffany-shadow: rgba(10, 186, 181, 0.25);
+  --tiffany-shadow-light: rgba(129, 216, 212, 0.15);
+  --tiffany-shadow-soft: rgba(10, 186, 181, 0.08);
+  --elegant-white: #FAFAFA;
+  --elegant-gray: #F8F9FA;
+  --text-primary: #2C3E50;
+  --text-secondary: #5A6C7D;
+  --text-muted: #95A5A6;
+  --success-color: #27AE60;
+  --warning-color: #F39C12;
+  --error-color: #E74C3C;
+  --info-color: #3498DB;
+  
+  /* Additional common colors */
+  --primary-color: #0ABAB5;
+  --primary-hover: #008B8B;
+  --background-primary: #FFFFFF;
+  --background-secondary: #FAFAFA;
+  --background-tertiary: #F8F9FA;
+  --border-color: #E5E7EB;
+  --button-secondary: #F3F4F6;
+  --button-secondary-hover: #E5E7EB;
+  --button-disabled: #D1D5DB;
+}
+
+/* Base styles - classes using @apply will need to be refactored or removed */
+body {
+  background-color: white;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-inter, sans-serif); /* Ensure Inter font is applied */
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #001f3f;
+}
+
+a {
+  color: #0ABAB5;
+  transition-property: color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+a:hover {
+  color: #001f3f;
+}
+
+/* Custom scrollbar - classes using @apply will need to be refactored or removed */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: #f3f4f6;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #7AD9D9;
+  border-radius: 0.25rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #0ABAB5;
+}
+
+/* Component styles - classes using @apply will need to be refactored or removed */
+
+/* Button Variants - These will need to be refactored to standard CSS or a different styling solution */
+.btn {
+  font-weight: 600;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary {
+  background-color: #0ABAB5;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: rgba(10, 186, 181, 0.8);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Card Component */
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  outline: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Form elements */
+.form-input {
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.form-input:focus {
+  border-color: #0ABAB5;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(10, 186, 181, 0.5);
+}
+
+/* Layout Structure Classes */
+.root-layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white; /* Or your desired global background */
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+/* Footer Component Styles */
+.site-footer {
+  background-color: #f9fafb; /* Lighter gray, was #f9fafb */
+  border-top: 1px solid #e5e7eb;
+  color: #4b5563; /* text-gray-600 equivalent for base text */
+  padding-top: 3rem; /* Increased padding */
+  padding-bottom: 3rem;
+}
+
+.footer-container {
+  max-width: 1100px; /* Slightly reduced for a tighter feel */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem; 
+  padding-right: 1.5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* More responsive grid */
+  gap: 2.5rem; /* Increased gap */
+}
+
+.footer-section {
+  /* padding: 0.5rem; */ /* Optional: if you want spacing within sections */
+}
+
+.footer-logo-title {
+  font-size: 1.5rem; /* Slightly larger */
+  font-weight: 700; /* Bolder */
+  color: var(--color-brand-navy); /* Using brand color */
+  margin-bottom: 1rem; 
+}
+
+.footer-logo-accent {
+  color: var(--color-brand-malikli-blue);
+}
+
+.footer-description {
+  color: #4b5563; 
+  font-size: 0.9rem; /* Slightly larger */
+  line-height: 1.6;
+}
+.footer-description p{
+  margin: 0; /* Added margin for spacing */
+}
+.footer-heading {
+  font-size: 1.1rem; /* Slightly adjusted */
+  font-weight: 600; 
+  color: var(--color-brand-navy);
+  margin-bottom: 1.25rem; /* Increased margin */
+  text-transform: uppercase; /* Added for style */
+  letter-spacing: 0.05em; /* Added for style */
+}
+
+.footer-links-list {
+  list-style: none; /* Remove default list styling */
+  padding-left: 0; /* Remove default list padding */
+}
+
+.footer-links-list > li + li {
+  margin-top: 0.6rem; /* Slightly increased spacing */
+}
+
+.footer-link {
+  color: #4b5563; 
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out, padding-left 0.2s ease-in-out; /* Added padding transition */
+}
+
+.footer-link:hover {
+  color: var(--color-brand-malikli-blue);
+  padding-left: 0.25rem; /* Slight indent on hover */
+}
+
+.footer-bottom-section {
+  margin-top: 3rem; /* Increased margin */
+  padding-top: 2rem; 
+  border-top: 1px solid #e5e7eb; 
+  text-align: center; 
+}
+
+.footer-copyright {
+  color: #6b7280; 
+  font-size: 0.875rem; 
+}
+
+/* Navbar Component Styles */
+.site-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: transparent; /* Initial background */
+  color: white; /* Default text color for transparent state - changed to white for better visibility on slider */
+}
+
+.site-navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  color: var(--color-brand-charcoal); /* Darker text when scrolled */
+}
+
+.site-navbar.transparent {
+  background-color: transparent;
+  box-shadow: none;
+  color: white; /* Ensure text is visible on dark slider backgrounds */
+}
+
+.navbar-container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) { /* sm */
+  .navbar-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) { /* lg */
+  .navbar-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.navbar-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem; /* 80px */
+}
+
+.navbar-logo-container {
+  flex-shrink: 0;
+}
+
+.navbar-logo-image {
+  height: auto; /* Maintain aspect ratio */
+  /* width is set on the Image component itself */
+}
+
+.navbar-links-desktop {
+  display: none; /* Hidden by default, shown on md and up */
+}
+
+@media (min-width: 768px) { /* md */
+  .navbar-links-desktop {
+    display: flex;
+    align-items: center;
+  }
+  .navbar-links-desktop > *:not(:last-child) {
+    margin-right: 1.5rem; /* space-x-6 */
+  }
+}
+@media (min-width: 1024px) { /* lg */
+  .navbar-links-desktop > *:not(:last-child) {
+    margin-right: 2rem; /* lg:space-x-8 */
+  }
+}
+
+.nav-link-desktop {
+  padding: 0.5rem 0.75rem; /* px-3 py-2 */
+  border-radius: 0.375rem; /* rounded-md */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  text-decoration: none;
+  color: inherit; /* Inherits from .site-navbar or .site-navbar.scrolled */
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.nav-link-desktop:hover {
+  color: var(--color-brand-malikli-blue);
+  background-color: rgba(10, 186, 181, 0.1); /* Light malikli-blue hover */
+}
+
+/* For transparent navbar state */
+.transparent .nav-link-desktop:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light white hover for transparent state */
+}
+
+.transparent .nav-icon {
+  filter: brightness(1.2); /* Make icons slightly brighter on transparent bg */
+}
+
+.navbar-icons-desktop {
+  display: none; /* Hidden by default, shown on md and up */
+}
+@media (min-width: 768px) { /* md */
+  .navbar-icons-desktop {
+    display: flex;
+    align-items: center;
+  }
+  .navbar-icons-desktop > *:not(:last-child) {
+    margin-right: 1.25rem; /* space-x-5 */
+  }
+}
+
+.nav-icon-link {
+  position: relative;
+  color: inherit; /* Inherits from .site-navbar or .site-navbar.scrolled */
+  transition: color 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.nav-icon-link:hover {
+  color: var(--color-brand-malikli-blue);
+}
+
+.nav-icon {
+  height: 1.5rem; /* h-6 */
+  width: 1.5rem; /* w-6 */
+}
+
+.nav-icon-user {
+  height: 1.75rem; /* h-7 */
+  width: 1.75rem; /* w-7 */
+}
+
+.nav-icon-badge {
+  position: absolute;
+  top: -0.375rem;    /* -top-1.5 */
+  right: -0.375rem;   /* -right-1.5 */
+  display: flex;
+  height: 1rem;       /* h-4 */
+  width: 1rem;        /* w-4 */
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px; /* rounded-full */
+  background-color: var(--color-brand-malikli-blue);
+  font-size: 0.75rem; /* text-xs */
+  color: white;
+  font-weight: 500;
+}
+
+.nav-link-login {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.nav-link-login:hover {
+  color: var(--color-brand-malikli-blue);
+}
+
+.navbar-mobile-controls {
+  display: flex; /* Shown by default, hidden on md and up */
+  align-items: center;
+}
+@media (min-width: 768px) { /* md */
+  .navbar-mobile-controls {
+    display: none;
+  }
+}
+
+.nav-icon-link-mobile {
+  margin-right: 0.75rem; /* mr-3 */
+}
+
+.mobile-menu-button {
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+.mobile-menu-button:focus {
+  outline: none;
+}
+
+.nav-icon-menu {
+  height: 1.75rem; /* h-7 */
+  width: 1.75rem; /* w-7 */
+}
+
+.mobile-menu {
+  position: absolute;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95); /* bg-white/95 */
+  backdrop-filter: blur(10px); /* backdrop-blur-md */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* shadow-xl */
+  border-top: 1px solid #e5e7eb; /* Add a subtle top border */
+}
+@media (min-width: 768px) { /* md */
+  .mobile-menu {
+    display: none;
+  }
+}
+
+.mobile-menu-links-section {
+  padding: 0.5rem 0.75rem 0.75rem; /* px-2 pt-2 pb-3 sm:px-3 */
+}
+.mobile-menu-links-section > *:not(:last-child) {
+  margin-bottom: 0.25rem; /* space-y-1 */
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 0.75rem 0.75rem; /* px-3 py-2 */
+  border-radius: 0.375rem; /* rounded-md */
+  font-size: 1rem; /* text-base */
+  font-weight: 500; /* font-medium */
+  color: var(--color-brand-charcoal);
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.mobile-nav-link:hover {
+  background-color: #f3f4f6; /* hover:bg-gray-100 */
+  color: var(--color-brand-malikli-blue);
+}
+
+.mobile-menu-user-section {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-top: 1px solid #e5e7eb; /* border-gray-200 */
+}
+
+.mobile-user-info {
+  display: flex;
+  align-items: center;
+  padding-left: 1.25rem; /* px-5 */
+  padding-right: 1.25rem;
+}
+
+.nav-icon-user-mobile {
+  height: 2rem; /* h-8 */
+  width: 2rem; /* w-8 */
+  color: var(--color-brand-charcoal);
+  margin-right: 0.75rem; /* mr-3 */
+}
+
+.mobile-user-name {
+  font-size: 1rem; /* text-base */
+  font-weight: 500; /* font-medium */
+  color: var(--color-brand-charcoal);
+}
+.mobile-user-email {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #6b7280; /* text-gray-500 */
+}
+
+.nav-icon-link-mobile-user {
+  margin-left: auto; /* ml-auto */
+  padding: 0.25rem; /* p-1 */
+  border-radius: 9999px; /* rounded-full */
+}
+
+.mobile-user-notification-badge {
+  display: block;
+  height: 0.5rem; /* h-2 */
+  width: 0.5rem; /* w-2 */
+  border-radius: 9999px; /* rounded-full */
+  background-color: var(--color-brand-malikli-blue);
+  /* ring-2 ring-white - consider border instead if easier */
+  border: 2px solid white;
+  position: absolute; /* Added for positioning */
+  top: 0.25rem; /* Adjust as needed */
+  right: 0.25rem; /* Adjust as needed */
+}
+
+.mobile-auth-links {
+  padding-left: 0.5rem; /* px-2 */
+  padding-right: 0.5rem;
+}
+.mobile-auth-links > *:not(:last-child) {
+  margin-bottom: 0.25rem; /* space-y-1 */
+}
+
+.mobile-auth-link {
+  display: block;
+  padding: 0.75rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-brand-charcoal);
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.mobile-auth-link:hover {
+  background-color: #f3f4f6;
+  color: var(--color-brand-malikli-blue);
+}
+
+.mobile-user-actions {
+  margin-top: 0.75rem; /* mt-3 */
+  padding-left: 0.5rem; /* px-2 */
+  padding-right: 0.5rem;
+}
+.mobile-user-actions > *:not(:last-child) {
+  margin-bottom: 0.25rem; /* space-y-1 */
+}
+
+.mobile-user-action-link,
+.mobile-user-action-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-brand-charcoal);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.mobile-user-action-link:hover,
+.mobile-user-action-button:hover {
+  background-color: #f3f4f6;
+  color: var(--color-brand-malikli-blue);
+}
+
+/* Ultra-small screens responsive design (smaller than 320px width) */
+@media (max-width: 320px) {
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .btn {
+    padding: 0.375rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+  
+  .card {
+    padding: 0.75rem;
+    border-radius: 8px;
+  }
+  
+  .form-input {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+  
+  /* Ensure text doesn't break layout */
+  h1, h2, h3, h4, h5, h6 {
+    word-break: break-word;
+    hyphens: auto;
+    line-height: 1.3;
+  }
+  
+  /* Make sure containers don't overflow */
+  .root-layout-container {
+    overflow-x: hidden;
+  }
+  
+  /* Reduce spacing for very small screens */
+  .main-content {
+    padding: 0.5rem;
+  }
+}
+
+/* Extra ultra-small screens (smaller than 280px width) */
+@media (max-width: 280px) {
+  body {
+    font-size: 13px;
+  }
+  
+  .btn {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+  }
+  
+  .card {
+    padding: 0.5rem;
+    border-radius: 6px;
+  }
+  
+  .form-input {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+  }
+  
+  .main-content {
+    padding: 0.25rem;
+  }
+}

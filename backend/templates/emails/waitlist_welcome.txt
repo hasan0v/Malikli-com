@@ -1,0 +1,52 @@
+Welcome to {{ site_name }}, {{ user_name }}!
+
+Thank you for joining our waitlist{% if source %} through {{ source }}{% endif %}! We're excited to let you know that your account is now ready, and you have exclusive early access to our platform.
+
+YOUR LOGIN CREDENTIALS
+=======================
+
+Username: {{ user_name }}
+Temporary Password: {{ password }}
+
+LOGIN TO YOUR ACCOUNT
+=====================
+
+Visit: {{ login_url }}
+
+IMPORTANT SECURITY NOTICE
+=========================
+
+⚠️  This is a temporary password. For your security, please log in and change your password immediately after your first login.
+
+SECURITY TIPS
+=============
+
+• Change your password immediately after logging in
+• Use a strong, unique password with at least 8 characters
+• Include uppercase, lowercase, numbers, and special characters
+• Never share your login credentials with anyone
+• Enable email verification for added security
+
+WHAT'S NEXT?
+============
+
+1. Visit {{ login_url }}
+2. Log in with your email and temporary password
+3. Update your password and complete your profile
+4. Start exploring our exclusive collections!
+
+NEED HELP?
+==========
+
+If you have any questions or need assistance, our support team is here to help!
+
+Email: support@malikli1992.com
+Website: https://malikli1992.com
+
+---
+
+© {{ year }} {{ site_name }}. All rights reserved.
+
+You're receiving this email because you signed up for our waitlist.
+
+This email contains sensitive login information. Please do not forward this email to others.

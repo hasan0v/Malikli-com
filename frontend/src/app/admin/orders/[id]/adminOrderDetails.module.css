@@ -1,0 +1,656 @@
+.adminOrderDetailsPage {
+  min-height: 100vh;
+  background-color: var(--background-primary);
+}
+
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.backButton {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--button-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.backButton:hover {
+  background-color: var(--button-secondary-hover);
+  border-color: var(--primary-color);
+}
+
+.loadingContainer, .errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  font-size: 1.2rem;
+}
+
+.errorContainer {
+  color: var(--error-color);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.orderInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.infoCard, .statusCard, .amountCard {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.infoCard h3, .statusCard h3, .amountCard h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.infoGrid, .amountGrid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.infoItem, .amountItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.infoItem label, .amountItem label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 140px;
+}
+
+.infoItem span, .amountItem span {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.totalAmount {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color) !important;
+}
+
+.statusSection {
+  margin-bottom: 1.5rem;
+}
+
+.statusSection:last-child {
+  margin-bottom: 0;
+}
+
+.currentStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: var(--background-tertiary);
+  border-radius: 8px;
+}
+
+.currentStatus label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusBadge.pending_payment, .statusBadge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.statusBadge.payment_pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.statusBadge.paid, .statusBadge.payment_paid {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.statusBadge.failed, .statusBadge.payment_failed {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.statusBadge.refunded, .statusBadge.payment_refunded {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+.statusBadge.processing {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.statusBadge.shipped {
+  background-color: #ecfdf5;
+  color: #047857;
+}
+
+.statusBadge.delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.statusBadge.cancelled {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+.statusButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.statusButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.statusButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.statusButton:disabled {
+  background-color: var(--button-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pendingButton {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.pendingButton:hover:not(:disabled) {
+  background-color: #fef3c7;
+}
+
+.processingButton {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.processingButton:hover:not(:disabled) {
+  background-color: #dbeafe;
+}
+
+.shippedButton {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.shippedButton:hover:not(:disabled) {
+  background-color: #ecfdf5;
+}
+
+.deliveredButton {
+  border-color: #059669;
+  color: #059669;
+}
+
+.deliveredButton:hover:not(:disabled) {
+  background-color: #d1fae5;
+}
+
+.cancelledButton {
+  border-color: #6b7280;
+  color: #6b7280;
+}
+
+.cancelledButton:hover:not(:disabled) {
+  background-color: #f3f4f6;
+}
+
+.paidButton {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.paidButton:hover:not(:disabled) {
+  background-color: #d1fae5;
+}
+
+.failedButton {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.failedButton:hover:not(:disabled) {
+  background-color: #fee2e2;
+}
+
+.refundedButton {
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+}
+
+.refundedButton:hover:not(:disabled) {
+  background-color: #e0e7ff;
+}
+
+.notesCard, .trackingCard {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  grid-column: 1 / -1;
+}
+
+.notesCard h3, .trackingCard h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.notesCard p, .trackingCard p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.trackingCard p strong {
+  color: var(--text-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .orderInfo {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .statusButtons {
+    flex-direction: column;
+  }
+  
+  .statusButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .currentStatus {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  
+  .currentStatus .statusBadge {
+    text-align: center;
+  }
+}
+
+.orderGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.orderCard {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.orderCardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.orderInfo {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.infoLabel {
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 140px;
+}
+
+.infoValue {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusBadge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.statusBadge.paid {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.statusBadge.failed {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.statusBadge.refunded {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+.statusBadge.processing {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.statusBadge.shipped {
+  background-color: #ecfdf5;
+  color: #047857;
+}
+
+.statusBadge.delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.statusBadge.cancelled {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+.statusManagement {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.statusGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statusSelect {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.statusSelect:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.updateButton {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.updateButton:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.updateButton:disabled {
+  background-color: var(--button-disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.itemsSection {
+  margin-top: 2rem;
+}
+
+.itemsTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.itemCard {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.itemImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-color: var(--background-tertiary);
+}
+
+.itemDetails {
+  flex: 1;
+}
+
+.itemName {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.itemMeta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.itemPrice {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.addressSection {
+  margin-top: 2rem;
+}
+
+.addressGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.addressCard {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.addressTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.addressDetails {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.successMessage {
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #a7f3d0;
+}
+
+.errorMessage {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #fca5a5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .orderGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .addressGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .itemCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .itemImage {
+    width: 100%;
+    height: 200px;
+  }
+}

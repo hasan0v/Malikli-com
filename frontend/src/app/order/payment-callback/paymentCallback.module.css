@@ -1,0 +1,155 @@
+.callbackPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
+}
+
+.container {
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Processing State */
+.processingState {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.processingTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.processingMessage {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Error State */
+.errorState {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.errorIcon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #dc3545;
+  margin: 0;
+}
+
+.errorMessage {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.primaryButton:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.secondaryButton {
+  background: transparent;
+  color: #666;
+  border: 2px solid #ddd;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.secondaryButton:hover {
+  border-color: #007bff;
+  color: #007bff;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .callbackPage {
+    padding: 1rem;
+  }
+
+  .processingState,
+  .errorState {
+    padding: 2rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}

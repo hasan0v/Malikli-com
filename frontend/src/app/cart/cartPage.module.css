@@ -1,0 +1,377 @@
+.cartPageContainer {
+  max-width: 1200px;
+  margin: 100px auto 60px;
+  padding: 0 20px;
+}
+
+.cartTitle {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.cartContent {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 30px;
+}
+
+.cartItems {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.cartHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 50px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  color: #555;
+}
+
+.cartItem {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 50px;
+  padding: 20px 0;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.productCol, .priceCol, .quantityCol, .totalCol, .actionCol {
+  padding: 0 10px;
+}
+
+.productInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.productImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #f6f6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemImage {
+  object-fit: cover;
+}
+
+.productName {
+  font-weight: 500;
+  color: #333;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.productVariants {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.variantItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+.variantLabel {
+  font-weight: 500;
+}
+
+.variantInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.colorSwatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.quantityBtn {
+  background: #f7f7f7;
+  border: none;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantityBtn:hover {
+  background-color: #eaeaea;
+}
+
+.quantityBtn:disabled {
+  cursor: not-allowed;
+  color: #aaa;
+}
+
+.quantityDisplay {
+  width: 40px;
+  text-align: center;
+  font-size: 15px;
+  padding: 0 5px;
+}
+
+.removeItemBtn {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.removeItemBtn:hover {
+  color: #e53935;
+  background-color: rgba(229, 57, 53, 0.05);
+}
+
+.cartActions {
+  padding: 20px 0;
+  display: flex;
+  gap: 15px;
+}
+
+.clearCartBtn {
+  background-color: #f8f8f8;
+  color: #555;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clearCartBtn:hover {
+  background-color: #f1f1f1;
+}
+
+.continueShoppingBtn {
+  background-color: #0ABAB5;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s;
+}
+
+.continueShoppingBtn:hover {
+  background-color: #09a29d;
+}
+
+.orderSummary {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: fit-content;
+}
+
+.summaryTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.summaryItems {
+  margin-bottom: 20px;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  color: #555;
+}
+
+.totalRow {
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+  padding-top: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.totalAmount {
+  font-size: 18px;
+  color: #0ABAB5;
+}
+
+.checkoutBtn {
+  width: 100%;
+  background-color: #0ABAB5;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.checkoutBtn:hover {
+  background-color: #09a29d;
+}
+
+.secureCheckout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+  color: #666;
+  font-size: 14px;
+}
+
+.emptyCartContainer {
+  max-width: 500px;
+  margin: 120px auto 60px;
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.emptyCartContainer h1 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.emptyCartContainer p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* Loading styles */
+.loadingContainer {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(79, 209, 197, 0.05);
+  border-radius: 16px;
+  margin: 20px 0;
+}
+
+/* Responsive styles */
+@media (max-width: 960px) {
+  .cartContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .orderSummary {
+    grid-row: 1;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cartHeader {
+    display: none;
+  }
+  
+  .cartItem {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 20px 0;
+  }
+  
+  .productInfo {
+    width: 100%;
+  }
+  
+  .priceCol, .quantityCol, .totalCol {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .priceCol::before {
+    content: 'Цена:';
+    font-weight: 500;
+  }
+  
+  .quantityCol::before {
+    content: 'Количество:';
+    font-weight: 500;
+  }
+  
+  .totalCol::before {
+    content: 'Итого:';
+    font-weight: 500;
+  }
+  
+  .actionCol {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cartPageContainer {
+    padding: 0 15px;
+    margin: 80px auto 40px;
+  }
+  
+  .cartTitle {
+    font-size: 24px;
+  }
+  
+  .cartItems, .orderSummary {
+    padding: 15px;
+  }
+  
+  .cartActions {
+    flex-direction: column;
+  }
+}

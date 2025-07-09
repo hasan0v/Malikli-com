@@ -1,0 +1,646 @@
+/* Customer Information step styles with Tiffany Blue theme */
+.customerInformation {
+  max-width: 600px;
+}
+
+.customerInformation h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+.formSection {
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f766e;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(129, 230, 217, 0.3);
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #14b8a6 0%, #5eead4 100%);
+  border-radius: 1px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formGroup.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0d9488;
+  margin-bottom: 0.5rem;
+}
+
+.required {
+  color: #ef4444;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+.input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(129, 230, 217, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0d9488;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 3px rgba(129, 230, 217, 0.2);
+  background: white;
+}
+
+.input::placeholder {
+  color: rgba(13, 148, 136, 0.5);
+}
+
+.input.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+  background-color: rgba(254, 242, 242, 0.5);
+}
+
+.select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(129, 230, 217, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0d9488;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+}
+
+.errorText::before {
+  content: '⚠️';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.75rem;
+}
+
+.errorMessage {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.checkbox {
+  /* width: 1.25rem; */
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+  user-select: none;
+}
+
+.billingSection {
+  margin-top: 1.5rem;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.billingSection.hidden {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Auto-save status */
+.autoSaveStatus {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #0d9488;
+  font-weight: 500;
+}
+
+/* Saved addresses section */
+.savedAddressesSection {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.1) 0%, rgba(167, 243, 208, 0.08) 100%);
+  border: 1px solid rgba(129, 230, 217, 0.2);
+  border-radius: 12px;
+}
+
+.savedAddressesTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f766e;
+  margin-bottom: 1rem;
+}
+
+.loadingAddresses {
+  text-align: center;
+  color: #6b7280;
+  padding: 1rem;
+  font-style: italic;
+}
+
+.savedAddressesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.savedAddressItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: white;
+  border: 1px solid rgba(129, 230, 217, 0.3);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.savedAddressItem:hover {
+  border-color: #14b8a6;
+  box-shadow: 0 2px 8px rgba(20, 184, 166, 0.1);
+}
+
+.savedAddressInfo {
+  flex: 1;
+}
+
+.savedAddressName {
+  font-weight: 600;
+  color: #0f766e;
+  margin-bottom: 0.25rem;
+}
+
+.savedAddressText {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.useSavedAddressBtn {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+.useSavedAddressBtn:hover {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+}
+
+.useSavedAddressBtn:active {
+  transform: translateY(0);
+}
+
+/* Selected address styles */
+.selectedAddress {
+  border-color: #14b8a6;
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.1) 0%, rgba(167, 243, 208, 0.08) 100%);
+}
+
+.defaultBadge {
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  background: #14b8a6;
+  color: white;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.savedAddressActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.deleteSavedAddressBtn {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.deleteSavedAddressBtn:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.addNewAddressBtn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.1) 0%, rgba(167, 243, 208, 0.08) 100%);
+  border: 2px dashed #14b8a6;
+  border-radius: 8px;
+  color: #0f766e;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.addNewAddressBtn:hover {
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.2) 0%, rgba(167, 243, 208, 0.15) 100%);
+  border-color: #0d9488;
+  transform: translateY(-1px);
+}
+
+/* Selected address display styles */
+.selectedAddressDisplay {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(129, 230, 217, 0.1) 0%, rgba(167, 243, 208, 0.08) 100%);
+  border: 1px solid #14b8a6;
+  border-radius: 12px;
+}
+
+.selectedAddressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.selectedAddressTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f766e;
+  margin: 0;
+}
+
+.selectedAddressDetails {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(129, 230, 217, 0.3);
+}
+
+.selectedAddressRow {
+  margin-bottom: 0.5rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.selectedAddressRow:last-child {
+  margin-bottom: 0;
+}
+
+/* Address form header styles */
+.addressFormHeader {
+  margin-bottom: 1.5rem;
+}
+
+.addressModeNote {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Guest checkout notice */
+.guestNotice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(94, 234, 212, 0.1) 100%);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.guestNoticeIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.guestNoticeContent {
+  flex: 1;
+}
+
+.guestNoticeContent p {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  color: #0f766e;
+}
+
+.guestNoticeSubtext {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 !important;
+}
+
+.authenticatedNotice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(74, 222, 128, 0.1) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-weight: 500;
+  color: #15803d;
+}
+
+.autoSaveStatus {
+  font-size: 0.875rem;
+  color: #059669;
+  font-weight: 400;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  .customerInformation {
+    max-width: 100%;
+  }
+  
+  .customerInformation h2 {
+    font-size: 1.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .customerInformation h2 {
+    font-size: 1.375rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .checkboxGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .formSection {
+    margin-bottom: 2rem;
+  }
+  
+  .input,
+  .select {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .customerInformation h2 {
+    font-size: 1.25rem;
+  }
+
+  .sectionTitle {
+    font-size: 0.95rem;
+  }
+
+  .checkboxGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .input,
+  .select {
+    padding: 0.875rem 1rem;
+  }
+  
+  .label {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .customerInformation h2 {
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .sectionTitle {
+    font-size: 0.9rem;
+    margin-bottom: 0.875rem;
+  }
+  
+  .formSection {
+    margin-bottom: 1.5rem;
+  }
+  
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+  
+  .input,
+  .select {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .label {
+    font-size: 0.8rem;
+    margin-bottom: 0.375rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .customerInformation h2 {
+    font-size: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 0.85rem;
+  }
+  
+  .input,
+  .select {
+    padding: 0.625rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ultra-small screens (smaller than 320px width) */
+@media (max-width: 320px) {
+  .customerInformation h2 {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .formSection {
+    margin-bottom: 1.25rem;
+  }
+  
+  .formGroup {
+    margin-bottom: 0.75rem;
+  }
+  
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .input,
+  .select {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+  
+  .label {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+  }
+  
+  .checkboxGroup {
+    gap: 0.375rem;
+  }
+  
+  .checkbox {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .checkboxLabel {
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
+}
+
+/* Extra ultra-small screens (smaller than 280px width) */
+@media (max-width: 280px) {
+  .customerInformation h2 {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .sectionTitle {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .formGroup {
+    margin-bottom: 0.5rem;
+  }
+  
+  .input,
+  .select {
+    padding: 0.375rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+  }
+  
+  .label {
+    font-size: 0.7rem;
+    margin-bottom: 0.125rem;
+  }
+  
+  .checkboxLabel {
+    font-size: 0.7rem;
+  }
+}
