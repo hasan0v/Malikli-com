@@ -7,10 +7,11 @@ I have removed all old deployment files and created a brand new, comprehensive d
 ## 🗑️ Removed Files
 - `deploy.sh` (old deployment script)
 - `setup_server.sh` (old server setup)
-- `ecosystem.config.js` (old PM2 config)
-- `start-backend.sh` (old backend starter)
+- `ecosystem.config.js` (old PM2 config in root directory)
 - `nginx.conf.template` (old nginx config)
 - All other old deployment-related scripts
+
+**Note**: `start-backend.sh` is recreated in the backend directory by the new deployment script
 
 ## 📁 New File Structure
 
@@ -19,11 +20,16 @@ I have removed all old deployment files and created a brand new, comprehensive d
 - `frontend/.env.production.template` - Frontend environment variables template
 
 ### 🚀 Deployment Scripts
+
 - `scripts/setup-almalinux-server.sh` - Complete AlmaLinux server setup
 - `scripts/deploy-production.sh` - Production deployment script
 - `scripts/maintenance.sh` - Maintenance and monitoring utilities
 - `scripts/setup-systemd-services.sh` - Alternative systemd service setup
 - `make-executable.sh` - Quick script permissions setup
+
+**Auto-Generated Files (created during deployment):**
+- `backend/start-backend.sh` - Backend startup script (auto-generated)
+- `ecosystem.config.js` - PM2 configuration (auto-generated)
 
 ### 📚 Documentation
 - `DEPLOYMENT_GUIDE.md` - Comprehensive deployment documentation

@@ -280,16 +280,23 @@ deploy_frontend() {
     print_header "DEPLOYING FRONTEND"
     
     cd "$FRONTEND_DIR"
-    
+
+    # Check if .env.local exists
+    if [[ ! -f ".env.local" ]]; then
+        print_error ".env.local file not found in frontend directory"
+        print_error "Please copy .env.production.template to .env.local and configure it"
+        exit 1
+    fi
+
     # Clear cache and install dependencies
     print_step "Installing Node.js dependencies..."
     rm -rf node_modules package-lock.json .next
-    npm ci --production=false
-    
+    npm install
+
     # Build the application
     print_step "Building Next.js application..."
     npm run build
-    
+
     # Test the build
     print_step "Testing Next.js build..."
     if [[ -d ".next" ]]; then
@@ -486,6 +493,9 @@ EOF
 setup_pm2() {
     print_header "SETTING UP PM2 PROCESSES"
     
+    # Create necessary log directories
+    mkdir -p "$LOGS_DIR"/{pm2,django,nginx}
+    
     # Create PM2 ecosystem configuration
     cat > "$APP_DIR/ecosystem.config.js" << EOF
 module.exports = {
@@ -531,7 +541,7 @@ module.exports = {
 };
 EOF
 
-    # Create backend start script
+    # Create backend start script (replaces any old start-backend.sh with new one)
     cat > "$BACKEND_DIR/start-backend.sh" << EOF
 #!/bin/bash
 # Django Backend Startup Script for PM2
@@ -547,22 +557,11 @@ export DJANGO_SETTINGS_MODULE=backend.settings
 # Export Python path
 export PYTHONPATH=$BACKEND_DIR:\$PYTHONPATH
 
-# Start gunicorn
-exec gunicorn \\
-    --bind 127.0.0.1:$BACKEND_PORT \\
-    --workers 3 \\
-    --worker-class sync \\
-    --worker-connections 1000 \\
-    --timeout 120 \\
-    --keepalive 2 \\
-    --max-requests 1000 \\
-    --max-requests-jitter 100 \\
-    --preload \\
-    --access-logfile $LOGS_DIR/django/access.log \\
-    --error-logfile $LOGS_DIR/django/error.log \\
-    --log-level info \\
-    --chdir $BACKEND_DIR \\
-    backend.wsgi:application
+# Create log directories if they don't exist
+mkdir -p $LOGS_DIR/django
+
+# Start gunicorn with simpler configuration
+exec gunicorn --bind 127.0.0.1:$BACKEND_PORT --workers 3 --timeout 120 --max-requests 1000 --preload --chdir $BACKEND_DIR backend.wsgi:application
 EOF
 
     chmod +x "$BACKEND_DIR/start-backend.sh"
