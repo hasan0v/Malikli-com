@@ -261,6 +261,8 @@ class OrderCreateSerializer(serializers.Serializer):
         return attrs
 
     def create(self, validated_data):
+        from .inventory import InventoryManager
+        
         cart = Cart.objects.get(cart_id=validated_data['cart_id'])
         shipping_address = Address.objects.get(id=validated_data['shipping_address_id'])
         billing_address = Address.objects.get(id=validated_data['billing_address_id']) if validated_data.get('billing_address_id') else shipping_address
@@ -268,7 +270,7 @@ class OrderCreateSerializer(serializers.Serializer):
         request = self.context.get('request')
         user = request.user if request and request.user.is_authenticated else None
 
-        # Use a database transaction to ensure atomicity for order creation and stock update
+        # Use a database transaction to ensure atomicity for order creation and stock reservation
         with transaction.atomic():
             # 1. Calculate totals
             from decimal import Decimal
@@ -294,98 +296,87 @@ class OrderCreateSerializer(serializers.Serializer):
                 # order_status and payment_status default to 'pending_payment' / 'pending'
             )
 
-            # 3. Create OrderItems and update stock
+            # 3. Create OrderItems (without reducing stock yet)
             for cart_item in cart.items.all():
                 if cart_item.drop_product:
-                    # Handle drop product items
-                    drop_product = cart_item.drop_product
-                    if cart_item.quantity > drop_product.current_stock_quantity:
+                    # Check availability first
+                    if not cart_item.drop_product.can_reserve(cart_item.quantity):
                         raise serializers.ValidationError(
-                            f"Not enough stock for {drop_product.product.name}. "
-                            f"Available: {drop_product.current_stock_quantity}, Requested: {cart_item.quantity}"
+                            f"Not enough stock for {cart_item.drop_product.product.name}. "
+                            f"Available: {cart_item.drop_product.available_quantity}, Requested: {cart_item.quantity}"
                         )
 
                     OrderItem.objects.create(
                         order=order,
-                        drop_product=drop_product,
-                        product_name_snapshot=drop_product.product.name,
-                        variant_name_snapshot=str(drop_product.variant) if drop_product.variant else None,
-                        sku_snapshot=f"{drop_product.product.sku_prefix or ''}{drop_product.variant.sku_suffix if drop_product.variant else ''}",
+                        drop_product=cart_item.drop_product,
+                        product_name_snapshot=cart_item.drop_product.product.name,
+                        variant_name_snapshot=str(cart_item.drop_product.variant) if cart_item.drop_product.variant else None,
+                        sku_snapshot=f"{cart_item.drop_product.product.sku_prefix or ''}{cart_item.drop_product.variant.sku_suffix if cart_item.drop_product.variant else ''}",
                         quantity=cart_item.quantity,
-                        price_per_unit=drop_product.drop_price, # Price from DropProduct
+                        price_per_unit=cart_item.drop_product.drop_price,
                         subtotal=cart_item.total_price
-                    )
-
-                    # Update stock (critical part)
-                    # Using F() expressions to prevent race conditions as much as possible with DB-level update
-                    DropProduct.objects.filter(id=drop_product.id).update(
-                        current_stock_quantity=models.F('current_stock_quantity') - cart_item.quantity
                     )
                     
                 elif cart_item.product_variant:
-                    # Handle regular product variant items
-                    product_variant = cart_item.product_variant
-                    
-                    # For regular products, we don't enforce stock limits in this example
-                    # You can add stock checking here if ProductVariant has stock fields
+                    # Check variant stock availability
+                    if not cart_item.product_variant.can_reserve(cart_item.quantity):
+                        raise serializers.ValidationError(
+                            f"Not enough stock for {cart_item.product_variant}. "
+                            f"Available: {cart_item.product_variant.available_quantity}, Requested: {cart_item.quantity}"
+                        )
                     
                     # Get product image URL from database
                     product_image_url = None
-                    if product_variant and hasattr(product_variant, 'image') and product_variant.image:
-                        product_image_url = product_variant.image.url
-                    elif product_variant.product.images.exists():
-                        primary_image = product_variant.product.images.filter(is_primary=True).first()
+                    if cart_item.product_variant and hasattr(cart_item.product_variant, 'image') and cart_item.product_variant.image:
+                        product_image_url = cart_item.product_variant.image.url
+                    elif cart_item.product_variant.product.images.exists():
+                        primary_image = cart_item.product_variant.product.images.filter(is_primary=True).first()
                         if primary_image:
                             product_image_url = primary_image.image.url
                         else:
-                            first_image = product_variant.product.images.first()
+                            first_image = cart_item.product_variant.product.images.first()
                             if first_image:
                                 product_image_url = first_image.image.url
                     
                     OrderItem.objects.create(
                         order=order,
-                        product_id=product_variant.product.id,
-                        product_variant_id=product_variant.id,
-                        product_slug=product_variant.product.slug,
+                        product_id=cart_item.product_variant.product.id,
+                        product_variant_id=cart_item.product_variant.id,
+                        product_slug=cart_item.product_variant.product.slug,
                         product_image_url=product_image_url,
                         color=cart_item.color,
                         size=cart_item.size,
-                        product_name_snapshot=product_variant.product.name,
-                        variant_name_snapshot=f"{product_variant.name_suffix or ''}" if product_variant.name_suffix else None,
-                        sku_snapshot=f"{product_variant.product.sku_prefix or ''}{product_variant.sku_suffix or ''}",
+                        product_name_snapshot=cart_item.product_variant.product.name,
+                        variant_name_snapshot=f"{cart_item.product_variant.name_suffix or ''}" if cart_item.product_variant.name_suffix else None,
+                        sku_snapshot=f"{cart_item.product_variant.product.sku_prefix or ''}{cart_item.product_variant.sku_suffix or ''}",
                         quantity=cart_item.quantity,
-                        price_per_unit=cart_item.unit_price, # Use cart item unit price
+                        price_per_unit=cart_item.unit_price,
                         subtotal=cart_item.total_price
                     )
-                    
-                    # For regular products, no stock update needed unless you have stock tracking
-                    
                 else:
-                    # This should not happen if cart validation is working properly
                     raise serializers.ValidationError(
                         "Cart item has neither drop_product nor product_variant"
                     )
-                # Refresh to get the updated value if needed immediately, or rely on DB to handle it
-                # drop_product.refresh_from_db(fields=['current_stock_quantity'])
 
+            # 4. Reserve inventory for all order items
+            success, failed_items = InventoryManager.reserve_order_items(order)
+            if not success:
+                # Create detailed error message
+                error_details = []
+                for failed_item in failed_items:
+                    if 'error' in failed_item:
+                        error_details.append(f"{failed_item['item']}: {failed_item['error']}")
+                    else:
+                        error_details.append(
+                            f"{failed_item['item']}: Available {failed_item['available']}, "
+                            f"Requested {failed_item['requested']}"
+                        )
+                raise serializers.ValidationError(
+                    f"Unable to reserve inventory: {'; '.join(error_details)}"
+                )
 
-            # 4. Clear the cart (or mark as processed)
+            # 5. Clear the cart
             cart.items.all().delete()
-            # Optionally delete the cart itself if it's a one-time use cart for checkout
-            # Or keep it if user might want to re-order or see past cart contents (though order history is better for that)
-            # cart.delete() # If cart is a guest cart, and this user is now creating an order
-
-            # 5. (Placeholder) Initiate payment processing / Create Payment record
-            # payment_intent_id = validated_data.get('payment_intent_id')
-            # if payment_intent_id:
-            #     Payment.objects.create(
-            #         order=order,
-            #         gateway_transaction_id=payment_intent_id, # Example for Stripe
-            #         amount=order.total_amount,
-            #         payment_method_type='stripe_pi',
-            #         status='pending' # Will be updated by webhook
-            #     )
-            # Else, order remains 'pending_payment'
 
         return order
 
@@ -481,6 +472,8 @@ class DirectOrderCreateSerializer(serializers.Serializer):
         return attrs
 
     def create(self, validated_data):
+        from .inventory import InventoryManager
+        
         product = Product.objects.get(id=validated_data['product_id'])
         variant = None
         if validated_data.get('product_variant_id'):
@@ -504,7 +497,9 @@ class DirectOrderCreateSerializer(serializers.Serializer):
             subtotal_amount = unit_price * quantity
             discount_amount = Decimal('0.00')
             tax_amount = Decimal('0.00')  # Add tax logic if needed
-            total_amount = subtotal_amount - discount_amount + tax_amount + shipping_method.cost            # Create the Order
+            total_amount = subtotal_amount - discount_amount + tax_amount + shipping_method.cost
+
+            # Create the Order
             order = Order.objects.create(
                 user=user if user else None,
                 email_for_guest=validated_data.get('email_for_guest') if not user else None,
@@ -517,15 +512,11 @@ class DirectOrderCreateSerializer(serializers.Serializer):
                 tax_amount=tax_amount,
                 total_amount=total_amount,
                 customer_notes=validated_data.get('customer_notes', ''),
-                # order_status and payment_status default to 'pending'
             )
 
-            # Create OrderItem
-            # For direct orders, we'll create a dummy DropProduct or handle it differently
-            # For now, let's try to find an existing DropProduct or create the order item directly
+            # Try to find an active DropProduct first, otherwise use regular product
             drop_product = None
             try:
-                # Try to find a DropProduct for this product/variant combination
                 if variant:
                     drop_product = DropProduct.objects.filter(
                         product=product, 
@@ -542,11 +533,11 @@ class DirectOrderCreateSerializer(serializers.Serializer):
                 pass
 
             if drop_product:
-                # Check stock
-                if quantity > drop_product.current_stock_quantity:
+                # Check stock availability
+                if not drop_product.can_reserve(quantity):
                     raise serializers.ValidationError(
                         f"Not enough stock for {product.name}. "
-                        f"Available: {drop_product.current_stock_quantity}, Requested: {quantity}"
+                        f"Available: {drop_product.available_quantity}, Requested: {quantity}"
                     )
 
                 OrderItem.objects.create(
@@ -559,17 +550,19 @@ class DirectOrderCreateSerializer(serializers.Serializer):
                     price_per_unit=drop_product.drop_price,
                     subtotal=quantity * drop_product.drop_price
                 )
-                
-                # Update stock
-                DropProduct.objects.filter(id=drop_product.id).update(
-                    current_stock_quantity=models.F('current_stock_quantity') - quantity
-                )
             else:
-                # Create order item for regular product (not in a drop)
-                # Use product image URL from frontend if provided, otherwise get from database
+                # Handle regular product variant (not in a drop)
+                if variant:
+                    # Check variant stock availability
+                    if not variant.can_reserve(quantity):
+                        raise serializers.ValidationError(
+                            f"Not enough stock for {variant}. "
+                            f"Available: {variant.available_quantity}, Requested: {quantity}"
+                        )
+
+                # Get product image URL
                 product_image_url = validated_data.get('product_image')
                 if not product_image_url:
-                    # Fallback to database image if not provided from frontend
                     if variant and hasattr(variant, 'image') and variant.image:
                         product_image_url = variant.image.url
                     elif product.images.exists():
@@ -583,21 +576,34 @@ class DirectOrderCreateSerializer(serializers.Serializer):
 
                 OrderItem.objects.create(
                     order=order,
-                    drop_product=None,  # No drop product for regular orders
-                    # Populate direct order fields
                     product_id=product.id,
                     product_variant_id=variant.id if variant else None,
                     product_slug=product.slug,
                     product_image_url=product_image_url,
                     color=validated_data.get('color'),
                     size=validated_data.get('size'),
-                    # Snapshot fields
                     product_name_snapshot=product.name,
                     variant_name_snapshot=str(variant) if variant else None,
                     sku_snapshot=f"{product.sku_prefix or ''}{variant.sku_suffix if variant else ''}",
                     quantity=quantity,
                     price_per_unit=unit_price,
                     subtotal=quantity * unit_price
+                )
+
+            # Reserve inventory for the order
+            success, failed_items = InventoryManager.reserve_order_items(order)
+            if not success:
+                error_details = []
+                for failed_item in failed_items:
+                    if 'error' in failed_item:
+                        error_details.append(f"{failed_item['item']}: {failed_item['error']}")
+                    else:
+                        error_details.append(
+                            f"{failed_item['item']}: Available {failed_item['available']}, "
+                            f"Requested {failed_item['requested']}"
+                        )
+                raise serializers.ValidationError(
+                    f"Unable to reserve inventory: {'; '.join(error_details)}"
                 )
 
         return order

@@ -51,6 +51,8 @@ class OrderViewSet(mixins.ListModelMixin,
     @action(detail=True, methods=['post'])
     def cancel(self, request, order_id=None):
         """Cancel an order if it's in a cancellable state"""
+        from .inventory import InventoryManager
+        
         order = self.get_object()
         
         # Check if order can be cancelled
@@ -65,11 +67,8 @@ class OrderViewSet(mixins.ListModelMixin,
         order.payment_status = 'refunded' if order.payment_status == 'paid' else order.payment_status
         order.save()
         
-        # TODO: Restore stock quantities
-        for item in order.items.all():
-            DropProduct.objects.filter(id=item.drop_product.id).update(
-                current_stock_quantity=models.F('current_stock_quantity') + item.quantity
-            )
+        # Release all inventory reservations
+        InventoryManager.cancel_order_reservations(order)
         
         # TODO: Process refund if payment was made
         
@@ -303,9 +302,13 @@ class PaymentCallbackView(APIView):
                 )
             
             # Update order status based on payment result
-            if status == 'success':
+            if status_param == 'success':
                 order.order_status = 'processing'
                 order.payment_status = 'paid'
+                
+                # Fulfill the order (convert reservations to actual stock reduction)
+                from .inventory import InventoryManager
+                InventoryManager.fulfill_order(order)
                 
                 # Create a payment record
                 Payment.objects.create(
@@ -318,15 +321,13 @@ class PaymentCallbackView(APIView):
                 
                 message = 'Payment successful, order confirmed'
             
-            elif status == 'failed':
+            elif status_param == 'failed':
                 order.order_status = 'failed'
                 order.payment_status = 'failed'
                 
-                # Restore stock quantities
-                for item in order.items.all():
-                    DropProduct.objects.filter(id=item.drop_product.id).update(
-                        current_stock_quantity=models.F('current_stock_quantity') + item.quantity
-                    )
+                # Cancel inventory reservations
+                from .inventory import InventoryManager
+                InventoryManager.cancel_order_reservations(order)
                 
                 # Create a failed payment record
                 Payment.objects.create(
@@ -579,6 +580,10 @@ class ProcessPaymentView(APIView):
                             order.payment_status = 'paid'
                             order.order_status = 'processing'
                             order.save()
+                            
+                            # Fulfill the order
+                            from .inventory import InventoryManager
+                            InventoryManager.fulfill_order(order)
                             
                             logger.info(f"Order {order_id} payment completed via PayPro")
                     except Order.DoesNotExist:

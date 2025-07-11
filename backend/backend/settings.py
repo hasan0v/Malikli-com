@@ -531,3 +531,6 @@ CURRENCY_CACHE_TIMEOUT = int(os.getenv('CURRENCY_CACHE_TIMEOUT', '36000'))  # 10
 # ============================================================================
 # END PAYPRO CONFIGURATION
 # ============================================================================
+
+# Inventory Management Settings
+ORDER_RESERVATION_TIMEOUT_MINUTES = 15  # How long to hold inventory for unpaid orders

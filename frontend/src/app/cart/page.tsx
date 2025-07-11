@@ -10,6 +10,7 @@ import { removeFromCart, updateQuantity, clearCart } from '@/store/cartSlice';
 import { formatCurrency } from '@/utils/formatters';
 import { useI18n } from '@/hooks/useI18n';
 import LoadingCircle from '@/components/LoadingCircle';
+import { CartValidationAlert } from '@/components/inventory/CartValidationAlert';
 import styles from './cartPage.module.css';
 
 export default function CartPage() {
@@ -107,6 +108,13 @@ export default function CartPage() {
   return (
     <div className={styles.cartPageContainer}>
       <h1 className={styles.cartTitle}>{t('cart.title')}</h1>
+      
+      {/* Cart Validation Alert */}
+      <CartValidationAlert 
+        autoValidate={true}
+        showSuccessMessage={false}
+        className={styles.cartValidation}
+      />
       
       <div className={styles.cartContent}>
         <div className={styles.cartItems}>

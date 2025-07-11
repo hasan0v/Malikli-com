@@ -10,6 +10,8 @@ import { RootState } from '@/store/store';
 import { findMatchingVariant, calculateVariantPrice, getVariantDisplayName } from '@/utils/variantUtils';
 import { useI18n } from '@/hooks/useI18n';
 import { useCheckoutOptions } from '@/hooks/useCheckoutOptions';
+import { useProductInventory } from '@/hooks/useInventory';
+import { StockStatusIndicator, StockBadge } from './inventory/StockStatusIndicator';
 import CheckoutOptionsModal from './Auth/CheckoutOptionsModal';
 import styles from './ProductCard.module.css';
 
@@ -61,6 +63,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const router = useRouter();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { isModalOpen, redirectUrl, showCheckoutOptions, hideCheckoutOptions } = useCheckoutOptions();
+  const { checkVariantAvailability, isCheckingStock, getVariantStockInfo } = useProductInventory();
 
   const [selectedColor, setSelectedColor] = useState<string | undefined>(color);
   const [selectedColorName, setSelectedColorName] = useState<string | undefined>(colorName);
@@ -72,6 +75,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [showQuickAdd, setShowQuickAdd] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState<any>(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -99,6 +103,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       const matchingVariant = findMatchingVariant(product, newColor || selectedColor, newSize || selectedSize);
       if (matchingVariant) {
         setSelectedVariantId(matchingVariant.id);
+        setSelectedVariant(matchingVariant);
         const newPrice = calculateVariantPrice(product, matchingVariant);
         setCurrentPrice(newPrice);
         
@@ -106,6 +111,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         if (matchingVariant.image && matchingVariant.image !== currentImageUrl) {
           setCurrentImageUrl(matchingVariant.image);
         }
+      } else {
+        setSelectedVariant(null);
       }
     }
   };
@@ -258,6 +265,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </div>
 
+        {/* Stock Status */}
+        {selectedVariant && (
+          <StockBadge 
+            availableQuantity={selectedVariant.available_quantity ?? 0}
+            isLowStock={selectedVariant.is_low_stock ?? false}
+            isInStock={selectedVariant.is_in_stock ?? (selectedVariant.available_quantity ?? 0) > 0}
+            className={styles.stockBadge}
+          />
+        )}
+
         {isClient && (
           <>            {/* Color Selection */}
             {availableColors.length > 0 && (
@@ -306,23 +323,35 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Add to Cart Button */}
           <button 
             className={`${styles.addToCartButton} ${
-              !isSelectionComplete ? styles.addToCartDisabled : ''
+              !isSelectionComplete || (selectedVariant && !(selectedVariant.is_in_stock ?? (selectedVariant.available_quantity ?? 0) > 0)) 
+                ? styles.addToCartDisabled : ''
             }`}
             onClick={handleAddToCart}
-            disabled={!isSelectionComplete}
+            disabled={!isSelectionComplete || (selectedVariant && !(selectedVariant.is_in_stock ?? (selectedVariant.available_quantity ?? 0) > 0))}
           >
-            {!isSelectionComplete ? t('common.selectOptions') : t('common.addToCart')}
+            {selectedVariant && !(selectedVariant.is_in_stock ?? (selectedVariant.available_quantity ?? 0) > 0) 
+              ? t('common.outOfStock') 
+              : !isSelectionComplete 
+                ? t('common.selectOptions') 
+                : t('common.addToCart')
+            }
           </button>
           
           {/* Buy Now Button */}
           <button 
             className={`${styles.buyNowButton} ${
-              !isSelectionComplete ? styles.buyNowDisabled : ''
+              !isSelectionComplete || (selectedVariant && !(selectedVariant.is_in_stock ?? (selectedVariant.available_quantity ?? 0) > 0))
+                ? styles.buyNowDisabled : ''
             }`}
             onClick={handleBuyNow}
-            disabled={!isSelectionComplete}
+            disabled={!isSelectionComplete || (selectedVariant && !(selectedVariant.is_in_stock ?? (selectedVariant.available_quantity ?? 0) > 0))}
           >
-            {!isSelectionComplete ? t('common.selectOptions') : t('common.buyNow')}
+            {selectedVariant && !(selectedVariant.is_in_stock ?? (selectedVariant.available_quantity ?? 0) > 0)
+              ? t('common.outOfStock')
+              : !isSelectionComplete 
+                ? t('common.selectOptions') 
+                : t('common.buyNow')
+            }
           </button>
         </div>
       </div>

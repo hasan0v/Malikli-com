@@ -596,7 +596,7 @@
     "shipping": {
       "title": "Kargo",
       "standardShipping": "Standart Kargo",
-      "standardDescription": "5-14 iş günü içinde teslimat",
+      "standardDescription": "7-30 iş günü içinde teslimat",
       "deliveryTime": {
         "today": "Bugün",
         "days": "{{count}} gün",

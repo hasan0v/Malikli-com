@@ -587,7 +587,7 @@
     "shipping": {
       "title": "Shipping",
       "standardShipping": "Standard Shipping",
-      "standardDescription": "Delivery within 5-14 business days",
+      "standardDescription": "Delivery within 7-30 business days",
       "deliveryTime": {
         "today": "Today",
         "days": "{{count}} day",

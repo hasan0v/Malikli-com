@@ -344,6 +344,12 @@ class ProductVariant(models.Model):
         null=True,
         storage=get_storage()
     )
+    
+    # Inventory Management Fields
+    stock_quantity = models.PositiveIntegerField(default=0, help_text="Total available stock")
+    reserved_quantity = models.PositiveIntegerField(default=0, help_text="Stock reserved for unpaid orders")
+    low_stock_threshold = models.PositiveIntegerField(default=5, help_text="Threshold for low stock alerts")
+    
     is_active = models.BooleanField(default=True, db_index=True)  # Add index
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)  # Add index
     updated_at = models.DateTimeField(auto_now=True)
@@ -353,6 +359,66 @@ class ProductVariant(models.Model):
         if self.image and hasattr(self.image, 'file'):
             self.image = optimize_image_for_upload(self.image, 'variant')
         super().save(*args, **kwargs)
+
+    @property
+    def available_quantity(self):
+        """Calculate available stock (total - reserved)"""
+        return self.stock_quantity - self.reserved_quantity
+
+    @property
+    def is_in_stock(self):
+        """Check if variant has available stock"""
+        return self.available_quantity > 0
+
+    @property
+    def is_low_stock(self):
+        """Check if variant is below low stock threshold"""
+        return self.available_quantity <= self.low_stock_threshold
+
+    def can_reserve(self, quantity):
+        """Check if we can reserve the specified quantity"""
+        return self.available_quantity >= quantity
+
+    def reserve_stock(self, quantity):
+        """Reserve stock for an order. Returns True if successful."""
+        from django.db import transaction
+        
+        with transaction.atomic():
+            # Reload from database to get latest stock levels
+            variant = ProductVariant.objects.select_for_update().get(pk=self.pk)
+            
+            if variant.available_quantity >= quantity:
+                variant.reserved_quantity += quantity
+                variant.save(update_fields=['reserved_quantity'])
+                # Update current instance
+                self.reserved_quantity = variant.reserved_quantity
+                return True
+            return False
+
+    def release_reservation(self, quantity):
+        """Release reserved stock (e.g., when order is cancelled)"""
+        from django.db import transaction
+        
+        with transaction.atomic():
+            variant = ProductVariant.objects.select_for_update().get(pk=self.pk)
+            variant.reserved_quantity = max(0, variant.reserved_quantity - quantity)
+            variant.save(update_fields=['reserved_quantity'])
+            # Update current instance
+            self.reserved_quantity = variant.reserved_quantity
+
+    def fulfill_order(self, quantity):
+        """Fulfill an order by reducing both reserved and total stock"""
+        from django.db import transaction
+        
+        with transaction.atomic():
+            variant = ProductVariant.objects.select_for_update().get(pk=self.pk)
+            # Reduce both reserved and total stock
+            variant.reserved_quantity = max(0, variant.reserved_quantity - quantity)
+            variant.stock_quantity = max(0, variant.stock_quantity - quantity)
+            variant.save(update_fields=['reserved_quantity', 'stock_quantity'])
+            # Update current instance
+            self.reserved_quantity = variant.reserved_quantity
+            self.stock_quantity = variant.stock_quantity
 
     def __str__(self):
         variant_parts = []
@@ -371,6 +437,21 @@ class ProductVariant(models.Model):
             models.Index(fields=['product', 'is_active']),
             models.Index(fields=['size', 'color']),
             models.Index(fields=['is_active', 'created_at']),
+            models.Index(fields=['stock_quantity', 'reserved_quantity']),  # For inventory queries
+        ]
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(stock_quantity__gte=0),
+                name='check_stock_quantity_non_negative'
+            ),
+            models.CheckConstraint(
+                check=models.Q(reserved_quantity__gte=0),
+                name='check_reserved_quantity_non_negative'
+            ),
+            models.CheckConstraint(
+                check=models.Q(reserved_quantity__lte=models.F('stock_quantity')),
+                name='check_reserved_lte_stock'
+            ),
         ]
 
 def general_product_image_path(instance, filename):

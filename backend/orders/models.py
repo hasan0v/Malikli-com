@@ -3,6 +3,7 @@ import uuid
 from django.db import models
 from django.conf import settings # AUTH_USER_MODEL
 from django.utils import timezone
+from datetime import timedelta
 from users.models import Address # For shipping/billing addresses
 from drops.models import DropProduct # For ordered items
 
@@ -154,3 +155,134 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Payment {self.gateway_transaction_id} for Order {self.order.order_number} - {self.status}"
+
+
+class InventoryReservation(models.Model):
+    """
+    Track inventory reservations for unpaid orders.
+    Automatically expires after a certain time period.
+    """
+    RESERVATION_TYPE_CHOICES = [
+        ('product_variant', 'Product Variant'),
+        ('drop_product', 'Drop Product'),
+    ]
+    
+    reservation_id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='reservations')
+    
+    # Polymorphic fields - only one should be set
+    product_variant = models.ForeignKey(
+        'products.ProductVariant',
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        related_name='reservations'
+    )
+    drop_product = models.ForeignKey(
+        DropProduct,
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        related_name='reservations'
+    )
+    
+    reservation_type = models.CharField(max_length=20, choices=RESERVATION_TYPE_CHOICES)
+    quantity = models.PositiveIntegerField()
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    
+    # Status tracking
+    is_active = models.BooleanField(default=True)
+    fulfilled_at = models.DateTimeField(null=True, blank=True)
+    cancelled_at = models.DateTimeField(null=True, blank=True)
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['expires_at', 'is_active']),
+            models.Index(fields=['order', 'is_active']),
+            models.Index(fields=['product_variant', 'is_active']),
+            models.Index(fields=['drop_product', 'is_active']),
+        ]
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(quantity__gt=0),
+                name='check_reservation_quantity_positive'
+            ),
+            # Ensure only one of product_variant or drop_product is set
+            models.CheckConstraint(
+                check=(
+                    models.Q(product_variant__isnull=True, drop_product__isnull=False) |
+                    models.Q(product_variant__isnull=False, drop_product__isnull=True)
+                ),
+                name='check_reservation_single_product_type'
+            ),
+        ]
+    
+    def save(self, *args, **kwargs):
+        # Set reservation type based on which product field is set
+        if self.product_variant:
+            self.reservation_type = 'product_variant'
+        elif self.drop_product:
+            self.reservation_type = 'drop_product'
+        
+        # Set expiration time if not provided
+        if not self.expires_at:
+            reservation_timeout = getattr(settings, 'ORDER_RESERVATION_TIMEOUT_MINUTES', 15)
+            self.expires_at = timezone.now() + timedelta(minutes=reservation_timeout)
+        
+        super().save(*args, **kwargs)
+    
+    @property
+    def is_expired(self):
+        """Check if reservation has expired"""
+        return timezone.now() > self.expires_at
+    
+    @property
+    def time_remaining(self):
+        """Get time remaining until expiration"""
+        if self.is_expired:
+            return timedelta(0)
+        return self.expires_at - timezone.now()
+    
+    def fulfill(self):
+        """Mark reservation as fulfilled and reduce actual stock"""
+        if not self.is_active or self.fulfilled_at:
+            return False
+        
+        from django.db import transaction
+        with transaction.atomic():
+            if self.product_variant:
+                self.product_variant.fulfill_order(self.quantity)
+            elif self.drop_product:
+                self.drop_product.fulfill_order(self.quantity)
+            
+            self.is_active = False
+            self.fulfilled_at = timezone.now()
+            self.save(update_fields=['is_active', 'fulfilled_at'])
+            return True
+    
+    def cancel(self):
+        """Cancel reservation and release stock"""
+        if not self.is_active or self.cancelled_at:
+            return False
+        
+        from django.db import transaction
+        with transaction.atomic():
+            if self.product_variant:
+                self.product_variant.release_reservation(self.quantity)
+            elif self.drop_product:
+                self.drop_product.release_reservation(self.quantity)
+            
+            self.is_active = False
+            self.cancelled_at = timezone.now()
+            self.save(update_fields=['is_active', 'cancelled_at'])
+            return True
+    
+    def __str__(self):
+        product_name = ""
+        if self.product_variant:
+            product_name = str(self.product_variant)
+        elif self.drop_product:
+            product_name = str(self.drop_product)
+        
+        return f"Reservation {str(self.reservation_id)[:8]} - {self.quantity}x {product_name}"

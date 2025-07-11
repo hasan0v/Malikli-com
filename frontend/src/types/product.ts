@@ -60,6 +60,14 @@ export interface ProductVariant {
   image?: string; // URL to variant-specific image
   is_active: boolean;
   images?: ProductImage[];
+  
+  // Inventory fields
+  stock_quantity?: number;
+  reserved_quantity?: number;
+  low_stock_threshold?: number;
+  available_quantity?: number;
+  is_in_stock?: boolean;
+  is_low_stock?: boolean;
 }
 
 export interface Product {

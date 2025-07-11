@@ -10,6 +10,7 @@ import { saveAddress, saveGuestAddress, CreateAddressRequest, getUserAddresses, 
 import { createOrder, CreateOrderRequest, createDirectOrder, CreateDirectOrderRequest } from '@/lib/api/orders';
 import { createCart, addToCartAPI } from '@/services/cartService';
 import { useI18n } from '@/hooks/useI18n';
+import { CheckoutValidationBar } from '@/components/inventory/CartValidationAlert';
 import styles from './checkout.module.css';
 
 // Components
@@ -109,8 +110,8 @@ export default function CheckoutPage() {
       name: t('checkout.shipping.standardShipping'),
       description: t('checkout.shipping.standardDescription'),
       cost: 15.00,
-      estimated_delivery_min_days: 5,
-      estimated_delivery_max_days: 14,
+      estimated_delivery_min_days: 7,
+      estimated_delivery_max_days: 30,
       is_active: true,
     },
   ]);
@@ -835,6 +836,15 @@ const handleOrderSubmission = async () => {
           <h1 className={styles.title}>{t('checkout.title')}</h1>
           <CheckoutSteps steps={steps} currentStep={currentStep} onStepClick={goToStep} />
         </div>
+
+        {/* Checkout Validation Bar */}
+        <CheckoutValidationBar 
+          onValidationResult={(isValid) => {
+            // Could disable checkout button if not valid
+            console.log('Cart validation result:', isValid);
+          }}
+          className={styles.checkoutValidation}
+        />
 
         <div className={styles.content}>
           <div className={styles.mainContent}>            {currentStep === 1 && (

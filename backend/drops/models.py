@@ -87,10 +87,72 @@ class DropProduct(models.Model):
     drop_price = models.DecimalField(max_digits=10, decimal_places=2)
     initial_stock_quantity = models.PositiveIntegerField(default=0)
     current_stock_quantity = models.PositiveIntegerField(default=0)
+    reserved_quantity = models.PositiveIntegerField(default=0, help_text="Stock reserved for unpaid orders")
+    low_stock_threshold = models.PositiveIntegerField(default=5, help_text="Threshold for low stock alerts")
     is_featured = models.BooleanField(default=False) # Highlight this product within the drop
     max_per_customer = models.PositiveIntegerField(null=True, blank=True) # Limit quantity per customer
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def available_quantity(self):
+        """Calculate available stock (current - reserved)"""
+        return self.current_stock_quantity - self.reserved_quantity
+
+    @property
+    def is_in_stock(self):
+        """Check if drop product has available stock"""
+        return self.available_quantity > 0
+
+    @property
+    def is_low_stock(self):
+        """Check if drop product is below low stock threshold"""
+        return self.available_quantity <= self.low_stock_threshold
+
+    def can_reserve(self, quantity):
+        """Check if we can reserve the specified quantity"""
+        return self.available_quantity >= quantity
+
+    def reserve_stock(self, quantity):
+        """Reserve stock for an order. Returns True if successful."""
+        from django.db import transaction
+        
+        with transaction.atomic():
+            # Reload from database to get latest stock levels
+            drop_product = DropProduct.objects.select_for_update().get(pk=self.pk)
+            
+            if drop_product.available_quantity >= quantity:
+                drop_product.reserved_quantity += quantity
+                drop_product.save(update_fields=['reserved_quantity'])
+                # Update current instance
+                self.reserved_quantity = drop_product.reserved_quantity
+                return True
+            return False
+
+    def release_reservation(self, quantity):
+        """Release reserved stock (e.g., when order is cancelled)"""
+        from django.db import transaction
+        
+        with transaction.atomic():
+            drop_product = DropProduct.objects.select_for_update().get(pk=self.pk)
+            drop_product.reserved_quantity = max(0, drop_product.reserved_quantity - quantity)
+            drop_product.save(update_fields=['reserved_quantity'])
+            # Update current instance
+            self.reserved_quantity = drop_product.reserved_quantity
+
+    def fulfill_order(self, quantity):
+        """Fulfill an order by reducing both reserved and current stock"""
+        from django.db import transaction
+        
+        with transaction.atomic():
+            drop_product = DropProduct.objects.select_for_update().get(pk=self.pk)
+            # Reduce both reserved and current stock
+            drop_product.reserved_quantity = max(0, drop_product.reserved_quantity - quantity)
+            drop_product.current_stock_quantity = max(0, drop_product.current_stock_quantity - quantity)
+            drop_product.save(update_fields=['reserved_quantity', 'current_stock_quantity'])
+            # Update current instance
+            self.reserved_quantity = drop_product.reserved_quantity
+            self.current_stock_quantity = drop_product.current_stock_quantity
 
     def __str__(self):
         item_name = self.product.name
@@ -125,5 +187,13 @@ class DropProduct(models.Model):
             models.CheckConstraint(
                 check=models.Q(current_stock_quantity__lte=models.F('initial_stock_quantity')),
                 name='check_current_stock_lte_initial'
-            )
+            ),
+            models.CheckConstraint(
+                check=models.Q(reserved_quantity__gte=0),
+                name='check_drop_reserved_quantity_non_negative'
+            ),
+            models.CheckConstraint(
+                check=models.Q(reserved_quantity__lte=models.F('current_stock_quantity')),
+                name='check_drop_reserved_lte_current'
+            ),
         ]

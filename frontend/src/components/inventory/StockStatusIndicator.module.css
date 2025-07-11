@@ -1,0 +1,251 @@
+/* Stock Status Indicator Styles */
+
+.stockIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+}
+
+.stockIndicator.small {
+  font-size: 12px;
+  gap: 4px;
+  padding: 2px 6px;
+}
+
+.stockIndicator.medium {
+  font-size: 14px;
+  gap: 6px;
+  padding: 4px 8px;
+}
+
+.stockIndicator.large {
+  font-size: 16px;
+  gap: 8px;
+  padding: 6px 12px;
+}
+
+.icon {
+  font-size: 1em;
+  line-height: 1;
+}
+
+.text {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Status-specific styles */
+.in-stock {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #065f46;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.limited-stock {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #1e40af;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.low-stock {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #92400e;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.out-of-stock {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #991b1b;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Stock badges */
+.stockBadge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+}
+
+.stockBadge.inStock {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.stockBadge.lowStock {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.stockBadge.outOfStock {
+  background-color: #fecaca;
+  color: #991b1b;
+}
+
+/* Quantity Selector */
+.quantitySelector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+}
+
+.quantityBtn {
+  background: #f9fafb;
+  border: none;
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #374151;
+}
+
+.quantityBtn:hover:not(:disabled) {
+  background-color: #e5e7eb;
+}
+
+.quantityBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #f3f4f6;
+}
+
+.quantityInput {
+  border: none;
+  text-align: center;
+  width: 60px;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  background: white;
+  color: #111827;
+  outline: none;
+}
+
+.quantityInput:disabled {
+  background-color: #f9fafb;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+/* Remove number input arrows */
+.quantityInput::-webkit-outer-spin-button,
+.quantityInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantityInput[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Stock notices */
+.maxStockNotice,
+.outOfStockNotice {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #f59e0b;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  padding: 2px 4px;
+  border-radius: 0 0 4px 4px;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.outOfStockNotice {
+  background: #ef4444;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .stockIndicator.in-stock {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #a7f3d0;
+  }
+
+  .stockIndicator.limited-stock {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #93c5fd;
+  }
+
+  .stockIndicator.low-stock {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+  }
+
+  .stockIndicator.out-of-stock {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+  }
+
+  .quantitySelector {
+    border-color: #374151;
+    background: #1f2937;
+  }
+
+  .quantityBtn {
+    background: #374151;
+    color: #d1d5db;
+  }
+
+  .quantityBtn:hover:not(:disabled) {
+    background-color: #4b5563;
+  }
+
+  .quantityInput {
+    background: #1f2937;
+    color: #f9fafb;
+  }
+
+  .quantityInput:disabled {
+    background-color: #374151;
+    color: #9ca3af;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .stockIndicator {
+    font-size: 12px;
+    gap: 4px;
+    padding: 3px 6px;
+  }
+
+  .stockIndicator.large {
+    font-size: 14px;
+    gap: 6px;
+    padding: 4px 8px;
+  }
+
+  .quantityBtn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .quantityInput {
+    width: 50px;
+    height: 32px;
+    font-size: 13px;
+  }
+}

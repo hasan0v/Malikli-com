@@ -32,13 +32,20 @@ class ProductVariantSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
     size_info = SizeSerializer(source='size', read_only=True)
     color_info = ColorSerializer(source='color', read_only=True)
+    
+    # Inventory information
+    available_quantity = serializers.ReadOnlyField()
+    is_in_stock = serializers.ReadOnlyField()
+    is_low_stock = serializers.ReadOnlyField()
 
     class Meta:
         model = ProductVariant
         fields = [
             'id', 'product', 'sku_suffix', 'name_suffix', 
             'size', 'size_info', 'color', 'color_info', 'attributes',
-            'additional_price', 'image', 'is_active', 'images'
+            'additional_price', 'image', 'is_active', 'images',
+            'stock_quantity', 'reserved_quantity', 'low_stock_threshold',
+            'available_quantity', 'is_in_stock', 'is_low_stock'
         ]
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -82,13 +89,20 @@ class ProductVariantWithProductSerializer(serializers.ModelSerializer):
     size_info = SizeSerializer(source='size', read_only=True)
     color_info = ColorSerializer(source='color', read_only=True)
     product_details = ProductSerializer(source='product', read_only=True)
+    
+    # Inventory information
+    available_quantity = serializers.ReadOnlyField()
+    is_in_stock = serializers.ReadOnlyField()
+    is_low_stock = serializers.ReadOnlyField()
 
     class Meta:
         model = ProductVariant
         fields = [
             'id', 'product', 'product_details', 'sku_suffix', 'name_suffix', 
             'size', 'size_info', 'color', 'color_info', 'attributes',
-            'additional_price', 'image', 'is_active', 'images'
+            'additional_price', 'image', 'is_active', 'images',
+            'stock_quantity', 'reserved_quantity', 'low_stock_threshold',
+            'available_quantity', 'is_in_stock', 'is_low_stock'
         ]
 
 

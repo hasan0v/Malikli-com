@@ -60,7 +60,11 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductVariantInline(admin.TabularInline):
     model = ProductVariant
     extra = 1
-    fields = ('sku_suffix', 'name_suffix', 'size', 'color', 'attributes', 'additional_price', 'image', 'is_active')
+    fields = (
+        'sku_suffix', 'name_suffix', 'size', 'color', 'attributes', 'additional_price', 
+        'stock_quantity', 'reserved_quantity', 'low_stock_threshold', 'is_active'
+    )
+    readonly_fields = ('reserved_quantity',)
     autocomplete_fields = ['size', 'color']
 
 class ProductImageInline(admin.TabularInline):
@@ -148,14 +152,75 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ProductVariant)
 class ProductVariantAdmin(admin.ModelAdmin):
-    list_display = ('get_full_name', 'product', 'size', 'color', 'additional_price', 'is_active')
+    list_display = (
+        'get_full_name', 'product', 'size', 'color', 'additional_price', 
+        'stock_quantity', 'reserved_quantity', 'available_quantity_display', 
+        'is_low_stock', 'is_active'
+    )
     list_filter = ('is_active', 'size', 'color', 'product__category')
     search_fields = ('product__name', 'sku_suffix', 'name_suffix')
     autocomplete_fields = ['product', 'size', 'color']
+    readonly_fields = ('reserved_quantity',)  # Reserved quantity should not be manually edited
+    actions = ['bulk_update_stock', 'check_low_stock']
+    
+    fieldsets = (
+        ("Basic Information", {
+            'fields': ('product', 'sku_suffix', 'name_suffix', 'size', 'color', 'attributes')
+        }),
+        ("Pricing", {
+            'fields': ('additional_price',)
+        }),
+        ("Inventory", {
+            'fields': ('stock_quantity', 'reserved_quantity', 'low_stock_threshold'),
+            'description': "Manage inventory levels. Reserved quantity is automatically managed by the system."
+        }),
+        ("Media & Status", {
+            'fields': ('image', 'is_active')
+        }),
+    )
     
     def get_full_name(self, obj):
-        return f"{obj.product.name} - {obj.get_display_name()}"
+        return f"{obj.product.name} - {obj}"
     get_full_name.short_description = 'Full Name'
+    
+    def available_quantity_display(self, obj):
+        available = obj.available_quantity
+        if available <= 0:
+            return format_html('<span style="color: red; font-weight: bold;">❌ {}</span>', available)
+        elif obj.is_low_stock:
+            return format_html('<span style="color: orange; font-weight: bold;">⚠️ {}</span>', available)
+        else:
+            return format_html('<span style="color: green;">✅ {}</span>', available)
+    available_quantity_display.short_description = 'Available'
+    
+    def is_low_stock(self, obj):
+        return obj.is_low_stock
+    is_low_stock.boolean = True
+    is_low_stock.short_description = 'Low Stock'
+    
+    def bulk_update_stock(self, request, queryset):
+        # This could be expanded to show a form for bulk stock updates
+        selected = queryset.count()
+        self.message_user(
+            request,
+            f"Selected {selected} variants for bulk stock update. (Feature can be expanded)"
+        )
+    bulk_update_stock.short_description = "Bulk update stock levels"
+    
+    def check_low_stock(self, request, queryset):
+        low_stock_items = [item for item in queryset if item.is_low_stock]
+        if low_stock_items:
+            names = [str(item) for item in low_stock_items[:5]]
+            if len(low_stock_items) > 5:
+                names.append(f"and {len(low_stock_items) - 5} more")
+            self.message_user(
+                request,
+                f"⚠️ Low stock alert: {', '.join(names)}",
+                level='WARNING'
+            )
+        else:
+            self.message_user(request, "✅ All selected variants have adequate stock.")
+    check_low_stock.short_description = "Check for low stock"
 
 @admin.register(ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):

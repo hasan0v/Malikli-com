@@ -12,6 +12,10 @@ from .currency_api_views import (
     get_exchange_rate, convert_eur_to_byn, 
     get_exchange_rate_simple, convert_eur_to_byn_simple
 )
+from .api_views import (
+    check_stock_availability, get_user_reservations, 
+    bulk_stock_update, inventory_dashboard_data
+)
 
 router = DefaultRouter()
 router.register(r'shipping-methods', ShippingMethodViewSet, basename='shipping-method')
@@ -25,6 +29,12 @@ urlpatterns = [
     # Currency API endpoints
     path('currency/rate/', get_exchange_rate, name='get-exchange-rate'),
     path('currency/convert/', convert_eur_to_byn, name='convert-eur-to-byn'),
+    
+    # Inventory API endpoints
+    path('inventory/check-stock/', check_stock_availability, name='check-stock-availability'),
+    path('inventory/reservations/', get_user_reservations, name='user-reservations'),
+    path('inventory/bulk-update/', bulk_stock_update, name='bulk-stock-update'),
+    path('inventory/dashboard/', inventory_dashboard_data, name='inventory-dashboard'),
     
     # Order creation endpoints
     path('orders/create/', CreateOrderView.as_view(), name='create-order'),

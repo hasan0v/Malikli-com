@@ -15,6 +15,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from orders.inventory import InventoryManager
 
 class I18nMixin:
     """
@@ -88,6 +89,85 @@ class ProductViewSet(I18nMixin, viewsets.ReadOnlyModelViewSet): # ReadOnly for n
     search_fields = ['name', 'description', 'category__name']
     ordering_fields = ['name', 'base_price', 'created_at']
     ordering = ['-created_at']  # Default ordering
+
+    @action(detail=True, methods=['get'], url_path='check-stock')
+    def check_stock(self, request, slug=None):
+        """
+        Check stock levels for all variants of a product.
+        Returns inventory status for each variant.
+        """
+        product = self.get_object()
+        variants = product.variants.all()
+        
+        stock_data = []
+        for variant in variants:
+            stock_data.append({
+                'variant_id': variant.id,
+                'sku': f"{product.sku_prefix}-{variant.sku_suffix}",
+                'size': variant.size.name if variant.size else None,
+                'color': variant.color.name if variant.color else None,
+                'stock_quantity': variant.stock_quantity,
+                'reserved_quantity': variant.reserved_quantity,
+                'available_quantity': variant.available_quantity,
+                'low_stock_threshold': variant.low_stock_threshold,
+                'is_in_stock': variant.is_in_stock,
+                'is_low_stock': variant.is_low_stock,
+                'additional_price': variant.additional_price,
+            })
+        
+        return Response({
+            'product_id': product.id,
+            'product_name': product.name,
+            'variants': stock_data
+        })
+
+    @action(detail=False, methods=['get'], url_path='low-stock-alerts')
+    def low_stock_alerts(self, request):
+        """
+        Get all products with low stock variants.
+        Only accessible to admin users.
+        """
+        if not request.user.is_staff:
+            return Response(
+                {'error': 'Permission denied'}, 
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        low_stock_data = InventoryManager.get_low_stock_items()
+        
+        # Format the response for frontend consumption
+        low_stock_variants = []
+        for variant in low_stock_data['variants']:
+            low_stock_variants.append({
+                'variant_id': variant.id,
+                'product_id': variant.product.id,
+                'product_name': variant.product.name,
+                'product_slug': variant.product.slug,
+                'variant_name': str(variant),
+                'sku': f"{variant.product.sku_prefix}-{variant.sku_suffix}",
+                'available_quantity': variant.available_quantity,
+                'low_stock_threshold': variant.low_stock_threshold,
+                'reserved_quantity': variant.reserved_quantity,
+                'stock_quantity': variant.stock_quantity,
+            })
+        
+        low_stock_drops = []
+        for drop in low_stock_data['drop_products']:
+            low_stock_drops.append({
+                'drop_id': drop.id,
+                'product_name': drop.product.name,
+                'drop_price': drop.drop_price,
+                'available_quantity': drop.available_quantity,
+                'low_stock_threshold': drop.low_stock_threshold,
+                'reserved_quantity': drop.reserved_quantity,
+                'stock_quantity': drop.stock_quantity,
+            })
+        
+        return Response({
+            'low_stock_variants': low_stock_variants,
+            'low_stock_drop_products': low_stock_drops,
+            'total_count': len(low_stock_variants) + len(low_stock_drops)
+        })
 
     @action(detail=True, methods=['post'], url_path='create-variants', permission_classes=[permissions.IsAdminUser])
     def create_variants(self, request, slug=None):

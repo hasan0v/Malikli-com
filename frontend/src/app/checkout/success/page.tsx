@@ -46,10 +46,10 @@ const CheckoutSuccess: React.FC = () => {
           shipping_method: {
             id: 1,
             name: 'Standard Shipping',
-            description: '5-14 business days',
+            description: '7-30 business days',
             cost: 9.99,
-            estimated_delivery_min_days: 5,
-            estimated_delivery_max_days: 7,
+            estimated_delivery_min_days: 7,
+            estimated_delivery_max_days: 30,
             is_active: true
           },          
           shipping_cost: 9.99,

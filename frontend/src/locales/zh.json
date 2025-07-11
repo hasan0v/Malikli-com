@@ -596,7 +596,7 @@
     "shipping": {
       "title": "配送方式",
       "standardShipping": "标准配送",
-      "standardDescription": "5-14个工作日内送达",
+      "standardDescription": "7-30个工作日内送达",
       "deliveryTime": {
         "today": "今天",
         "days": "{{count}} 天",

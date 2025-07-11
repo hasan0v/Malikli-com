@@ -608,7 +608,7 @@
     "shipping": {
       "title": "الشحن",
       "standardShipping": "شحن قياسي",
-      "standardDescription": "التوصيل خلال 5-14 يوم عمل",
+      "standardDescription": "التوصيل خلال 7-30 يوم عمل",
       "deliveryTime": {
         "today": "اليوم",
         "days": "{{count}} يوم",

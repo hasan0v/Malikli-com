@@ -589,7 +589,7 @@
     "shipping": {
       "title": "Доставка",
       "standardShipping": "Стандартная доставка",
-      "standardDescription": "Доставка в течение 5-14 рабочих дней",
+      "standardDescription": "Доставка в течение 7-30 рабочих дней",
       "deliveryTime": {
         "today": "Сегодня",
         "days": "{{count}} день",
