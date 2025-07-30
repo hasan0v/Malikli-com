@@ -7,7 +7,6 @@ import Footer from '@/components/Layout/Footer';
 import { useCartPersistence } from '@/hooks/useCartPersistence';
 import { CartSyncProvider } from '@/components/Cart/CartSyncProvider';
 import { I18nProvider } from '@/hooks/useI18n';
-// import CartDebugger from '@/components/Cart/CartDebugger'; // Commented out for production
 
 // Cart persistence wrapper component
 function CartPersistenceWrapper({ children }: { children: React.ReactNode }) {
@@ -29,7 +28,6 @@ export default function LayoutBody({ children }: { children: React.ReactNode }) 
               </main>
               {/* <Footer /> */}
             </div>
-            {/* <CartDebugger /> */} {/* Commented out for production */}
           </CartSyncProvider>
         </CartPersistenceWrapper>
       </I18nProvider>
