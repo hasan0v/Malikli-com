@@ -595,7 +595,16 @@
         "range": "{{min}}-{{max}} days"
       },
       "free": "Free",
-      "info": "All orders are carefully packaged and shipped within 1-2 business days"
+      "info": "All orders are carefully packaged and shipped within 1-2 business days",
+      "ems": {
+        "serviceName": "EMS International Express Mail Service",
+        "unavailable": "is not available for",
+        "availableFor": "EMS International Express Mail Service rates are automatically calculated for",
+        "mayBeAvailable": "EMS International shipping may be available for your destination.",
+        "viewSupportedCountries": "View supported countries",
+        "automaticCalculation": "Automatic rate calculation based on destination and weight",
+        "fastReliableShipping": "Fast and reliable international shipping to {{country}}. Weight:"
+      }
     },    "payment": {
       "title": "Payment Method",
       "instructions": "After clicking 'Place Order' you will be redirected to a secure payment page to enter your card details.",

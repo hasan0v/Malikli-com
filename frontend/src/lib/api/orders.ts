@@ -72,9 +72,13 @@ export interface CreateOrderRequest {
   cart_id: string;
   shipping_address_id: number;
   billing_address_id?: number;
-  shipping_method_id: number;
+  shipping_method_id?: number; // Make optional
   customer_notes?: string;
   email_for_guest?: string; // For guest checkout
+  
+  // Fields for dynamic shipping
+  shipping_cost_override?: number;
+  shipping_method_name_snapshot?: string;
 }
 
 /**
@@ -160,7 +164,13 @@ export async function createOrder(
     const errorData = await response.json();
     console.error('=== CREATE ORDER ERROR RESPONSE ===');
     console.error('Error data:', errorData);
-    throw new Error(errorData.message || 'Failed to create order');
+    
+    // More specific error handling
+    if (errorData.shipping_method_id) {
+      throw new Error(`Shipping error: ${errorData.shipping_method_id[0]}`);
+    }
+    
+    throw new Error(errorData.detail || errorData.message || 'Failed to create order');
   }
 
   const backendOrder = await response.json();
@@ -491,4 +501,52 @@ export async function createDirectOrder(
   console.log('Transformed direct order:', transformedOrder);
   
   return transformedOrder;
+}
+
+/**
+ * Fetch available shipping methods
+ */
+export async function getShippingMethods(): Promise<any[]> {
+  console.log('=== GET SHIPPING METHODS API CALLED ===');
+  const url = `${API_BASE_URL}/shipping-methods/`;
+  console.log('API URL:', url);
+
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log('=== GET SHIPPING METHODS RESPONSE ===');
+    console.log('Status:', response.status);
+    console.log('Status text:', response.statusText);
+    console.log('Response OK:', response.ok);
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('Error data:', errorData);
+      throw new Error('Failed to fetch shipping methods');
+    }
+
+    const data = await response.json();
+    console.log('=== GET SHIPPING METHODS SUCCESS ===');
+    console.log('Shipping methods data:', data);
+    return data;
+  } catch (error) {
+    console.error('Error fetching shipping methods:', error);
+    // Return a default/fallback shipping method to avoid breaking the checkout flow
+    return [
+      {
+        id: 1, // A default ID, assuming it might exist
+        name: 'Standard Shipping (Fallback)',
+        description: '7-30 business days',
+        cost: '15.00',
+        is_active: true,
+        estimated_delivery_min_days: 7,
+        estimated_delivery_max_days: 30,
+      },
+    ];
+  }
 }

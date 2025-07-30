@@ -24,8 +24,8 @@ interface EnhancedProductCardProps {
   colorName?: string;
   size?: string;
   sizeName?: string;
-  availableColors?: Array<{id?: number, code: string, name: string, image?: string}>;
-  availableSizes?: Array<{id?: number, code: string, name: string}>;
+  availableColors?: Array<{id?: number, code: string, name: string, display_order?: number, image?: string}>;
+  availableSizes?: Array<{id?: number, code: string, name: string, display_order?: number}>;
   product?: any;
   priority?: boolean;
   index?: number;

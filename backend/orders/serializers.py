@@ -190,7 +190,9 @@ class OrderCreateSerializer(serializers.Serializer):
     cart_id = serializers.UUIDField(write_only=True)
     shipping_address_id = serializers.IntegerField(write_only=True, required=True)
     billing_address_id = serializers.IntegerField(write_only=True, required=False, allow_null=True) # Optional
-    shipping_method_id = serializers.IntegerField(write_only=True, required=True)
+    shipping_method_id = serializers.IntegerField(write_only=True, required=False) # No longer always required
+    shipping_cost_override = serializers.DecimalField(max_digits=10, decimal_places=2, required=False, write_only=True)
+    shipping_method_name_snapshot = serializers.CharField(required=False, allow_blank=True, write_only=True)
     customer_notes = serializers.CharField(required=False, allow_blank=True, write_only=True)
     email_for_guest = serializers.EmailField(required=False, allow_null=True, write_only=True) # If guest user
 
@@ -258,6 +260,17 @@ class OrderCreateSerializer(serializers.Serializer):
                 'email_for_guest': 'Email address is required for guest orders.'
             })
         
+        # If shipping_method_id is not provided, then shipping_cost_override and shipping_method_name_snapshot are required
+        if not attrs.get('shipping_method_id'):
+            if 'shipping_cost_override' not in attrs:
+                raise serializers.ValidationError({
+                    'shipping_cost_override': 'Shipping cost is required when no shipping method ID is provided.'
+                })
+            if not attrs.get('shipping_method_name_snapshot'):
+                raise serializers.ValidationError({
+                    'shipping_method_name_snapshot': 'Shipping method name is required when no shipping method ID is provided.'
+                })
+        
         return attrs
 
     def create(self, validated_data):
@@ -266,7 +279,17 @@ class OrderCreateSerializer(serializers.Serializer):
         cart = Cart.objects.get(cart_id=validated_data['cart_id'])
         shipping_address = Address.objects.get(id=validated_data['shipping_address_id'])
         billing_address = Address.objects.get(id=validated_data['billing_address_id']) if validated_data.get('billing_address_id') else shipping_address
-        shipping_method = ShippingMethod.objects.get(id=validated_data['shipping_method_id'])
+        
+        # Handle dynamic vs. fixed shipping method
+        shipping_method = None
+        shipping_cost = validated_data.get('shipping_cost_override')
+        shipping_method_name = validated_data.get('shipping_method_name_snapshot')
+
+        if validated_data.get('shipping_method_id'):
+            shipping_method = ShippingMethod.objects.get(id=validated_data['shipping_method_id'])
+            shipping_cost = shipping_method.cost
+            shipping_method_name = shipping_method.name
+        
         request = self.context.get('request')
         user = request.user if request and request.user.is_authenticated else None
 
@@ -275,10 +298,9 @@ class OrderCreateSerializer(serializers.Serializer):
             # 1. Calculate totals
             from decimal import Decimal
             subtotal_amount = cart.subtotal
-            # TODO: Add logic for discounts, taxes
             discount_amount = Decimal('0.00')
-            tax_amount = Decimal('0.00') # Example: (subtotal_amount - discount_amount) * Decimal('0.10')
-            total_amount = subtotal_amount - discount_amount + tax_amount + shipping_method.cost
+            tax_amount = Decimal('0.00')
+            total_amount = subtotal_amount - discount_amount + tax_amount + shipping_cost
 
             # 2. Create the Order
             order = Order.objects.create(
@@ -286,14 +308,14 @@ class OrderCreateSerializer(serializers.Serializer):
                 email_for_guest=validated_data.get('email_for_guest') if not user else None,
                 shipping_address=shipping_address,
                 billing_address=billing_address,
-                shipping_method=shipping_method,
-                shipping_cost=shipping_method.cost,
+                shipping_method=shipping_method, # Can be null for dynamic shipping
+                shipping_method_name_snapshot=shipping_method_name,
+                shipping_cost=shipping_cost,
                 subtotal_amount=subtotal_amount,
                 discount_amount=discount_amount,
                 tax_amount=tax_amount,
                 total_amount=total_amount,
                 customer_notes=validated_data.get('customer_notes', ''),
-                # order_status and payment_status default to 'pending_payment' / 'pending'
             )
 
             # 3. Create OrderItems (without reducing stock yet)

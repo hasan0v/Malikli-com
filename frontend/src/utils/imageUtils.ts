@@ -122,6 +122,20 @@ export const getProductVariantInfo = (product: Product) => {
     };
   }
   
+  // First, try to find the variant with the smallest size (lowest display_order)
+  const availableSizes = extractAvailableSizes(product);
+  if (availableSizes.length > 0) {
+    const smallestSize = availableSizes[0]; // First item after sorting by display_order
+    
+    // Find a variant that matches this smallest size
+    for (const variant of product.variants) {
+      const info = extractVariantInfo(variant);
+      if (info.size === smallestSize.code) {
+        return info;
+      }
+    }
+  }
+  
   // Try to find a variant with color or size information
   for (const variant of product.variants) {
     const info = extractVariantInfo(variant);
@@ -152,12 +166,13 @@ export const extractAvailableColors = (product: Product) => {
         id: variantId,
         code: color,
         name: colorName || color,
+        display_order: variant.color_info?.display_order || 999,
         image: image || getColorImageUrl(product, color)
       });
     }
   });
   
-  return Array.from(colorMap.values());
+  return Array.from(colorMap.values()).sort((a, b) => a.display_order - b.display_order);
 };
 
 /**
@@ -174,13 +189,18 @@ export const extractAvailableSizes = (product: Product) => {
     const { size, sizeName, variantId } = extractVariantInfo(variant);
     
     if (size && !sizeMap.has(size)) {
+      // Get display_order from size_info if available
+      const displayOrder = variant.size_info?.display_order || 999;
+      
       sizeMap.set(size, {
         id: variantId,
         code: size,
-        name: sizeName || size
+        name: sizeName || size,
+        display_order: displayOrder
       });
     }
   });
   
-  return Array.from(sizeMap.values());
+  // Convert to array and sort by display_order
+  return Array.from(sizeMap.values()).sort((a, b) => a.display_order - b.display_order);
 };

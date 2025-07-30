@@ -57,7 +57,7 @@ export default function OrdersPage() {
           status: selectedStatus,
           ordering: ordering,
           page_size: 50 // Get up to 50 orders
-        });        console.log('Orders response:', response); // Debug log
+        });        // console.log('Orders response:', response); // Debug log - Commented out for production
         setOrdersResponse(response);
         setOrders(response.results || []);
       } catch (error) {

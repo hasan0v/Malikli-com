@@ -56,7 +56,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({ description }) 
         if (colonIndex !== -1) {
           const title = trimmedSection.substring(1, colonIndex).trim(); // Remove * and get title
           const content = trimmedSection.substring(colonIndex + 1).trim(); // Get everything after colon
-          console.log(`DEBUG - ProductDescription.formatDescription - feature: ${title}, content: ${content}`);
+          // console.log(`DEBUG - ProductDescription.formatDescription - feature: ${title}, content: ${content}`); // Commented out for production
           return (
             <div key={index} className={styles.featureSection}>
               <h4 className={styles.featureTitle}>
@@ -69,7 +69,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({ description }) 
           );
         } else {
           // No colon, just a title
-          console.log(`DEBUG - ProductDescription.formatDescription - feature title: ${trimmedSection}`);
+          // console.log(`DEBUG - ProductDescription.formatDescription - feature title: ${trimmedSection}`); // Commented out for production
           const title = trimmedSection.replace(/^\*/, '').trim();
           return (
             <div key={index} className={styles.featureSection}>

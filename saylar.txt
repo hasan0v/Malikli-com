@@ -1,0 +1,17 @@
+White Arab :
+S 10
+M 15
+L 12
+Xl 5
+
+White Samurai 
+S 8
+M 18
+L 13
+Xl 5
+
+Gray 
+S 19
+M 39
+L 34 
+Xl 14

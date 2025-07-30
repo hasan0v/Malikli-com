@@ -604,7 +604,16 @@
         "range": "{{min}}-{{max}} 天"
       },
       "free": "免费",
-      "info": "所有订单都经过精心包装，并在1-2个工作日内发货"
+      "info": "所有订单都经过精心包装，并在1-2个工作日内发货",
+      "ems": {
+        "serviceName": "EMS国际特快邮递服务",
+        "unavailable": "不适用于",
+        "availableFor": "EMS国际特快邮递服务费率自动计算：",
+        "mayBeAvailable": "EMS国际快递可能适用于您的目的地。",
+        "viewSupportedCountries": "查看支持的国家",
+        "automaticCalculation": "基于目的地和重量的自动费率计算",
+        "fastReliableShipping": "快速可靠的国际快递至{{country}}。重量："
+      }
     },
     "payment": {
       "title": "支付方式",

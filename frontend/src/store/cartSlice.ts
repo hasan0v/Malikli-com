@@ -10,6 +10,7 @@ import {
   CartMergeRequest 
 } from '../services/cartService';
 import { convertBackendItemToFrontend, convertFrontendItemToBackend } from '../types/backendCart';
+import CartRecoveryService from '../services/cartRecoveryService';
 
 // Define the cart item type
 export interface CartItem {
@@ -36,52 +37,24 @@ interface CartState {
   needsSync: boolean;   // Flag to indicate if cart needs syncing
 }
 
-// LocalStorage functions
+// Initialize CartRecoveryService
+const cartRecovery = CartRecoveryService.getInstance();
+
+// LocalStorage functions - now using CartRecoveryService
 const loadCartFromStorage = (): CartItem[] => {
-  if (typeof window === 'undefined') return [];
-  
-  try {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  } catch (error) {
-    console.error('Error loading cart from localStorage:', error);
-    return [];
-  }
+  return cartRecovery.loadCartSafely();
 };
 
 const saveCartToStorage = (items: CartItem[]) => {
-  if (typeof window === 'undefined') return;
-  
-  try {
-    localStorage.setItem('cart', JSON.stringify(items));
-  } catch (error) {
-    console.error('Error saving cart to localStorage:', error);
-  }
+  cartRecovery.saveCartSafely(items);
 };
 
 const loadCartIdFromStorage = (): string | undefined => {
-  if (typeof window === 'undefined') return undefined;
-  
-  try {
-    return localStorage.getItem('cartId') || undefined;
-  } catch (error) {
-    console.error('Error loading cart ID from localStorage:', error);
-    return undefined;
-  }
+  return cartRecovery.loadCartIdSafely();
 };
 
 const saveCartIdToStorage = (cartId?: string) => {
-  if (typeof window === 'undefined') return;
-  
-  try {
-    if (cartId) {
-      localStorage.setItem('cartId', cartId);
-    } else {
-      localStorage.removeItem('cartId');
-    }
-  } catch (error) {
-    console.error('Error saving cart ID to localStorage:', error);
-  }
+  cartRecovery.saveCartIdSafely(cartId);
 };
 
 // Async thunks for backend integration
@@ -122,7 +95,7 @@ export const mergeGuestCartWithUser = createAsyncThunk(
         merge_strategy: strategy,
       };
 
-      console.log('Attempting to merge guest cart:', mergeData);
+      // console.log('Attempting to merge guest cart:', mergeData); // Commented out for production
       const result = await mergeGuestCart(mergeData);
       
       if (!result) {
@@ -130,7 +103,7 @@ export const mergeGuestCartWithUser = createAsyncThunk(
         throw new Error('Backend returned null result for cart merge');
       }
 
-      console.log('Cart merge successful:', result);
+      // console.log('Cart merge successful:', result); // Commented out for production
       return result;
     } catch (error: any) {
       console.error('Cart merge error details:', error);
@@ -285,9 +258,14 @@ const initialState: CartState = {
   items: loadCartFromStorage(),
   cartId: loadCartIdFromStorage(),
   isLoading: false,
-  needsSync: false,
+  needsSync: cartRecovery.getSyncFlag(),
   lastSyncTime: undefined,
 };
+
+// Enable cross-tab synchronization
+if (typeof window !== 'undefined') {
+  cartRecovery.enableCrossTabSync();
+}
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -342,9 +320,10 @@ const cartSlice = createSlice({
     },
     clearCart: (state) => {
       state.items = [];
+      state.cartId = undefined;
       state.needsSync = false;
-      // Clear from localStorage
-      saveCartToStorage([]);
+      // Clear from localStorage using recovery service
+      cartRecovery.clearAllCartData();
     },
     // Action to manually load cart from localStorage (useful for hydration)
     loadCart: (state) => {
@@ -372,6 +351,13 @@ const cartSlice = createSlice({
       // Save to localStorage
       saveCartToStorage(state.items);
       saveCartIdToStorage(action.payload.cart_id);
+    },
+    // Action to handle cross-tab cart updates
+    syncCartFromAnotherTab: (state) => {
+      // Reload cart data from localStorage
+      state.items = loadCartFromStorage();
+      state.cartId = loadCartIdFromStorage();
+      state.needsSync = cartRecovery.getSyncFlag();
     },
   },
   extraReducers: (builder) => {
@@ -568,7 +554,8 @@ export const {
   loadCart, 
   setCartId, 
   markAsSynced, 
-  setCartFromBackend 
+  setCartFromBackend,
+  syncCartFromAnotherTab 
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

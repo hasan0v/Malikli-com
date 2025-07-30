@@ -32,7 +32,7 @@ export const useCartSync = () => {
         if (cartId && items.length > 0) {
           // User has a guest cart with items - merge it
           try {
-            console.log('Attempting to merge guest cart:', { cartId, itemCount: items.length });
+            // console.log('Attempting to merge guest cart:', { cartId, itemCount: items.length }); // Commented out for production
             
             // Validate cart ID format (should be a UUID)
             const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -47,14 +47,14 @@ export const useCartSync = () => {
               guestCartId: cartId,
               strategy: 'merge'
             })).unwrap();
-            console.log('Guest cart merge successful');
+            // console.log('Guest cart merge successful'); // Commented out for production
           } catch (error) {
             console.error('Failed to merge guest cart:', error);
             
             // Check if the error is due to guest cart not found
             const errorMessage = error instanceof Error ? error.message : String(error);
             if (errorMessage.includes('Guest cart not found')) {
-              console.log('Guest cart not found in backend, using bulk add fallback');
+              // console.log('Guest cart not found in backend, using bulk add fallback'); // Commented out for production
             } else if (errorMessage.includes('not authenticated')) {
               console.log('Authentication issue during merge, retrying after delay');
               // Wait a bit longer and try again
@@ -63,13 +63,13 @@ export const useCartSync = () => {
             
             // Fallback: try to sync current items with user cart using bulk add
             try {
-              console.log('Attempting fallback: bulk add items to user cart');
+              // console.log('Attempting fallback: bulk add items to user cart'); // Commented out for production
               await dispatch(bulkAddToUserCart()).unwrap();
               console.log('Fallback bulk add successful');
             } catch (fallbackError) {
               console.error('Fallback bulk add failed:', fallbackError);
               // Final fallback: just load user's existing cart
-              console.log('Loading user cart from backend as final fallback');
+              // console.log('Loading user cart from backend as final fallback'); // Commented out for production
               await dispatch(loadCartFromBackend({}));
             }
           }

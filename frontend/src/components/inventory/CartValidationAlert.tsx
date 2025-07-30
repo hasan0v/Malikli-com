@@ -218,26 +218,29 @@ export const CheckoutValidationBar: React.FC<CheckoutValidationBarProps> = ({
 
   const isRecent = lastValidation && (Date.now() - lastValidation.timestamp) < 30000; // 30 seconds
 
-  return (
-    <div className={`${styles.checkoutBar} ${className}`}>
-      <div className={styles.validationStatus}>
-        {isValidatingCart ? (
-          <span className={styles.checking}>🔄 Validating cart...</span>
-        ) : lastValidation?.valid ? (
-          <span className={styles.valid}>✅ Cart validated {isRecent ? 'recently' : ''}</span>
-        ) : (
-          <span className={styles.invalid}>❌ Cart has availability issues</span>
-        )}
-      </div>
-      <button
-        className={styles.recheckBtn}
-        onClick={checkCart}
-        disabled={isValidatingCart}
-      >
-        {isValidatingCart ? 'Checking...' : 'Recheck'}
-      </button>
-    </div>
-  );
+  // Commented out for production - hide cart validation bar from users
+  return null;
+  
+  // return (
+  //   <div className={`${styles.checkoutBar} ${className}`}>
+  //     <div className={styles.validationStatus}>
+  //       {isValidatingCart ? (
+  //         <span className={styles.checking}>🔄 Validating cart...</span>
+  //       ) : lastValidation?.valid ? (
+  //         <span className={styles.valid}>✅ Cart validated {isRecent ? 'recently' : ''}</span>
+  //       ) : (
+  //         <span className={styles.invalid}>❌ Cart has availability issues</span>
+  //       )}
+  //     </div>
+  //     <button
+  //       className={styles.recheckBtn}
+  //       onClick={checkCart}
+  //       disabled={isValidatingCart}
+  //     >
+  //       {isValidatingCart ? 'Checking...' : 'Recheck'}
+  //     </button>
+  //   </div>
+  // );
 };
 
 export default CartValidationAlert;

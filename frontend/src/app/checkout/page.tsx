@@ -7,7 +7,7 @@ import { RootState } from '@/store/store';
 import { clearCart } from '@/store/cartSlice';
 import { CheckoutData, CheckoutStep, CHECKOUT_STEPS, OrderSummary, ShippingMethod, Address, PaymentMethod, PAYMENT_METHODS } from '@/types/checkout';
 import { saveAddress, saveGuestAddress, CreateAddressRequest, getUserAddresses, AddressResponse, deleteAddress } from '@/lib/api/address';
-import { createOrder, CreateOrderRequest, createDirectOrder, CreateDirectOrderRequest } from '@/lib/api/orders';
+import { createOrder, CreateOrderRequest, createDirectOrder, CreateDirectOrderRequest, getShippingMethods } from '@/lib/api/orders';
 import { createCart, addToCartAPI } from '@/services/cartService';
 import { useI18n } from '@/hooks/useI18n';
 import { CheckoutValidationBar } from '@/components/inventory/CartValidationAlert';
@@ -103,19 +103,54 @@ export default function CheckoutPage() {
     shipping_method: null,
     payment_method: null,    customer_notes: '',
   });
-  // Single standard shipping method with fixed $10 cost
-  const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([
-    {
-      id: 1,
-      name: t('checkout.shipping.standardShipping'),
-      description: t('checkout.shipping.standardDescription'),
-      cost: 15.00,
-      estimated_delivery_min_days: 7,
-      estimated_delivery_max_days: 30,
-      is_active: true,
-    },
-  ]);
+  const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([]);
 
+  // Fetch shipping methods from API
+  useEffect(() => {
+    const fetchMethods = async () => {
+      try {
+        const methods = await getShippingMethods();
+        // Ensure methods is an array and has items before setting state
+        if (Array.isArray(methods) && methods.length > 0) {
+          setShippingMethods(methods.map(m => ({
+            ...m,
+            cost: parseFloat(m.cost) // Ensure cost is a number
+          })));
+        } else {
+          // Fallback if API returns empty or invalid data
+          setShippingMethods([
+            {
+              id: 1,
+              name: t('checkout.shipping.standardShipping'),
+              description: t('checkout.shipping.standardDescription'),
+              cost: 15.00,
+              estimated_delivery_min_days: 7,
+              estimated_delivery_max_days: 30,
+              is_active: true,
+            },
+          ]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch shipping methods, using fallback.", error);
+        // Set fallback on error
+        setShippingMethods([
+          {
+            id: 1,
+            name: t('checkout.shipping.standardShipping'),
+            description: t('checkout.shipping.standardDescription'),
+            cost: 15.00,
+            estimated_delivery_min_days: 7,
+            estimated_delivery_max_days: 30,
+            is_active: true,
+          },
+        ]);
+      }
+    };
+    
+    if (isClientMounted) {
+      fetchMethods();
+    }
+  }, [isClientMounted, t]);
   // Reset validation warnings when form data changes (user starts typing)
   useEffect(() => {
     if (showValidationWarnings) {
@@ -216,7 +251,10 @@ export default function CheckoutPage() {
     const items = isBuyNowFlow && buyNowProduct ? [buyNowProduct] : cartItems;
     
     const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping_cost = checkoutData.shipping_method?.cost || 0;
+    
+    // Use dynamic shipping cost if available, otherwise use selected method's cost
+    const shipping_cost = checkoutData.dynamic_shipping_cost ?? checkoutData.shipping_method?.cost ?? 0;
+    
     const discount_amount = 0; // Add discount logic later
     const total_amount = subtotal + shipping_cost - discount_amount;
 
@@ -546,51 +584,51 @@ export default function CheckoutPage() {
     }
   };
   const handleContinue = () => {
-    console.log('=== HANDLE CONTINUE CLICKED ===');    console.log('Current step:', currentStep);
+    // console.log('=== HANDLE CONTINUE CLICKED ===');    // console.log('Current step:', currentStep); // Commented out for production
     
     // Show validation warnings when user clicks continue
     setShowValidationWarnings(true);
     
     const isValid = validateCurrentStep();
-    console.log('Validation result:', isValid);
+    // console.log('Validation result:', isValid); // Commented out for production
     
     if (isValid) {
       // Hide validation warnings since validation passed
       setShowValidationWarnings(false);
         // Auto-save address when moving from step 1 to step 2
       if (currentStep === 1) {
-        console.log('Step 1: Auto-saving address and moving to next step');
+        // console.log('Step 1: Auto-saving address and moving to next step'); // Commented out for production
         autoSaveAddress().then(() => {
           nextStep();
         });
       } else if (currentStep === 4) {
-        console.log('Step 4: Starting order submission');
+        // console.log('Step 4: Starting order submission'); // Commented out for production
         // Final submission
         handleOrderSubmission();
       } else {
-        console.log(`Step ${currentStep}: Moving to next step`);
+        // console.log(`Step ${currentStep}: Moving to next step`); // Commented out for production
         nextStep();
       }    } else {
-      console.log('Validation failed, errors:', errors);
+      // console.log('Validation failed, errors:', errors); // Commented out for production
       // Validation warnings will be shown because showValidationWarnings is now true
     }};
 
 const handleOrderSubmission = async () => {
     setIsLoading(true);
-    console.log('=== ORDER SUBMISSION STARTED ===');
-    console.log('Current step:', currentStep);
-    console.log('Cart ID:', cartId);
-    console.log('Selected Address ID:', selectedAddressId);
-    console.log('Is authenticated:', isAuthenticated);
-    console.log('User:', user);
-    console.log('Checkout data:', checkoutData);
-    console.log('Is buy now flow:', isBuyNowFlow);
+    // console.log('=== ORDER SUBMISSION STARTED ==='); // Commented out for production
+    // console.log('Current step:', currentStep); // Commented out for production
+    // console.log('Cart ID:', cartId); // Commented out for production
+    // console.log('Selected Address ID:', selectedAddressId); // Commented out for production
+    // console.log('Is authenticated:', isAuthenticated); // Commented out for production
+    // console.log('User:', user); // Commented out for production
+    // console.log('Checkout data:', checkoutData); // Commented out for production
+    // console.log('Is buy now flow:', isBuyNowFlow); // Commented out for production
     
     try {      // Create the order before redirecting to payment
       let savedAddressId = selectedAddressId;
       let createdOrder = null;      // Save address for both authenticated and guest users if needed
       if (!selectedAddressId) {
-        console.log('Creating address for order (save_address=', checkoutData.save_address, ')');
+        // console.log('Creating address for order (save_address=', checkoutData.save_address, ')'); // Commented out for production
         try {
           const token = localStorage.getItem('access_token');          
           // Prepare shipping address data
@@ -608,33 +646,33 @@ const handleOrderSubmission = async () => {
             is_default_billing: isAuthenticated ? checkoutData.save_address : false,
           };
 
-          console.log('Address data to save:', shippingAddressData);
+          // console.log('Address data to save:', shippingAddressData); // Commented out for production
 
           // Save address (authenticated users vs guest users)
           let savedAddress;
           if (isAuthenticated && token) {
-            console.log('Saving address for authenticated user');
+            // console.log('Saving address for authenticated user'); // Commented out for production
             savedAddress = await saveAddress(shippingAddressData, token);
           } else {
-            console.log('Saving address for guest user');
+            // console.log('Saving address for guest user'); // Commented out for production
             savedAddress = await saveGuestAddress(shippingAddressData);
           }
           
           savedAddressId = savedAddress.id;
-          console.log('Address saved successfully:', savedAddress);
+          // console.log('Address saved successfully:', savedAddress); // Commented out for production
         } catch (addressError) {
           console.error('Failed to save address:', addressError);
           throw new Error('Failed to save shipping address: ' + (addressError instanceof Error ? addressError.message : 'Unknown error'));
         }
       } else if (selectedAddressId) {
-        console.log('Using existing selected address:', selectedAddressId);
+        // console.log('Using existing selected address:', selectedAddressId); // Commented out for production
         savedAddressId = selectedAddressId;
       }// For Buy Now flow, use direct order creation
       if (isBuyNowFlow && buyNowProduct) {
-        console.log('=== BUY NOW FLOW - CREATING DIRECT ORDER ===');
-        console.log('Buy now product:', buyNowProduct);
+        // console.log('=== BUY NOW FLOW - CREATING DIRECT ORDER ==='); // Commented out for production
+        // console.log('Buy now product:', buyNowProduct); // Commented out for production
           if (!savedAddressId) {
-          console.log('=== ERROR: NO ADDRESS ID ===');
+          // console.log('=== ERROR: NO ADDRESS ID ==='); // Commented out for production
           throw new Error('Shipping address is required. Please ensure address is saved or selected.');
         }
 
@@ -645,9 +683,9 @@ const handleOrderSubmission = async () => {
         //   throw new Error('Authentication required');
         // }
         if (token) {
-          console.log('✓ Auth token available for Buy Now');
+          // console.log('✓ Auth token available for Buy Now'); // Commented out for production
         } else {
-          console.log('⚠ No auth token - proceeding as guest Buy Now');
+          // console.log('⚠ No auth token - proceeding as guest Buy Now'); // Commented out for production
         }        // Create direct order data
         const createDirectOrderData: CreateDirectOrderRequest = {
           product_id: buyNowProduct.id,
@@ -680,20 +718,20 @@ const handleOrderSubmission = async () => {
           createDirectOrderData.product_image = buyNowProduct.image;
         }
 
-        console.log('=== SENDING DIRECT ORDER CREATION REQUEST ===');
-        console.log('Direct order data:', createDirectOrderData);        // Create the order directly
+        // console.log('=== SENDING DIRECT ORDER CREATION REQUEST ==='); // Commented out for production
+        // console.log('Direct order data:', createDirectOrderData);        // Create the order directly // Commented out for production
         createdOrder = await createDirectOrder(createDirectOrderData, token || undefined);
         
-        console.log('=== DIRECT ORDER CREATED SUCCESSFULLY ===');
-        console.log('Created order:', createdOrder);      } else {
-        console.log('=== REGULAR CHECKOUT FLOW - PROCEEDING WITH ORDER CREATION ===');
+        // console.log('=== DIRECT ORDER CREATED SUCCESSFULLY ==='); // Commented out for production
+        // console.log('Created order:', createdOrder);      } else { // Commented out for production
+        // console.log('=== REGULAR CHECKOUT FLOW - PROCEEDING WITH ORDER CREATION ==='); // Commented out for production
 
         // For regular checkout, ensure we have a cart with items
         let orderCartId = cartId;
         
         // If no cart ID exists (single item purchase), create a temporary cart
         if (!orderCartId) {
-          console.log('=== NO CART ID - CREATING TEMPORARY CART FOR SINGLE ITEM ===');
+          // console.log('=== NO CART ID - CREATING TEMPORARY CART FOR SINGLE ITEM ==='); // Commented out for production
           
           // Determine the items to add to cart
           const itemsToAdd = isBuyNowFlow && buyNowProduct ? [buyNowProduct] : cartItems;
@@ -702,7 +740,7 @@ const handleOrderSubmission = async () => {
             throw new Error('No items to order. Please add items to cart first.');
           }
           
-          console.log('Items to add to cart:', itemsToAdd);
+          // console.log('Items to add to cart:', itemsToAdd); // Commented out for production
           
           // Create a new cart
           const newCart = await createCart();
@@ -711,7 +749,7 @@ const handleOrderSubmission = async () => {
           }
           
           orderCartId = newCart.cart_id;
-          console.log('✓ Temporary cart created:', orderCartId);
+          // console.log('✓ Temporary cart created:', orderCartId); // Commented out for production
           
           // Add items to the cart
           for (const item of itemsToAdd) {
@@ -724,7 +762,7 @@ const handleOrderSubmission = async () => {
               size: item.size,
             };
             
-            console.log('Adding item to cart:', addToCartData);
+            // console.log('Adding item to cart:', addToCartData); // Commented out for production
             
             const addedItem = await addToCartAPI(orderCartId, addToCartData);
             if (!addedItem) {
@@ -732,63 +770,77 @@ const handleOrderSubmission = async () => {
             }
           }
           
-          console.log('✓ All items added to temporary cart');
+          // console.log('✓ All items added to temporary cart'); // Commented out for production
         }
 
         if (!orderCartId) {
-          console.log('=== ERROR: NO CART ID AVAILABLE ===');
+          // console.log('=== ERROR: NO CART ID AVAILABLE ==='); // Commented out for production
           throw new Error('Cart ID not available. Please refresh and try again.');
         }
-        console.log('✓ Cart ID available:', orderCartId);
+        // console.log('✓ Cart ID available:', orderCartId); // Commented out for production
 
         if (!savedAddressId) {
-          console.log('=== ERROR: NO ADDRESS ID ===');
+          // console.log('=== ERROR: NO ADDRESS ID ==='); // Commented out for production
           throw new Error('Shipping address is required. Please ensure address is saved or selected.');
         }
-        console.log('✓ Address ID available:', savedAddressId);        // Get authentication token if user is logged in (optional for guest checkout)
-        const token = localStorage.getItem('access_token');
-        // if (!token) {
+        // console.log('✓ Address ID available:', savedAddressId);        // Get authentication token if user is logged in (optional for guest checkout) // Commented out for production
+        const authToken = localStorage.getItem('access_token');
+        // if (!authToken) {
         //   console.log('=== ERROR: NO AUTH TOKEN ===');
         //   throw new Error('Authentication required');
         // }
-        if (token) {
-          console.log('✓ Auth token available');
+        if (authToken) {
+          // console.log('✓ Auth token available'); // Commented out for production
         } else {
-          console.log('⚠ No auth token - proceeding as guest checkout');
-        }        console.log('=== CREATING ORDER ===');
+          // console.log('⚠ No auth token - proceeding as guest checkout'); // Commented out for production
+        }        // console.log('=== CREATING ORDER ==='); // Commented out for production
         
         // Create order data
         const createOrderData: CreateOrderRequest = {
           cart_id: orderCartId,
           shipping_address_id: savedAddressId,
           billing_address_id: savedAddressId, // Use same address for billing
-          shipping_method_id: checkoutData.shipping_method?.id || 1, // Default to first shipping method
           customer_notes: checkoutData.customer_notes || '',
         };
+
+        // Handle dynamic vs. fixed shipping
+        if (checkoutData.dynamic_shipping_cost !== null && checkoutData.dynamic_shipping_cost !== undefined) {
+          createOrderData.shipping_cost_override = checkoutData.dynamic_shipping_cost;
+          createOrderData.shipping_method_name_snapshot = checkoutData.dynamic_shipping_method_name || 'EMS Shipping';
+        } else if (checkoutData.shipping_method) {
+          createOrderData.shipping_method_id = checkoutData.shipping_method.id;
+        } else {
+          throw new Error("No shipping method selected or calculated.");
+        }
 
         // Add guest email if user is not authenticated
         if (!isAuthenticated) {
           createOrderData.email_for_guest = checkoutData.customer_info.email;
         }
 
-        console.log('=== SENDING ORDER CREATION REQUEST ===');
-        console.log('Order data:', createOrderData);
+        // console.log('=== SENDING ORDER CREATION REQUEST ==='); // Commented out for production
+        // console.log('Order data:', createOrderData); // Commented out for production
 
         // Create the order with pending status
-        createdOrder = await createOrder(createOrderData, token);
+        createdOrder = await createOrder(createOrderData, authToken);
         
-        console.log('=== ORDER CREATED SUCCESSFULLY ===');
-        console.log('Created order:', createdOrder);
+        // console.log('=== ORDER CREATED SUCCESSFULLY ==='); // Commented out for production
+        // console.log('Created order:', createdOrder); // Commented out for production
 
         // Clear the cart after successful order creation
         dispatch(clearCart());
-      }      console.log('=== REDIRECTING TO PAYPRO PAYMENT ===');
-      console.log('Order created successfully:', createdOrder);
+      }      // console.log('=== REDIRECTING TO PAYPRO PAYMENT ==='); // Commented out for production
+      // console.log('Order created successfully:', createdOrder); // Commented out for production
       
       // Always use PayPro payment integration instead of external links
       // Redirect to PayPro payment page with order ID
-      console.log('Redirecting to PayPro payment page for order:', createdOrder.id);
-      window.location.href = `/payment?order_id=${createdOrder.id}`;} catch (error) {
+      if (createdOrder && createdOrder.id) {
+        // console.log('Redirecting to PayPro payment page for order:', createdOrder.id); // Commented out for production
+        window.location.href = `/payment?order_id=${createdOrder.id}`;
+      } else {
+        throw new Error('Order creation failed - no order ID available');
+      }
+    } catch (error) {
       console.error('=== ORDER SUBMISSION FAILED ===');
       console.error('Error:', error);
       console.error('Error message:', error instanceof Error ? error.message : 'Unknown error');
@@ -841,7 +893,7 @@ const handleOrderSubmission = async () => {
         <CheckoutValidationBar 
           onValidationResult={(isValid) => {
             // Could disable checkout button if not valid
-            console.log('Cart validation result:', isValid);
+            // console.log('Cart validation result:', isValid); // Commented out for production
           }}
           className={styles.checkoutValidation}
         />
@@ -868,6 +920,8 @@ const handleOrderSubmission = async () => {
                 updateCheckoutData={updateCheckoutData}
                 shippingMethods={shippingMethods}
                 errors={errors}
+                orderItems={orderSummary.items}
+                orderSubtotal={orderSummary.subtotal}
               />
             )}
 

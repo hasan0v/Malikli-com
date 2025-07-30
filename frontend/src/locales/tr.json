@@ -604,7 +604,16 @@
         "range": "{{min}}-{{max}} gün"
       },
       "free": "Ücretsiz",
-      "info": "Tüm siparişler özenle paketlenir ve 1-2 iş günü içinde kargoya verilir"
+      "info": "Tüm siparişler özenle paketlenir ve 1-2 iş günü içinde kargoya verilir",
+      "ems": {
+        "serviceName": "EMS Uluslararası Ekspres Posta Hizmeti",
+        "unavailable": "için mevcut değil",
+        "availableFor": "EMS Uluslararası Ekspres Posta Hizmeti ücretleri otomatik olarak hesaplanır:",
+        "mayBeAvailable": "EMS Uluslararası kargo hizmeti hedefiniz için mevcut olabilir.",
+        "viewSupportedCountries": "Desteklenen ülkeleri görüntüle",
+        "automaticCalculation": "Varış noktası ve ağırlığa dayalı otomatik ücret hesaplama",
+        "fastReliableShipping": "{{country}} için hızlı ve güvenilir uluslararası kargo. Ağırlık:"
+      }
     },
     "payment": {
       "title": "Ödeme Yöntemi",

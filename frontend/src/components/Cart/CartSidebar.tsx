@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -11,6 +11,7 @@ import { removeFromCart, updateQuantity, removeFromCartAPI, updateCartItemQuanti
 import { formatCurrency } from '@/utils/formatters';
 import { useI18n } from '@/hooks/useI18n';
 import { useCheckoutOptions } from '@/hooks/useCheckoutOptions';
+import { useCartCrossTabSync } from '@/hooks/useCartCrossTabSync';
 import CheckoutOptionsModal from '../Auth/CheckoutOptionsModal';
 import styles from './CartSidebar.module.css';
 
@@ -23,10 +24,17 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { t } = useI18n();
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartItems = useSelector((state: RootState) => {
+    // Ensure we always get an array, even if state is not initialized
+    const items = state?.cart?.items;
+    return Array.isArray(items) ? items : [];
+  });
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { isModalOpen, redirectUrl, showCheckoutOptions, hideCheckoutOptions } = useCheckoutOptions();
   const sidebarRef = useRef<HTMLDivElement>(null);
+  
+  // Enable cross-tab cart synchronization
+  useCartCrossTabSync();
   // Add client-side rendering flag
   const [isClient, setIsClient] = useState(false);
   // Add debounce timeout refs for API calls
@@ -131,8 +139,28 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     updateTimeouts.current.set(itemKey, timeout);
   }, [dispatch, handleRemoveItem]);
 
-  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  // Calculate totals with proper error handling
+  const totalItems = useMemo(() => {
+    try {
+      return Array.isArray(cartItems) ? cartItems.reduce((total, item) => total + (item?.quantity || 0), 0) : 0;
+    } catch (error) {
+      console.warn('Error calculating total items:', error);
+      return 0;
+    }
+  }, [cartItems]);
+
+  const subtotal = useMemo(() => {
+    try {
+      return Array.isArray(cartItems) ? cartItems.reduce((total, item) => {
+        const price = item?.price || 0;
+        const quantity = item?.quantity || 0;
+        return total + (price * quantity);
+      }, 0) : 0;
+    } catch (error) {
+      console.warn('Error calculating subtotal:', error);
+      return 0;
+    }
+  }, [cartItems]);
 
   // Close sidebar when clicking outside
   useEffect(() => {

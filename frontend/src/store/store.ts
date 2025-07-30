@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import uiReducer from './slices/uiSlice'; 
 import cartReducer from './cartSlice' // Adjust the path as necessary
 import authReducer from './authSlice';
+import { cartPersistenceMiddleware } from './middleware/cartPersistenceMiddleware';
 // import productReducer from './slices/productSlice';
 // ... etc.
 
@@ -29,7 +30,8 @@ export const makeStore = () => {
       // product: productReducer,
       // ... your other reducers
     },
-    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger), // example
+    middleware: (getDefaultMiddleware) => 
+      getDefaultMiddleware().concat(cartPersistenceMiddleware),
     devTools: process.env.NODE_ENV !== 'production',
   });
 };

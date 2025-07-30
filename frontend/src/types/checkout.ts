@@ -65,6 +65,9 @@ export interface CheckoutData {
   shipping_method: ShippingMethod | null;
   payment_method: PaymentMethod | null;
   customer_notes?: string;
+  // Add a field for dynamic shipping cost, e.g., from EMS
+  dynamic_shipping_cost?: number | null;
+  dynamic_shipping_method_name?: string | null;
 }
 
 export interface Order {

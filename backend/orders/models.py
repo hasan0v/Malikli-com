@@ -64,6 +64,7 @@ class Order(models.Model):
     shipping_method = models.ForeignKey(
         ShippingMethod, on_delete=models.SET_NULL, null=True, blank=True
     )
+    shipping_method_name_snapshot = models.CharField(max_length=255, blank=True, null=True)
     shipping_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     subtotal_amount = models.DecimalField(max_digits=10, decimal_places=2) # Sum of (item price * quantity)

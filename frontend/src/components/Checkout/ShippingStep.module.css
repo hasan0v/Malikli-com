@@ -253,6 +253,105 @@
   font-weight: 500;
 }
 
+.emsInfo {
+  color: #1e40af;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+/* EMS Shipping Method specific styles */
+.emsMethod {
+  background: linear-gradient(135deg, #fefefe, #f8faff);
+  border-color: #3b82f6;
+  position: relative;
+}
+
+.emsMethod::before {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+  opacity: 1;
+}
+
+.emsIcon {
+  font-size: 1.2em;
+  margin-right: 0.5rem;
+}
+
+/* EMS Calculator Section */
+.emsSection {
+  margin: 2rem 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+}
+
+.toggleButton {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #f8faff, #eff6ff);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e40af;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.toggleButton:hover {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  transform: translateY(-1px);
+}
+
+.toggleIcon {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.chevron {
+  margin-left: auto;
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+}
+
+.calculatorContainer {
+  padding: 2rem;
+  border-top: 1px solid #e5e7eb;
+  background: #fafbfc;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+.emsCalculator {
+  box-shadow: none;
+  border: none;
+  background: white;
+}
+
 /* Animation for method selection */
 .shippingMethod {
   animation: fadeInUp 0.6s ease forwards;
@@ -319,6 +418,15 @@
     gap: 1.25rem;
     margin-bottom: 1.5rem;
   }
+
+  .toggleButton {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .calculatorContainer {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -349,6 +457,15 @@
   .shippingMethods {
     gap: 1rem;
   }
+
+  .toggleButton {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .calculatorContainer {
+    padding: 1.25rem;
+  }
 }
 
 @media (max-width: 360px) {
@@ -375,4 +492,67 @@
   .container {
     padding: 0 0.5rem;
   }
+}
+
+/* EMS unavailable message styles */
+.emsUnavailable {
+  margin: 1rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fef2f2, #fef7f7);
+  border: 1px solid #fecaca;
+  border-radius: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #dc2626;
+  line-height: 1.5;
+}
+
+.emsUnavailable .infoIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.emsUnavailable .infoText {
+  font-weight: 500;
+}
+
+.emsDetails {
+  margin-top: 1rem;
+}
+
+.emsDetails summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #991b1b;
+  padding: 0.5rem 0;
+  list-style: none;
+  position: relative;
+}
+
+.emsDetails summary::before {
+  content: '▶';
+  position: absolute;
+  left: -1.25rem;
+  transition: transform 0.2s ease;
+  font-size: 0.75rem;
+}
+
+.emsDetails[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.supportedCountries {
+  margin-top: 0.75rem;
+  padding: 1rem;
+  background: white;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #374151;
+  line-height: 1.6;
+  max-height: 150px;
+  overflow-y: auto;
 }

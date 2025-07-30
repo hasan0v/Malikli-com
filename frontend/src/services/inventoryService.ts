@@ -11,8 +11,8 @@ import type {
   ProductInventoryStatus
 } from '../types/inventory';
 
-const INVENTORY_BASE_URL = '/api/orders/inventory';
-const PRODUCTS_BASE_URL = '/api/products';
+const INVENTORY_BASE_URL = '/inventory';
+const PRODUCTS_BASE_URL = '/products';
 
 /**
  * Check stock availability for multiple items before adding to cart
