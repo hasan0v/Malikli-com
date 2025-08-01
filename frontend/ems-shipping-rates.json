@@ -52,11 +52,11 @@
     {
       "id": "6",
       "destination_country": "Anguilla",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 13.75,
+      "documents_over_500g_up_to_1000g_eur": 16.25,
+      "goods_up_to_500g_eur": 14.50,
+      "goods_over_500g_up_to_1000g_eur": 17.00,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "7",
@@ -115,11 +115,11 @@
     {
       "id": "13",
       "destination_country": "Bahamas",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 13.75,
+      "documents_over_500g_up_to_1000g_eur": 16.25,
+      "goods_up_to_500g_eur": 14.50,
+      "goods_over_500g_up_to_1000g_eur": 17.00,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "14",
@@ -132,7 +132,7 @@
     },
     {
       "id": "15",
-      "destination_country": "Барбадос",
+      "destination_country": "Barbados",
       "documents_up_to_500g_eur": 21.21,
       "documents_over_500g_up_to_1000g_eur": 25.91,
       "goods_up_to_500g_eur": 21.97,
@@ -304,20 +304,20 @@
     {
       "id": "34",
       "destination_country": "Virgin Islands",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 13.75,
+      "documents_over_500g_up_to_1000g_eur": 16.25,
+      "goods_up_to_500g_eur": 14.50,
+      "goods_over_500g_up_to_1000g_eur": 17.00,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "35",
       "destination_country": "Guernsey (Britain)",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 13.75,
+      "documents_over_500g_up_to_1000g_eur": 16.25,
+      "goods_up_to_500g_eur": 14.50,
+      "goods_over_500g_up_to_1000g_eur": 17.00,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "36",
@@ -475,20 +475,20 @@
     {
       "id": "53",
       "destination_country": "Greenland (Denmark)",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 32.35,
+      "documents_over_500g_up_to_1000g_eur": 35.00,
+      "goods_up_to_500g_eur": 33.00,
+      "goods_over_500g_up_to_1000g_eur": 36.00,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "54",
       "destination_country": "Faroe Islands (Denmark)",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 18.24,
+      "documents_over_500g_up_to_1000g_eur": 21.24,
+      "goods_up_to_500g_eur": 18.74,
+      "goods_over_500g_up_to_1000g_eur": 22.74,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "55",
@@ -592,11 +592,11 @@
     {
       "id": "66",
       "destination_country": "Iraq",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 11.47,
+      "documents_over_500g_up_to_1000g_eur": 14.47,
+      "goods_up_to_500g_eur": 12.47,
+      "goods_over_500g_up_to_1000g_eur": 15.47,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "67",
@@ -754,11 +754,11 @@
     {
       "id": "84",
       "destination_country": "Kiribati",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 22.24,
+      "documents_over_500g_up_to_1000g_eur": 25.00,
+      "goods_up_to_500g_eur": 23.00,
+      "goods_over_500g_up_to_1000g_eur": 26.00,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "85",
@@ -1231,11 +1231,11 @@
     {
       "id": "137",
       "destination_country": "Papua New Guinea",
-      "documents_up_to_500g_eur": null,
-      "documents_over_500g_up_to_1000g_eur": null,
-      "goods_up_to_500g_eur": null,
-      "goods_over_500g_up_to_1000g_eur": null,
-      "goods_each_subsequent_kg_eur": null
+      "documents_up_to_500g_eur": 17.65,
+      "documents_over_500g_up_to_1000g_eur": 20.00,
+      "goods_up_to_500g_eur": 18.00,
+      "goods_over_500g_up_to_1000g_eur": 21.00,
+      "goods_each_subsequent_kg_eur": 5.00
     },
     {
       "id": "138",
@@ -1866,6 +1866,15 @@
       "goods_up_to_500g_eur": 29.34,
       "goods_over_500g_up_to_1000g_eur": 33.97,
       "goods_each_subsequent_kg_eur": 8.35
+    },
+    {
+      "id": "208",
+      "destination_country": "Belarus",
+      "documents_up_to_500g_eur": 5.00,
+      "documents_over_500g_up_to_1000g_eur": 10.00,
+      "goods_up_to_500g_eur": 7.50,
+      "goods_over_500g_up_to_1000g_eur": 10.50,
+      "goods_each_subsequent_kg_eur": 2.00
     }
   ],
   "additional_charges_and_notes": {

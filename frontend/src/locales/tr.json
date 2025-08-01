@@ -11,7 +11,8 @@
     "logout": "Çıkış Yap",
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
-    "adminPanel": "Yönetici Paneli"
+    "adminPanel": "Yönetici Paneli",
+    "tagline": "Ruhunuz için giyim markası"
   },
   "common": {
     "loading": "Yükleniyor...",
@@ -606,9 +607,9 @@
       "free": "Ücretsiz",
       "info": "Tüm siparişler özenle paketlenir ve 1-2 iş günü içinde kargoya verilir",
       "ems": {
-        "serviceName": "EMS Uluslararası Ekspres Posta Hizmeti",
+        "serviceName": "Kargo",
         "unavailable": "için mevcut değil",
-        "availableFor": "EMS Uluslararası Ekspres Posta Hizmeti ücretleri otomatik olarak hesaplanır:",
+        "availableFor": "Uluslararası kargo ücretleri otomatik olarak hesaplanır:",
         "mayBeAvailable": "EMS Uluslararası kargo hizmeti hedefiniz için mevcut olabilir.",
         "viewSupportedCountries": "Desteklenen ülkeleri görüntüle",
         "automaticCalculation": "Varış noktası ve ağırlığa dayalı otomatik ücret hesaplama",
@@ -1536,7 +1537,7 @@
     "regions": {
       "europe": {
         "title": "Avrupa",
-        "deliveryTime": "5-10 iş günü",
+        "deliveryTime": "7-30 iş günü",
         "tracking": "Tam takip"
       },
       "northAmerica": {
@@ -1545,27 +1546,27 @@
           "ABD",
           "Kanada"
         ],
-        "deliveryTime": "7-14 iş günü",
+        "deliveryTime": "7-30 iş günü",
         "tracking": "Tam takip"
       },
       "asia": {
         "title": "Asya",
-        "deliveryTime": "5-12 iş günü",
+        "deliveryTime": "7-30 iş günü",
         "tracking": "Tam takip"
       },
       "australia": {
         "title": "Avustralya/Okyanusya",
-        "deliveryTime": "8-15 iş günü",
+        "deliveryTime": "7-30 iş günü",
         "tracking": "Tam takip"
       },
       "russia": {
         "title": "Rusya",
-        "deliveryTime": "3-7 iş günü",
+        "deliveryTime": "7-30 iş günü",
         "note": "Komşu ülke"
       },
       "cis": {
         "title": "Diğer BDT Ülkeleri",
-        "deliveryTime": "5-10 iş günü"
+        "deliveryTime": "7-30 iş günü"
       }
     },
     "factors": {

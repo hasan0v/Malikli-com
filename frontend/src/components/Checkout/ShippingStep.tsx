@@ -22,7 +22,7 @@ const countryCodeToName: Record<string, string> = {
   'AW': 'Aruba',
   'AZ': 'Azerbaijan',
   'BA': 'Bosnia-Herzegovina',
-  'BB': 'Барбадос',
+  'BB': 'Barbados',
   'BD': 'Bangladesh',
   'BE': 'Belgium',
   'BF': 'Burkina Faso',
@@ -39,6 +39,7 @@ const countryCodeToName: Record<string, string> = {
   'BT': 'Bhutan',
   'BW': 'Botswana',
   'BZ': 'Belize',
+  'BY': 'Belarus',
   'CA': 'Canada',
   'CD': 'Dem. Republic of the Congo',
   'CF': 'Central African Republic',
@@ -264,25 +265,29 @@ export default function ShippingStep({
       const emsMethod = getEMSShippingMethod(userCountryName, totalItemCount, orderSubtotal, localizedDescription, localizedName);
       
       if (emsMethod) {
-        // Add EMS method to the list if it doesn't already exist
-        const currentEMSIndex = allShippingMethods.findIndex(method => method.id === 999);
-        if (currentEMSIndex === -1) {
-          setAllShippingMethods([...shippingMethods, emsMethod]);
-        } else {
-          setAllShippingMethods(prev => 
-            prev.map(method => method.id === 999 ? emsMethod : method)
-          );
+        // Set EMS as the only shipping method
+        setAllShippingMethods([emsMethod]);
+        
+        // Auto-select EMS method if no shipping method is currently selected
+        if (!checkoutData.shipping_method) {
+          updateCheckoutData({
+            shipping_method: emsMethod,
+            dynamic_shipping_cost: emsMethod.cost,
+            dynamic_shipping_method_name: emsMethod.name,
+          });
         }
       } else {
-        setAllShippingMethods(shippingMethods.filter(method => method.id !== 999));
+        // If EMS is not available, show empty array (no shipping options)
+        setAllShippingMethods([]);
       }
     } else {
-      setAllShippingMethods(shippingMethods);
+      // If no items or country, show empty array
+      setAllShippingMethods([]);
     }
-  }, [checkoutData.shipping_address?.country, totalItemCount, orderSubtotal, shippingMethods, t]);
+  }, [checkoutData.shipping_address?.country, totalItemCount, orderSubtotal, t, checkoutData.shipping_method, updateCheckoutData]);
 
   const handleShippingMethodChange = (method: ShippingMethod) => {
-    const isEMSMethod = method.id === 999;
+    const isEMSMethod = method.id === 1;
     
     updateCheckoutData({
       shipping_method: method,
@@ -315,13 +320,13 @@ export default function ShippingStep({
     <div className={styles.container}>
       <h2 className={styles.title}>{t('checkout.shipping.title')}</h2>
       
-      {/* All Shipping Methods (including auto-calculated EMS) */}
+      {/* Only EMS Shipping Methods */}
       <div className={styles.shippingMethods}>
         {allShippingMethods
-          .filter(method => method.is_active)
+          .filter(method => method.is_active && method.id === 1) // Only show EMS method (id 1)
           .map((method) => {
             const isSelected = checkoutData.shipping_method?.id === method.id;
-            const isEMSMethod = method.id === 999;
+            const isEMSMethod = method.id === 1;
             
             return (
               <div
@@ -346,7 +351,7 @@ export default function ShippingStep({
                     
                     <div className={styles.methodInfo}>
                       <div className={styles.methodName}>
-                        {isEMSMethod && <span className={styles.emsIcon}>📦</span>}
+                        <span className={styles.emsIcon}>📦</span>
                         {method.name}
                       </div>
                       <div className={styles.methodDescription}>{method.description}</div>
@@ -365,7 +370,7 @@ export default function ShippingStep({
           })}
       </div>
 
-      {/* EMS availability message */}
+      {/* Shipping availability message */}
       {checkoutData.shipping_address?.country && totalItemCount > 0 && (
         (() => {
           const userCountryName = getCountryNameFromCode(checkoutData.shipping_address.country);

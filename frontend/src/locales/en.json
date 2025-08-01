@@ -10,7 +10,8 @@
     "logout": "Logout",
     "login": "Login",
     "register": "Sign Up",
-    "adminPanel": "Admin Panel"
+    "adminPanel": "Admin Panel",
+    "tagline": "Clothes brand for your soul"
   },"common": {
     "loading": "Loading...",
     "error": "Error occurred",
@@ -597,9 +598,9 @@
       "free": "Free",
       "info": "All orders are carefully packaged and shipped within 1-2 business days",
       "ems": {
-        "serviceName": "EMS International Express Mail Service",
+        "serviceName": "Shipping",
         "unavailable": "is not available for",
-        "availableFor": "EMS International Express Mail Service rates are automatically calculated for",
+        "availableFor": "International shipping rates are automatically calculated for",
         "mayBeAvailable": "EMS International shipping may be available for your destination.",
         "viewSupportedCountries": "View supported countries",
         "automaticCalculation": "Automatic rate calculation based on destination and weight",
@@ -1543,7 +1544,7 @@
       },
       "express": {
         "title": "Express Services",
-        "time": "5-15 business days"
+        "time": "7-30 business days"
       },
       "standard": {
         "title": "Standard Services",
@@ -1557,33 +1558,33 @@
     "regions": {
       "europe": {
         "title": "Europe",
-        "deliveryTime": "5-10 business days",
+        "deliveryTime": "7-30 business days",
         "tracking": "Full tracking"
       },
       "northAmerica": {
         "title": "North America",
         "countries": ["USA", "Canada"],
-        "deliveryTime": "7-14 business days",
+        "deliveryTime": "7-30 business days",
         "tracking": "Full tracking"
       },
       "asia": {
         "title": "Asia",
-        "deliveryTime": "5-12 business days",
+        "deliveryTime": "7-30 business days",
         "tracking": "Full tracking"
       },
       "australia": {
         "title": "Australia/Oceania",
-        "deliveryTime": "8-15 business days",
+        "deliveryTime": "7-30 business days",
         "tracking": "Full tracking"
       },
       "russia": {
         "title": "Russia",
-        "deliveryTime": "3-7 business days",
+        "deliveryTime": "7-30 business days",
         "note": "Neighboring country"
       },
       "cis": {
         "title": "Other CIS Countries",
-        "deliveryTime": "5-10 business days"
+        "deliveryTime": "7-30 business days"
       }
     },
     "factors": {
@@ -1599,20 +1600,20 @@
         ]
       },
       "faster": {
-        "title": "Faster Delivery To",
+        "title": "Standard Delivery To",
         "items": [
-          "Russia: 3-7 days",
-          "Poland: 5-10 days",
-          "Germany: 7-12 days",
-          "Lithuania: 5-8 days"
+          "Russia: 7-15 days",
+          "Poland: 7-20 days",
+          "Germany: 7-25 days",
+          "Lithuania: 7-18 days"
         ]
       },
       "longer": {
-        "title": "Longer Delivery To",
+        "title": "Extended Delivery To",
         "items": [
-          "USA: 10-21 days",
-          "Australia: 12-25 days",
-          "Remote areas: 20-35 days"
+          "USA: 15-30 days",
+          "Australia: 20-30 days",
+          "Remote areas: 20-30 days"
         ]
       }
     },    "labels": {

@@ -11,7 +11,8 @@
     "logout": "تسجيل الخروج",
     "login": "تسجيل الدخول",
     "register": "إنشاء حساب",
-    "adminPanel": "لوحة التحكم"
+    "adminPanel": "لوحة التحكم",
+    "tagline": "علامة ملابس لروحك"
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -618,9 +619,9 @@
       "free": "مجاني",
       "info": "تُغلف جميع الطلبات بعناية وتُشحن خلال 1-2 يوم عمل",
       "ems": {
-        "serviceName": "خدمة البريد السريع الدولي EMS",
+        "serviceName": "الشحن",
         "unavailable": "غير متوفرة لـ",
-        "availableFor": "يتم حساب أسعار خدمة البريد السريع الدولي EMS تلقائياً لـ",
+        "availableFor": "يتم حساب أسعار الشحن الدولي تلقائياً لـ",
         "mayBeAvailable": "قد تكون خدمة الشحن الدولي EMS متوفرة لوجهتك.",
         "viewSupportedCountries": "عرض البلدان المدعومة",
         "automaticCalculation": "حساب الأسعار التلقائي بناءً على الوجهة والوزن",
@@ -1547,7 +1548,7 @@
     "regions": {
       "europe": {
         "title": "أوروبا",
-        "deliveryTime": "5-10 أيام عمل",
+        "deliveryTime": "7-30 أيام عمل",
         "tracking": "تتبع كامل"
       },
       "northAmerica": {
@@ -1556,27 +1557,27 @@
           "الولايات المتحدة الأمريكية",
           "كندا"
         ],
-        "deliveryTime": "7-14 أيام عمل",
+        "deliveryTime": "7-30 أيام عمل",
         "tracking": "تتبع كامل"
       },
       "asia": {
         "title": "آسيا",
-        "deliveryTime": "5-12 أيام عمل",
+        "deliveryTime": "7-30 أيام عمل",
         "tracking": "تتبع كامل"
       },
       "australia": {
         "title": "أستراليا/أوقيانوسيا",
-        "deliveryTime": "8-15 أيام عمل",
+        "deliveryTime": "7-30 أيام عمل",
         "tracking": "تتبع كامل"
       },
       "russia": {
         "title": "روسيا",
-        "deliveryTime": "3-7 أيام عمل",
+        "deliveryTime": "7-30 أيام عمل",
         "note": "دولة مجاورة"
       },
       "cis": {
         "title": "دول رابطة الدول المستقلة الأخرى",
-        "deliveryTime": "5-10 أيام عمل"
+        "deliveryTime": "7-30 أيام عمل"
       }
     },
     "factors": {

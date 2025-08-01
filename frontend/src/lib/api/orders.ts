@@ -164,10 +164,20 @@ export async function createOrder(
     const errorData = await response.json();
     console.error('=== CREATE ORDER ERROR RESPONSE ===');
     console.error('Error data:', errorData);
+    console.error('Full error object:', JSON.stringify(errorData, null, 2));
     
     // More specific error handling
+    if (errorData.cart_id) {
+      console.error('Cart ID errors:', errorData.cart_id);
+    }
+    if (errorData.shipping_address_id) {
+      console.error('Shipping address ID errors:', errorData.shipping_address_id);
+    }
     if (errorData.shipping_method_id) {
-      throw new Error(`Shipping error: ${errorData.shipping_method_id[0]}`);
+      console.error('Shipping method ID errors:', errorData.shipping_method_id);
+    }
+    if (errorData.non_field_errors) {
+      console.error('General validation errors:', errorData.non_field_errors);
     }
     
     throw new Error(errorData.detail || errorData.message || 'Failed to create order');
@@ -176,9 +186,15 @@ export async function createOrder(
   const backendOrder = await response.json();
   console.log('=== CREATE ORDER SUCCESS ===');
   console.log('Backend order response:', backendOrder);
+  console.log('Backend order type:', typeof backendOrder);
+  console.log('Backend order keys:', Object.keys(backendOrder || {}));
+  console.log('Raw order_id:', backendOrder.order_id);
+  console.log('Raw id:', backendOrder.id);
   
   const transformedOrder = transformOrder(backendOrder);
+  console.log('=== AFTER TRANSFORMATION ===');
   console.log('Transformed order:', transformedOrder);
+  console.log('Transformed order ID:', transformedOrder.id);
   
   return transformedOrder;
 }
@@ -359,7 +375,12 @@ function transformOrderItem(backendItem: any): OrderItem {
  * Transform backend order to frontend format
  */
 function transformOrder(backendOrder: any): Order {
-  console.log('Transforming backend order:', backendOrder);
+  console.log('=== TRANSFORM ORDER DEBUG ===');
+  console.log('Full backend order object:', backendOrder);
+  console.log('Backend order.order_id:', backendOrder.order_id);
+  console.log('Backend order.id:', backendOrder.id);
+  console.log('Type of backend order:', typeof backendOrder);
+  console.log('Object keys:', Object.keys(backendOrder || {}));
   
   const shippingAddress = backendOrder.shipping_address_details || backendOrder.shipping_address || {};
   
@@ -372,8 +393,11 @@ function transformOrder(backendOrder: any): Order {
     email_for_guest: backendOrder.email_for_guest
   });
   
+  const transformedId = backendOrder.order_id || backendOrder.id;
+  console.log('Final transformed ID:', transformedId);
+  
   return {
-    id: backendOrder.order_id || backendOrder.id,
+    id: transformedId,
     order_number: backendOrder.order_number,
     status: mapBackendStatus(backendOrder.order_status),
     payment_status: mapBackendPaymentStatus(backendOrder.payment_status),
@@ -446,6 +470,7 @@ export interface CreateDirectOrderRequest {
   shipping_address_id: number;
   billing_address_id?: number;
   shipping_method_id: number;
+  shipping_cost_override?: number; // Use calculated shipping cost instead of database cost
   customer_notes?: string;
   color?: string;
   color_code?: string;
@@ -490,15 +515,34 @@ export async function createDirectOrder(
     const errorData = await response.json();
     console.error('=== CREATE DIRECT ORDER ERROR RESPONSE ===');
     console.error('Error data:', errorData);
-    throw new Error(errorData.message || 'Failed to create direct order');
+    console.error('Full error object:', JSON.stringify(errorData, null, 2));
+    
+    // Log specific validation errors if they exist
+    if (errorData.product_id) {
+      console.error('Product ID errors:', errorData.product_id);
+    }
+    if (errorData.shipping_address_id) {
+      console.error('Shipping address ID errors:', errorData.shipping_address_id);
+    }
+    if (errorData.shipping_method_id) {
+      console.error('Shipping method ID errors:', errorData.shipping_method_id);
+    }
+    
+    throw new Error(errorData.message || errorData.detail || 'Failed to create direct order');
   }
 
   const backendOrder = await response.json();
   console.log('=== CREATE DIRECT ORDER SUCCESS ===');
   console.log('Backend order response:', backendOrder);
+  console.log('Backend order type:', typeof backendOrder);
+  console.log('Backend order keys:', Object.keys(backendOrder || {}));
+  console.log('Raw order_id:', backendOrder.order_id);
+  console.log('Raw id:', backendOrder.id);
   
   const transformedOrder = transformOrder(backendOrder);
+  console.log('=== AFTER DIRECT ORDER TRANSFORMATION ===');
   console.log('Transformed direct order:', transformedOrder);
+  console.log('Transformed direct order ID:', transformedOrder.id);
   
   return transformedOrder;
 }

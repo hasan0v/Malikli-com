@@ -33,6 +33,12 @@
   justify-content: space-between;
 }
 
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .logoContainer {
   display: flex;
   align-items: center;
@@ -42,6 +48,27 @@
   height: auto;
   max-height: 40px;
   width: auto;
+}
+
+.tagline {
+  font-family: cursive;
+  font-size: 11px;
+  font-weight: 400;
+  color:#0abab5;
+  margin-top: 0px;
+  /* text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px; */
+  transition: color 0.3s ease;
+  line-height: 1.2;
+  letter-spacing: 1.3px;
+  cursor: default;
+  user-select: none;
+}
+
+.taglineWhite {
+  color: #0abab5;
+  /* text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); */
 }
 
 .logo {
@@ -552,7 +579,7 @@
     justify-content: space-between;
   }
 
-  .logoContainer {
+  .logoSection {
     flex-shrink: 0;
     order: 1; /* Logo comes first */
   }
@@ -563,6 +590,12 @@
 
   .logo, .logoWhite {
     max-height: 28px; /* Ensure both logo variants are smaller */
+  }
+
+  .tagline {
+    font-size: 9px; /* Smaller tagline on mobile */
+    margin-top: -1px;
+    letter-spacing: 0.2px;
   }
 
   .navLinks {
@@ -636,6 +669,11 @@
     max-height: 24px;
   }
 
+  .tagline {
+    font-size: 8px; /* Even smaller tagline on very small screens */
+    letter-spacing: 0.1px;
+  }
+
   .navIcons {
     gap: 8px; /* Reduce gap further */
   }
@@ -688,6 +726,11 @@
     max-height: 22px;
   }
 
+  .tagline {
+    font-size: 8px;
+    letter-spacing: 0.1px;
+  }
+
   .mobileMenu {
     top: 60px;
   }
@@ -713,6 +756,11 @@
 
   .logo, .logoWhite {
     max-height: 20px;
+  }
+
+  .tagline {
+    font-size: 7px;
+    letter-spacing: 0px;
   }
 
   .navIcons {
@@ -759,6 +807,12 @@
 
   .logo, .logoWhite {
     max-height: 18px;
+  }
+
+  .tagline {
+    font-size: 12px;
+    letter-spacing: 0px;
+    margin-top: 0px;
   }
 
   .navIcons {

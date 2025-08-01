@@ -8,11 +8,13 @@ import styles from './OrderSummary.module.css';
 interface OrderSummaryProps {
   orderSummary: OrderSummaryType;
   isLoading?: boolean;
+  currentStep?: number;
 }
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
   orderSummary,
-  isLoading = false
+  isLoading = false,
+  currentStep = 1
 }) => {
   const { t } = useI18n();
   
@@ -82,7 +84,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
           <span>{t('checkout.summary.subtotal')}</span>
           <span>{orderSummary.subtotal.toFixed(2)} EUR</span>
         </div>
-          {orderSummary.shipping_cost > 0 && (
+        {orderSummary.shipping_cost > 0 && currentStep > 1 && (
           <div className={styles.totalLine}>
             <span>{t('checkout.summary.shipping')}</span>
             <span>{orderSummary.shipping_cost.toFixed(2)} EUR</span>

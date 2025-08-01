@@ -488,7 +488,7 @@ export default function CustomerInformation({
             <option value="PL">{t('checkout.customerInfo.countries.poland')}</option>
             <option value="PT">{t('checkout.customerInfo.countries.portugal')}</option>
             <option value="QA">{t('checkout.customerInfo.countries.qatar')}</option>
-            <option value="CG">{t('checkout.customerInfo.countries.republicCongo')}</option>
+            {/* <option value="CG">{t('checkout.customerInfo.countries.republicCongo')}</option> */}
             <option value="RO">{t('checkout.customerInfo.countries.romania')}</option>
             <option value="RU">{t('checkout.customerInfo.countries.russianFederation')}</option>
             <option value="RW">{t('checkout.customerInfo.countries.rwanda')}</option>

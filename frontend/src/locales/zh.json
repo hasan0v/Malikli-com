@@ -11,7 +11,8 @@
     "logout": "退出登录",
     "login": "登录",
     "register": "注册",
-    "adminPanel": "管理面板"
+    "adminPanel": "管理面板",
+    "tagline": "为您灵魂而生的服装品牌"
   },
   "common": {
     "loading": "加载中...",
@@ -606,9 +607,9 @@
       "free": "免费",
       "info": "所有订单都经过精心包装，并在1-2个工作日内发货",
       "ems": {
-        "serviceName": "EMS国际特快邮递服务",
+        "serviceName": "配送",
         "unavailable": "不适用于",
-        "availableFor": "EMS国际特快邮递服务费率自动计算：",
+        "availableFor": "国际配送费率自动计算：",
         "mayBeAvailable": "EMS国际快递可能适用于您的目的地。",
         "viewSupportedCountries": "查看支持的国家",
         "automaticCalculation": "基于目的地和重量的自动费率计算",
@@ -1536,7 +1537,7 @@
     "regions": {
       "europe": {
         "title": "欧洲",
-        "deliveryTime": "5-10个工作日",
+        "deliveryTime": "7-30个工作日",
         "tracking": "全程跟踪"
       },
       "northAmerica": {
@@ -1545,27 +1546,27 @@
           "美国",
           "加拿大"
         ],
-        "deliveryTime": "7-14个工作日",
+        "deliveryTime": "7-30个工作日",
         "tracking": "全程跟踪"
       },
       "asia": {
         "title": "亚洲",
-        "deliveryTime": "5-12个工作日",
+        "deliveryTime": "7-30个工作日",
         "tracking": "全程跟踪"
       },
       "australia": {
         "title": "澳大利亚/大洋洲",
-        "deliveryTime": "8-15个工作日",
+        "deliveryTime": "7-30个工作日",
         "tracking": "全程跟踪"
       },
       "russia": {
         "title": "俄罗斯",
-        "deliveryTime": "3-7个工作日",
+        "deliveryTime": "7-30个工作日",
         "note": "邻国"
       },
       "cis": {
         "title": "其他独联体国家",
-        "deliveryTime": "5-10个工作日"
+        "deliveryTime": "7-30个工作日"
       }
     },
     "factors": {

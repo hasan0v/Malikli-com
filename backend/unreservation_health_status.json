@@ -1,0 +1,29 @@
+[
+  {
+    "timestamp": "2025-08-01T22:29:24.491645+00:00",
+    "status": "healthy",
+    "issues": [],
+    "metrics": {
+      "expired_reservations": 0,
+      "recent_cleanups": {
+        "cancelled_today": 4,
+        "last_cleanup_hours_ago": 0.11788620166666668
+      },
+      "performance": {
+        "total_reservations": 4,
+        "processed_reservations": 4,
+        "avg_lifetime_seconds": "292338.061343250000",
+        "avg_processing_time": 5.0
+      },
+      "database": {
+        "healthy": true,
+        "response_time_ms": 67.101,
+        "error": null
+      },
+      "lock_status": {
+        "stale_lock": false,
+        "lock_exists": false
+      }
+    }
+  }
+]

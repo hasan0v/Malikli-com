@@ -98,23 +98,28 @@ export default function Navbar() {
     <>
       <nav className={navbarClass}>
         <div className={styles.navContainer}>
-          <Link href="/" className={styles.logoContainer}>
-            {/* Use standard logo on server render, then conditionally apply styles once mounted */}
-            <Image 
-              src="/logo.png" 
-              alt="Malikli1992 Logo" 
-              width={150} 
-              height={40} 
-              className={mounted && isHomePage && !isScrolledOrMenuOpen ? styles.logoWhite : styles.logo}
-              priority
-              style={{
-                width: 'auto',
-                height: 'auto',
-                maxHeight: '40px',
-                // Responsive sizing handled by CSS media queries
-              }}
-            />
-          </Link>
+          <div className={styles.logoSection}>
+            <Link href="/" className={styles.logoContainer}>
+              {/* Use standard logo on server render, then conditionally apply styles once mounted */}
+              <Image 
+                src="/logo.png" 
+                alt="Malikli1992 Logo" 
+                width={150} 
+                height={40} 
+                className={mounted && isHomePage && !isScrolledOrMenuOpen ? styles.logoWhite : styles.logo}
+                priority
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                  maxHeight: '40px',
+                  // Responsive sizing handled by CSS media queries
+                }}
+              />
+            </Link>
+            <span className={`${styles.tagline} ${mounted && isHomePage && !isScrolledOrMenuOpen ? styles.taglineWhite : ''}`}>
+              {t('nav.tagline')}
+            </span>
+          </div>
 
           <div className={styles.navLinks}>
             <Link href="/delivery" className={styles.navLink}>

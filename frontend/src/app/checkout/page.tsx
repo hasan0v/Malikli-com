@@ -11,6 +11,7 @@ import { createOrder, CreateOrderRequest, createDirectOrder, CreateDirectOrderRe
 import { createCart, addToCartAPI } from '@/services/cartService';
 import { useI18n } from '@/hooks/useI18n';
 import { CheckoutValidationBar } from '@/components/inventory/CartValidationAlert';
+import { getEMSShippingMethod } from '@/utils/emsShippingCalculator';
 import styles from './checkout.module.css';
 
 // Components
@@ -245,6 +246,249 @@ export default function CheckoutPage() {
       loadUserAddresses();
     }
   }, [isAuthenticated, user, isClientMounted]);
+
+  // Auto-calculate shipping cost when country changes
+  useEffect(() => {
+    if (checkoutData.shipping_address.country && isClientMounted) {
+      const items = isBuyNowFlow && buyNowProduct ? [buyNowProduct] : cartItems;
+      const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+      
+      if (itemCount > 0) {
+        // Map country code to full country name for EMS calculator
+        const countryCodeToName: Record<string, string> = {
+          'AF': 'Afghanistan',
+          'AL': 'Albania', 
+          'DZ': 'Algeria',
+          'AO': 'Angola',
+          'AI': 'Anguilla',
+          'AG': 'Antigua and Barbuda',
+          'AR': 'Argentina',
+          'AM': 'Armenia',
+          'AW': 'Aruba',
+          'AU': 'Australia',
+          'AT': 'Austria',
+          'AZ': 'Azerbaijan',
+          'BS': 'Bahamas',
+          'BH': 'Bahrain',
+          'BD': 'Bangladesh',
+          'BB': 'Барбадос',
+          'BY': 'Belarus',
+          'BE': 'Belgium',
+          'BZ': 'Belize',
+          'BJ': 'Benin',
+          'BM': 'Bermuda',
+          'BT': 'Bhutan',
+          'BO': 'Bolivia',
+          'BQ': 'Bonaire, Sint Eustatius, and Saba (the former Antilles)',
+          'BA': 'Bosnia-Herzegovina',
+          'BW': 'Botswana',
+          'BR': 'Brazil',
+          'BN': 'Brunei Darussalam',
+          'BG': 'Bulgaria',
+          'BF': 'Burkina Faso',
+          'BI': 'Burundi',
+          'KH': 'Cambodia',
+          'CM': 'Cameroon',
+          'CA': 'Canada',
+          'IC': 'Canary Islands (Spain)',
+          'CV': 'Cape Verde',
+          'KY': 'Cayman Islands',
+          'CF': 'Central African Republic',
+          'TD': 'Chad',
+          'CL': 'Chile',
+          'CN': 'China',
+          'CO': 'Columbia',
+          'KM': 'Comoros Islands',
+          'CR': 'Costa Rica',
+          'CI': 'Côte d\'Ivoire (Rep.)',
+          'HR': 'Croatia',
+          'CU': 'Cuba',
+          'CW': 'Curaçao',
+          'CY': 'Cyprus',
+          'CZ': 'Czech Republic',
+          'CD': 'Dem. Republic of the Congo',
+          'KP': 'Dem. People\'s Rep. of Korea',
+          'DK': 'Denmark',
+          'DJ': 'Djibouti',
+          'DM': 'Dominica',
+          'DO': 'Dominican Republic',
+          'EC': 'Ecuador',
+          'EG': 'Egypt',
+          'SV': 'Salvador',
+          'GQ': 'Equatorial Guinea',
+          'ER': 'Eritrea',
+          'EE': 'Estonia',
+          'SZ': 'Eswatini (ex. Swaziland)',
+          'ET': 'Ethiopia',
+          'FO': 'Faroe Islands (Denmark)',
+          'FJ': 'Fiji',
+          'FI': 'Finland',
+          'FR': 'France',
+          'PF': 'French Polynesia',
+          'GA': 'Gabon',
+          'GM': 'Gambia',
+          'GE': 'Georgia',
+          'DE': 'Germany',
+          'GH': 'Ghana',
+          'GI': 'Gibraltar (Britain)',
+          'GR': 'Greece',
+          'GL': 'Greenland (Denmark)',
+          'GD': 'Grenada',
+          'GT': 'Guatemala',
+          'GG': 'Guernsey (Britain)',
+          'GN': 'Guinea',
+          'GY': 'Guyana',
+          'HT': 'Haiti',
+          'HK': 'Hong Kong (China)',
+          'HU': 'Hungary',
+          'IS': 'Iceland',
+          'IN': 'India',
+          'ID': 'Indonesia',
+          'IR': 'Iran (Islamic Rep.)',
+          'IQ': 'Iraq',
+          'IE': 'Ireland',
+          'IL': 'Israel',
+          'IT': 'Italy',
+          'JM': 'Jamaica',
+          'JP': 'Japan',
+          'JE': 'Jersey (Britain)',
+          'JO': 'Jordan',
+          'KZ': 'Kazakhstan',
+          'KE': 'Kenya',
+          'KI': 'Kiribati',
+          'XK': 'Kosovo',
+          'KW': 'Kuwait',
+          'KG': 'Kyrgyzstan',
+          'LA': 'Laos',
+          'LV': 'Latvia',
+          'LB': 'Lebanon',
+          'LS': 'Lesotho',
+          'LR': 'Liberia',
+          'LY': 'Libya',
+          'LI': 'Liechtenstein',
+          'LT': 'Lithuania',
+          'LU': 'Luxembourg',
+          'MO': 'Macao',
+          'MK': 'North Macedonia',
+          'MG': 'Madagascar',
+          'MW': 'Malawi',
+          'MY': 'Malaysia',
+          'MV': 'Maldives',
+          'ML': 'Mali',
+          'MT': 'Malta',
+          'MR': 'Mauritania',
+          'MU': 'Mauritius',
+          'MX': 'Mexico',
+          'MD': 'Moldova',
+          'MC': 'Monaco',
+          'MN': 'Mongolia',
+          'ME': 'Montenegro',
+          'MA': 'Morocco',
+          'MZ': 'Mozambique',
+          'MM': 'Myanmar',
+          'NA': 'Namibia',
+          'NP': 'Nepal',
+          'NL': 'Netherlands',
+          'NC': 'New Caledonia',
+          'NZ': 'New Zealand',
+          'NI': 'Nicaragua',
+          'NE': 'Niger',
+          'NG': 'Nigeria',
+          'NO': 'Norway',
+          'OM': 'Oman',
+          'PK': 'Pakistan',
+          'PA': 'Panama (Rep.)',
+          'PG': 'Papua New Guinea',
+          'PY': 'Paraguay',
+          'PE': 'Peru',
+          'PH': 'Philippines',
+          'PL': 'Poland',
+          'PT': 'Portugal',
+          'QA': 'Qatar',
+          'RO': 'Romania',
+          'RU': 'Russian Federation',
+          'RW': 'Rwanda',
+          'KN': 'Saint Kitts and Nevis',
+          'LC': 'St. Lucia',
+          'MF': 'Saint-Martin',
+          'VC': 'St. Vincent and the Grenadines',
+          'WS': 'Samoa',
+          'SM': 'San Marino',
+          'ST': 'Sao Tome and Principe',
+          'SA': 'Saudi Arabia',
+          'SN': 'Senegal',
+          'RS': 'Serbia',
+          'SC': 'Seychelles',
+          'SL': 'Sierra Leone',
+          'SG': 'Singapore',
+          'SK': 'Slovakia',
+          'SI': 'Slovenia',
+          'SB': 'Solomon Island',
+          'ZA': 'South Africa',
+          'ES': 'Spain',
+          'LK': 'Sri Lanka',
+          'SD': 'Sudan',
+          'SR': 'Surinam',
+          'SE': 'Sweden',
+          'CH': 'Switzerland',
+          'SY': 'Syrian Arab Republic',
+          'TW': 'Taiwan (China)',
+          'TJ': 'Tajikistan',
+          'TZ': 'Tanzania',
+          'TH': 'Thailand',
+          'TG': 'Togolese Republic',
+          'TO': 'Tonga',
+          'TT': 'Trinidad and Tobago',
+          'TN': 'Tunisia',
+          'TR': 'Turkey',
+          'TM': 'Turkmenistan',
+          'TC': 'Turks and Caicos Islands',
+          'UG': 'Uganda',
+          'UA': 'Ukraine',
+          'AE': 'United Arab Emirates',
+          'GB': 'United Kingdom of Great Britain and Northern Ireland',
+          'UY': 'Uruguay',
+          'US': 'USA (United States)',
+          'VI': 'Virgin Islands',
+          'UZ': 'Uzbekistan',
+          'VU': 'Vanuatu',
+          'VA': 'Vatican',
+          'VE': 'Venezuela',
+          'VN': 'Vietnam',
+          'VG': 'Virgin Islands',
+          'YE': 'Yemen',
+          'ZM': 'Zambia',
+          'ZW': 'Zimbabwe'
+        };
+
+        const countryName = countryCodeToName[checkoutData.shipping_address.country];
+        
+        if (countryName) {
+          // Calculate subtotal for declared value
+          const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+          
+          // Get EMS shipping method
+          const emsMethod = getEMSShippingMethod(
+            countryName, 
+            itemCount, 
+            subtotal, 
+            undefined, // Use default description
+            t('checkout.shipping.serviceName') // Use localized service name
+          );
+          
+          if (emsMethod) {
+            // Update dynamic shipping cost and shipping method
+            setCheckoutData(prev => ({
+              ...prev,
+              dynamic_shipping_cost: emsMethod.cost,
+              shipping_method: emsMethod
+            }));
+          }
+        }
+      }
+    }
+  }, [checkoutData.shipping_address.country, isBuyNowFlow, buyNowProduct, cartItems, isClientMounted, t]);
+
   // Calculate order summary
   const calculateOrderSummary = (): OrderSummary => {
     // Use Buy Now product if in Buy Now flow, otherwise use cart items
@@ -615,19 +859,87 @@ export default function CheckoutPage() {
 
 const handleOrderSubmission = async () => {
     setIsLoading(true);
-    // console.log('=== ORDER SUBMISSION STARTED ==='); // Commented out for production
-    // console.log('Current step:', currentStep); // Commented out for production
-    // console.log('Cart ID:', cartId); // Commented out for production
-    // console.log('Selected Address ID:', selectedAddressId); // Commented out for production
-    // console.log('Is authenticated:', isAuthenticated); // Commented out for production
-    // console.log('User:', user); // Commented out for production
-    // console.log('Checkout data:', checkoutData); // Commented out for production
-    // console.log('Is buy now flow:', isBuyNowFlow); // Commented out for production
+    console.log('=== ORDER SUBMISSION STARTED ===');
+    console.log('Current step:', currentStep);
+    console.log('Cart ID:', cartId);
+    console.log('Selected Address ID:', selectedAddressId);
+    console.log('Is authenticated:', isAuthenticated);
+    console.log('User:', user);
+    console.log('Checkout data:', checkoutData);
+    console.log('Is buy now flow:', isBuyNowFlow);
     
-    try {      // Create the order before redirecting to payment
+    try {      
+      console.log('=== ENTERING TRY BLOCK ===');
+      // Create the order before redirecting to payment
       let savedAddressId = selectedAddressId;
-      let createdOrder = null;      // Save address for both authenticated and guest users if needed
+      let createdOrder = null;      
+      console.log('=== VARIABLES INITIALIZED ===');
+      console.log('savedAddressId:', savedAddressId);
+      console.log('createdOrder:', createdOrder);
+      
+      // Save address for both authenticated and guest users if needed
+      console.log('=== CHECKING ADDRESS REQUIREMENT ===');
+      console.log('!selectedAddressId:', !selectedAddressId);
+      
       if (!selectedAddressId) {
+        console.log('=== ADDRESS SAVING SECTION ===');
+        console.log('Creating address for order (save_address=', checkoutData.save_address, ')');
+        try {
+          console.log('=== GETTING TOKEN ===');
+          const token = localStorage.getItem('access_token');
+          console.log('Token retrieved:', !!token);
+          
+          console.log('=== PREPARING ADDRESS DATA ===');
+          // Prepare shipping address data
+          const shippingAddressData: CreateAddressRequest = {
+            address_type: 'shipping',
+            recipient_name: `${checkoutData.customer_info.first_name} ${checkoutData.customer_info.last_name}`.trim(),
+            street_address: checkoutData.shipping_address.street_address,
+            address_line_2: checkoutData.shipping_address.apartment || undefined,
+            city: checkoutData.shipping_address.city,
+            state_province: (checkoutData.shipping_address.state || '').trim() || 'N/A', // Ensure we never send empty string
+            postal_code: checkoutData.shipping_address.postal_code,
+            country_code: checkoutData.shipping_address.country,
+            phone_number: checkoutData.customer_info.phone || undefined,
+            is_default_shipping: isAuthenticated ? checkoutData.save_address : false, // Only set as default for authenticated users
+            is_default_billing: isAuthenticated ? checkoutData.save_address : false,
+          };
+
+          console.log('Address data to save:', shippingAddressData);
+
+          console.log('=== SAVING ADDRESS ===');
+          // Save address (authenticated users vs guest users)
+          let savedAddress;
+          if (isAuthenticated && token) {
+            console.log('Saving address for authenticated user');
+            savedAddress = await saveAddress(shippingAddressData, token);
+          } else {
+            console.log('Saving address for guest user');
+            savedAddress = await saveGuestAddress(shippingAddressData);
+          }
+          
+          console.log('=== ADDRESS SAVED ===');
+          savedAddressId = savedAddress.id;
+          console.log('Address saved successfully:', savedAddress);
+        } catch (addressError) {
+          console.error('=== ADDRESS SAVING ERROR ===');
+          console.error('Failed to save address:', addressError);
+          throw new Error('Failed to save shipping address: ' + (addressError instanceof Error ? addressError.message : 'Unknown error'));
+        }
+      } else if (selectedAddressId) {
+        console.log('Using existing selected address:', selectedAddressId);
+        savedAddressId = selectedAddressId;
+      }
+
+      console.log('=== ADDRESS SECTION COMPLETE ===');
+      console.log('Final savedAddressId:', savedAddressId);
+      
+      // For Buy Now flow, use direct order creation
+      console.log('=== CHECKING ORDER CREATION FLOW ===');
+      console.log('isBuyNowFlow:', isBuyNowFlow);
+      console.log('buyNowProduct:', buyNowProduct);
+      
+      if (isBuyNowFlow && buyNowProduct) {
         // console.log('Creating address for order (save_address=', checkoutData.save_address, ')'); // Commented out for production
         try {
           const token = localStorage.getItem('access_token');          
@@ -686,7 +998,11 @@ const handleOrderSubmission = async () => {
           // console.log('✓ Auth token available for Buy Now'); // Commented out for production
         } else {
           // console.log('⚠ No auth token - proceeding as guest Buy Now'); // Commented out for production
-        }        // Create direct order data
+        }        console.log('=== CREATING DIRECT ORDER DATA ===');
+        console.log('checkoutData.shipping_method:', checkoutData.shipping_method);
+        console.log('checkoutData.shipping_method?.id:', checkoutData.shipping_method?.id);
+        
+        // Create direct order data
         const createDirectOrderData: CreateDirectOrderRequest = {
           product_id: buyNowProduct.id,
           quantity: buyNowProduct.quantity || 1,
@@ -695,6 +1011,14 @@ const handleOrderSubmission = async () => {
           shipping_method_id: checkoutData.shipping_method?.id || 1,
           customer_notes: checkoutData.customer_notes || '',
         };
+
+        // Add calculated shipping cost override
+        if (checkoutData.dynamic_shipping_cost !== null && checkoutData.dynamic_shipping_cost !== undefined) {
+          createDirectOrderData.shipping_cost_override = checkoutData.dynamic_shipping_cost;
+          console.log('Adding shipping cost override:', checkoutData.dynamic_shipping_cost);
+        }
+
+        console.log('shipping_method_id being sent:', createDirectOrderData.shipping_method_id);
 
         // Add guest email if user is not authenticated
         if (!isAuthenticated) {
@@ -718,20 +1042,33 @@ const handleOrderSubmission = async () => {
           createDirectOrderData.product_image = buyNowProduct.image;
         }
 
-        // console.log('=== SENDING DIRECT ORDER CREATION REQUEST ==='); // Commented out for production
-        // console.log('Direct order data:', createDirectOrderData);        // Create the order directly // Commented out for production
-        createdOrder = await createDirectOrder(createDirectOrderData, token || undefined);
+        console.log('=== SENDING DIRECT ORDER CREATION REQUEST ===');
+        console.log('Direct order data:', createDirectOrderData);
         
-        // console.log('=== DIRECT ORDER CREATED SUCCESSFULLY ==='); // Commented out for production
-        // console.log('Created order:', createdOrder);      } else { // Commented out for production
-        // console.log('=== REGULAR CHECKOUT FLOW - PROCEEDING WITH ORDER CREATION ==='); // Commented out for production
+        try {
+          console.log('About to call createDirectOrder...');
+          createdOrder = await createDirectOrder(createDirectOrderData, token || undefined);
+          console.log('createDirectOrder returned:', createdOrder);
+        } catch (directOrderError) {
+          console.error('=== DIRECT ORDER CREATION ERROR ===');
+          console.error('Error:', directOrderError);
+          console.error('Error message:', directOrderError instanceof Error ? directOrderError.message : 'Unknown error');
+          console.error('Error stack:', directOrderError instanceof Error ? directOrderError.stack : 'No stack trace');
+          throw directOrderError; // Re-throw to be caught by outer try-catch
+        }
+        
+        console.log('=== DIRECT ORDER CREATED SUCCESSFULLY ===');
+        console.log('Created order:', createdOrder);
+      } else {
+        console.log('=== REGULAR CHECKOUT FLOW - PROCEEDING WITH ORDER CREATION ===');
 
         // For regular checkout, ensure we have a cart with items
         let orderCartId = cartId;
+        console.log('Initial orderCartId:', orderCartId);
         
         // If no cart ID exists (single item purchase), create a temporary cart
         if (!orderCartId) {
-          // console.log('=== NO CART ID - CREATING TEMPORARY CART FOR SINGLE ITEM ==='); // Commented out for production
+          console.log('=== NO CART ID - CREATING TEMPORARY CART FOR SINGLE ITEM ===');
           
           // Determine the items to add to cart
           const itemsToAdd = isBuyNowFlow && buyNowProduct ? [buyNowProduct] : cartItems;
@@ -818,11 +1155,20 @@ const handleOrderSubmission = async () => {
           createOrderData.email_for_guest = checkoutData.customer_info.email;
         }
 
-        // console.log('=== SENDING ORDER CREATION REQUEST ==='); // Commented out for production
-        // console.log('Order data:', createOrderData); // Commented out for production
+        console.log('=== SENDING ORDER CREATION REQUEST ===');
+        console.log('Order data:', createOrderData);
 
-        // Create the order with pending status
-        createdOrder = await createOrder(createOrderData, authToken);
+        try {
+          console.log('About to call createOrder...');
+          createdOrder = await createOrder(createOrderData, authToken);
+          console.log('createOrder returned:', createdOrder);
+        } catch (orderCreationError) {
+          console.error('=== ORDER CREATION ERROR ===');
+          console.error('Error:', orderCreationError);
+          console.error('Error message:', orderCreationError instanceof Error ? orderCreationError.message : 'Unknown error');
+          console.error('Error stack:', orderCreationError instanceof Error ? orderCreationError.stack : 'No stack trace');
+          throw orderCreationError; // Re-throw to be caught by outer try-catch
+        }
         
         // console.log('=== ORDER CREATED SUCCESSFULLY ==='); // Commented out for production
         // console.log('Created order:', createdOrder); // Commented out for production
@@ -830,14 +1176,21 @@ const handleOrderSubmission = async () => {
         // Clear the cart after successful order creation
         dispatch(clearCart());
       }      // console.log('=== REDIRECTING TO PAYPRO PAYMENT ==='); // Commented out for production
-      // console.log('Order created successfully:', createdOrder); // Commented out for production
+      console.log('=== ORDER CREATION RESULT DEBUG ===');
+      console.log('Created order object:', createdOrder);
+      console.log('Created order type:', typeof createdOrder);
+      console.log('Created order ID:', createdOrder?.id);
+      console.log('Created order keys:', Object.keys(createdOrder || {}));
       
       // Always use PayPro payment integration instead of external links
       // Redirect to PayPro payment page with order ID
       if (createdOrder && createdOrder.id) {
-        // console.log('Redirecting to PayPro payment page for order:', createdOrder.id); // Commented out for production
+        console.log('✓ Order has valid ID, redirecting to payment page:', createdOrder.id);
         window.location.href = `/payment?order_id=${createdOrder.id}`;
       } else {
+        console.error('✗ Order creation issue:');
+        console.error('- createdOrder exists:', !!createdOrder);
+        console.error('- createdOrder.id exists:', !!createdOrder?.id);
         throw new Error('Order creation failed - no order ID available');
       }
     } catch (error) {
@@ -1007,6 +1360,7 @@ const handleOrderSubmission = async () => {
             <OrderSummaryComponent
               orderSummary={orderSummary}
               isLoading={isLoading}
+              currentStep={currentStep}
             />
           </div>
         </div>

@@ -413,6 +413,7 @@ class DirectOrderCreateSerializer(serializers.Serializer):
     shipping_address_id = serializers.IntegerField(write_only=True, required=True)
     billing_address_id = serializers.IntegerField(write_only=True, required=False, allow_null=True)
     shipping_method_id = serializers.IntegerField(write_only=True, required=True)
+    shipping_cost_override = serializers.DecimalField(max_digits=10, decimal_places=2, write_only=True, required=False, allow_null=True)  # Override default shipping cost with calculated cost
     customer_notes = serializers.CharField(required=False, allow_blank=True, write_only=True)
     email_for_guest = serializers.EmailField(required=False, allow_null=True, write_only=True)  # For guest orders
     
@@ -519,7 +520,10 @@ class DirectOrderCreateSerializer(serializers.Serializer):
             subtotal_amount = unit_price * quantity
             discount_amount = Decimal('0.00')
             tax_amount = Decimal('0.00')  # Add tax logic if needed
-            total_amount = subtotal_amount - discount_amount + tax_amount + shipping_method.cost
+            
+            # Use shipping cost override if provided, otherwise use default shipping method cost
+            shipping_cost = validated_data.get('shipping_cost_override', shipping_method.cost)
+            total_amount = subtotal_amount - discount_amount + tax_amount + shipping_cost
 
             # Create the Order
             order = Order.objects.create(
@@ -528,7 +532,7 @@ class DirectOrderCreateSerializer(serializers.Serializer):
                 shipping_address=shipping_address,
                 billing_address=billing_address,
                 shipping_method=shipping_method,
-                shipping_cost=shipping_method.cost,
+                shipping_cost=shipping_cost,  # Use calculated shipping cost
                 subtotal_amount=subtotal_amount,
                 discount_amount=discount_amount,
                 tax_amount=tax_amount,
