@@ -14,8 +14,8 @@ export default function PaymentSuccessPage() {
   const [loading, setLoading] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
   
-  const orderId = searchParams.get('order_id');
-  const status = searchParams.get('status');
+  const orderId = searchParams?.get('order_id');
+  const status = searchParams?.get('status');
   
   // Redirect countdown
   useEffect(() => {

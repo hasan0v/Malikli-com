@@ -12,10 +12,10 @@ export default function PaymentFailedPage() {
   const [countdown, setCountdown] = useState(15);
   const [isRedirecting, setIsRedirecting] = useState(false);
   
-  const orderId = searchParams.get('order_id');
-  const error = searchParams.get('error');
-  const status = searchParams.get('status');
-  const token = searchParams.get('token');
+  const orderId = searchParams?.get('order_id');
+  const error = searchParams?.get('error');
+  const status = searchParams?.get('status');
+  const token = searchParams?.get('token');
   
   // Redirect countdown
   useEffect(() => {

@@ -12,7 +12,7 @@ export default function PaymentErrorPage() {
   const [countdown, setCountdown] = useState(15);
   const [isClient, setIsClient] = useState(false);
   
-  const error = searchParams.get('error');
+  const error = searchParams?.get('error');
   
   // Prevent hydration issues
   useEffect(() => {

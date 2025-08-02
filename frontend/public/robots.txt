@@ -1,0 +1,27 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /auth
+Disallow: /profile
+Disallow: /dev
+Disallow: /language-test
+Disallow: /api
+Disallow: /*?*utm_*
+Disallow: /*?*fbclid*
+Disallow: /*?*gclid*
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+Disallow: /profile
+Disallow: /dev
+
+# Host
+Host: https://malikli1992.com
+
+# Sitemaps
+Sitemap: https://malikli1992.com/sitemap.xml
+Sitemap: https://malikli1992.com/server-sitemap.xml

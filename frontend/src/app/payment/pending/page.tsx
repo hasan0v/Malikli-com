@@ -13,8 +13,8 @@ export default function PaymentPendingPage() {
   const [checkingStatus, setCheckingStatus] = useState(true);
   const [isClient, setIsClient] = useState(false);
   
-  const orderId = searchParams.get('order_id');
-  const status = searchParams.get('status');
+  const orderId = searchParams?.get('order_id');
+  const status = searchParams?.get('status');
   
   // Prevent hydration issues
   useEffect(() => {

@@ -13,9 +13,9 @@ export default function PaymentCancelledPage() {
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [isClient, setIsClient] = useState(false);
   
-  const orderId = searchParams.get('order_id');
-  const status = searchParams.get('status');
-  const error = searchParams.get('error');
+  const orderId = searchParams?.get('order_id');
+  const status = searchParams?.get('status');
+  const error = searchParams?.get('error');
   
   // Prevent hydration issues
   useEffect(() => {
