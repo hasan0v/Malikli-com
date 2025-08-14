@@ -39,6 +39,24 @@
   z-index: 10;
 }
 
+/* Portrait handling: add blurred background filler */
+.mainImageContainer.portrait {
+  background:#000; /* fallback */
+}
+.bgFiller {
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  filter:blur(30px) brightness(.8) saturate(1.1);
+  transform:scale(1.1);
+  opacity:0;
+  animation:fadeInFiller .35s ease forwards;
+}
+@keyframes fadeInFiller { from {opacity:0;} to {opacity:1;} }
+/* Ensure actual image stays above filler */
+.bgFiller + .mainImage { position:relative; z-index:1; }
+
 /* Main Image */
 .mainImage {
   width: 100%;

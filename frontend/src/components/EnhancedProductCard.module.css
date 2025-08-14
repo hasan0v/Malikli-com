@@ -624,6 +624,14 @@
   .storyParagraph {
     font-size: 13px;
     line-height: 1.6;
+  max-width: 220px; /* narrow readable measure matches design card */
+  margin-left: auto;
+  margin-right: auto;
+  background: #ffffff;
+  padding: 16px 18px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid rgba(10,186,181,0.08);
   }
   
   .storyDetails {

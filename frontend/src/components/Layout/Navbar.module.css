@@ -11,6 +11,440 @@
   color: #333;
 }
 
+/* Subtle hairline divider for content separation */
+.navbar::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(10,171,181,0.25) 15%, rgba(10,171,181,0.35) 50%, rgba(10,171,181,0.25) 85%, rgba(0,0,0,0) 100%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+
+.navbar[data-scrolled='true']::after { opacity: 1; }
+
+/* Scroll shrink & subtle backdrop effect */
+.navbar[data-scrolled='true'] {
+  height: 64px;
+  backdrop-filter: saturate(180%) blur(14px);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 4px 20px -4px rgba(0,0,0,0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navbar[data-scrolled='true'] {
+    transition: none;
+    backdrop-filter: none;
+  }
+}
+
+/* New structural wrapper enabling future layout refinements */
+.navInner {
+  /* acts as flex container already via navContainer rules */
+}
+
+/* Brand cluster groups logo + tagline for refined spacing */
+.brandCluster {
+  position: relative;
+}
+
+/* Modern minimalist variant for logo + tagline */
+.taglineModern {
+  font-weight: 500;
+  letter-spacing: 0.05em; /* tighter for better legibility in Cyrillic */
+  text-transform: none;
+  font-size: clamp(11px, 0.5vw + 9px, 14px);
+  background: linear-gradient(90deg, #0ABAB5 0%, #0891b2 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  padding: 0;
+  margin-top: 2px;
+  margin-left: 1px;
+  text-shadow: none;
+  opacity: 0.95;
+  line-height: 1.15;
+  white-space: normal; /* allow elegant wrap instead of over-tracking */
+  /* max-width: 200px; */
+  position: relative;
+}
+
+/* Refined variant for slogan: keeps brand color (#0ABAB5 requirement) but improves structure & legibility */
+.taglineRefined {
+  background: none !important; /* ensure solid brand color */
+  color: #0ABAB5 !important; /* preserve brand */
+  font-weight: 600;
+  font-size: clamp(11px, 0.42vw + 9px, 15px);
+  letter-spacing: 0.045em;
+  line-height: 1.18;
+  font-feature-settings: "liga" 1, "calt" 1;
+  display: inline-block;
+  padding: 2px 4px 2px 6px; /* subtle inset background breathing */
+  border-radius: 6px;
+  position: relative;
+  isolation: isolate; /* allow pseudo layering */
+  background-color: rgba(10,186,181,0.06); /* faint pill */
+  backdrop-filter: saturate(140%) blur(1px);
+}
+
+/* Minimal: ultra-flat, no pill, just text with subtle opacity shift */
+.taglineMinimal {
+  background: none !important;
+  color: #0ABAB5 !important;
+  font-weight: 500;
+  font-size: clamp(11px, 0.45vw + 9px, 14px);
+  padding: 0;
+  margin-top: 4px;
+  margin-left: 2px;
+  letter-spacing: 0.04em;
+  line-height: 1.14;
+  opacity: 0.92;
+  transition: opacity .3s ease;
+}
+.taglineMinimal:hover { opacity: 1; }
+
+/* MonoBar: single left bar accent, condensed text */
+.taglineMonoBar {
+  background: none !important;
+  color: #0ABAB5 !important;
+  position: relative;
+  padding: 2px 4px 2px 10px;
+  margin-top: 3px;
+  margin-left: 0;
+  font-size: clamp(11px, 0.4vw + 9px, 14px);
+  letter-spacing: 0.045em;
+  font-weight: 600;
+}
+.taglineMonoBar::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 2px;
+  background: #0ABAB5;
+  opacity: 0.85;
+}
+.navbar[data-scrolled='true'] .taglineMonoBar::before { background: #0A4B52; }
+
+/* Hero: gradient luminous variant used only on home top, transforms on scroll */
+.taglineHero {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-size: clamp(12px, 0.5vw + 10px, 16px);
+  background: linear-gradient(90deg,#0ABAB5 0%,#06c7d3 50%,#0891b2 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+  padding: 2px 6px;
+  margin-top: 4px;
+  margin-left: 2px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  filter: drop-shadow(0 4px 14px rgba(10,186,181,0.35));
+  transition: filter .6s ease, letter-spacing .4s ease, opacity .5s ease;
+}
+.taglineHeroActive { animation: heroPulse 3.2s ease-in-out infinite; }
+@keyframes heroPulse { 0%,100% { filter: drop-shadow(0 4px 14px rgba(10,186,181,0.35)); } 50% { filter: drop-shadow(0 4px 20px rgba(10,186,181,0.55)); } }
+.navbar[data-scrolled='true'] .taglineHero {
+  background: none; -webkit-background-clip: initial; color: #0A4B52; filter: none; text-shadow: none;
+  letter-spacing: 0.045em;
+}
+
+/* Removed left accent bar for cleaner look */
+/* Hard override in case old compiled CSS still injected */
+.taglineRefined::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: none !important;
+}
+
+.taglineRefined:hover {
+  background-color: rgba(10,186,181,0.1);
+  box-shadow: 0 2px 6px -2px rgba(10,186,181,0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .taglineRefined, .taglineRefined:hover { transition: none; }
+}
+
+@media (max-width: 768px) {
+  .taglineRefined { font-size: 11.5px; letter-spacing: 0.04em; padding: 1px 4px 1px 6px; }
+}
+@media (max-width: 480px) {
+  .taglineRefined { font-size: 10.5px; }
+}
+@media (max-width: 375px) {
+  .taglineRefined { font-size: 10px;  }
+}
+@media (max-width: 320px) {
+  .taglineRefined { font-size: 9px;  }
+}
+
+.navbar[data-scrolled='true'] .taglineRefined {
+  background-color: rgba(10,75,82,0.06);
+  color: #0A4B52 !important; /* deep variant for higher contrast when scrolled */
+}
+
+.navbar[data-scrolled='true'] .taglineModern {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .taglineModern {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .taglineModern {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    white-space: normal; /* allow wrap when very narrow */
+  }
+}
+
+@media (max-width: 375px) {
+  .taglineModern {
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    /* max-width: 130px; */
+  }
+}
+
+@media (max-width: 320px) {
+  .taglineModern {
+    font-size: 8.5px;
+    /* max-width: 120px; */
+  }
+}
+
+/* Align brand cluster cleanly */
+.brandCluster {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  gap: 0;
+}
+
+/* Logo refinement & alignment baseline */
+.brandCluster .logoContainer { display: flex; align-items: flex-end; }
+.brandCluster .logoContainer img { 
+  max-height: 42px;
+  transition: transform .4s cubic-bezier(.34,.6,.24,1), filter .4s ease;
+  will-change: transform;
+}
+
+.navbar[data-scrolled='true'] .brandCluster .logoContainer img {
+  max-height: 34px;
+  transform: translateY(1px);
+}
+
+@media (max-width: 768px) {
+  .brandCluster .logoContainer img { max-height: 36px; }
+  .navbar[data-scrolled='true'] .brandCluster .logoContainer img { max-height: 30px; }
+}
+
+@media (max-width: 480px) {
+  .brandCluster .logoContainer img { max-height: 32px; }
+  .navbar[data-scrolled='true'] .brandCluster .logoContainer img { max-height: 28px; }
+}
+
+/* Primary nav as list for better semantics */
+.primaryNav {
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Indicator container context */
+.hasIndicator { position: relative; }
+
+.navIndicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg,#0ABAB5,#0891b2);
+  border-radius: 2px;
+  transition: transform .5s cubic-bezier(.65,.05,.36,1), width .45s cubic-bezier(.65,.05,.36,1), opacity .3s ease;
+  pointer-events: none;
+  will-change: transform, width;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navIndicator { transition: none; }
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+}
+
+/* Utility cluster wraps language / user / cart (future) */
+.utilityCluster {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Burger button future refinement */
+.burger {
+  position: relative;
+  z-index: 1100;
+}
+
+/* Bigger tap target for touch ergonomics */
+.burger {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.02);
+  transition: background .25s ease, box-shadow .25s ease, transform .35s cubic-bezier(.34,.6,.24,1);
+}
+
+.burger:hover { background: rgba(10,171,181,0.08); }
+.burger:active { transform: scale(.92); }
+.navbar[data-scrolled='true'] .burger { background: rgba(0,0,0,0.04); }
+
+@media (prefers-reduced-motion: reduce) {
+  .burger { transition: background .2s ease; }
+  .burger:active { transform: none; }
+}
+
+/* Refined spacing for clusters */
+.navInner {
+  gap: 32px;
+}
+
+@media (max-width: 1024px) {
+  .navInner { gap: 20px; }
+}
+
+/* Focus styles (accessible, minimal) */
+.navInner :focus-visible,
+.mobileMenu :focus-visible,
+.userDropdown :focus-visible {
+  outline: 2px solid #0ABAB5;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Primary nav link refinement */
+.primaryNav .navLink {
+  position: relative;
+  padding: 8px 2px 10px;
+}
+
+.primaryNav .navLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #0ABAB5, #08a0a5);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(.65,.05,.36,1);
+  border-radius: 2px;
+}
+
+/* Slight delay so hover feels intentional */
+.primaryNav .navLink:hover::after { transition-delay: 40ms; }
+
+.primaryNav .navLink:hover::after,
+.primaryNav .navLink:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Active route styling */
+.navLinkActive::after {
+  transform: scaleX(1) !important;
+}
+
+.navLinkActive {
+  color: #0ABAB5;
+}
+
+/* Improve contrast when scrolled */
+.navbar[data-scrolled='true'] .navLinkActive { color: #087b86; }
+
+/* Logo hover micro lift */
+.logoContainer img {
+  transition: transform .4s cubic-bezier(.34,.6,.24,1), filter .4s ease;
+}
+
+.logoContainer:hover img {
+  transform: translateY(-3px) scale(1.015);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoContainer img, .logoContainer:hover img { transition: none; transform: none; }
+}
+
+/* Neutralize tagline gradient when scrolled for stronger contrast */
+.navbar[data-scrolled='true'] .taglineModern {
+  background: none;
+  -webkit-background-clip: initial;
+  color: #0A4B52; /* deep neutral/teal hybrid for readability */
+}
+
+/* Hairline and cluster adjustments on very small devices */
+@media (max-width: 480px) {
+  .navbar::after { opacity: 0.9; }
+  /* .taglineModern { max-width: 160px; } */
+}
+
+/* @media (max-width: 375px) {
+  .taglineModern { max-width: 140px; }
+} */
+
+/* Adjust tagline on shrink */
+.navbar[data-scrolled='true'] .tagline {
+  letter-spacing: 0.1em;
+  opacity: 0.85;
+  transform: translateY(-1px) scale(.95);
+  transition: transform .35s ease, opacity .35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar[data-scrolled='true'] .tagline {
+    transform: none;
+  }
+}
+
+/* Mobile menu animation refinement */
+.mobileMenu {
+  will-change: height, backdrop-filter;
+}
+
+.mobileMenu.open .mobileMenuLinks {
+  animation: menuContentFade .35s ease-out;
+}
+
+@keyframes menuContentFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .navbar.transparent {
   background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
   box-shadow: none;
@@ -37,11 +471,14 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 1px;
+  position: relative;
 }
 
 .logoContainer {
   display: flex;
   align-items: center;
+  margin-bottom: -1px;
 }
 
 .logoContainer img {
@@ -51,24 +488,59 @@
 }
 
 .tagline {
-  font-family: cursive;
-  font-size: 11px;
-  font-weight: 400;
-  color:#0abab5;
-  margin-top: 0px;
-  /* text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-thickness: 1px; */
-  transition: color 0.3s ease;
-  line-height: 1.2;
-  letter-spacing: 1.3px;
+  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Responsive fluid sizing: never smaller than 11px nor larger than 15px */
+  font-size: clamp(11px, 0.55vw + 10px, 15px);
+  font-weight: 600;
+  color: #0abab5; /* DO NOT CHANGE COLOR (requirement) */
+  margin-top: 2px;
+  margin-left: 4px;
+  transition: letter-spacing 0.25s ease, transform 0.25s ease, opacity 0.4s ease;
+  line-height: 1.15;
+  letter-spacing: 0.09em; /* increased tracking for brand feel */
   cursor: default;
   user-select: none;
+  text-transform: uppercase;
+  opacity: 0.92;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2px 0 0;
+  animation: fadeInSlide 0.9s ease-out 0.45s both;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+}
+
+.tagline:hover {
+  opacity: 1;
+  letter-spacing: 0.11em;
+  transform: translateY(-1px);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
 }
 
 .taglineWhite {
-  color: #0abab5;
-  /* text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); */
+  color: #0abab5; /* retains brand color */
+  opacity: 1;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.taglineWhite:hover {
+  opacity: 1;
+  transform: translateY(-0.5px);
+  text-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -109,6 +581,31 @@
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+/* Desktop-specific improvements for larger screens */
+@media (min-width: 1024px) {
+  /* Revert to stacked layout: tagline under logo */
+  .logoSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .tagline {
+    margin-top: 2px;
+    margin-left: 4px; /* slight indent aligns with optical start of logo */
+    letter-spacing: 0.11em;
+    text-align: left;
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1440px) {
+  .tagline {
+    font-size: clamp(12px, 0.45vw + 11px, 16px);
+    letter-spacing: 0.14em;
+    margin-left: 4px;
+  }
 }
 
 /* Language switcher styles - now used for both desktop and mobile */
@@ -224,6 +721,8 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  min-height: calc(100vh - 140px); /* Account for navbar height and padding */
+  position: relative;
 }
 
 .mobileMenuLinks a {
@@ -390,51 +889,169 @@
 
 /* Mobile User Menu Styles */
 .mobileUserSection {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto; /* Push to bottom */
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 20px 20px 0 0;
+  animation: slideUpFade 0.4s ease-out;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mobileUserInfo {
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+  animation: fadeInScale 0.5s ease-out 0.1s both;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.mobileUserInfo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
 }
 
 .mobileUserAvatar {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, #0ABAB5 0%, #08a0a5 100%);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 700;
+  font-size: 20px;
   margin-right: 16px;
-  box-shadow: 0 4px 12px rgba(10, 171, 181, 0.3);
+  box-shadow: 0 6px 20px rgba(10, 171, 181, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  animation: avatarPulse 0.6s ease-out 0.2s both;
+}
+
+@keyframes avatarPulse {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.mobileUserAvatar:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 8px 30px rgba(10, 171, 181, 0.6);
 }
 
 .mobileUserDetails {
   flex: 1;
+  min-width: 0; /* Allow text truncation */
 }
 
 .mobileUserName {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
   color: #ffffff;
   margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  animation: slideInLeft 0.5s ease-out 0.3s both;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .mobileUserEmail {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  animation: slideInLeft 0.5s ease-out 0.4s both;
+}
+
+.mobileChevron {
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.mobileChevronUp {
+  transform: rotate(180deg);
 }
 
 .mobileUserActions {
   padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  animation: slideDownIn 0.3s ease-out;
+  transform-origin: top;
+}
+
+@keyframes slideDownIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scaleY(0.8);
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    max-height: 300px;
+  }
 }
 
 .mobileUserAction,
@@ -442,37 +1059,103 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 12px 16px;
-  margin-bottom: 4px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 500;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
   color: #ffffff;
   text-decoration: none;
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: left;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Staggered animation for action items */
+.mobileUserAction:nth-child(1) { animation: slideInUp 0.4s ease-out 0.5s both; }
+.mobileUserAction:nth-child(2) { animation: slideInUp 0.4s ease-out 0.6s both; }
+.mobileUserAction:nth-child(3) { animation: slideInUp 0.4s ease-out 0.7s both; }
+.mobileUserAction:nth-child(4) { animation: slideInUp 0.4s ease-out 0.8s both; }
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects with enhanced animations */
 .mobileUserAction:hover,
 .mobileAuthAction:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(8px) translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Ripple effect on click */
+.mobileUserAction::before,
+.mobileAuthAction::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: width 0.3s ease, height 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.mobileUserAction:active::before,
+.mobileAuthAction:active::before {
+  width: 300px;
+  height: 300px;
 }
 
 .mobileActionIcon {
-  width: 20px;
-  height: 20px;
-  margin-right: 12px;
-  opacity: 0.8;
+  width: 22px;
+  height: 22px;
+  margin-right: 14px;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.mobileUserAction:hover .mobileActionIcon,
+.mobileAuthAction:hover .mobileActionIcon {
+  opacity: 1;
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Special styling for logout button */
+.mobileUserAction:last-child {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.8) 0%, rgba(220, 38, 38, 0.8) 100%);
+  border-color: rgba(239, 68, 68, 0.5);
+  animation: slideInUp 0.4s ease-out 0.9s both;
+}
+
+.mobileUserAction:last-child:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%);
+  transform: translateX(8px) translateY(-3px);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
 }
 
 .mobileAuthSection {
-  margin-top: 16px;
-  padding: 16px 8px;
+  margin-top: auto; /* Push to bottom when no user section */
+  padding: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-radius: 20px 20px 0 0;
 }
 
 /* Fixed cart button */
@@ -584,25 +1267,28 @@
     order: 1; /* Logo comes first */
   }
 
+  /* Larger, more legible logo on mobile */
   .logoContainer img {
-    max-height: 28px; /* Significantly reduce logo size on mobile */
+    max-height: 36px;
   }
 
   .logo, .logoWhite {
-    max-height: 28px; /* Ensure both logo variants are smaller */
+    max-height: 36px;
   }
 
   .tagline {
-    font-size: 9px; /* Smaller tagline on mobile */
-    margin-top: -1px;
-    letter-spacing: 0.2px;
+    font-size: 11px;
+    margin-top: 4px;
+    margin-left: 2px;
+    letter-spacing: 0.09em;
+    line-height: 1.18;
   }
 
   .navLinks {
     display: none;
   }  .navIcons {
     display: flex;
-    gap: 12px; /* Reduce gap between icons */
+    gap: 6px; /* tighter so language switcher hugs burger */
     align-items: center;
     order: 2; /* Keep profile menu and language switcher visible */
     flex-shrink: 0;
@@ -617,7 +1303,7 @@
     display: block;
     order: 3; /* Ensure hamburger menu is always visible */
     flex-shrink: 0;
-    margin-left: 8px; /* Add small spacing */
+    margin-left: 0; /* remove spacing to bring closer to language switcher */
   }
 
   .mobileMenu {
@@ -662,16 +1348,21 @@
   }
 
   .logoContainer img {
-    max-height: 24px; /* Further reduce logo size */
+    max-height: 32px; /* Keep logo readable */
   }
 
   .logo, .logoWhite {
-    max-height: 24px;
+    max-height: 32px;
   }
 
   .tagline {
-    font-size: 8px; /* Even smaller tagline on very small screens */
-    letter-spacing: 0.1px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+    margin-left: 2px;
+    opacity: 0.9;
+    white-space: normal; /* allow wrap instead of shrinking excessively */
+    /* max-width: 160px; /* constrain width so wrap looks intentional */
   }
 
   .navIcons {
@@ -727,8 +1418,11 @@
   }
 
   .tagline {
-    font-size: 8px;
-    letter-spacing: 0.1px;
+    font-size: 7px;
+    letter-spacing: 0.2px;
+    margin-top: 0px;
+    margin-left: 0px;
+    opacity: 0.75;
   }
 
   .mobileMenu {
@@ -740,7 +1434,29 @@
   }
 }
 
-/* Adjustments for very small screens (like iPhone SE) */
+/* Desktop-specific improvements for larger screens */
+@media (min-width: 1024px) {
+  .tagline {
+    font-size: 13px;
+    letter-spacing: 0.9px;
+    margin-top: 3px;
+    margin-left: 3px;
+  }
+  
+  .logoSection {
+    gap: 2px;
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1440px) {
+  .tagline {
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    margin-left: 0px;
+  }
+}
 @media (max-width: 375px) {
   .navbar {
     height: 60px;
@@ -751,16 +1467,21 @@
   }
 
   .logoContainer img {
-    max-height: 20px;
+    max-height: 28px; /* previously 20px - increase for legibility */
   }
 
   .logo, .logoWhite {
-    max-height: 20px;
+    max-height: 28px;
   }
 
   .tagline {
-    font-size: 7px;
-    letter-spacing: 0px;
+    font-size: 9px;
+    letter-spacing: 0.09em;
+    margin-top: 2px;
+    margin-left: 2px;
+    opacity: 0.9;
+    white-space: normal;
+    /* max-width: 140px; */
   }
 
   .navIcons {
@@ -802,17 +1523,22 @@
   }
 
   .logoContainer img {
-    max-height: 18px;
+    max-height: 24px; /* raise from 18px */
   }
 
   .logo, .logoWhite {
-    max-height: 18px;
+    max-height: 24px;
   }
 
   .tagline {
-    font-size: 12px;
-    letter-spacing: 0px;
-    margin-top: 0px;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+    margin-left: 1px;
+    opacity: 0.85;
+    white-space: normal;
+    /* max-width: 120px; */
+    line-height: 1.15;
   }
 
   .navIcons {
@@ -843,10 +1569,39 @@
   }
 }
 
-/* Hide mobile user menu by default on very small screens */
+/* Very small screens: previously hid mobileUserSection; now keep it visible with compact layout */
 @media (max-width: 375px) {
   .mobileUserSection {
+    display: block; /* ensure visible */
+    padding: 10px 12px;
+  }
+  .mobileUserInfo {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+  }
+  .mobileUserAvatar {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  .mobileUserName {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  /* Hide email on ultra-small screens to save space */
+  .mobileUserEmail {
     display: none;
+  }
+  .mobileUserAction,
+  .mobileAuthAction {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .mobileActionIcon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
   }
 }
 
@@ -876,4 +1631,128 @@
 /* Remove the mobile language section since it's now in main navbar */
 .mobileLangSection {
   display: none;
+}
+
+/* Responsive design adjustments for mobile user section */
+@media (max-width: 480px) {
+  .mobileUserSection {
+    padding: 16px;
+  }
+  
+  .mobileUserInfo {
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  
+  .mobileUserAvatar {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+    margin-right: 12px;
+  }
+  
+  .mobileUserName {
+    font-size: 16px;
+  }
+  
+  .mobileUserEmail {
+    font-size: 13px;
+  }
+  
+  .mobileUserAction,
+  .mobileAuthAction {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+  
+  .mobileActionIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 375px) {
+  .mobileUserSection {
+    padding: 12px;
+  }
+  
+  .mobileUserInfo {
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  
+  .mobileUserAvatar {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .mobileUserName {
+    font-size: 15px;
+  }
+  
+  .mobileUserEmail {
+    font-size: 12px;
+  }
+  
+  .mobileUserAction,
+  .mobileAuthAction {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  
+  .mobileActionIcon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+  }
+}
+
+/* Landscape orientation adjustments for mobile user section */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+  .mobileUserSection {
+    padding: 8px 16px;
+  }
+  
+  .mobileUserInfo {
+    padding: 6px 12px;
+    margin-bottom: 6px;
+  }
+  
+  .mobileUserAvatar {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+  
+  .mobileUserActions {
+    gap: 4px;
+  }
+  
+  .mobileUserAction,
+  .mobileAuthAction {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .mobileUserName {
+    font-size: 14px;
+  }
+  
+  .mobileUserEmail {
+    font-size: 12px;
+  }
+}
+
+/* Unified tagline vertical spacing (sidebar open or closed) */
+.tagline,
+.taglineModern,
+.taglineRefined,
+.taglineMinimal,
+.taglineMonoBar,
+.taglineHero {
+  margin-top: 8px !important;
 }

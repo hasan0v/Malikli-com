@@ -15,7 +15,9 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+import csv, io
 from orders.inventory import InventoryManager
+from rest_framework import parsers
 
 class I18nMixin:
     """
@@ -169,6 +171,41 @@ class ProductViewSet(I18nMixin, viewsets.ReadOnlyModelViewSet): # ReadOnly for n
             'total_count': len(low_stock_variants) + len(low_stock_drops)
         })
 
+    @action(detail=False, methods=['get'], url_path='low-stock-export', permission_classes=[permissions.IsAdminUser])
+    def low_stock_export(self, request):
+        """Export low stock variants/drop products as CSV."""
+        low_stock_data = InventoryManager.get_low_stock_items()
+        output = io.StringIO()
+        writer = csv.writer(output)
+        writer.writerow(['type','product_id','product_name','variant_or_drop_id','sku','available_quantity','low_stock_threshold','reserved_quantity','stock_quantity'])
+        for variant in low_stock_data['variants']:
+            writer.writerow([
+                'variant',
+                variant.product.id,
+                variant.product.name,
+                variant.id,
+                f"{variant.product.sku_prefix}-{variant.sku_suffix}",
+                variant.available_quantity,
+                variant.low_stock_threshold,
+                variant.reserved_quantity,
+                variant.stock_quantity
+            ])
+        for drop in low_stock_data['drop_products']:
+            writer.writerow([
+                'drop_product',
+                drop.product.id,
+                drop.product.name,
+                drop.id,
+                '',
+                drop.available_quantity,
+                drop.low_stock_threshold,
+                drop.reserved_quantity,
+                drop.stock_quantity
+            ])
+        resp = Response(output.getvalue(), content_type='text/csv')
+        resp['Content-Disposition'] = 'attachment; filename="low_stock_export.csv"'
+        return resp
+
     @action(detail=True, methods=['post'], url_path='create-variants', permission_classes=[permissions.IsAdminUser])
     def create_variants(self, request, slug=None):
         """
@@ -189,38 +226,257 @@ class ProductViewSet(I18nMixin, viewsets.ReadOnlyModelViewSet): # ReadOnly for n
         }
         """
         product = self.get_object()
-        sizes = request.data.get('sizes', [])
-        colors = request.data.get('colors', [])
-        
-        # Convert string prices to a proper mapping
-        additional_prices_raw = request.data.get('additional_prices', {})
+        sizes = request.data.get('sizes', []) or []
+        colors = request.data.get('colors', []) or []
+
+        # Normalize to lists of ints (ignore invalid entries silently)
+        def to_int_list(seq):
+            out = []
+            for v in seq:
+                try:
+                    out.append(int(v))
+                except (ValueError, TypeError):
+                    continue
+            return out
+
+        sizes = to_int_list(sizes)
+        colors = to_int_list(colors)
+
+        # Raw mappings from request
+        additional_prices_raw = request.data.get('additional_prices', {}) or {}
+        stock_raw = request.data.get('stock', {}) or {}
+        low_raw = request.data.get('low_stock_thresholds', {}) or {}
+
         additional_prices = {}
-        
-        for key, price in additional_prices_raw.items():
-            try:
-                # Parse keys like "1-2" into (1, 2) tuples
-                if '-' in key:
-                    size_id, color_id = map(int, key.split('-'))
-                    additional_prices[(size_id, color_id)] = float(price)
-                else:
-                    # Handle single value keys (for size-only or color-only variants)
-                    additional_prices[int(key)] = float(price)
-            except (ValueError, TypeError):
-                pass
-                
+        stock_map = {}
+        low_map = {}
+
+        # Helper to parse mapping dictionaries (keys may be "size-color" or single id)
+        def parse_mapping(src_dict, cast_func=float):
+            parsed = {}
+            for key, val in src_dict.items():
+                try:
+                    if '-' in str(key):
+                        size_id, color_id = map(int, str(key).split('-', 1))
+                        parsed[(size_id, color_id)] = cast_func(val)
+                    else:
+                        parsed[int(key)] = cast_func(val)
+                except (ValueError, TypeError):
+                    # Skip malformed entries
+                    continue
+            return parsed
+
+        additional_prices = parse_mapping(additional_prices_raw, cast_func=float)
+        stock_map = parse_mapping(stock_raw, cast_func=int)
+        low_map = parse_mapping(low_raw, cast_func=int)
+
         try:
             variants = product.create_variants_from_options(
-                sizes=sizes, 
+                sizes=sizes,
                 colors=colors,
-                additional_prices=additional_prices
+                additional_prices=additional_prices,
+                stock_map=stock_map,
+                low_stock_map=low_map
             )
             serializer = ProductVariantSerializer(variants, many=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as e:
-            return Response(
-                {"error": str(e)}, 
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['post'], url_path='archive', permission_classes=[permissions.IsAdminUser])
+    def archive_product(self, request, slug=None):
+        """Archive (soft delete) a product by setting is_archived=True"""
+        product = self.get_object()
+        if product.is_archived:
+            return Response({'detail':'Already archived'}, status=200)
+        product.is_archived = True
+        product.save(update_fields=['is_archived','updated_at'])
+        return Response({'status':'archived','product_id':product.id})
+
+    @action(detail=True, methods=['post'], url_path='unarchive', permission_classes=[permissions.IsAdminUser])
+    def unarchive_product(self, request, slug=None):
+        """Unarchive a product (set is_archived False)"""
+        product = self.get_object()
+        if not product.is_archived:
+            return Response({'detail':'Not archived'}, status=200)
+        product.is_archived = False
+        product.save(update_fields=['is_archived','updated_at'])
+        return Response({'status':'unarchived','product_id':product.id})
+
+    @action(detail=False, methods=['get'], url_path='export-csv', permission_classes=[permissions.IsAdminUser])
+    def export_csv(self, request):
+        """Export all (non-archived) products with basic info as CSV."""
+        products = self.filter_queryset(self.get_queryset())  # apply filters if provided
+        output = io.StringIO()
+        writer = csv.writer(output)
+        writer.writerow(['id','name','slug','category','base_price','is_archived','variant_count','created_at'])
+        for p in products:
+            writer.writerow([
+                p.id,
+                p.name,
+                p.slug,
+                p.category.name if p.category else '',
+                p.base_price,
+                p.is_archived,
+                p.variants.count(),
+                p.created_at.isoformat()
+            ])
+        resp = Response(output.getvalue(), content_type='text/csv')
+        resp['Content-Disposition'] = 'attachment; filename="products_export.csv"'
+        return resp
+
+class AdminProductViewSet(viewsets.ModelViewSet):
+    """Full CRUD for products for admin usage"""
+    queryset = Product.objects.all().select_related('category').prefetch_related('variants','translations')
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAdminUser]
+    lookup_field = 'slug'
+
+    @action(detail=True, methods=['post'], url_path='add-translation', permission_classes=[permissions.IsAdminUser])
+    def add_translation(self, request, slug=None):
+        """Add or update a translation for this product.
+
+        Expected JSON body: {"language_code": "en", "name": "Name", "description": "Desc"}
+        """
+        product = self.get_object()
+        language_code = request.data.get('language_code')
+        name = request.data.get('name')
+        description = request.data.get('description')
+        if not language_code:
+            return Response({'error':'language_code required'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            product.set_translation(language_code, name=name, description=description)
+            # refresh serializer to include new translations
+            serializer = self.get_serializer(product)
+            return Response(serializer.data.get('translations', []), status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['post'], url_path='upload-image', permission_classes=[permissions.IsAdminUser], parser_classes=[parsers.MultiPartParser, parsers.FormParser])
+    def upload_image(self, request, slug=None):
+        """Upload a product-level or variant-level image.
+
+        Multipart form fields:
+        - image: file (required)
+        - alt_text: str (optional)
+        - display_order: int (optional, default 0)
+        - is_primary: bool (optional)
+        - variant_id: int (optional) if attaching to a variant
+        """
+        product = self.get_object()
+        file = request.FILES.get('image')
+        if not file:
+            return Response({'error':'image file required'}, status=400)
+        alt_text = request.data.get('alt_text') or ''
+        display_order = request.data.get('display_order') or 0
+        try:
+            display_order = int(display_order)
+        except (ValueError, TypeError):
+            display_order = 0
+        is_primary = str(request.data.get('is_primary', '')).lower() in ['1','true','yes','on']
+        variant_id = request.data.get('variant_id')
+        variant = None
+        if variant_id:
+            try:
+                variant = product.variants.get(id=variant_id)
+            except ProductVariant.DoesNotExist:
+                return Response({'error':'Variant not found for this product'}, status=404)
+        img = ProductImage(product=product if not variant else None, variant=variant if variant else None, image=file, alt_text=alt_text, display_order=display_order, is_primary=is_primary)
+        img.save()
+        # ensure only one primary per scope
+        if is_primary:
+            scope_qs = ProductImage.objects.filter(variant=variant) if variant else ProductImage.objects.filter(product=product, variant__isnull=True)
+            scope_qs.exclude(id=img.id).update(is_primary=False)
+        serializer = ProductSerializer(product, context=self.get_serializer_context())
+        return Response({'images': serializer.data.get('images', [])}, status=201)
+
+    @action(detail=True, methods=['delete'], url_path='images/(?P<image_id>[^/.]+)', permission_classes=[permissions.IsAdminUser])
+    def delete_image(self, request, slug=None, image_id=None):
+        """Delete an image belonging to this product (product-level or variant-level)."""
+        product = self.get_object()
+        img = get_object_or_404(ProductImage, id=image_id)
+        # ensure association
+        if not (img.product_id == product.id or (img.variant and img.variant.product_id == product.id)):
+            return Response({'error':'Image not associated with this product'}, status=400)
+        img.delete()
+        serializer = ProductSerializer(product, context=self.get_serializer_context())
+        return Response({'images': serializer.data.get('images', [])}, status=200)
+
+    @action(detail=True, methods=['post'], url_path='images/(?P<image_id>[^/.]+)/set-primary', permission_classes=[permissions.IsAdminUser])
+    def set_primary_image(self, request, slug=None, image_id=None):
+        """Set an existing image as primary within its scope (product-level or variant-level)."""
+        product = self.get_object()
+        img = get_object_or_404(ProductImage, id=image_id)
+        # validate association with this product
+        if not (img.product_id == product.id or (img.variant and img.variant.product_id == product.id)):
+            return Response({'error': 'Image not associated with this product'}, status=400)
+        # set primary for scope
+        img.is_primary = True
+        img.save(update_fields=["is_primary"])
+        if img.variant_id:
+            ProductImage.objects.filter(variant_id=img.variant_id).exclude(id=img.id).update(is_primary=False)
+        else:
+            ProductImage.objects.filter(product_id=product.id, variant__isnull=True).exclude(id=img.id).update(is_primary=False)
+        serializer = ProductSerializer(product, context=self.get_serializer_context())
+        return Response({'images': serializer.data.get('images', [])}, status=200)
+
+    @action(detail=True, methods=['post'], url_path='reorder-images', permission_classes=[permissions.IsAdminUser])
+    def reorder_images(self, request, slug=None):
+        """Bulk reorder product-level images (and optionally variant-level if variant_id provided per item).
+
+        Expected JSON body:
+        {"orders": [ {"id": 12, "display_order": 0}, {"id": 15, "display_order": 1} ] }
+        Only updates images belonging to this product (or its variants)."""
+        product = self.get_object()
+        items = request.data.get('orders', []) or []
+        updated_ids = []
+        for entry in items:
+            try:
+                img_id = int(entry.get('id'))
+                disp = int(entry.get('display_order', 0))
+            except (TypeError, ValueError):
+                continue
+            try:
+                img = ProductImage.objects.get(id=img_id)
+            except ProductImage.DoesNotExist:
+                continue
+            # association check
+            if not (img.product_id == product.id or (img.variant and img.variant.product_id == product.id)):
+                continue
+            if img.display_order != disp:
+                img.display_order = disp
+                img.save(update_fields=['display_order'])
+            updated_ids.append(img.id)
+        serializer = ProductSerializer(product, context=self.get_serializer_context())
+        return Response({'updated': updated_ids, 'images': serializer.data.get('images', [])})
+
+    @action(detail=True, methods=['post'], url_path='images/(?P<image_id>[^/.]+)/update-alt', permission_classes=[permissions.IsAdminUser])
+    def update_image_alt(self, request, slug=None, image_id=None):
+        """Update alt_text for a product or variant image."""
+        product = self.get_object()
+        img = get_object_or_404(ProductImage, id=image_id)
+        if not (img.product_id == product.id or (img.variant and img.variant.product_id == product.id)):
+            return Response({'error':'Image not associated with this product'}, status=400)
+        alt = request.data.get('alt_text','')[:255]
+        img.alt_text = alt
+        img.save(update_fields=['alt_text'])
+        serializer = ProductSerializer(product, context=self.get_serializer_context())
+        return Response({'images': serializer.data.get('images', [])})
+
+class AdminProductVariantViewSet(viewsets.ModelViewSet):
+    queryset = ProductVariant.objects.all().select_related('product','size','color')
+    serializer_class = ProductVariantSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+class AdminSizeViewSet(viewsets.ModelViewSet):
+    queryset = Size.objects.all().order_by('display_order', 'name')
+    serializer_class = SizeSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+class AdminColorViewSet(viewsets.ModelViewSet):
+    queryset = Color.objects.all().order_by('display_order', 'name')
+    serializer_class = ColorSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 class SizeViewSet(I18nMixin, viewsets.ReadOnlyModelViewSet):
     queryset = Size.objects.all()

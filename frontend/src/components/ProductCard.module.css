@@ -102,6 +102,14 @@
   flex-grow: 1;
 }
 
+/* Improve mobile readability by constraining line length */
+@media (max-width: 768px) {
+  .productInfo {
+    max-width: 94%; /* slight inset from full width */
+    margin: 0 auto; /* center the text block */
+  }
+}
+
 /* Product Name - Slightly smaller */
 .productName {
   margin: 0;

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css'; // This now imports the refactored globals.css
 import LayoutBody from './LayoutBody';
+import ToastProvider from '@/components/ToastProvider';
 import { Suspense } from 'react';
 import CriticalImagePreloader from '../components/CriticalImagePreloader';
 
@@ -141,7 +142,9 @@ export default function RootLayout({
         <PerformanceScript />
       </head>
       <body suppressHydrationWarning>
-        <LayoutBody>{children}</LayoutBody>
+        <ToastProvider>
+          <LayoutBody>{children}</LayoutBody>
+        </ToastProvider>
       </body>
     </html>
   );

@@ -9,6 +9,7 @@ import {
   CartSyncRequest,
   CartMergeRequest 
 } from '../services/cartService';
+import { normaliseError } from '../services/apiError';
 import { convertBackendItemToFrontend, convertFrontendItemToBackend } from '../types/backendCart';
 import CartRecoveryService from '../services/cartRecoveryService';
 
@@ -78,7 +79,8 @@ export const syncCartWithBackend = createAsyncThunk(
 
       return result;
     } catch (error: any) {
-      return rejectWithValue(error.message || 'Failed to sync cart');
+  const norm = normaliseError(error);
+  return rejectWithValue(norm.message);
     }
   }
 );
@@ -107,7 +109,8 @@ export const mergeGuestCartWithUser = createAsyncThunk(
       return result;
     } catch (error: any) {
       console.error('Cart merge error details:', error);
-      return rejectWithValue(error.message || 'Failed to merge cart');
+  const norm = normaliseError(error);
+  return rejectWithValue(norm.message);
     }
   }
 );
@@ -119,7 +122,8 @@ export const loadCartFromBackend = createAsyncThunk(
       const result = await getMyCart(params.guestCartId);
       return result;
     } catch (error: any) {
-      return rejectWithValue(error.message || 'Failed to load cart from backend');
+  const norm = normaliseError(error);
+  return rejectWithValue(norm.message);
     }
   }
 );
@@ -145,7 +149,8 @@ export const bulkAddToUserCart = createAsyncThunk(
       }
 
       return result;    } catch (error: any) {
-      return rejectWithValue(error.message || 'Failed to bulk add items to cart');
+  const norm = normaliseError(error);
+  return rejectWithValue(norm.message);
     }
   }
 );
@@ -173,7 +178,8 @@ export const addToCartAPI = createAsyncThunk(
 
       return result;
     } catch (error: any) {
-      return rejectWithValue(error.message || 'Failed to add item to cart');
+  const norm = normaliseError(error);
+  return rejectWithValue(norm.message);
     }
   }
 );
@@ -212,7 +218,8 @@ export const updateCartItemQuantityAPI = createAsyncThunk(
 
       return result;
     } catch (error: any) {
-      return rejectWithValue(error.message || 'Failed to update cart item quantity');
+  const norm = normaliseError(error);
+  return rejectWithValue(norm.message);
     }
   }
 );
@@ -249,7 +256,8 @@ export const removeFromCartAPI = createAsyncThunk(
 
       return result;
     } catch (error: any) {
-      return rejectWithValue(error.message || 'Failed to remove cart item');
+  const norm = normaliseError(error);
+  return rejectWithValue(norm.message);
     }
   }
 );

@@ -22,13 +22,15 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/auth/', include('users.urls')),
+    path('api/v1/auth/', include('users.urls')),  # Legacy /auth/ prefix for auth endpoints
+    path('api/v1/users/', include('users.urls')),  # Added to satisfy frontend calls to /users/
     path('api/v1/', include('products.urls')), # Your products app URLs (root for products and categories)
     path('api/v1/', include('drops.urls')),    # Add this for public and admin drop endpoints
     path('api/v1/', include('carts.urls')),    # Add this for cart endpoints
     path('api/v1/', include('orders.urls')),   # Uncomment when orders app is ready
     path('api/v1/', include('notifications_app.urls')), # Uncomment when notifications app is ready
     path('api/v1/', include('languages.urls')), # Language management API
+    path('api/v1/', include('analytics.urls')), # Analytics (events + dashboard)
 ]
 
 # Only add this in development for serving media files locally

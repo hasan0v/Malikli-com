@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'notifications_app.apps.NotificationsAppConfig',
     'languages.apps.LanguagesConfig',  # Language management app
+    'analytics.apps.AnalyticsConfig',  # Site analytics (events & dashboard)
     # 'bootstrap5', # For Django Bootstrap 5 integration
     # ... other apps (drops, carts, orders, notifications_app)
 ]

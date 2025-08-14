@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -16,12 +16,31 @@ import { useI18n } from '../../hooks/useI18n';
 
 export default function Navbar() {
   const { t } = useI18n();
+  // Tagline visual variant selector: change value to switch designs quickly.
+  // Supported: 'refined' | 'minimal' | 'monoBar' | 'hero'
+  const TAGLINE_VARIANT = 'refined' as 'refined' | 'minimal' | 'monoBar' | 'hero';
   // Initialize with false and only update after hydration
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartSidebarOpen, setCartSidebarOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [mobileUserDropdownOpen, setMobileUserDropdownOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const navListRef = useRef<HTMLUListElement | null>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number; opacity: number; animating?: boolean }>({ left: 0, width: 0, opacity: 0, animating: false });
+  const indicatorAnimFrame = useRef<number | null>(null);
+  const currentStyleRef = useRef(indicatorStyle);
+  const [navHovering, setNavHovering] = useState(false);
+
+  useEffect(() => { currentStyleRef.current = indicatorStyle; }, [indicatorStyle]);
+  // NOTE: Profile dropdown visibility now strictly depends on real authentication state
+  // If you previously saw it disappear, most common reasons:
+  // 1) User not authenticated (token expired / store reset on refresh)
+  // 2) Very small viewport (<375px) where CSS hides mobile user section intentionally
+  // 3) Mobile menu closed -> effect resets dropdown state
+  // 4) Logout dispatch cleared user
+  // Remove any temporary demo code to avoid confusion.
   
   const pathname = usePathname();
   const dispatch = useAppDispatch();
@@ -77,9 +96,14 @@ export default function Navbar() {
     setUserMenuOpen(!userMenuOpen);
   };
 
+  const handleMobileUserDropdownToggle = () => {
+    setMobileUserDropdownOpen(!mobileUserDropdownOpen);
+  };
+
   const handleLogout = () => {
     dispatch(logout());
     setUserMenuOpen(false);
+    setMobileUserDropdownOpen(false);
   };
 
   // Close user menu when clicking outside
@@ -94,11 +118,183 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [userMenuOpen]);
 
+  // Close mobile user dropdown when mobile menu is closed
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      setMobileUserDropdownOpen(false);
+      // Restore body scroll when menu closes
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+      }
+    } else {
+      // Prevent body scroll when menu open
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  }, [mobileMenuOpen]);
+
+  // When auth status changes to unauthenticated, close any open menus
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setUserMenuOpen(false);
+      setMobileUserDropdownOpen(false);
+    }
+  }, [isAuthenticated]);
+
+  // ESC key handling & focus trap for mobile menu
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (userMenuOpen) setUserMenuOpen(false);
+        if (mobileMenuOpen) setMobileMenuOpen(false);
+      }
+      if (mobileMenuOpen && e.key === 'Tab') {
+        const container = mobileMenuRef.current;
+        if (!container) return;
+        const focusables = Array.from(
+          container.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [role="button"], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          )
+        ).filter(el => !el.getAttribute('aria-hidden'));
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        // Shift+Tab on first => wrap to last
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [mobileMenuOpen, userMenuOpen]);
+
+  // Auto focus first link when mobile menu opens (after animation frame)
+  useEffect(() => {
+    if (mobileMenuOpen && mobileMenuRef.current) {
+      requestAnimationFrame(() => {
+        const firstLink = mobileMenuRef.current?.querySelector<HTMLElement>('a, button');
+        firstLink?.focus();
+      });
+    }
+  }, [mobileMenuOpen]);
+
+  // Helper: cancel any ongoing animation
+  const cancelIndicatorAnimation = () => {
+    if (indicatorAnimFrame.current !== null) {
+      cancelAnimationFrame(indicatorAnimFrame.current);
+      indicatorAnimFrame.current = null;
+    }
+  };
+
+  // Physics-like easeOutBack
+  const easeOutBack = (t: number) => {
+    const c1 = 1.70158;
+    const c3 = c1 + 1;
+    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+  };
+
+  const animateIndicator = (targetLeft: number, targetWidth: number, targetOpacity: number) => {
+    cancelIndicatorAnimation();
+    const start = performance.now();
+    const duration = 450; // ms
+    const { left: startLeft, width: startWidth, opacity: startOpacity } = currentStyleRef.current;
+    setIndicatorStyle(s => ({ ...s, animating: true }));
+
+    const step = (now: number) => {
+      const elapsed = now - start;
+      const t = Math.min(1, elapsed / duration);
+      const e = easeOutBack(t); // overshoot built-in
+      const newLeft = startLeft + (targetLeft - startLeft) * e;
+      const newWidth = startWidth + (targetWidth - startWidth) * e;
+      const newOpacity = startOpacity + (targetOpacity - startOpacity) * t; // linear fade sufficient
+      setIndicatorStyle({ left: newLeft, width: newWidth, opacity: newOpacity, animating: t < 1 });
+      if (t < 1) {
+        indicatorAnimFrame.current = requestAnimationFrame(step);
+      } else {
+        indicatorAnimFrame.current = null;
+      }
+    };
+    indicatorAnimFrame.current = requestAnimationFrame(step);
+  };
+
+  // Calculate target metrics for active link
+  const recalcActiveMetrics = () => {
+    const listEl = navListRef.current;
+    if (!listEl) return { hasActive: false };
+    const active = listEl.querySelector<HTMLElement>('a.' + styles.navLinkActive.replace(/ /g, '.'));
+    if (!active) return { hasActive: false };
+    const listRect = listEl.getBoundingClientRect();
+    const activeRect = active.getBoundingClientRect();
+    return {
+      hasActive: true,
+      left: activeRect.left - listRect.left,
+      width: activeRect.width
+    };
+  };
+
+  // Drive indicator when route changes or mount (unless hovering)
+  useEffect(() => {
+    if (!mounted || navHovering) return;
+    const { hasActive, left, width } = recalcActiveMetrics();
+      if (!hasActive || typeof left !== 'number' || typeof width !== 'number') {
+        const cur = currentStyleRef.current;
+        animateIndicator(cur.left || 0, cur.width || 0, 0);
+        return;
+      }
+      animateIndicator(left, width, 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, mounted, navHovering]);
+
+  // Resize listener
+  useEffect(() => {
+    const handle = () => {
+      if (navHovering) return; // postpone until hover ends
+      const { hasActive, left, width } = recalcActiveMetrics();
+        if (hasActive && typeof left === 'number' && typeof width === 'number') {
+          animateIndicator(left, width, 1);
+        } else {
+          const cur = currentStyleRef.current;
+          animateIndicator(cur.left || 0, cur.width || 0, 0);
+        }
+    };
+    window.addEventListener('resize', handle);
+    return () => window.removeEventListener('resize', handle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navHovering]);
+
+  // Cleanup on unmount
+  useEffect(() => () => cancelIndicatorAnimation(), []);
+
+  // Recalculate on resize (debounced via rAF)
+  useEffect(() => {
+    const handle = () => {
+      requestAnimationFrame(() => {
+        const listEl = navListRef.current;
+        if (!listEl) return;
+        const active = listEl.querySelector<HTMLElement>('a.' + styles.navLinkActive.replace(/ /g, '.'));
+        if (!active) return;
+        const listRect = listEl.getBoundingClientRect();
+        const activeRect = active.getBoundingClientRect();
+        setIndicatorStyle({ left: activeRect.left - listRect.left, width: activeRect.width, opacity: 1 });
+      });
+    };
+    window.addEventListener('resize', handle);
+    return () => window.removeEventListener('resize', handle);
+  }, []);
+
   return (
     <>
-      <nav className={navbarClass}>
-        <div className={styles.navContainer}>
-          <div className={styles.logoSection}>
+      <nav className={navbarClass} data-scrolled={isScrolledOrMenuOpen ? 'true' : 'false'}>
+        {/* navInner introduces the new structural layout layer; keep navContainer for backward-compatible styling */}
+        <div className={`${styles.navContainer} ${styles.navInner}`}>
+          {/* Brand Cluster */}
+          <div className={`${styles.logoSection} ${styles.brandCluster}`}>
             <Link href="/" className={styles.logoContainer}>
               {/* Use standard logo on server render, then conditionally apply styles once mounted */}
               <Image 
@@ -116,32 +312,101 @@ export default function Navbar() {
                 }}
               />
             </Link>
-            <span className={`${styles.tagline} ${mounted && isHomePage && !isScrolledOrMenuOpen ? styles.taglineWhite : ''}`}>
-              {t('nav.tagline')}
-            </span>
+            {(() => {
+              const common = [styles.tagline, styles.taglineModern];
+              const variantClass =
+                TAGLINE_VARIANT === 'refined' ? styles.taglineRefined :
+                TAGLINE_VARIANT === 'minimal' ? styles.taglineMinimal :
+                TAGLINE_VARIANT === 'monoBar' ? styles.taglineMonoBar :
+                styles.taglineHero;
+              const heroActive = TAGLINE_VARIANT === 'hero' && mounted && isHomePage && !isScrolledOrMenuOpen;
+              return (
+                <span
+                  className={[
+                    ...common,
+                    variantClass,
+                    heroActive ? styles.taglineHeroActive : '',
+                    mounted && isHomePage && !isScrolledOrMenuOpen ? styles.taglineWhite : ''
+                  ].filter(Boolean).join(' ')}
+                  data-variant={TAGLINE_VARIANT}
+                >
+                  {t('nav.tagline')}
+                </span>
+              );
+            })()}
           </div>
+          {/* Primary Navigation */}
+          <nav aria-label="Primary" className={`${styles.navLinks} ${styles.primaryNav}`}>
+            <ul
+              className={`${styles.navList} ${styles.hasIndicator}`}
+              ref={navListRef}
+              onMouseEnter={() => {
+                setNavHovering(true);
+                cancelIndicatorAnimation();
+                setIndicatorStyle(s => ({ ...s, opacity: 0 }));
+              }}
+              onMouseLeave={() => {
+                setNavHovering(false);
+                const { hasActive, left, width } = recalcActiveMetrics();
+                if (hasActive && typeof left === 'number' && typeof width === 'number') {
+                  animateIndicator(left, width, 1);
+                } else {
+                  const cur = currentStyleRef.current;
+                  animateIndicator(cur.left || 0, cur.width || 0, 0);
+                }
+              }}
+            >
+              {mounted && (
+                <span
+                  aria-hidden="true"
+                  className={`${styles.navIndicator} ${indicatorStyle.animating ? styles.navIndicatorAnimating : ''}`}
+                  style={{
+                    transform: `translateX(${indicatorStyle.left}px)`,
+                    width: indicatorStyle.width,
+                    opacity: indicatorStyle.opacity,
+                  }}
+                />
+              )}
+              <li className={styles.navItem}>
+                <Link
+                  href="/delivery"
+                  className={`${styles.navLink} ${pathname === '/delivery' ? styles.navLinkActive : ''}`}
+                  aria-current={pathname === '/delivery' ? 'page' : undefined}
+                >
+                  {t('nav.delivery')}
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link
+                  href="/about"
+                  className={`${styles.navLink} ${pathname === '/about' ? styles.navLinkActive : ''}`}
+                  aria-current={pathname === '/about' ? 'page' : undefined}
+                >
+                  {t('nav.about')}
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link
+                  href="/contact"
+                  className={`${styles.navLink} ${pathname === '/contact' ? styles.navLinkActive : ''}`}
+                  aria-current={pathname === '/contact' ? 'page' : undefined}
+                >
+                  {t('nav.contact')}
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
-          <div className={styles.navLinks}>
-            <Link href="/delivery" className={styles.navLink}>
-              {t('nav.delivery')}
-            </Link>
-            <Link href="/about" className={styles.navLink}>
-              {t('nav.about')}
-            </Link>
-            <Link href="/contact" className={styles.navLink}>
-              {t('nav.contact')}
-            </Link>
-          </div>
-
-          <div className={styles.navIcons}>
+          {/* Utility Cluster (language, user, cart trigger placeholder) */}
+          <div className={`${styles.navIcons} ${styles.utilityCluster}`}>
             {/* Language Switcher - show on mobile as well */}
             <div className={styles.languageSwitcher}>
               <LanguageSwitcher />
             </div>
             
-            {/* User Authentication Section */}
+            {/* User Authentication Section - Hidden on mobile */}
             {isAuthenticated && user ? (
-              <div className={`${styles.userMenuContainer} user-menu-container`}>
+              <div className={`${styles.userMenuContainer} ${styles.desktopOnly} user-menu-container`}>
                 <button 
                   className={styles.userButton}
                   onClick={handleUserMenuToggle}
@@ -261,8 +526,12 @@ export default function Navbar() {
             )}
           </div>
 
+          {/* Burger button */}
           <button
-            className={styles.mobileMenuButton}
+            className={`${styles.mobileMenuButton} ${styles.burger}`}
+            aria-label={mobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation-panel"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className={`${styles.iconSvg} ${mounted && isHomePage && !isScrolledOrMenuOpen ? styles.iconLight : ''}`}>
@@ -284,7 +553,15 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu overlay */}
-        <div className={`${styles.mobileMenu} ${mounted && mobileMenuOpen ? styles.open : ''} ${mounted && mobileMenuOpen ? styles.dark : ''}`}>
+        <div
+          id="mobile-navigation-panel"
+            // role dialog for accessibility (screen readers treat as modal region)
+          role="dialog"
+          aria-modal="true"
+          aria-label={t('nav.mobileMenu') || 'Mobile navigation'}
+          ref={mobileMenuRef}
+          className={`${styles.mobileMenu} ${mounted && mobileMenuOpen ? styles.open : ''} ${mounted && mobileMenuOpen ? styles.dark : ''}`}
+        >
           <div className={`${styles.mobileMenuLinks} ${mounted && mobileMenuOpen ? styles.dark : ''}`}>
             <Link href="/delivery" onClick={() => setMobileMenuOpen(false)}>
               {t('nav.delivery')}
@@ -295,6 +572,98 @@ export default function Navbar() {
             <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
               {t('nav.contact')}
             </Link>
+            
+            {/* User profile section for mobile - only when authenticated */}
+            {(isAuthenticated && user) && (
+              <div className={styles.mobileUserSection}>
+                <button 
+                  className={styles.mobileUserInfo}
+                  onClick={handleMobileUserDropdownToggle}
+                >
+                  <div className={styles.mobileUserAvatar}>
+                    {(user?.first_name ? user.first_name.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase()) || 'U'}
+                  </div>
+                  <div className={styles.mobileUserDetails}>
+                    <div className={styles.mobileUserName}>
+                      {(user?.first_name && user?.last_name)
+                        ? `${user.first_name} ${user.last_name}`
+                        : (user?.first_name || user?.email?.split('@')[0] || t('nav.user'))}
+                    </div>
+                    <div className={styles.mobileUserEmail}>
+                      {user?.email}
+                    </div>
+                  </div>
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 20 20" 
+                    fill="currentColor" 
+                    className={`${styles.mobileChevron} ${mobileUserDropdownOpen ? styles.mobileChevronUp : ''}`}
+                  >
+                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                  </svg>
+                </button>
+                
+                {mobileUserDropdownOpen && (
+                  <div className={styles.mobileUserActions}>
+                  <Link 
+                    href="/profile" 
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setMobileUserDropdownOpen(false);
+                    }} 
+                    className={styles.mobileUserAction}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={styles.mobileActionIcon}>
+                      <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
+                    </svg>
+                    {t('nav.profile')}
+                  </Link>
+                  
+                  <Link 
+                    href="/orders" 
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setMobileUserDropdownOpen(false);
+                    }} 
+                    className={styles.mobileUserAction}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={styles.mobileActionIcon}>
+                      <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+                      <path fillRule="evenodd" d="m3.087 9 .54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.163 3.75A.75.75 0 0110 12h4a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+                    </svg>
+                    {t('nav.orders')}
+                  </Link>
+                  
+                  {user?.is_staff && (
+                    <Link 
+                      href="/admin" 
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setMobileUserDropdownOpen(false);
+                      }} 
+                      className={styles.mobileUserAction}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={styles.mobileActionIcon}>
+                        <path fillRule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.570.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clipRule="evenodd" />
+                      </svg>
+                      {t('nav.admin')}
+                    </Link>
+                  )}
+                  
+                  <button 
+                    onClick={handleLogout}
+                    className={styles.mobileUserAction}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={styles.mobileActionIcon}>
+                      <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6z" clipRule="evenodd" />
+                      <path fillRule="evenodd" d="M19.28 9.47a.75.75 0 010 1.06l-2.25 2.25a.75.75 0 11-1.06-1.06l.97-.97H9a.75.75 0 010-1.5h7.94l-.97-.97a.75.75 0 111.06-1.06l2.25 2.25z" clipRule="evenodd" />
+                    </svg>
+                    {t('nav.logout')}
+                  </button>
+                  </div>
+                )}
+              </div>
+            )}
             
             {/* Auth section for mobile - only show login/register when not authenticated */}
             {!isAuthenticated && (

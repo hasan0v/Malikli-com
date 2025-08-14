@@ -207,7 +207,7 @@ class Product(models.Model):
             translation_obj.save()
         return translation_obj
 
-    def create_variants_from_options(self, sizes=None, colors=None, additional_prices=None):
+    def create_variants_from_options(self, sizes=None, colors=None, additional_prices=None, stock_map=None, low_stock_map=None):
         """
         Create product variants from combinations of sizes and colors.
         
@@ -235,6 +235,10 @@ class Product(models.Model):
             
         if additional_prices is None:
             additional_prices = {}
+        if stock_map is None:
+            stock_map = {}
+        if low_stock_map is None:
+            low_stock_map = {}
             
         created_variants = []
             
@@ -268,12 +272,16 @@ class Product(models.Model):
                     sku_suffix = f"-{size_code}-{color_code}"
                     
                     # Create the variant
+                    stock_val = stock_map.get((size_id, color_id), stock_map.get(f"{size_id}-{color_id}", 0))
+                    low_val = low_stock_map.get((size_id, color_id), low_stock_map.get(f"{size_id}-{color_id}", 5))
                     variant = ProductVariant.objects.create(
                         product=self,
                         size=size,
                         color=color,
                         sku_suffix=sku_suffix,
-                        additional_price=add_price
+                        additional_price=add_price,
+                        stock_quantity=stock_val or 0,
+                        low_stock_threshold=low_val if low_val is not None else 5
                     )
                     created_variants.append(variant)
         
@@ -290,11 +298,15 @@ class Product(models.Model):
                 sku_suffix = f"-{size_code}"
                 
                 # Create the variant
+                stock_val = stock_map.get(size_id, 0)
+                low_val = low_stock_map.get(size_id, 5)
                 variant = ProductVariant.objects.create(
                     product=self,
                     size=size,
                     sku_suffix=sku_suffix,
-                    additional_price=add_price
+                    additional_price=add_price,
+                    stock_quantity=stock_val or 0,
+                    low_stock_threshold=low_val if low_val is not None else 5
                 )
                 created_variants.append(variant)
         
@@ -311,11 +323,15 @@ class Product(models.Model):
                 sku_suffix = f"-{color_code}"
                 
                 # Create the variant
+                stock_val = stock_map.get(color_id, 0)
+                low_val = low_stock_map.get(color_id, 5)
                 variant = ProductVariant.objects.create(
                     product=self,
                     color=color,
                     sku_suffix=sku_suffix,
-                    additional_price=add_price
+                    additional_price=add_price,
+                    stock_quantity=stock_val or 0,
+                    low_stock_threshold=low_val if low_val is not None else 5
                 )
                 created_variants.append(variant)
         

@@ -2,6 +2,7 @@
 import { CartItem } from '../store/cartSlice';
 import { BackendCart, convertFrontendItemToBackend } from '../types/backendCart';
 import apiClient from './api';
+import { normaliseError } from './apiError';
 
 export interface CartResponse extends BackendCart {}
 
@@ -117,8 +118,21 @@ export async function syncCart(syncData: CartSyncRequest): Promise<CartResponse 
   try {
     const response = await apiClient.post<CartSyncResponse>('/carts/sync/', syncData);
     return response.data.cart;
-  } catch (error) {
-    console.error('Error syncing cart:', error);
+  } catch (error: any) {
+    const norm = normaliseError(error);
+    console.error('[Cart Sync] Failed:', {
+      userMessage: norm.message,
+      type: norm.type,
+      status: norm.status,
+      technical: norm.technicalMessage,
+      data: norm.data,
+    });
+    if (norm.type === 'cors' || norm.type === 'network') {
+      if (typeof window !== 'undefined' && !sessionStorage.getItem('cart_sync_hint_shown')) {
+        sessionStorage.setItem('cart_sync_hint_shown', '1');
+        console.warn('[Cart Sync] Hint: If running frontend locally but not backend, set NEXT_PUBLIC_API_URL (e.g. http://127.0.0.1:8000/api/v1) and ensure Django DEBUG=True so 127.0.0.1:3000 is allowed in CORS.');
+      }
+    }
     return null;
   }
 }

@@ -10,7 +10,9 @@ from .views import (
     password_reset_request,
     password_reset_confirm,
     send_verification_email_view,
-    verify_email
+    verify_email,
+    AdminUserViewSet,
+    convert_waitlist_subscriber
 )
 from .authentication import CustomTokenObtainPairView
 from rest_framework_simplejwt.views import (
@@ -21,6 +23,7 @@ from rest_framework_simplejwt.views import (
 
 router = DefaultRouter()
 router.register(r'addresses', AddressViewSet, basename='address')
+router.register(r'admin-users', AdminUserViewSet, basename='admin-user')
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='auth_register'),
@@ -33,5 +36,6 @@ urlpatterns = [
     path('send-verification-email/', send_verification_email_view, name='send_verification_email'),
     path('verify-email/', verify_email, name='verify_email'),
     path('guest-address/', GuestAddressViewSet.as_view(), name='guest_address_create'),
+    path('convert-waitlist/', convert_waitlist_subscriber, name='convert_waitlist'),
     path('', include(router.urls)), # Includes AddressViewSet URLs
 ]

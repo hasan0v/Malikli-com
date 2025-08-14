@@ -24,9 +24,10 @@ class ColorSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'hex_code', 'display_order']
 
 class ProductImageSerializer(serializers.ModelSerializer):
+    variant_id = serializers.IntegerField(source='variant.id', read_only=True)
     class Meta:
         model = ProductImage
-        fields = ['id', 'image', 'alt_text', 'display_order', 'is_primary']
+        fields = ['id', 'image', 'alt_text', 'display_order', 'is_primary', 'variant_id']
 
 class ProductVariantSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)

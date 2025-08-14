@@ -70,6 +70,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
   const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isPortrait, setIsPortrait] = useState(false); // detect tall images (9:16)
   
   const mainImageRef = useRef<HTMLDivElement>(null);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
@@ -83,6 +84,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
     if (index >= 0 && index < validImages.length) {
       setCurrentIndex(index);
       setIsImageLoading(true);
+  setIsPortrait(false);
       onImageChange?.(validImages[index].image);
     }
   }, [validImages, onImageChange]);
@@ -304,7 +306,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
         {/* Main Image */}
         <div 
           ref={mainImageRef}
-          className={`${styles.mainImageContainer} ${isZoomed ? styles.zoomed : ''}`}
+          className={`${styles.mainImageContainer} ${isZoomed ? styles.zoomed : ''} ${isPortrait ? styles.portrait : ''}`}
           onMouseMove={isZoomed ? handleMouseMove : handleMouseMoveForDrag}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
@@ -312,6 +314,10 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          {/* Blurred filler background for tall (portrait) images to reduce empty side space */}
+          {isPortrait && (
+            <div className={styles.bgFiller} style={{backgroundImage:`url(${currentImage.image})`}} aria-hidden='true' />
+          )}
           {/* Loading Overlay */}
           {isImageLoading && (
             <div className={styles.loadingOverlay}>
@@ -328,7 +334,13 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
             style={{
               transformOrigin: isZoomed ? `${zoomPosition.x}% ${zoomPosition.y}%` : 'center center'
             }}
-            onLoad={() => setIsImageLoading(false)}
+            onLoadingComplete={(img)=>{
+              setIsImageLoading(false);
+              if(img.naturalWidth && img.naturalHeight){
+                const ratio = img.naturalWidth / img.naturalHeight; // <1 means portrait
+                setIsPortrait(ratio < 0.85); // threshold ~ 9:16 (0.5625) with buffer
+              }
+            }}
             onError={() => setIsImageLoading(false)}
             priority={currentIndex === 0}
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 50vw"

@@ -10,7 +10,10 @@ from .serializers import (
     CartSyncSerializer, CartMergeSerializer, CartSyncItemSerializer
 )
 import uuid
+import logging
 from django.db import transaction
+
+logger = logging.getLogger(__name__)
 
 def get_or_create_cart(request, cart_id_from_request=None):
     """
@@ -225,18 +228,18 @@ class CartViewSet(mixins.RetrieveModelMixin,
                   # Clear existing items and add synced items
                 cart.items.all().delete()
                 
-                for item_data in items_data:
+                item_errors = []
+                for idx, item_data in enumerate(items_data):
                     drop_product_id = item_data.get('drop_product_id')
                     product_variant_id = item_data.get('product_variant_id')
-                    
-                    if drop_product_id:
-                        try:
-                            drop_product = DropProduct.objects.get(id=drop_product_id)
-                            
-                            # Validate stock again (defensive)
+                    try:
+                        if drop_product_id:
+                            try:
+                                drop_product = DropProduct.objects.get(id=drop_product_id)
+                            except DropProduct.DoesNotExist:
+                                raise ValueError('drop_product_not_found')
                             if item_data['quantity'] > drop_product.current_stock_quantity:
-                                continue  # Skip items that exceed stock
-                            
+                                raise ValueError('quantity_exceeds_stock')
                             CartItem.objects.create(
                                 cart=cart,
                                 drop_product=drop_product,
@@ -245,14 +248,12 @@ class CartViewSet(mixins.RetrieveModelMixin,
                                 color_code=item_data.get('color_code'),
                                 size=item_data.get('size')
                             )
-                        except DropProduct.DoesNotExist:
-                            continue  # Skip invalid products
-                    
-                    elif product_variant_id:
-                        try:
-                            from products.models import ProductVariant
-                            product_variant = ProductVariant.objects.get(id=product_variant_id)
-                            
+                        elif product_variant_id:
+                            try:
+                                from products.models import ProductVariant
+                                product_variant = ProductVariant.objects.get(id=product_variant_id)
+                            except ProductVariant.DoesNotExist:
+                                raise ValueError('variant_not_found')
                             CartItem.objects.create(
                                 cart=cart,
                                 product_variant=product_variant,
@@ -261,16 +262,23 @@ class CartViewSet(mixins.RetrieveModelMixin,
                                 color_code=item_data.get('color_code'),
                                 size=item_data.get('size')
                             )
-                        except ProductVariant.DoesNotExist:
-                            continue  # Skip invalid products
-                
+                        else:
+                            raise ValueError('missing_reference_id')
+                    except ValueError as ve:
+                        item_errors.append({'index': idx, 'code': str(ve), 'item': item_data})
+                    except Exception as e_item:
+                        item_errors.append({'index': idx, 'code':'unknown_error', 'detail': str(e_item)})
+
                 cart_serializer = self.get_serializer(cart)
+                status_code = status.HTTP_207_MULTI_STATUS if item_errors else status.HTTP_200_OK
                 return Response({
                     'cart': cart_serializer.data,
-                    'message': 'Cart synced successfully'
-                }, status=status.HTTP_200_OK)
+                    'message': 'Cart synced successfully' + (' with some item errors' if item_errors else ''),
+                    'item_errors': item_errors
+                }, status=status_code)
                 
         except Exception as e:
+            logger.exception("Cart sync failed")
             return Response({
                 'error': 'Failed to sync cart',
                 'detail': str(e)
